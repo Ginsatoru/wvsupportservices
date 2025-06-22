@@ -1,0 +1,125 @@
+/* CareersPage.css */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap');
+
+body {
+  font-family: 'Montserrat', sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f5f7fa;
+}
+
+.careers-container {
+  max-width: 1100px;
+  margin: 60px auto;
+  padding: 60px 50px;
+  background-color: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+}
+
+.careers-header {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.careers-header h1 {
+  font-size: 42px;
+  color: #0f8abe;
+  margin-bottom: 12px;
+  font-weight: 700;
+}
+
+.careers-header p {
+  font-size: 18px;
+  color: #555555;
+}
+
+.careers-intro,
+.careers-values,
+.careers-positions {
+  margin-bottom: 50px;
+}
+
+.careers-intro h2,
+.careers-values h2,
+.careers-positions h2 {
+  font-size: 28px;
+  color: #0f8abe;
+  margin-bottom: 20px;
+  font-weight: 600;
+}
+
+.careers-intro p,
+.careers-values ul,
+.careers-positions p {
+  font-size: 16px;
+  color: #333333;
+  line-height: 1.7;
+}
+
+.careers-values ul {
+  list-style-type: disc;
+  padding-left: 20px;
+}
+
+.position-card {
+  background: #f9fbfd;
+  border: 1px solid #e0e6ed;
+  border-radius: 10px;
+  padding: 25px;
+  margin-bottom: 25px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.position-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 20px rgba(0, 0, 0, 0.08);
+}
+
+.position-card h3 {
+  font-weight: 600;
+  font-size: 22px;
+  color: #0f8abe;
+  margin-bottom: 10px;
+}
+
+.position-card p {
+  font-size: 15px;
+  color: #555555;
+  margin-bottom: 20px;
+}
+
+.position-card button {
+  padding: 6px 20px;
+  background-color: #0f8abe;
+  color: #ffffff;
+  border: none;
+  border-radius: 6px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.position-card button:hover {
+  background-color: #0c6f94;
+}
+
+.careers-footer {
+  text-align: center;
+  margin-top: 40px;
+}
+
+.careers-footer p {
+  font-size: 16px;
+  color: #666666;
+}
+
+.careers-footer a {
+  color: #0f8abe;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.careers-footer a:hover {
+  text-decoration: underline;
+}
