@@ -49,17 +49,6 @@ const Team = () => {
         phone: "+855 87 968 850",
       },
     },
-      {
-      id: 9,
-      name: "Kane",
-      position: "Customer Support",
-      image: "src/Components/Images/kane.png",
-      contacts: {
-        telegram: "@dara_sok",
-        email: "dara@wvsupport.com",
-        phone: "+855 12 345 681",
-      },
-    },
     {
       id: 4,
       name: "Lucy",

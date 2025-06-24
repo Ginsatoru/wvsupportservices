@@ -1,501 +1,74 @@
 import React, { useEffect } from "react";
-import styled from "styled-components";
 import { Link } from "react-router-dom";
 import AOS from "aos";
 import "aos/dist/aos.css";
 import {
-  FaGlobe,
-  FaMobileAlt,
-  FaPaintBrush,
-  FaWordpress,
-  FaTools,
-  FaShoppingCart,
-  FaRocket,
-  FaShieldAlt,
+  FaCashRegister,
+  FaSyncAlt,
+  FaStore,
+  FaBoxes,
+  FaChartBar,
+  FaUsers,
   FaHandshake,
-  FaChartLine,
-  FaQuoteLeft,
-  FaUserTie,
-  FaServer,
-  // FaReact,
-  // FaNodeJs,
-  // FaAngular,
-  // FaVuejs,
-  // FaApple,
-  // FaAndroid,
-  // FaWindows,
-  // FaLaravel,
-  // FaBootstrap,
-  // FaFigma,
+  FaDatabase,
+  FaTools,
+  FaShieldAlt,
+  FaChartLine
 } from "react-icons/fa";
 import { IoMdTrendingUp } from "react-icons/io";
 import { GiProgression } from "react-icons/gi";
 import headerImage from "./Images/header.png";
 
-import reactIcon from "./Images/react.png";
-import nodeIcon from "./Images/nodejs.png";
-import angularIcon from "./Images/angular.png";
-import vueIcon from "./Images/vue.png";
-import iosIcon from "./Images/ios.png";
-import androidIcon from "./Images/android.png";
+// Technology icons
 import windowsIcon from "./Images/windows.png";
-import wordpressIcon from "./Images/wordpress.png";
-import laravelIcon from "./Images/laravel.png";
-import bootstrapIcon from "./Images/bootstrap.png";
-import figmaIcon from "./Images/figma.png";
-import canvaIcon from "./Images/canva.png";
-
-const HeroSection = styled.div`
-  background: linear-gradient(rgba(15, 138, 190, 0.8), rgba(15, 138, 190, 0.9)),
-    url(${headerImage}) center/cover no-repeat;
-  color: white;
-  padding: 5.1rem 0;
-  text-align: center;
-`;
-
-const HeroContent = styled.div`
-  max-width: 800px;
-  margin: 0 auto;
-  padding: 0 20px;
-`;
-
-const HeroTitle = styled.h1`
-  @keyframes slideIn {
-    from {
-      transform: translateX(-50px);
-      opacity: 0;
-    }
-    to {
-      transform: translateX(0);
-      opacity: 1;
-    }
-  }
-  font-size: 2.5rem;
-  margin-bottom: 1rem;
-  font-weight: 700;
-  animation: slideIn 0.5s ease-in-out;
-`;
-
-const HeroSubtitle = styled.p`
-  @keyframes slideIn {
-    from {
-      transform: translateX(-50px);
-      opacity: 0;
-    }
-    to {
-      transform: translateX(0);
-      opacity: 1;
-    }
-  }
-  animation: slideIn 0.5s ease-in-out;
-  font-size: 1.2rem;
-  opacity: 0.9;
-  color: #fff;
-`;
-
-const ServicesGrid = styled.div`
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 2rem;
-  max-width: 1200px;
-  margin: 4rem auto;
-  padding: 0 20px;
-`;
-
-const ServiceCard = styled.div`
-  background: white;
-  border-radius: 12px;
-  padding: 2rem;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
-  text-align: center;
-  height: 100%;
-  transition: all 0.3s ease;
-
-  &:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
-  }
-`;
-
-const ServiceIcon = styled.div`
-  font-size: 2.5rem;
-  color: #3498db;
-  margin-bottom: 1.5rem;
-  display: inline-flex;
-  justify-content: center;
-  align-items: center;
-  width: 80px;
-  height: 80px;
-  background: rgba(52, 152, 219, 0.1);
-  border-radius: 50%;
-`;
-
-const ServiceTitle = styled.h3`
-  font-weight: 600;
-  font-size: 1.3rem;
-  color: #52514a;
-  margin-bottom: 1rem;
-`;
-
-const ServiceDescription = styled.p`
-  color: #52514a;
-  line-height: 1.6;
-  font-size: 0.95rem;
-  margin-bottom: 1rem;
-`;
-
-const ServiceDetails = styled.p`
-  color: #52514a;
-  font-size: 0.85rem;
-  line-height: 1.6;
-`;
-
-// New Technologies Section Styles
-const TechnologiesSection = styled.section`
-  padding: 4rem 2rem;
-  background: linear-gradient(135deg, #f5f7fa 0%, #e4e8eb 100%);
-  text-align: center;
-`;
-
-const TechImage = styled.img`
-  width: 60px;
-  height: 60px;
-  object-fit: contain;
-  margin-bottom: 1rem;
-`;
-
-const TechGrid = styled.div`
-  max-width: 1170px;
-  margin: 3rem auto 0;
-`;
-
-const TechGroup = styled.div`
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 2rem;
-  margin-bottom: 3rem;
-
-  &:last-child {
-    margin-bottom: 0;
-  }
-`;
-
-const TechItem = styled.div`
-  background: white;
-  border-radius: 8px;
-  padding: 2rem 1rem;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-  transition: 0.3s ease;
-
-  &:hover {
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
-    transform: translateY(-5px);
-  }
-`;
-
-const TechIcon = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 80px;
-  margin-bottom: 1rem;
-`;
-
-const TechName = styled.h4`
-  font-size: 1.25rem;
-  color: #1a1a2e;
-  margin-bottom: 0;
-
-  @media (max-width: 600px) {
-    font-size: 1rem;
-  }
-`;
-
-const ProcessSection = styled.section`
-  padding: 4rem 0;
-  background: #f9fbfd;
-  text-align: center;
-`;
-
-const SectionTitle = styled.h2`
-  font-size: 2rem;
-  color: #0f8abe;
-  margin-bottom: 1rem;
-  font-weight: 700;
-  position: relative;
-  display: inline-block;
-  line-height: 1.2;
-`;
-
-const SectionSubtitle = styled.p`
-  color: #52514a;
-  font-size: 1.1rem;
-  max-width: 700px;
-  margin: 0 auto 3rem auto;
-  line-height: 1.6;
-`;
-
-const ProcessSteps = styled.div`
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-  gap: 2rem;
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 20px;
-`;
-
-const ProcessStep = styled.div`
-  flex: 1;
-  min-width: 250px;
-  background: white;
-  border-radius: 12px;
-  padding: 2rem;
-  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
-  transition: all 0.3s ease;
-
-  &:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
-  }
-`;
-
-const StepIcon = styled.div`
-  font-size: 2rem;
-  color: #3498db;
-  margin-bottom: 1.5rem;
-  display: inline-flex;
-  justify-content: center;
-  align-items: center;
-  width: 70px;
-  height: 70px;
-  background: rgba(52, 152, 219, 0.1);
-  border-radius: 50%;
-`;
-
-const StepTitle = styled.h3`
-font-weight:600;
-  font-size: 1.2rem;
-  color: #2c3e50;
-  margin-bottom: 1rem;
-`;
-
-const StepDescription = styled.p`
-  color: #52514a;
-  line-height: 1.6;
-  font-size: 0.95rem;
-`;
-
-const WhyChooseUsSection = styled.section`
-  padding: 5rem 0;
-  background: #f8fafc;
-  text-align: center;
-`;
-
-const WhyChooseUsContainer = styled.div`
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 20px;
-`;
-
-const WhyChooseUsTitle = styled.h2`
-  font-size: 2rem;
-  color: #0f8abe;
-  margin-bottom: 1.5rem;
-  font-weight: 700;
-  position: relative;
-  display: inline-block;
-`;
-
-const WhyChooseUsSubtitle = styled.p`
-  color: #52514a;
-  font-size: 1.2rem;
-  max-width: 700px;
-  margin: 0 auto 3rem auto;
-  line-height: 1.6;
-`;
-
-const BenefitsGrid = styled.div`
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 2.5rem;
-  margin-top: 3rem;
-`;
-
-const BenefitCard = styled.div`
-  background: white;
-  border-radius: 16px;
-  padding: 2.5rem 2rem;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
-  transition: all 0.3s ease;
-  position: relative;
-  overflow: hidden;
-  z-index: 1;
-
-  &:before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 5px;
-    background-image: linear-gradient(120deg, #89f7fe 0%, #66a6ff 100%);
-  }
-
-  &:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
-  }
-`;
-
-const BenefitIcon = styled.div`
-  font-size: 2.5rem;
-  color: #3498db;
-  margin-bottom: 1.5rem;
-  display: inline-flex;
-  justify-content: center;
-  align-items: center;
-  width: 80px;
-  height: 80px;
-  background: rgba(52, 152, 219, 0.1);
-  border-radius: 50%;
-`;
-
-const BenefitTitle = styled.h3`
-font-weight:600;
-  font-size: 1.4rem;
-  color: #2c3e50;
-  margin-bottom: 1rem;
-`;
-
-const BenefitDescription = styled.p`
-  color: #52514a;
-  line-height: 1.7;
-  font-size: 1rem;
-`;
-
-const CtaSection = styled.section`
-  padding: 6rem 0;
-  background: linear-gradient(135deg, #f5f7fa 0%, #e4e8eb 100%);
-  color: #0f8abe;
-  text-align: center;
-  position: relative;
-  overflow: hidden;
-
-  &:before {
-    content: "";
-    position: absolute;
-    top: -50px;
-    right: -50px;
-    width: 200px;
-    height: 200px;
-    background: #of8abe;
-    border-radius: 50%;
-  }
-
-  &:after {
-    content: "";
-    position: absolute;
-    bottom: -80px;
-    left: -80px;
-    width: 300px;
-    height: 300px;
-    background: rgba(255, 255, 255, 0.05);
-    border-radius: 50%;
-  }
-`;
-
-const CtaContainer = styled.div`
-  max-width: 800px;
-  margin: 0 auto;
-  padding: 0 20px;
-  position: relative;
-  z-index: 2;
-`;
-
-const CtaTitle = styled.h2`
-  line-height: 1.2;
-  font-size: 2.5rem;
-  margin-bottom: 1.5rem;
-  font-weight: 700;
-`;
-
-const CtaSubtitle = styled.p`
-  font-size: 1.2rem;
-  margin-bottom: 2.5rem;
-  line-height: 1.7;
-  opacity: 0.9;
-  max-width: 600px;
-  margin-left: auto;
-  margin-right: auto;
-  color: #52514a;
-`;
-
-const CtaButton = styled(Link)`
-  display: inline-block;
-  padding: 1rem 2.5rem;
-  background: white;
-  color: #3498db;
-  border-radius: 50px;
-  text-decoration: none;
-  font-weight: 600;
-  font-size: 1.1rem;
-  transition: all 0.3s ease;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-
-  &:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
-    background: #f8f9fa;
-  }
-`;
+import sqlIcon from "./Images/sql.png";
+import retailManagerIcon from "./Images/retailmanager.png";
+import webstoreIcon from "./Images/webstore.png";
+import multiStoreIcon from "./Images/multistore.png";
+import posIcon from "./Images/pos.png";
+import inventoryIcon from "./Images/inventory.png";
+import reportingIcon from "./Images/reporting.png";
+import teamviewerIcon from "./Images/teamviewer.png";
+import onedriveIcon from "./Images/onedrive.png";
+import accessIcon from "./Images/access.png";
+import outlookIcon from "./Images/outlook.png";
 
 const services = [
   {
-    title: "Web Development",
-    description:
-      "Fast, responsive, and scalable websites tailored to your needs.",
-    icon: <FaGlobe />,
-    route: "/web-development",
-    details:
-      "Custom website design, CMS integration, and performance optimization.",
+    title: "RetailManager POS",
+    description: "Comprehensive point-of-sale solutions for retail businesses.",
+    icon: <FaCashRegister />,
+    details: "Custom setup, barcode scanning, receipt printing, and payment processing.",
   },
   {
-    title: "Mobile Apps",
-    description:
-      "Native and cross-platform mobile apps that perform seamlessly.",
-    icon: <FaMobileAlt />,
-    route: "/mobile-app-development",
-    details: "Mobile apps for iOS and Android with a focus on performance.",
+    title: "WebStore Integration",
+    description: "Seamless integration between your physical and online stores.",
+    icon: <FaSyncAlt />,
+    details: "Real-time inventory sync, order management, and customer data integration.",
   },
   {
-    title: "UI/UX Design",
-    description: "Beautiful, user-focused designs for great experiences.",
-    icon: <FaPaintBrush />,
-    route: "/ui-design",
-    details:
-      "Intuitive interfaces and user experiences aligned with your brand.",
+    title: "Multi-Store Management",
+    description: "Centralized control for businesses with multiple locations.",
+    icon: <FaStore />,
+    details: "Unified reporting, inventory transfers, and consolidated purchasing.",
   },
   {
-    title: "WordPress",
-    description: "Custom WordPress websites for your business needs.",
-    icon: <FaWordpress />,
-    route: "/wordpress",
-    details: "Theme customization, plugin development, and SEO optimization.",
+    title: "Inventory Management",
+    description: "Advanced tools to track and optimize your stock levels.",
+    icon: <FaBoxes />,
+    details: "Automated reordering, barcode generation, and stock movement tracking.",
   },
   {
-    title: "IT Support",
-    description: "Expert IT support for smoother operations.",
-    icon: <FaTools />,
-    route: "/ITsupport",
-    details: "Troubleshooting, system maintenance, and 24/7 monitoring.",
+    title: "Reporting & Analytics",
+    description: "Powerful insights into your business performance.",
+    icon: <FaChartBar />,
+    details: "Custom reports, sales trends, profit analysis, and KPI dashboards.",
   },
   {
-    title: "Web Hosting",
-    description: "Web hosting stores your website files on a server.",
-    icon: <FaServer />,
-    route: "/web-hosting",
-    details: "This makes your site accessible to visitors online anytime.",
+    title: "Customer Management",
+    description: "Build loyalty and understand your customer base.",
+    icon: <FaUsers />,
+    details: "Customer profiles, purchase history, loyalty programs, and marketing tools.",
   },
 ];
 
@@ -506,230 +79,304 @@ const Services = () => {
 
   return (
     <>
-      <HeroSection>
-        <HeroContent>
-          <HeroTitle>Our Services</HeroTitle>
-          <HeroSubtitle>
-            Discover the digital solutions we offer to power your business.
-          </HeroSubtitle>
-        </HeroContent>
-      </HeroSection>
+      {/* Hero Section */}
+      <div 
+        className="relative text-white py-15 text-center bg-cover bg-center bg-no-repeat"
+        style={{
+          backgroundImage: `linear-gradient(rgba(15, 138, 190, 0.8), rgba(15, 138, 190, 0.9)), url(${headerImage})`
+        }}
+      >
+        <div className="max-w-4xl mx-auto px-5">
+          <h1 className="text-4xl mb-4 font-bold animate-[slideIn_0.5s_ease-in-out]">
+            Our Services
+          </h1>
+          <p className="text-xl opacity-90 text-white animate-[slideIn_0.5s_ease-in-out]">
+            Comprehensive tools to streamline your retail operations and boost your business performance.
+          </p>
+        </div>
+      </div>
 
-      <ServicesGrid>
+      {/* Services Grid */}
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto my-16 px-5">
         {services.map((service, index) => (
-          <ServiceCard
+          <div
             key={index}
+            className="bg-white rounded-xl p-8 shadow-[0_10px_30px_rgba(0,0,0,0.05)] text-center h-full transition-all duration-300 hover:transform hover:-translate-y-3 hover:shadow-[0_15px_35px_rgba(0,0,0,0.1)]"
             data-aos="fade-up"
             data-aos-delay={index * 100}
-            as={service.route ? Link : "div"}
-            to={service.route ? service.route : undefined}
-            style={{ cursor: service.route ? "pointer" : "default" }}
           >
-            <ServiceIcon>{service.icon}</ServiceIcon>
-            <ServiceTitle>{service.title}</ServiceTitle>
-            <ServiceDescription>{service.description}</ServiceDescription>
-            <ServiceDetails>{service.details}</ServiceDetails>
-          </ServiceCard>
+            <div className="text-4xl text-[#0f8abe] mb-6 inline-flex justify-center items-center w-20 h-20 bg-[#0f8abe]/10 rounded-full">
+              {service.icon}
+            </div>
+            <h3 className="font-semibold text-xl text-gray-700 mb-4">
+              {service.title}
+            </h3>
+            <p className="text-gray-700 leading-relaxed text-sm mb-4">
+              {service.description}
+            </p>
+            <p className="text-gray-700 text-xs leading-relaxed">
+              {service.details}
+            </p>
+          </div>
         ))}
-      </ServicesGrid>
+      </div>
 
-      {/* New Technologies Section */}
-      <TechnologiesSection>
-        <SectionTitle>Technologies We Work With</SectionTitle>
-        <SectionSubtitle>
-          Our expertise spans across the most popular and powerful technologies
-          in the industry
-        </SectionSubtitle>
+      {/* Technologies Section */}
+      <section className="py-16 px-8 bg-gradient-to-br from-gray-50 to-gray-200 text-center">
+        <h2 className="text-3xl text-[#0f8abe] mb-4 font-bold relative inline-block leading-tight">
+          Our Retail Technology Stack
+        </h2>
+        <p className="text-gray-700 text-lg max-w-2xl mx-auto mb-12 leading-relaxed">
+          We specialize in these powerful retail management technologies and platforms
+        </p>
 
-        <TechGrid>
-          <TechGroup>
-            <TechItem data-aos="fade-up" data-aos-delay="0">
-              <TechIcon>
-                <TechImage src={reactIcon} alt="React JS" />
-              </TechIcon>
-              <TechName>React JS</TechName>
-            </TechItem>
-            <TechItem data-aos="fade-up" data-aos-delay="100">
-              <TechIcon>
-                <TechImage src={nodeIcon} alt="Node JS" />
-              </TechIcon>
-              <TechName>Node JS</TechName>
-            </TechItem>
-            <TechItem data-aos="fade-up" data-aos-delay="200">
-              <TechIcon>
-                <TechImage src={angularIcon} alt="Angular" />
-              </TechIcon>
-              <TechName>Angular</TechName>
-            </TechItem>
-            <TechItem data-aos="fade-up" data-aos-delay="300">
-              <TechIcon>
-                <TechImage src={vueIcon} alt="Vue.js" />
-              </TechIcon>
-              <TechName>Vue.js</TechName>
-            </TechItem>
-          </TechGroup>
+        <div className="max-w-6xl mx-auto mt-12">
+          {/* First Tech Group */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
+            <div className="bg-white rounded-xl p-8 shadow-[0_5px_15px_rgba(0,0,0,0.05)] transition-all duration-300 hover:shadow-[0_10px_25px_rgba(0,0,0,0.1)] hover:transform hover:-translate-y-1" data-aos="fade-up" data-aos-delay="0">
+              <div className="flex justify-center items-center h-20 mb-4">
+                <img src={retailManagerIcon} alt="RetailManager" className="w-20 h-20 object-contain mb-4" />
+              </div>
+              <h4 className="text-xl text-gray-900 mb-0 max-[600px]:text-base">
+                RetailManager
+              </h4>
+            </div>
+            <div className="bg-white rounded-xl p-8 shadow-[0_5px_15px_rgba(0,0,0,0.05)] transition-all duration-300 hover:shadow-[0_10px_25px_rgba(0,0,0,0.1)] hover:transform hover:-translate-y-1" data-aos="fade-up" data-aos-delay="100">
+              <div className="flex justify-center items-center h-20 mb-4">
+                <img src={webstoreIcon} alt="WebStore Manager" className="w-20 h-20 object-contain mb-4" />
+              </div>
+              <h4 className="text-xl text-gray-900 mb-0 max-[600px]:text-base">
+                WebStore Manager
+              </h4>
+            </div>
+            <div className="bg-white rounded-xl p-8 shadow-[0_5px_15px_rgba(0,0,0,0.05)] transition-all duration-300 hover:shadow-[0_10px_25px_rgba(0,0,0,0.1)] hover:transform hover:-translate-y-1" data-aos="fade-up" data-aos-delay="200">
+              <div className="flex justify-center items-center h-20 mb-4">
+                <img src={multiStoreIcon} alt="RM Multi-Store" className="w-20 h-20 object-contain mb-4" />
+              </div>
+              <h4 className="text-xl text-gray-900 mb-0 max-[600px]:text-base">
+                RM Multi-Store
+              </h4>
+            </div>
+            <div className="bg-white rounded-xl p-8 shadow-[0_5px_15px_rgba(0,0,0,0.05)] transition-all duration-300 hover:shadow-[0_10px_25px_rgba(0,0,0,0.1)] hover:transform hover:-translate-y-1" data-aos="fade-up" data-aos-delay="300">
+              <div className="flex justify-center items-center h-20 mb-4">
+                <img src={windowsIcon} alt="Windows" className="w-20 h-20 object-contain mb-4" />
+              </div>
+              <h4 className="text-xl text-gray-900 mb-0 max-[600px]:text-base">
+                Windows Platform
+              </h4>
+            </div>
+          </div>
 
-          <TechGroup>
-            <TechItem data-aos="fade-up" data-aos-delay="0">
-              <TechIcon>
-                <TechImage src={iosIcon} alt="iOS" />
-              </TechIcon>
-              <TechName>iOS</TechName>
-            </TechItem>
-            <TechItem data-aos="fade-up" data-aos-delay="100">
-              <TechIcon>
-                <TechImage src={androidIcon} alt="Android" />
-              </TechIcon>
-              <TechName>Android</TechName>
-            </TechItem>
-            <TechItem data-aos="fade-up" data-aos-delay="200">
-              <TechIcon>
-                <TechImage src={windowsIcon} alt="Windows" />
-              </TechIcon>
-              <TechName>Windows</TechName>
-            </TechItem>
-            <TechItem data-aos="fade-up" data-aos-delay="300">
-              <TechIcon>
-                <TechImage src={canvaIcon} alt="Figma" />
-              </TechIcon>
-              <TechName>Figma</TechName>
-            </TechItem>
-          </TechGroup>
+          {/* Second Tech Group */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
+            <div className="bg-white rounded-xl p-8 shadow-[0_5px_15px_rgba(0,0,0,0.05)] transition-all duration-300 hover:shadow-[0_10px_25px_rgba(0,0,0,0.1)] hover:transform hover:-translate-y-1" data-aos="fade-up" data-aos-delay="0">
+              <div className="flex justify-center items-center h-20 mb-4">
+                <img src={sqlIcon} alt="SQL Database" className="w-20 h-20 object-contain mb-4" />
+              </div>
+              <h4 className="text-xl text-gray-900 mb-0 max-[600px]:text-base">
+                SQL Database
+              </h4>
+            </div>
+            <div className="bg-white rounded-xl p-8 shadow-[0_5px_15px_rgba(0,0,0,0.05)] transition-all duration-300 hover:shadow-[0_10px_25px_rgba(0,0,0,0.1)] hover:transform hover:-translate-y-1" data-aos="fade-up" data-aos-delay="100">
+              <div className="flex justify-center items-center h-20 mb-4">
+                <img src={posIcon} alt="POS Hardware" className="w-20 h-20 object-contain mb-4" />
+              </div>
+              <h4 className="text-xl text-gray-900 mb-0 max-[600px]:text-base">
+                POS Hardware
+              </h4>
+            </div>
+            <div className="bg-white rounded-xl p-8 shadow-[0_5px_15px_rgba(0,0,0,0.05)] transition-all duration-300 hover:shadow-[0_10px_25px_rgba(0,0,0,0.1)] hover:transform hover:-translate-y-1" data-aos="fade-up" data-aos-delay="200">
+              <div className="flex justify-center items-center h-20 mb-4">
+                <img src={inventoryIcon} alt="Inventory Systems" className="w-20 h-20 object-contain mb-4" />
+              </div>
+              <h4 className="text-xl text-gray-900 mb-0 max-[600px]:text-base">
+                Inventory Systems
+              </h4>
+            </div>
+            <div className="bg-white rounded-xl p-8 shadow-[0_5px_15px_rgba(0,0,0,0.05)] transition-all duration-300 hover:shadow-[0_10px_25px_rgba(0,0,0,0.1)] hover:transform hover:-translate-y-1" data-aos="fade-up" data-aos-delay="300">
+              <div className="flex justify-center items-center h-20 mb-4">
+                <img src={reportingIcon} alt="Reporting Tools" className="w-20 h-20 object-contain mb-4" />
+              </div>
+              <h4 className="text-xl text-gray-900 mb-0 max-[600px]:text-base">
+                Reporting Tools
+              </h4>
+            </div>
+          </div>
 
-          <TechGroup>
-            <TechItem data-aos="fade-up" data-aos-delay="0">
-              <TechIcon>
-                <TechImage src={wordpressIcon} alt="WordPress" />
-              </TechIcon>
-              <TechName>WordPress</TechName>
-            </TechItem>
-            <TechItem data-aos="fade-up" data-aos-delay="100">
-              <TechIcon>
-                <TechImage src={laravelIcon} alt="Laravel" />
-              </TechIcon>
-              <TechName>Laravel</TechName>
-            </TechItem>
-            <TechItem data-aos="fade-up" data-aos-delay="200">
-              <TechIcon>
-                <TechImage src={bootstrapIcon} alt="Bootstrap" />
-              </TechIcon>
-              <TechName>Bootstrap</TechName>
-            </TechItem>
-            <TechItem data-aos="fade-up" data-aos-delay="300">
-              <TechIcon>
-                <TechImage src={figmaIcon} alt="Figma" />
-              </TechIcon>
-              <TechName>Figma</TechName>
-            </TechItem>
-          </TechGroup>
-        </TechGrid>
-      </TechnologiesSection>
+          {/* Third Tech Group */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+            <div className="bg-white rounded-xl p-8 shadow-[0_5px_15px_rgba(0,0,0,0.05)] transition-all duration-300 hover:shadow-[0_10px_25px_rgba(0,0,0,0.1)] hover:transform hover:-translate-y-1" data-aos="fade-up" data-aos-delay="0">
+              <div className="flex justify-center items-center h-20 mb-4">
+                <img src={teamviewerIcon} alt="TeamViewer" className="w-20 h-20 object-contain mb-4" />
+              </div>
+              <h4 className="text-xl text-gray-900 mb-0 max-[600px]:text-base">
+                TeamViewer
+              </h4>
+            </div>
+            <div className="bg-white rounded-xl p-8 shadow-[0_5px_15px_rgba(0,0,0,0.05)] transition-all duration-300 hover:shadow-[0_10px_25px_rgba(0,0,0,0.1)] hover:transform hover:-translate-y-1" data-aos="fade-up" data-aos-delay="100">
+              <div className="flex justify-center items-center h-20 mb-4">
+                <img src={onedriveIcon} alt="OneDrive" className="w-20 h-20 object-contain mb-4" />
+              </div>
+              <h4 className="text-xl text-gray-900 mb-0 max-[600px]:text-base">
+                OneDrive
+              </h4>
+            </div>
+            <div className="bg-white rounded-xl p-8 shadow-[0_5px_15px_rgba(0,0,0,0.05)] transition-all duration-300 hover:shadow-[0_10px_25px_rgba(0,0,0,0.1)] hover:transform hover:-translate-y-1" data-aos="fade-up" data-aos-delay="200">
+              <div className="flex justify-center items-center h-20 mb-4">
+                <img src={accessIcon} alt="Microsoft Access" className="w-20 h-20 object-contain mb-4" />
+              </div>
+              <h4 className="text-xl text-gray-900 mb-0 max-[600px]:text-base">
+                Microsoft Access
+              </h4>
+            </div>
+            <div className="bg-white rounded-xl p-8 shadow-[0_5px_15px_rgba(0,0,0,0.05)] transition-all duration-300 hover:shadow-[0_10px_25px_rgba(0,0,0,0.1)] hover:transform hover:-translate-y-1" data-aos="fade-up" data-aos-delay="300">
+              <div className="flex justify-center items-center h-20 mb-4">
+                <img src={outlookIcon} alt="Outlook Classic" className="w-20 h-20 object-contain mb-4" />
+              </div>
+              <h4 className="text-xl text-gray-900 mb-0 max-[600px]:text-base">
+                Outlook Classic
+              </h4>
+            </div>
+          </div>
+        </div>
+      </section>
 
-      <ProcessSection>
-        <SectionTitle>Our Working Process</SectionTitle>
-        <SectionSubtitle>
-          We follow a proven methodology to deliver exceptional results for
-          every project
-        </SectionSubtitle>
-        <ProcessSteps>
-          <ProcessStep data-aos="fade-up" data-aos-delay="0">
-            <StepIcon>
+      {/* Process Section */}
+      <section className="py-16 bg-gray-50 text-center">
+        <h2 className="text-3xl text-[#0f8abe] mb-4 font-bold relative inline-block leading-tight">
+          Our Implementation Process
+        </h2>
+        <p className="text-gray-700 text-lg max-w-2xl mx-auto mb-12 leading-relaxed">
+          We follow a structured approach to ensure successful RetailManager deployment
+        </p>
+        <div className="flex justify-center flex-wrap gap-8 max-w-6xl mx-auto px-5">
+          <div className="flex-1 min-w-[250px] bg-white rounded-xl p-8 shadow-[0_5px_20px_rgba(0,0,0,0.05)] transition-all duration-300 hover:transform hover:-translate-y-3 hover:shadow-[0_8px_25px_rgba(0,0,0,0.1)]" data-aos="fade-up" data-aos-delay="0">
+            <div className="text-3xl text-[#0f8abe] mb-6 inline-flex justify-center items-center w-[70px] h-[70px] bg-[#0f8abe]/10 rounded-full">
               <FaHandshake />
-            </StepIcon>
-            <StepTitle>Discovery</StepTitle>
-            <StepDescription>
-              We start by understanding your business goals, target audience,
-              and project requirements.
-            </StepDescription>
-          </ProcessStep>
-          <ProcessStep data-aos="fade-up" data-aos-delay="100">
-            <StepIcon>
-              <FaPaintBrush />
-            </StepIcon>
-            <StepTitle>Design</StepTitle>
-            <StepDescription>
-              Our designers create wireframes and prototypes to visualize the
-              user experience.
-            </StepDescription>
-          </ProcessStep>
-          <ProcessStep data-aos="fade-up" data-aos-delay="200">
-            <StepIcon>
-              <FaRocket />
-            </StepIcon>
-            <StepTitle>Development</StepTitle>
-            <StepDescription>
-              Our developers bring the design to life with clean, efficient code
-              and modern technologies.
-            </StepDescription>
-          </ProcessStep>
-          <ProcessStep data-aos="fade-up" data-aos-delay="300">
-            <StepIcon>
+            </div>
+            <h3 className="font-semibold text-xl text-slate-800 mb-4">
+              Needs Assessment
+            </h3>
+            <p className="text-gray-700 leading-relaxed text-sm">
+              We analyze your business requirements, current processes, and pain points to recommend the right solution.
+            </p>
+          </div>
+          <div className="flex-1 min-w-[250px] bg-white rounded-xl p-8 shadow-[0_5px_20px_rgba(0,0,0,0.05)] transition-all duration-300 hover:transform hover:-translate-y-3 hover:shadow-[0_8px_25px_rgba(0,0,0,0.1)]" data-aos="fade-up" data-aos-delay="100">
+            <div className="text-3xl text-[#0f8abe] mb-6 inline-flex justify-center items-center w-[70px] h-[70px] bg-[#0f8abe]/10 rounded-full">
+              <FaDatabase />
+            </div>
+            <h3 className="font-semibold text-xl text-slate-800 mb-4">
+              Business Data Migration
+            </h3>
+            <p className="text-gray-700 leading-relaxed text-sm">
+              We securely transfer your existing product, customer, and transaction data to the new system.
+            </p>
+          </div>
+          <div className="flex-1 min-w-[250px] bg-white rounded-xl p-8 shadow-[0_5px_20px_rgba(0,0,0,0.05)] transition-all duration-300 hover:transform hover:-translate-y-3 hover:shadow-[0_8px_25px_rgba(0,0,0,0.1)]" data-aos="fade-up" data-aos-delay="200">
+            <div className="text-3xl text-[#0f8abe] mb-6 inline-flex justify-center items-center w-[70px] h-[70px] bg-[#0f8abe]/10 rounded-full">
+              <FaTools />
+            </div>
+            <h3 className="font-semibold text-xl text-slate-800 mb-4">
+              System Configuration
+            </h3>
+            <p className="text-gray-700 leading-relaxed text-sm">
+              We customize RetailManager to match your business workflows, tax rules, and reporting needs.
+            </p>
+          </div>
+          <div className="flex-1 min-w-[250px] bg-white rounded-xl p-8 shadow-[0_5px_20px_rgba(0,0,0,0.05)] transition-all duration-300 hover:transform hover:-translate-y-3 hover:shadow-[0_8px_25px_rgba(0,0,0,0.1)]" data-aos="fade-up" data-aos-delay="300">
+            <div className="text-3xl text-[#0f8abe] mb-6 inline-flex justify-center items-center w-[70px] h-[70px] bg-[#0f8abe]/10 rounded-full">
               <FaShieldAlt />
-            </StepIcon>
-            <StepTitle>Testing & Launch</StepTitle>
-            <StepDescription>
-              Rigorous testing ensures quality before we deploy your solution to
-              the world.
-            </StepDescription>
-          </ProcessStep>
-        </ProcessSteps>
-      </ProcessSection>
+            </div>
+            <h3 className="font-semibold text-xl text-slate-800 mb-4">
+              Training & Support
+            </h3>
+            <p className="text-gray-700 leading-relaxed text-sm">
+              Comprehensive staff training and ongoing support to ensure you get the most from your system.
+            </p>
+          </div>
+        </div>
+      </section>
 
-      <WhyChooseUsSection>
-        <WhyChooseUsContainer>
-          <WhyChooseUsTitle data-aos="fade-up">Why Choose Us?</WhyChooseUsTitle>
-          <WhyChooseUsSubtitle data-aos="fade-up" data-aos-delay="100">
-            We combine technical expertise with creative thinking to deliver
-            solutions that drive real business results.
-          </WhyChooseUsSubtitle>
+      {/* Why Choose Us Section */}
+      <section className="py-20 bg-slate-50 text-center">
+        <div className="max-w-6xl mx-auto px-5">
+          <h2 className="text-3xl text-[#0f8abe] mb-6 font-bold relative inline-block" data-aos="fade-up">
+            Why Retailers Choose Us
+          </h2>
+          <p className="text-gray-700 text-xl max-w-2xl mx-auto mb-12 leading-relaxed" data-aos="fade-up" data-aos-delay="100">
+            We combine deep retail expertise with technical knowledge to deliver solutions that drive real business results.
+          </p>
 
-          <BenefitsGrid>
-            <BenefitCard data-aos="fade-up" data-aos-delay="0">
-              <BenefitIcon>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 mt-12">
+            <div className="bg-white rounded-2xl p-10 shadow-[0_10px_30px_rgba(0,0,0,0.05)] transition-all duration-300 relative overflow-hidden z-10 before:content-[''] before:absolute before:top-0 before:left-0 before:w-full before:h-[5px] before:bg-gradient-to-r before:from-[#0f8abe]/60 before:to-[#0f8abe] hover:transform hover:-translate-y-3 hover:shadow-[0_15px_40px_rgba(0,0,0,0.1)]" data-aos="fade-up" data-aos-delay="0">
+              <div className="text-4xl text-[#0f8abe] mb-6 inline-flex justify-center items-center w-20 h-20 bg-[#0f8abe]/10 rounded-full">
                 <IoMdTrendingUp />
-              </BenefitIcon>
-              <BenefitTitle>Proven Results</BenefitTitle>
-              <BenefitDescription>
-                We've helped hundreds of clients achieve measurable success
-                through our data-backed strategies and execution.
-              </BenefitDescription>
-            </BenefitCard>
+              </div>
+              <h3 className="font-semibold text-2xl text-slate-800 mb-4">
+                Retail Specialists
+              </h3>
+              <p className="text-gray-700 leading-7 text-base">
+                Our team understands retail operations from the ground up, ensuring solutions that actually work in real retail environments.
+              </p>
+            </div>
 
-            <BenefitCard data-aos="fade-up" data-aos-delay="100">
-              <BenefitIcon>
+            <div className="bg-white rounded-2xl p-10 shadow-[0_10px_30px_rgba(0,0,0,0.05)] transition-all duration-300 relative overflow-hidden z-10 before:content-[''] before:absolute before:top-0 before:left-0 before:w-full before:h-[5px] before:bg-gradient-to-r before:from-[#0f8abe]/60 before:to-[#0f8abe] hover:transform hover:-translate-y-3 hover:shadow-[0_15px_40px_rgba(0,0,0,0.1)]" data-aos="fade-up" data-aos-delay="100">
+              <div className="text-4xl text-[#0f8abe] mb-6 inline-flex justify-center items-center w-20 h-20 bg-[#0f8abe]/10 rounded-full">
                 <GiProgression />
-              </BenefitIcon>
-              <BenefitTitle>Scalable Solutions</BenefitTitle>
-              <BenefitDescription>
-                Our architectures grow with your business, ensuring you never
-                outpace your technology infrastructure.
-              </BenefitDescription>
-            </BenefitCard>
+              </div>
+              <h3 className="font-semibold text-2xl text-slate-800 mb-4">
+                Proven Track Record
+              </h3>
+              <p className="text-gray-700 leading-7 text-base">
+                We've helped hundreds of retailers streamline operations, reduce costs, and increase sales through our solutions.
+              </p>
+            </div>
 
-            <BenefitCard data-aos="fade-up" data-aos-delay="200">
-              <BenefitIcon>
+            <div className="bg-white rounded-2xl p-10 shadow-[0_10px_30px_rgba(0,0,0,0.05)] transition-all duration-300 relative overflow-hidden z-10 before:content-[''] before:absolute before:top-0 before:left-0 before:w-full before:h-[5px] before:bg-gradient-to-r before:from-[#0f8abe]/60 before:to-[#0f8abe] hover:transform hover:-translate-y-3 hover:shadow-[0_15px_40px_rgba(0,0,0,0.1)]" data-aos="fade-up" data-aos-delay="200">
+              <div className="text-4xl text-[#0f8abe] mb-6 inline-flex justify-center items-center w-20 h-20 bg-[#0f8abe]/10 rounded-full">
                 <FaChartLine />
-              </BenefitIcon>
-              <BenefitTitle>Data-Driven Approach</BenefitTitle>
-              <BenefitDescription>
-                Every decision is informed by analytics and user research to
-                maximize ROI and user satisfaction.
-              </BenefitDescription>
-            </BenefitCard>
-          </BenefitsGrid>
-        </WhyChooseUsContainer>
-      </WhyChooseUsSection>
+              </div>
+              <h3 className="font-semibold text-2xl text-slate-800 mb-4">
+                Ongoing Support
+              </h3>
+              <p className="text-gray-700 leading-7 text-base">
+                We don't just implement systems - we provide continuous support, updates, and optimizations as your business grows.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
 
-      <CtaSection>
-        <CtaContainer data-aos="fade-up">
-          <CtaTitle>Ready to Transform Your Business?</CtaTitle>
-          <CtaSubtitle>
-            Let's discuss how we can help you achieve your digital goals. Our
-            team is ready to bring your vision to life.
-          </CtaSubtitle>
-          <CtaButton to="/contact">Get Started Today</CtaButton>
-        </CtaContainer>
-      </CtaSection>
+      {/* CTA Section */}
+      <section className="py-24 bg-gradient-to-br from-gray-50 to-gray-200 text-[#0f8abe] text-center">
+        <div className="max-w-4xl mx-auto px-5" data-aos="fade-up">
+          <h2 className="leading-tight text-3xl mb-6 font-bold">
+            Ready to Transform Your Retail Business?
+          </h2>
+          <p className="text-xl mb-10 leading-7 opacity-90 max-w-2xl mx-auto text-gray-700">
+            Let's discuss how RetailManager can streamline your operations and boost your profits. Our team is ready to help.
+          </p>
+          <Link
+            to="/contact"
+            className="inline-block py-4 px-10 bg-white text-[#0f8abe] rounded-full no-underline font-semibold text-lg transition-all duration-300 shadow-[0_5px_15px_rgba(0,0,0,0.1)] hover:transform hover:-translate-y-1 hover:shadow-[0_8px_25px_rgba(0,0,0,0.2)] hover:bg-gray-50"
+          >
+            Get Started Today
+          </Link>
+        </div>
+      </section>
+
+      <style jsx>{`
+        @keyframes slideIn {
+          from {
+            transform: translateX(-50px);
+            opacity: 0;
+          }
+          to {
+            transform: translateX(0);
+            opacity: 1;
+          }
+        }
+      `}</style>
     </>
   );
 };

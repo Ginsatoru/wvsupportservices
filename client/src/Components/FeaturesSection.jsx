@@ -97,16 +97,11 @@ export default function FeaturesSection() {
           <img className="card-img big" src={Success} alt="Success Story" />
           <h2>Read Our Success Story for Inspiration</h2>
           <p>
-            Far beyond the digital noise, there exists WV Support—a place where
-            real solutions live. Thriving in clarity and care, it rests at the
-            edge of seamless service and trusted support, across a vast ocean of
-            technology.
+            Beyond the digital noise lies WV Support where real solutions meet
+            trusted, seamless service across the tech landscape.
           </p>
           <p>
-            On her way, she encountered a ticket. The ticket warned her that, in
-            the world of support, messages are often revised countless times—
-            until all that remains is clarity and the core of what truly
-            matters: the solution.
+            On her way, she found a ticket. It warned that in support, messages are often rewritten until only clarity and the true solution remain.
           </p>
           <Link to="/Contact">
             <button>Contact Us</button>

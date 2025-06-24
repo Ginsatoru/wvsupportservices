@@ -393,7 +393,7 @@ const Support = () => {
   return (
     <>
       <SupportHeader>
-        <h1>Welcome to Our Support Services</h1>
+        <h1>Our Support Services</h1>
         <p>
           We ensure your business runs smoothly. Our team is here to assist you with any technical challenges.
         </p>

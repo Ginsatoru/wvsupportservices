@@ -32,14 +32,14 @@ import Integration from "./Components/Integration";
 import Networking from "./Components/Networking";
 import Training from "./Components/Training";
 import Retailmanager from "./Components/RetailManager";
-import Plans from "./Components/Plans";
-import ITsupport from "./Components/ITsupport";
-import Payment from "./Components/Payment"; // Assuming this is the correct path for
-import WebDevelopment from "./Components/WebDevelopment";
-import MobileApp from "./Components/MobileAppDevelopmentPage";
-import UIDesign from "./Components/UIDesign";
-import WordPress from "./Components/WordPress";
-import WebHosting from "./Components/WebHosting";
+// import Plans from "./Components/Plans";
+// import ITsupport from "./Components/ITsupport";
+// import Payment from "./Components/Payment"; // Assuming this is the correct path for
+// import WebDevelopment from "./Components/WebDevelopment";
+// import MobileApp from "./Components/MobileAppDevelopmentPage";
+// import UIDesign from "./Components/UIDesign";
+// import WordPress from "./Components/WordPress";
+// import WebHosting from "./Components/WebHosting";
 
 function App() {
   const location = useLocation();
@@ -85,14 +85,14 @@ function App() {
             <Route path="/networking" element={<Networking />} />
             <Route path="/training" element={<Training />} />
             <Route path="/retailmanager" element={<Retailmanager />} />
-            <Route path="/Plans" element={<Plans />} />
-            <Route path="/itsupport" element={<ITsupport />} />
-            <Route path="/payment" element={<Payment />} />
-            <Route path="/mobile-app-development" element={<MobileApp />} />
-            <Route path="/web-development" element={<WebDevelopment />} />
-            <Route path="/ui-design" element={<UIDesign />} />
+            {/* <Route path="/Plans" element={<Plans />} /> */}
+            {/* <Route path="/itsupport" element={<ITsupport />} /> */}
+            {/* <Route path="/payment" element={<Payment />} /> */}
+            {/* <Route path="/mobile-app-development" element={<MobileApp />} /> */}
+            {/* <Route path="/web-development" element={<WebDevelopment />} /> */}
+            {/* <Route path="/ui-design" element={<UIDesign />} />
             <Route path="/wordpress" element={<WordPress />} />
-            <Route path="/web-hosting" element={<WebHosting />} />
+            <Route path="/web-hosting" element={<WebHosting />} /> */}
 
             
 

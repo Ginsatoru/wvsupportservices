@@ -475,7 +475,7 @@ const TeamCTASection = styled.section`
 `;
 
 const TeamCTATitle = styled(SectionTitle)`
-  color: white;
+  color: #0f8abe;
   font-weight: 700; /* Added bold font weight */
 `;
 

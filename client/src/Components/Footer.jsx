@@ -198,7 +198,7 @@ const Footer = () => {
                 <a onClick={() => window.location.href = '/Partner'}>Partners</a>
               </li>
               <li>
-                <a onClick={() => window.location.href = '/FAQ'}>FAQ</a>
+                <a onClick={() => window.location.href = '/FAQ'}>FAQs</a>
               </li>
               <li>
                 <a onClick={() => window.location.href = '/Support'}>Support</a>

@@ -6,6 +6,9 @@ export default {
   content: ["./index.html", "./src/**/*.{ts,tsx,js,jsx}"],
   theme: {
     extend: {
+      spacing: {
+        15: "3.75rem",
+      },
       borderRadius: {
         lg: "var(--radius)",
         md: "calc(var(--radius) - 2px)",
@@ -90,4 +93,3 @@ export default {
     // Add any additional plugins if needed
   ],
 };
-
