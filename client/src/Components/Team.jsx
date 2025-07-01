@@ -1,6 +1,15 @@
 import React, { useEffect, useRef, useState } from "react";
 import "./Team.css";
 import { FaTelegram, FaEnvelope, FaPhone } from "react-icons/fa";
+import Pisey from "./Images/owner.png"
+import Sam from "./Images/sam.png"
+import Lyne from "./Images/lyne.png"
+import Bo from "./Images/bo.png"
+import Lucy from "./Images/Lucy.png"
+import Suth from "./Images/suth.png"
+import Soeurn from "./Images/soeurn.png"
+import Sim from "./Images/sim.png"
+import Sok from "./Images/sok.png"
 
 const Team = () => {
   const teamMembers = [
@@ -8,7 +17,7 @@ const Team = () => {
       id: 9,
       name: "Pisey",
       position: "Manager",
-      image: "src/Components/Images/owner.png",
+      image: Pisey,
       contacts: {
         telegram: "@dara_sok",
         email: "dara@wvsupport.com",
@@ -20,7 +29,7 @@ const Team = () => {
       id: 1,
       name: "Sam",
       position: "Team Leader",
-      image: "src/Components/Images/sam.png",
+      image: Sam,
       contacts: {
         telegram: "@sophal_chen",
         email: "sophal@wvsupport.com",
@@ -31,7 +40,7 @@ const Team = () => {
       id: 2,
       name: "Lyne",
       position: "Customer Support & Developer",
-      image: "src/Components/Images/lyne.png",
+      image: Lyne,
       contacts: {
         telegram: "@vannak_lim",
         email: "vannak@wvsupport.com",
@@ -42,7 +51,7 @@ const Team = () => {
       id: 3,
       name: "Bo",
       position: "Customer Support & Developer",
-      image: "src/Components/Images/bo.png",
+      image: Bo,
       contacts: {
         telegram: "@Gin_Satoru",
         email: "naibo2002@gmail.com",
@@ -53,7 +62,7 @@ const Team = () => {
       id: 4,
       name: "Lucy",
       position: "Administrator",
-      image: "src/Components/Images/lucy.png",
+      image: Lucy,
       contacts: {
         telegram: "@dara_sok",
         email: "dara@wvsupport.com",
@@ -64,7 +73,7 @@ const Team = () => {
       id: 6,
       name: "Suth",
       position: "Admin & Accountant",
-      image: "src/Components/Images/suth.png",
+      image: Suth,
       contacts: {
         telegram: "@dara_sok",
         email: "dara@wvsupport.com",
@@ -75,7 +84,7 @@ const Team = () => {
       id: 5,
       name: "Soeurn",
       position: "Developer",
-      image: "src/Components/Images/soeurn.png",
+      image: Soeurn,
       contacts: {
         telegram: "@dara_sok",
         email: "dara@wvsupport.com",
@@ -86,7 +95,7 @@ const Team = () => {
       id: 7,
       name: "Sim",
       position: "Customer Service",
-      image: "src/Components/Images/sim.png",
+      image: Sim,
       contacts: {
         telegram: "@dara_sok",
         email: "dara@wvsupport.com",
@@ -97,7 +106,7 @@ const Team = () => {
       id: 8,
       name: "Sok",
       position: "Customer Service",
-      image: "src/Components/Images/sok.png",
+      image: Sok,
       contacts: {
         telegram: "@dara_sok",
         email: "dara@wvsupport.com",
