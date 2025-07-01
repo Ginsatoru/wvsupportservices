@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import styled, { keyframes } from "styled-components";
 import { useTranslation } from "react-i18next";
 import "../Components/i18n";
+import imageSrc from "./Images/mainBack.jpg"
 
 // Animations
 const slideIn = keyframes`
@@ -273,9 +274,7 @@ const ContactButton = styled(Button)`
   }
 `;
 
-const HeroComponent = ({
-  imageSrc = "src/Components/Images/mainBack.jpg",
-}) => {
+const HeroComponent = ({}) => {
   const navigate = useNavigate();
   const { t } = useTranslation();
 
@@ -286,9 +285,7 @@ const HeroComponent = ({
           <Title>
             <span className="company">WV Support Services Cambodia</span>
           </Title>
-          <Subtitle>
-            {t("subtitle")}
-          </Subtitle>
+          <Subtitle>{t("subtitle")}</Subtitle>
           <ButtonGroup>
             <LearnMoreButton onClick={() => navigate("/Services")}>
               {t("LearnMore")}
