@@ -12,7 +12,7 @@ import RetailManagerTroubleshooting from "./RetailManagerTroubleshooting";
 import CustomerSupportExperience from "./CustomerSupportExperience";
 import Partners from "./Partners";
 import Hero from "./Hero";
-import WelcomeMessage from "./welcomepop";
+import WelcomeMessage from "./WelcomePop";
 
 function Home() {
   const { t } = useTranslation();
