@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import { MapPin, Building2 } from "lucide-react";
+import headerImage from './Images/header.png';
+
 
 const Projects = () => {
   const [activeFilter, setActiveFilter] = useState("All");
@@ -106,7 +108,7 @@ const Projects = () => {
       <div 
         className="relative bg-cover bg-center text-white py-15 px-4 text-center"
         style={{
-          backgroundImage: `linear-gradient(rgba(15, 138, 190, 0.8), rgba(15, 138, 190, 0.9)), url('src/Components/Images/header.png')`
+          backgroundImage: `linear-gradient(rgba(15, 138, 190, 0.8), rgba(15, 138, 190, 0.9)), url(${headerImage})`
         }}
       >
         <div className="projects-content animate-[slideIn_0.5s_ease-out_forwards]">
