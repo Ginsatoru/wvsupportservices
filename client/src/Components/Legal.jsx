@@ -1,6 +1,6 @@
 // LegalPage.js
 import React from "react";
-import "./Legal.css";
+import "./legal.css";
 
 const Legal = () => {
   return (
