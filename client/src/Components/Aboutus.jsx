@@ -145,7 +145,7 @@ const HeroSection = styled.section`
   color: white;
   padding: 0.4rem 1rem;
   text-align: center;
-  min-height: 20vh;
+  min-height: 25.5vh;
   display: flex;
   align-items: center;
   justify-content: center;

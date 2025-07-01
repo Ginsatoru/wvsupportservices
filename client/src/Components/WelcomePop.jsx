@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { CheckCircle, ArrowRight } from 'lucide-react';
+import welcomeImage from "./Images/welcome.png"
 
 const WelcomeMessage = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -71,7 +72,7 @@ const WelcomeMessage = () => {
             {/* Image Section */}
             <div className="relative w-full h-48">
               <img
-                src="src/Components/Images/welcome.png"
+                src={welcomeImage}
                 alt="Professional IT Support Team"
                 className="w-full h-full object-cover opacity-90"
               />
