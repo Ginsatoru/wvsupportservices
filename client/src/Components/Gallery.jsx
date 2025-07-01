@@ -3,6 +3,75 @@ import { FiMapPin } from "react-icons/fi";
 import { FaIndustry } from "react-icons/fa";
 import styled, { css } from "styled-components";
 import { motion, AnimatePresence } from "framer-motion";
+import Image5 from "./Images/image5.png"
+import Image2 from "./Images/image2.png"
+import Image3 from "./Images/image3.png"
+import Image1 from "./Images/image1.png"
+import Image4 from "./Images/image4.png"
+import Image6 from "./Images/image6.png"
+
+const galleryData = [
+    {
+      id: 1,
+      title: "RetailChain Global POS Deployment",
+      description: "Implemented and supported POS systems for 30K+ stores across Asia-Pacific",
+      category: "POS Support",
+      location: "Australia, New Zealand, Papua New Guinea, and more",
+      industry: "Retail Fashion",
+      image: Image1,
+      fullImage: Image1,
+    },
+    {
+      id: 2,
+      title: "E-Commerce Platform Integration",
+      description: "Integrated webstore with existing POS for seamless inventory management",
+      category: "Webstore Integration",
+      location: "Australia, New Zealand",
+      industry: "Home Goods",
+      image: Image2,
+      fullImage: Image2,
+    },
+    {
+      id: 3,
+      title: "Multi-Store Management System",
+      description: "Centralized management solution for franchise operations in 3 countries",
+      category: "Multi-Store Management",
+      location: "Australia, Cambodia",
+      industry: "Home Decoration",
+      image: Image3,
+      fullImage: Image3
+    },
+    {
+      id: 4,
+      title: "POS System Upgrade & Migration",
+      description: "Seamless migration to new POS platform with zero downtime",
+      category: "POS Support",
+      location: "United Kingdom",
+      industry: "Specialty Retail",
+      image: Image4,
+      fullImage: Image4,
+    },
+    {
+      id: 5,
+      title: "Omnichannel Retail Solution",
+      description: "Integrated online and offline sales channels for unified customer experience",
+      category: "Webstore Integration",
+      location: "United States",
+      industry: "Electronics",
+      image: Image5,
+      fullImage: Image5,
+    },
+    {
+      id: 6,
+      title: "Franchise Operations Support",
+      description: "24/7 technical support for franchise network across Europe",
+      category: "Multi-Store Management",
+      location: "Germany, France, Spain",
+      industry: "Health & Beauty",
+      image: Image6,
+      fullImage: Image6,
+    }
+  ];
 
 // Styled Components
 const GalleryPage = styled.div`
@@ -241,68 +310,7 @@ const Gallery = () => {
     "Multi-Store Management",
   ];
 
-  const galleryData = [
-    {
-      id: 1,
-      title: "RetailChain Global POS Deployment",
-      description: "Implemented and supported POS systems for 30K+ stores across Asia-Pacific",
-      category: "POS Support",
-      location: "Australia, New Zealand, Papua New Guinea, and more",
-      industry: "Retail Fashion",
-      image: "src/Components/Images/image5.png",
-      fullImage: "src/Components/Images/image5.png"
-    },
-    {
-      id: 2,
-      title: "E-Commerce Platform Integration",
-      description: "Integrated webstore with existing POS for seamless inventory management",
-      category: "Webstore Integration",
-      location: "Australia, New Zealand",
-      industry: "Home Goods",
-      image: "src/Components/Images/image4.png",
-      fullImage: "src/Components/Images/image4.png"
-    },
-    {
-      id: 3,
-      title: "Multi-Store Management System",
-      description: "Centralized management solution for franchise operations in 3 countries",
-      category: "Multi-Store Management",
-      location: "Australia, Cambodia",
-      industry: "Home Decoration",
-      image: "src/Components/Images/image6.png",
-      fullImage: "src/Components/Images/image6.png"
-    },
-    {
-      id: 4,
-      title: "POS System Upgrade & Migration",
-      description: "Seamless migration to new POS platform with zero downtime",
-      category: "POS Support",
-      location: "United Kingdom",
-      industry: "Specialty Retail",
-      image: "src/Components/Images/image1.png",
-      fullImage: "src/Components/Images/image1.png"
-    },
-    {
-      id: 5,
-      title: "Omnichannel Retail Solution",
-      description: "Integrated online and offline sales channels for unified customer experience",
-      category: "Webstore Integration",
-      location: "United States",
-      industry: "Electronics",
-      image: "src/Components/Images/image2.png",
-      fullImage: "src/Components/Images/image2.png"
-    },
-    {
-      id: 6,
-      title: "Franchise Operations Support",
-      description: "24/7 technical support for franchise network across Europe",
-      category: "Multi-Store Management",
-      location: "Germany, France, Spain",
-      industry: "Health & Beauty",
-      image: "src/Components/Images/image3.png",
-      fullImage: "src/Components/Images/image3.png"
-    },
-  ];
+  
 
   const filteredImages = activeFilter === "All" 
     ? galleryData 
