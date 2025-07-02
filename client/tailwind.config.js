@@ -6,6 +6,9 @@ export default {
   content: ["./index.html", "./src/**/*.{ts,tsx,js,jsx}"],
   theme: {
     extend: {
+      fontFamily: {
+        khmer: ['"Dangrek"', 'sans-serif'],
+      },
       spacing: {
         15: "3.75rem",
       },
@@ -55,7 +58,6 @@ export default {
           4: "hsl(var(--chart-4))",
           5: "hsl(var(--chart-5))",
         },
-        // Add chat-specific colors
         chat: {
           user: "#0f8abe",
           admin: "#ffffff",
@@ -80,7 +82,6 @@ export default {
           "100%": { opacity: "1", transform: "translateY(0)" },
         },
       },
-      // Add any additional utilities needed for the chat
       boxShadow: {
         chat: "0 12px 30px rgba(0, 0, 0, 0.2)",
         "chat-button": "0 4px 12px rgba(0, 0, 0, 0.3)",
@@ -90,6 +91,5 @@ export default {
   plugins: [
     require("tailwind-scrollbar"),
     tailwindcssAnimate,
-    // Add any additional plugins if needed
   ],
 };

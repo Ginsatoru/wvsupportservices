@@ -140,7 +140,7 @@ const Footer = () => {
             ) : (
               <div className="footer-logo-placeholder">
                 <span className="footer-logo-text">
-                  {settings?.companyName?.charAt(0) || "C"}
+                  {settings?.companyName?.charAt(0) || ""}
                 </span>
               </div>
             )}

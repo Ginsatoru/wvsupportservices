@@ -6,7 +6,7 @@ import Dashboard from "../components/Dashbaord/Dashboard";
 // import Inbox from "../components/Inbox/Inbox";
 import OpenMessage from "../components/Inbox/OpenMessagesPage";
 import ClosedMessage from "../components/Inbox/ClosedMessagesPage";
-import FrontendPages from "../components/FrontendPages/FrontendPages";
+import FrontendPages from "../components/FrontendPages/CMSPage.jsx";
 import Settings from "../components/Settings/Settings";
 import ConfirmationModal from "../components/Modals/ConfirmationModal";
 import { motion, AnimatePresence } from "framer-motion";

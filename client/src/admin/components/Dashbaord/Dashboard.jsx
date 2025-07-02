@@ -2,7 +2,7 @@ import React from "react";
 import { motion } from "framer-motion";
 import StatsCard from "./StatsCard";
 import VisitorChart, { visitorData } from "./VisitorChart";
-import MonthlyRevenue, { revenueData } from "./MonthlyRevenue";
+import ContentEngagement, { contentData } from "./ContentEngagement";
 import TopCountries, { COLORS, countryData } from "./TopCountries";
 
 const Dashboard = ({ darkMode }) => {
@@ -21,17 +21,19 @@ const Dashboard = ({ darkMode }) => {
       change: "+3.2%",
     },
     {
-      title: "Revenue",
-      value: "$12,345",
-      iconType: "dollar",
+      title: "Reader Engagement",
+      value: "8.7K",
+      iconType: "users", // Represents engaged readers
       color: {
-        from: "from-green-500",
-        to: "to-green-700",
-        bg: "bg-green-100",
-        text: "text-green-700",
+        from: "from-purple-500",
+        to: "to-purple-700",
+        bg: "bg-purple-100",
+        text: "text-purple-700",
       },
       trend: "up",
-      change: "+1.8%",
+      change: "+7.2%",
+      metric: "engaged_readers",
+      timeFrame: "last 7 days",
     },
     {
       title: "World Reach",
@@ -79,7 +81,7 @@ const Dashboard = ({ darkMode }) => {
       {/* Charts Section */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-1">
         <VisitorChart data={visitorData} darkMode={darkMode} />
-        <MonthlyRevenue data={revenueData} darkMode={darkMode} />
+        <ContentEngagement data={contentData} darkMode={darkMode} />
         <TopCountries data={countryData} colors={COLORS} darkMode={darkMode} />
       </div>
     </div>

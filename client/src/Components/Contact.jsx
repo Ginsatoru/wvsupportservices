@@ -1,4 +1,3 @@
-import React, { useState, useRef } from "react";
 import emailjs from "@emailjs/browser";
 import ReCAPTCHA from "react-google-recaptcha";
 import {
@@ -7,12 +6,14 @@ import {
   HiOutlineEnvelope,
 } from "react-icons/hi2";
 import "./Contact.css";
-// import ContactInfo from "./ContactInfo";
-import { useSettings } from '../context/SettingsContext';
+import { useSettings } from "../context/SettingsContext";
+import { Loader2, AlertTriangle } from "lucide-react";
+import { motion } from "framer-motion";
+import React, { useEffect, useState, useRef } from "react";
 
 const Contact = () => {
   const { settings, loading } = useSettings();
-  
+
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -75,11 +76,45 @@ const Contact = () => {
 
   // Show loading state if settings are still loading
   if (loading || !settings) {
+    const [timeoutReached, setTimeoutReached] = useState(false);
+
+    useEffect(() => {
+      const timer = setTimeout(() => {
+        setTimeoutReached(true);
+      }, 5000); // 5 seconds
+
+      return () => clearTimeout(timer);
+    }, []);
+
     return (
-      <div className="whole-page">
-        <div className="animate-pulse p-8 text-center">
-          Loading contact page...
-        </div>
+      <div className="flex items-center justify-center min-h-[92vh] bg-gray-50 dark:bg-gray-900">
+        <motion.div
+          initial={{ opacity: 0, scale: 0.95 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.4 }}
+          className="bg-white dark:bg-gray-800 shadow-lg rounded-2xl p-10 flex flex-col items-center space-y-4"
+        >
+          {timeoutReached ? (
+            <>
+              <AlertTriangle className="w-10 h-10 text-red-500" />
+              <p className="text-gray-800 dark:text-gray-300 text-lg font-semibold">
+                Oops! We couldn’t load the contact page.
+              </p>
+              <p className="text-gray-500 dark:text-gray-400 text-sm text-center max-w-sm">
+                It looks like our server might be temporarily unavailable.
+                Please check your internet connection or try again in a few
+                moments.
+              </p>
+            </>
+          ) : (
+            <>
+              <Loader2 className="w-10 h-10 text-sky-500 animate-spin" />
+              <p className="text-gray-700 dark:text-gray-300 text-lg font-medium">
+                Loading contact page...
+              </p>
+            </>
+          )}
+        </motion.div>
       </div>
     );
   }
@@ -107,15 +142,9 @@ const Contact = () => {
     <div className="whole-page">
       <header className="contact-header">
         <h1>Contact Us</h1>
-        <p>
-          We're here to help, anytime you need support or have a question.
-        </p>
+        <p>We're here to help, anytime you need support or have a question.</p>
       </header>
-      
-      {/* <div className="contact-info-header text-center p-5">
-        <ContactInfo />
-      </div> */}
-      
+
       <div className="contact-container">
         <div className="contact-content">
           <div className="contact-form-container">

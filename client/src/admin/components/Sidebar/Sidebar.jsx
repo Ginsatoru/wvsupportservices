@@ -64,21 +64,18 @@ const Sidebar = ({
     {
       id: "inbox",
       label: "Inbox",
-      // notification: notifications.inbox,
       icon: FiMail,
       isExpandable: true,
       isExpanded: expandedSections.inbox,
       children: [
         {
           id: "inbox-open",
-          // notification: notifications.inbox,
           label: "Open",
           icon: FiTrendingUp,
           component: <MessagesContainer status="open" />,
         },
         {
           id: "inbox-closed",
-          // notification: notifications.inbox,
           label: "Closed",
           icon: FiArchive,
           component: <MessagesContainer status="closed" />,
@@ -243,7 +240,6 @@ const Sidebar = ({
                   backgroundColor: "#38bdf8", // Tailwind's sky-300
                 }
               : {}
-              //#7dd3fc
           }
           title={!isOpen ? item.label : ""}
           whileHover={{ scale: 1.02 }}
@@ -315,87 +311,101 @@ const Sidebar = ({
     <motion.div
       className={`${
         darkMode ? "bg-gray-800" : "bg-white"
-      } shadow-sm flex flex-col`}
+      } shadow-sm flex flex-col justify-between`}  // Added justify-between here
       initial={{ width: isOpen ? 288 : 80 }}
       animate={{ width: isOpen ? 288 : 80 }}
       transition={{ type: "spring", damping: 25, stiffness: 300 }}
     >
-      {/* Quick Stats */}
-      <AnimatePresence>
-        {isOpen && (
-          <motion.div
-            className={`p-4 -mt-4 ${
-              darkMode ? "border-gray-700" : "border-gray-100"
-            }`}
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: "auto" }}
-            exit={{ opacity: 0, height: 0 }}
-            transition={{ duration: 0.3 }}
-          >
-            <div
-              className={`rounded-xl p-4 ${
-                darkMode
-                  ? "bg-gray-700"
-                  : "bg-sky-100"
+      <div>
+        {/* Quick Stats */}
+        <AnimatePresence>
+          {isOpen && (
+            <motion.div
+              className={`p-4 -mt-4 ${
+                darkMode ? "border-gray-700" : "border-gray-100"
               }`}
+              initial={{ opacity: 0, height: 0 }}
+              animate={{ opacity: 1, height: "auto" }}
+              exit={{ opacity: 0, height: 0 }}
+              transition={{ duration: 0.3 }}
             >
-              <div className="flex items-center justify-around mb-5">
-                <span
-                  className={`text-sm font-medium ${
-                    darkMode ? "text-gray-300" : "text-gray-600"
-                  }`}
-                >
-                  Today's Overview
-                </span>
-                <FiStar
-                  className={`h-5 w-5 ${
-                    darkMode ? "text-sky-400" : "text-sky-400"
-                  }`}
-                />
-              </div>
-              <div className="grid grid-cols-2 gap-3">
-                <div className="text-center">
-                  <p
-                    className="text-2xl font-bold text-sky-400"
-                  >
-                    68
-                  </p>
-                  <p
-                    className={`text-sm ${
-                      darkMode ? "text-gray-300" : "text-gray-500"
+              <div
+                className={`rounded-xl p-4 ${
+                  darkMode
+                    ? "bg-gray-700"
+                    : "bg-sky-100"
+                }`}
+              >
+                <div className="flex items-center justify-around mb-5">
+                  <span
+                    className={`text-sm font-medium ${
+                      darkMode ? "text-gray-300" : "text-gray-600"
                     }`}
                   >
-                    Viewers
-                  </p>
-                </div>
-                <div className="text-center">
-                  <p
-                    className="text-2xl font-bold text-sky-400"
-                  >
-                    32
-                  </p>
-                  <p
-                    className={`text-sm ${
-                      darkMode ? "text-gray-300" : "text-gray-500"
+                    Today's Overview
+                  </span>
+                  <FiStar
+                    className={`h-5 w-5 ${
+                      darkMode ? "text-sky-400" : "text-sky-400"
                     }`}
-                  >
-                    Visitors
-                  </p>
+                  />
+                </div>
+                <div className="grid grid-cols-2 gap-3">
+                  <div className="text-center">
+                    <p
+                      className="text-2xl font-bold text-sky-400"
+                    >
+                      68
+                    </p>
+                    <p
+                      className={`text-sm ${
+                        darkMode ? "text-gray-300" : "text-gray-500"
+                      }`}
+                    >
+                      Viewers
+                    </p>
+                  </div>
+                  <div className="text-center">
+                    <p
+                      className="text-2xl font-bold text-sky-400"
+                    >
+                      32
+                    </p>
+                    <p
+                      className={`text-sm ${
+                        darkMode ? "text-gray-300" : "text-gray-500"
+                      }`}
+                    >
+                      Visitors
+                    </p>
+                  </div>
                 </div>
               </div>
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+            </motion.div>
+          )}
+        </AnimatePresence>
 
-      {/* Navigation */}
-      <nav className="flex-1 p-4 overflow-y-auto">
-        <div className="space-y-2">
-          {menuItems.map((item) => (
-            <MenuItem key={item.id} item={item} />
-          ))}
-        </div>
-      </nav>
+        {/* Navigation */}
+        <nav className="flex-1 p-4 overflow-y-auto">
+          <div className="space-y-2">
+            {menuItems.map((item) => (
+              <MenuItem key={item.id} item={item} />
+            ))}
+          </div>
+        </nav>
+      </div>
+
+      {/* Version number at the bottom */}
+      <motion.div
+        className={`p-4 text-center ${
+          darkMode ? "text-gray-400" : "text-gray-500"
+        } text-xs`}
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 0.2 }}
+      >
+        V1.0
+      </motion.div>
     </motion.div>
   );
 };

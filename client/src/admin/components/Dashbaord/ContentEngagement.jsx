@@ -9,14 +9,14 @@ import {
   Cell,
 } from "recharts";
 
-// Export the data so it can be imported in Dashboard.jsx
-export const revenueData = [
-  { name: "Jan", revenue: 4000 },
-  { name: "Feb", revenue: 3000 },
-  { name: "Mar", revenue: 5000 },
-  { name: "Apr", revenue: 4500 },
-  { name: "May", revenue: 6000 },
-  { name: "Jun", revenue: 7000 },
+// Updated data structure for content engagement
+export const contentData = [
+  { name: "Jan", views: 12000, reads: 8000, interactions: 3500 },
+  { name: "Feb", views: 9000, reads: 6000, interactions: 2800 },
+  { name: "Mar", views: 15000, reads: 9500, interactions: 4200 },
+  { name: "Apr", views: 13500, reads: 8500, interactions: 3800 },
+  { name: "May", views: 18000, reads: 11000, interactions: 5200 },
+  { name: "Jun", views: 21000, reads: 13000, interactions: 6800 },
 ];
 
 // Modern gradient colors for bars
@@ -29,7 +29,7 @@ const barColors = [
   "#3B82F6", // Blue
 ];
 
-// Custom tooltip component
+// Custom tooltip component for content metrics
 const CustomTooltip = ({ active, payload, label, darkMode }) => {
   if (active && payload && payload.length) {
     return (
@@ -41,18 +41,27 @@ const CustomTooltip = ({ active, payload, label, darkMode }) => {
         }`}
       >
         <p className="font-medium text-sm mb-1">{label}</p>
-        <p className="text-lg font-bold text-emerald-500">
-          ${payload[0].value.toLocaleString()}
-        </p>
+        {payload.map((entry, index) => (
+          <div key={`tooltip-${index}`} className="flex items-center mt-1">
+            <div
+              className="w-3 h-3 rounded-full mr-2"
+              style={{ backgroundColor: entry.color }}
+            />
+            <span className="text-sm font-medium mr-2">{entry.name}:</span>
+            <span className="text-sm font-bold">
+              {entry.value.toLocaleString()}
+            </span>
+          </div>
+        ))}
       </div>
     );
   }
   return null;
 };
 
-// Properly named functional component
-const MonthlyRevenue = ({ data = revenueData, darkMode = false }) => {
-  const maxRevenue = Math.max(...data.map(item => item.revenue));
+// Updated component for Content Engagement
+const ContentEngagement = ({ data = contentData, darkMode = false }) => {
+  const maxViews = Math.max(...data.map(item => item.views));
   
   return (
     <div
@@ -70,33 +79,33 @@ const MonthlyRevenue = ({ data = revenueData, darkMode = false }) => {
               darkMode ? "text-white" : "text-gray-900"
             }`}
           >
-            Monthly Revenue
+            Content Engagement
           </h2>
           <p
             className={`text-sm ${
               darkMode ? "text-gray-400" : "text-gray-600"
             }`}
           >
-            Revenue trends over the past 6 months
+            Audience interaction over the past 6 months
           </p>
         </div>
         
-        {/* Revenue summary */}
+        {/* Summary */}
         <div className="mt-4 sm:mt-0 flex flex-col sm:items-end">
           <span
             className={`text-xs uppercase tracking-wide font-medium ${
               darkMode ? "text-gray-400" : "text-gray-500"
             }`}
           >
-            Peak Revenue
+            Peak Views
           </span>
           <span className="text-2xl font-bold text-emerald-500">
-            ${maxRevenue.toLocaleString()}
+            {maxViews.toLocaleString()}
           </span>
         </div>
       </div>
 
-      {/* Chart container with improved responsive behavior */}
+      {/* Chart container */}
       <div className="relative">
         <ResponsiveContainer width="100%" height={300} className="min-h-[250px]">
           <BarChart
@@ -107,11 +116,20 @@ const MonthlyRevenue = ({ data = revenueData, darkMode = false }) => {
               left: 0,
               bottom: 20,
             }}
-            barCategoryGap="20%"
+            barCategoryGap="15%"
+            barGap={4}
           >
             <defs>
-              {/* Gradient definitions for modern look */}
-              <linearGradient id="barGradient" x1="0" y1="0" x2="0" y2="1">
+              {/* Gradient definitions */}
+              <linearGradient id="viewsGradient" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stopColor="#8B5CF6" stopOpacity={0.8} />
+                <stop offset="100%" stopColor="#8B5CF6" stopOpacity={0.4} />
+              </linearGradient>
+              <linearGradient id="readsGradient" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stopColor="#06B6D4" stopOpacity={0.8} />
+                <stop offset="100%" stopColor="#06B6D4" stopOpacity={0.4} />
+              </linearGradient>
+              <linearGradient id="interactionsGradient" x1="0" y1="0" x2="0" y2="1">
                 <stop offset="0%" stopColor="#10B981" stopOpacity={0.8} />
                 <stop offset="100%" stopColor="#10B981" stopOpacity={0.4} />
               </linearGradient>
@@ -134,7 +152,6 @@ const MonthlyRevenue = ({ data = revenueData, darkMode = false }) => {
               axisLine={false}
               tickLine={false}
               tick={{ dx: -8 }}
-              tickFormatter={(value) => `$${(value / 1000).toFixed(0)}k`}
               width={60}
             />
             
@@ -146,22 +163,45 @@ const MonthlyRevenue = ({ data = revenueData, darkMode = false }) => {
               }}
             />
             
+            <Legend 
+              wrapperStyle={{
+                paddingTop: '20px',
+                fontSize: '12px',
+                fontWeight: 500,
+              }}
+              iconType="circle"
+              iconSize={10}
+            />
+            
             <Bar
-              dataKey="revenue"
+              dataKey="views"
+              name="Views"
               radius={[8, 8, 0, 0]}
-              fill="url(#barGradient)"
-              stroke={darkMode ? "#10B981" : "#059669"}
+              fill="url(#viewsGradient)"
+              stroke="#8B5CF6"
               strokeWidth={1}
               className="drop-shadow-sm hover:drop-shadow-md transition-all duration-200"
-            >
-              {data.map((entry, index) => (
-                <Cell
-                  key={`cell-${index}`}
-                  fill={barColors[index % barColors.length]}
-                  className="hover:brightness-110 transition-all duration-200"
-                />
-              ))}
-            </Bar>
+            />
+            
+            <Bar
+              dataKey="reads"
+              name="Reads"
+              radius={[8, 8, 0, 0]}
+              fill="url(#readsGradient)"
+              stroke="#06B6D4"
+              strokeWidth={1}
+              className="drop-shadow-sm hover:drop-shadow-md transition-all duration-200"
+            />
+            
+            <Bar
+              dataKey="interactions"
+              name="Interactions"
+              radius={[8, 8, 0, 0]}
+              fill="url(#interactionsGradient)"
+              stroke="#10B981"
+              strokeWidth={1}
+              className="drop-shadow-sm hover:drop-shadow-md transition-all duration-200"
+            />
           </BarChart>
         </ResponsiveContainer>
         
@@ -184,16 +224,20 @@ const MonthlyRevenue = ({ data = revenueData, darkMode = false }) => {
         }`}
       >
         <div className="flex items-center gap-2">
-          <div className="w-3 h-3 rounded-full bg-gradient-to-r from-purple-500 to-blue-500"></div>
-          <span>Multi-color bars for visual distinction</span>
+          <div className="w-3 h-3 rounded-full bg-purple-500"></div>
+          <span>Views - Total content impressions</span>
+        </div>
+        <div className="flex items-center gap-2">
+          <div className="w-3 h-3 rounded-full bg-cyan-500"></div>
+          <span>Reads - Engaged reading sessions</span>
         </div>
         <div className="flex items-center gap-2">
           <div className="w-3 h-3 rounded-full bg-emerald-500"></div>
-          <span>Hover for detailed values</span>
+          <span>Interactions - Comments & shares</span>
         </div>
       </div>
     </div>
   );
 };
 
-export default MonthlyRevenue;
+export default ContentEngagement;
