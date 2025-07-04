@@ -1,838 +1,285 @@
 import React from "react";
-import styled from "styled-components";
-
-// Colors
-const colors = {
-  primary: "#0f8abe",
-  primaryLight: "#e6f4fa",
-  primaryDark: "#0c6e95",
-  white: "#ffffff",
-  gray100: "#f8f9fa",
-  gray200: "#e9ecef",
-  gray600: "#6c757d",
-  gray800: "#343a40",
-  blue100: "#d1e7f7",
-};
-
-// Font family
-const fontFamily = "Montserrat, sans-serif";
-
-// Styled components
-const Container = styled.div`
-  min-height: 100vh;
-  background-color: ${colors.gray100};
-  font-family: ${fontFamily};
-`;
-
-const MainContent = styled.div`
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 1.5rem 1rem;
-
-  @media (min-width: 640px) {
-    padding: 2rem 1.5rem;
-  }
-
-  @media (min-width: 1024px) {
-    padding: 3rem 2rem;
-  }
-`;
-
-const Header = styled.div`
-  text-align: center;
-  margin-bottom: 2rem;
-
-  @media (min-width: 768px) {
-    margin-bottom: 3rem;
-  }
-`;
-
-const IconWrapper = styled.div`
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  background-color: ${colors.blue100};
-  padding: 0.75rem;
-  border-radius: 9999px;
-  margin-bottom: 1rem;
-
-  @media (min-width: 640px) {
-    padding: 1rem;
-    margin-bottom: 1.5rem;
-  }
-
-  svg {
-    width: 36px;
-    height: 36px;
-
-    @media (min-width: 640px) {
-      width: 48px;
-      height: 48px;
-    }
-  }
-`;
-
-const Title = styled.h1`
-  font-size: 1.5rem;
-  font-weight: 700;
-  color: ${colors.gray800};
-  margin-bottom: 0.5rem;
-  line-height: 1.3;
-
-  @media (min-width: 640px) {
-    font-size: 1.75rem;
-  }
-
-  @media (min-width: 768px) {
-    font-size: 2rem;
-  }
-
-  @media (min-width: 1024px) {
-    font-size: 2.25rem;
-  }
-`;
-
-const Subtitle = styled.p`
-  font-size: 0.9375rem;
-  color: ${colors.gray600};
-  max-width: 42rem;
-  margin: 0 auto;
-  line-height: 1.5;
-
-  @media (min-width: 640px) {
-    font-size: 1rem;
-  }
-
-  @media (min-width: 768px) {
-    font-size: 1.125rem;
-  }
-`;
-
-const MainCard = styled.div`
-  background-color: ${colors.white};
-  border-radius: 0.75rem;
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-  overflow: hidden;
-  margin-bottom: 2rem;
-
-  @media (min-width: 768px) {
-    border-radius: 1rem;
-    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
-    margin-bottom: 3rem;
-  }
-`;
-
-const HeroSection = styled.div`
-  padding: 2rem 1rem;
-  text-align: center;
-  color: ${colors.white};
-  background-color: ${colors.primary};
-
-  @media (min-width: 640px) {
-    padding: 2.5rem 1.5rem;
-  }
-
-  @media (min-width: 768px) {
-    padding: 3rem 2rem;
-  }
-
-  @media (min-width: 1024px) {
-    padding: 4rem 2rem;
-  }
-`;
-
-const SectionTitle = styled.h2`
-  font-size: 1.25rem;
-  font-weight: 700;
-  margin-bottom: 0.75rem;
-  line-height: 1.3;
-
-  @media (min-width: 640px) {
-    font-size: 1.375rem;
-  }
-
-  @media (min-width: 768px) {
-    font-size: 1.5rem;
-    margin-bottom: 1rem;
-  }
-
-  @media (min-width: 1024px) {
-    font-size: 1.75rem;
-  }
-`;
-
-const HeroText = styled.p`
-  font-size: 0.9375rem;
-  max-width: 56rem;
-  margin: 0 auto;
-  line-height: 1.5;
-
-  @media (min-width: 640px) {
-    font-size: 1rem;
-  }
-
-  @media (min-width: 768px) {
-    font-size: 1.125rem;
-  }
-`;
-
-const ContentGrid = styled.div`
-  padding: 1.5rem;
-  display: grid;
-  gap: 1.5rem;
-
-  @media (min-width: 768px) {
-    padding: 2rem;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 2rem;
-  }
-
-  @media (min-width: 1024px) {
-    padding: 3rem;
-    gap: 3rem;
-  }
-`;
-
-const Column = styled.div``;
-
-const BenefitsList = styled.ul`
-  display: grid;
-  gap: 1rem;
-
-  @media (min-width: 768px) {
-    gap: 1.5rem;
-  }
-`;
-
-const BenefitItem = styled.li`
-  display: flex;
-  align-items: flex-start;
-`;
-
-const BenefitIcon = styled.div`
-  flex-shrink: 0;
-  background-color: ${colors.blue100};
-  padding: 0.5rem;
-  border-radius: 50%;
-  margin-right: 0.75rem;
-
-  svg {
-    width: 18px;
-    height: 18px;
-
-    @media (min-width: 640px) {
-      width: 20px;
-      height: 20px;
-    }
-
-    @media (min-width: 768px) {
-      width: 24px;
-      height: 24px;
-    }
-  }
-`;
-
-const BenefitContent = styled.div``;
-
-const BenefitTitle = styled.h4`
-  font-size: 0.9375rem;
-  font-weight: 500;
-  color: ${colors.gray800};
-  line-height: 1.3;
-
-  @media (min-width: 640px) {
-    font-size: 1rem;
-  }
-`;
-
-const BenefitDescription = styled.p`
-  font-size: 0.8125rem;
-  color: ${colors.gray600};
-  margin-top: 0.25rem;
-  line-height: 1.5;
-
-  @media (min-width: 640px) {
-    font-size: 0.875rem;
-  }
-`;
-
-const ProcessCard = styled.div`
-  background-color: ${colors.gray100};
-  padding: 1.25rem;
-  border-radius: 0.5rem;
-  border: 1px solid ${colors.gray200};
-
-  @media (min-width: 768px) {
-    padding: 1.5rem;
-    border-radius: 0.75rem;
-  }
-`;
-
-const ProcessList = styled.div`
-  display: grid;
-  gap: 1rem;
-
-  @media (min-width: 768px) {
-    gap: 1.5rem;
-  }
-`;
-
-const ProcessItem = styled.div`
-  display: flex;
-`;
-
-const ProcessStep = styled.div`
-  flex-shrink: 0;
-  color: ${colors.white};
-  font-weight: 700;
-  border-radius: 9999px;
-  height: 2rem;
-  width: 2rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-right: 0.75rem;
-  background-color: ${colors.primary};
-  font-size: 0.875rem;
-
-  @media (min-width: 640px) {
-    height: 2.25rem;
-    width: 2.25rem;
-    font-size: 1rem;
-  }
-
-  @media (min-width: 768px) {
-    height: 2.5rem;
-    width: 2.5rem;
-    margin-right: 1rem;
-  }
-`;
-
-const CoverageGrid = styled.div`
-  padding: 0 1.5rem 1.5rem;
-  display: grid;
-  gap: 1rem;
-
-  @media (min-width: 640px) {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 1.25rem;
-  }
-
-  @media (min-width: 768px) {
-    padding: 0 2rem 2rem;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 1.5rem;
-  }
-
-  @media (min-width: 1024px) {
-    padding: 0 3rem 3rem;
-  }
-`;
-
-const CoverageCard = styled.div`
-  background-color: ${colors.blue100};
-  padding: 1.25rem;
-  border-radius: 0.5rem;
-
-  @media (min-width: 768px) {
-    padding: 1.5rem;
-  }
-`;
-
-const CoverageList = styled.ul`
-  display: grid;
-  gap: 0.5rem;
-  margin-top: 0.75rem;
-`;
-
-const CoverageItem = styled.li`
-  display: flex;
-  align-items: flex-start;
-  font-size: 0.8125rem;
-  line-height: 1.5;
-
-  @media (min-width: 640px) {
-    font-size: 0.875rem;
-  }
-
-  svg {
-    width: 16px;
-    height: 16px;
-    margin-right: 0.5rem;
-    margin-top: 0.125rem;
-    flex-shrink: 0;
-
-    @media (min-width: 640px) {
-      width: 18px;
-      height: 18px;
-    }
-
-    @media (min-width: 768px) {
-      width: 20px;
-      height: 20px;
-    }
-  }
-`;
-
-const CTASection = styled.div`
-  padding: 2rem 1rem;
-  text-align: center;
-  color: ${colors.white};
-  background-color: ${colors.primary};
-
-  @media (min-width: 640px) {
-    padding: 2.5rem 1.5rem;
-  }
-
-  @media (min-width: 768px) {
-    padding: 3rem 2rem;
-  }
-
-  @media (min-width: 1024px) {
-    padding: 4rem 2rem;
-  }
-`;
-
-const Button = styled.button`
-  padding: 0.625rem 1.5rem;
-  font-weight: 700;
-  border-radius: 0.375rem;
-  transition: all 0.2s ease;
-  font-size: 0.8125rem;
-
-  @media (min-width: 640px) {
-    padding: 0.75rem 2rem;
-    border-radius: 0.5rem;
-    font-size: 0.875rem;
-  }
-`;
-
-const PrimaryButton = styled(Button)`
-  cursor: pointer;
-  border: none;
-  background-color: ${colors.white};
-  color: ${colors.primary};
-
-  &:hover {
-    background-color: ${colors.gray100};
-  }
-`;
-
-const SecondaryButton = styled(Button)`
-  cursor: pointer;
-  background-color: transparent;
-  border: 2px solid ${colors.white};
-  color: ${colors.white};
-
-  &:hover {
-    background-color: rgba(255, 255, 255, 0.1);
-  }
-`;
-
-const ButtonGroup = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 0.75rem;
-  justify-content: center;
-  margin-top: 1.5rem;
-
-  @media (min-width: 640px) {
-    flex-direction: row;
-    gap: 1rem;
-    margin-top: 2rem;
-  }
-`;
+import {
+  Monitor,
+  Shield,
+  Globe,
+  Headphones,
+  Search,
+  Wrench,
+  Check,
+  Quote,
+  Clock,
+  Lock,
+  Users,
+  Database,
+  Printer,
+  Network,
+  GraduationCap,
+} from "lucide-react";
 
 const RetailManagerPOSSupport = () => {
   return (
-    <Container>
-      <MainContent>
-        <Header>
-          <IconWrapper>
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke={colors.primary}
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z"
-              />
-            </svg>
-          </IconWrapper>
-          <Title>RetailManager POS Support</Title>
-          <Subtitle>
-            Professional remote support for your point-of-sale system
-          </Subtitle>
-        </Header>
-
-        <MainCard>
-          <HeroSection>
-            <SectionTitle>Comprehensive Remote Support</SectionTitle>
-            <HeroText>
-              We provide fast and efficient remote troubleshooting via
-              TeamViewer, resolving software issues quickly without the need for
-              on-site visits.
-            </HeroText>
-          </HeroSection>
-
-          <ContentGrid>
-            <Column>
-              <SectionTitle
-                style={{ color: colors.gray800, marginBottom: "1.25rem" }}
-              >
-                Key Benefits
-              </SectionTitle>
-              <BenefitsList>
-                <BenefitItem>
-                  <BenefitIcon>
-                    <svg
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke={colors.primary}
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M5 13l4 4L19 7"
-                      />
-                    </svg>
-                  </BenefitIcon>
-                  <BenefitContent>
-                    <BenefitTitle>Instant Response</BenefitTitle>
-                    <BenefitDescription>
-                      Immediate attention to critical issues to minimize
-                      downtime
-                    </BenefitDescription>
-                  </BenefitContent>
-                </BenefitItem>
-                <BenefitItem>
-                  <BenefitIcon>
-                    <svg
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke={colors.primary}
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M5 13l4 4L19 7"
-                      />
-                    </svg>
-                  </BenefitIcon>
-                  <BenefitContent>
-                    <BenefitTitle>Secure Connection</BenefitTitle>
-                    <BenefitDescription>
-                      End-to-end encrypted remote sessions for your security
-                    </BenefitDescription>
-                  </BenefitContent>
-                </BenefitItem>
-                <BenefitItem>
-                  <BenefitIcon>
-                    <svg
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke={colors.primary}
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M5 13l4 4L19 7"
-                      />
-                    </svg>
-                  </BenefitIcon>
-                  <BenefitContent>
-                    <BenefitTitle>24/7 Availability</BenefitTitle>
-                    <BenefitDescription>
-                      Support whenever you need it, even outside business hours
-                    </BenefitDescription>
-                  </BenefitContent>
-                </BenefitItem>
-                <BenefitItem>
-                  <BenefitIcon>
-                    <svg
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke={colors.primary}
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M5 13l4 4L19 7"
-                      />
-                    </svg>
-                  </BenefitIcon>
-                  <BenefitContent>
-                    <BenefitTitle>Proactive Maintenance</BenefitTitle>
-                    <BenefitDescription>
-                      Regular updates and checks to prevent issues before they
-                      occur
-                    </BenefitDescription>
-                  </BenefitContent>
-                </BenefitItem>
-              </BenefitsList>
-            </Column>
-
-            <Column>
-              <ProcessCard>
-                <SectionTitle
-                  style={{ color: colors.gray800, marginBottom: "1.25rem" }}
-                >
-                  How It Works
-                </SectionTitle>
-                <ProcessList>
-                  <ProcessItem>
-                    <ProcessStep>1</ProcessStep>
-                    <BenefitContent>
-                      <BenefitTitle>Request Support</BenefitTitle>
-                      <BenefitDescription>
-                        Contact us via phone, email, or our support portal with
-                        your issue details
-                      </BenefitDescription>
-                    </BenefitContent>
-                  </ProcessItem>
-                  <ProcessItem>
-                    <ProcessStep>2</ProcessStep>
-                    <BenefitContent>
-                      <BenefitTitle>Establish Connection</BenefitTitle>
-                      <BenefitDescription>
-                        We'll guide you through the simple TeamViewer connection
-                        process
-                      </BenefitDescription>
-                    </BenefitContent>
-                  </ProcessItem>
-                  <ProcessItem>
-                    <ProcessStep>3</ProcessStep>
-                    <BenefitContent>
-                      <BenefitTitle>Diagnose & Resolve</BenefitTitle>
-                      <BenefitDescription>
-                        Our certified technician will diagnose and fix your
-                        issue remotely
-                      </BenefitDescription>
-                    </BenefitContent>
-                  </ProcessItem>
-                  <ProcessItem>
-                    <ProcessStep>4</ProcessStep>
-                    <BenefitContent>
-                      <BenefitTitle>Confirm Resolution</BenefitTitle>
-                      <BenefitDescription>
-                        We'll verify everything is working properly before
-                        ending the session
-                      </BenefitDescription>
-                    </BenefitContent>
-                  </ProcessItem>
-                </ProcessList>
-              </ProcessCard>
-            </Column>
-          </ContentGrid>
-
-          <div>
-            <SectionTitle
-              style={{
-                color: colors.gray800,
-                marginBottom: "1.25rem",
-                padding: "0 1.5rem",
-              }}
-            >
-              Support Coverage
-            </SectionTitle>
-            <CoverageGrid>
-              <CoverageCard>
-                <BenefitTitle
-                  style={{ fontSize: "1rem", fontWeight: "700" }}
-                >
-                  Software Issues
-                </BenefitTitle>
-                <CoverageList>
-                  <CoverageItem>
-                    <svg
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke={colors.primary}
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M5 13l4 4L19 7"
-                      />
-                    </svg>
-                    <span>System errors and crashes</span>
-                  </CoverageItem>
-                  <CoverageItem>
-                    <svg
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke={colors.primary}
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M5 13l4 4L19 7"
-                      />
-                    </svg>
-                    <span>Performance optimization</span>
-                  </CoverageItem>
-                  <CoverageItem>
-                    <svg
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke={colors.primary}
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M5 13l4 4L19 7"
-                      />
-                    </svg>
-                    <span>Update and installation issues</span>
-                  </CoverageItem>
-                </CoverageList>
-              </CoverageCard>
-              <CoverageCard>
-                <BenefitTitle
-                  style={{ fontSize: "1rem", fontWeight: "700" }}
-                >
-                  Configuration
-                </BenefitTitle>
-                <CoverageList>
-                  <CoverageItem>
-                    <svg
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke={colors.primary}
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M5 13l4 4L19 7"
-                      />
-                    </svg>
-                    <span>Printer and scanner setup</span>
-                  </CoverageItem>
-                  <CoverageItem>
-                    <svg
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke={colors.primary}
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M5 13l4 4L19 7"
-                      />
-                    </svg>
-                    <span>Hardware integration</span>
-                  </CoverageItem>
-                  <CoverageItem>
-                    <svg
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke={colors.primary}
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M5 13l4 4L19 7"
-                      />
-                    </svg>
-                    <span>Network configuration</span>
-                  </CoverageItem>
-                </CoverageList>
-              </CoverageCard>
-              <CoverageCard>
-                <BenefitTitle
-                  style={{ fontSize: "1rem", fontWeight: "700" }}
-                >
-                  Training
-                </BenefitTitle>
-                <CoverageList>
-                  <CoverageItem>
-                    <svg
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke={colors.primary}
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M5 13l4 4L19 7"
-                      />
-                    </svg>
-                    <span>New staff onboarding</span>
-                  </CoverageItem>
-                  <CoverageItem>
-                    <svg
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke={colors.primary}
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M5 13l4 4L19 7"
-                      />
-                    </svg>
-                    <span>Feature walkthroughs</span>
-                  </CoverageItem>
-                  <CoverageItem>
-                    <svg
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke={colors.primary}
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M5 13l4 4L19 7"
-                      />
-                    </svg>
-                    <span>Best practices guidance</span>
-                  </CoverageItem>
-                </CoverageList>
-              </CoverageCard>
-            </CoverageGrid>
+    <div className="min-h-screen bg-gray-50 font-sans">
+      {/* Header Section with Image Background */}
+      <div 
+        className="relative py-20 px-4 sm:px-6 lg:px-8 text-center overflow-hidden"
+        style={{
+          backgroundImage: "url('https://web-assets.bcg.com/dc/eb/b3a2abf44e32b5cfba378b05a77c/the-next-normal-outlook-for-australian-retail-in-2022.jpg')",
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+        }}
+      >
+        {/* Overlay */}
+        <div className="absolute inset-0 bg-black opacity-50"></div>
+        
+        <div className="relative max-w-4xl mx-auto z-10">
+          <div className="inline-flex items-center justify-center bg-white bg-opacity-20 p-5 rounded-xl mb-8 transition-all duration-500 hover:rotate-6 hover:scale-105">
+            <Monitor className="h-16 w-16 text-white" />
           </div>
+          <h1 className="text-4xl sm:text-5xl font-bold text-white mb-6">
+            RetailManager <span className="text-white">POS</span> Support
+          </h1>
+          <p className="text-xl text-gray-200">
+            Premium 24/7 support with{" "}
+            <span className="font-semibold text-white">
+              97% satisfaction rate
+            </span>
+          </p>
+        </div>
+      </div>
 
-          <CTASection>
-            <SectionTitle>Ready to Experience Seamless Support?</SectionTitle>
-            <HeroText style={{ marginBottom: "1.5rem" }}>
-              Our team is available 24/7 to ensure your POS system runs
-              smoothly.
-            </HeroText>
-            <ButtonGroup>
-              <PrimaryButton
-                onClick={() => (window.location.href = "/Contact")}
+      {/* Main Content */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 -mt-10">
+        {/* Feature Cards */}
+        <div className="grid md:grid-cols-3 gap-8 mb-20">
+          {[
+            {
+              icon: <Clock className="h-8 w-8 text-primary" />,
+              title: "Fast Response",
+              description:
+                "Under 10 minute average response time for critical issues",
+              stats: "98% uptime guarantee",
+            },
+            {
+              icon: <Lock className="h-8 w-8 text-primary" />,
+              title: "Secure Support",
+              description: "Military-grade encrypted remote sessions",
+              stats: "100% security compliance",
+            },
+            {
+              icon: <Globe className="h-8 w-8 text-primary" />,
+              title: "Global Coverage",
+              description: "Support in multiple languages and timezones",
+              stats: "24/7 availability",
+            },
+          ].map((feature, index) => (
+            <div
+              key={index}
+              className="bg-gray p-8 rounded-xl transition-all duration-300 ease-in-out hover:shadow-xl hover:-translate-y-1 border border-gray-100 hover:border-primary hover:border-opacity-30"
+            >
+              <div className="bg-blue-500 bg-opacity-10 p-4 rounded-xl inline-flex mb-6 transition-transform duration-300 hover:scale-110">
+                {feature.icon}
+              </div>
+
+              <h3 className="text-2xl font-bold text-gray-800 mb-3">
+                {feature.title}
+              </h3>
+              <p className="text-gray-600 mb-4">{feature.description}</p>
+              <div className="bg-gray-100 px-4 py-2 rounded-xl inline-block transition-colors duration-300 hover:text-white">
+                <span className="font-normal text-gray-800">
+                  {feature.stats}
+                </span>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        {/* How It Works */}
+        <div className="bg-white rounded-xl shadow-lg p-8 mb-20 border border-gray-200 transition-shadow duration-300 hover:shadow-xl">
+          <h2 className="text-3xl font-bold text-center mb-12 text-gray-800">
+            Our Support Process
+          </h2>
+          <div className="grid md:grid-cols-4 gap-6">
+            {[
+              {
+                icon: <Headphones className="h-6 w-6 text-white" />,
+                step: "1",
+                title: "Report Issue",
+                description: "Contact us via phone, chat, or email",
+              },
+              {
+                icon: <Search className="h-6 w-6 text-white" />,
+                step: "2",
+                title: "Diagnose",
+                description: "We analyze your system remotely",
+              },
+              {
+                icon: <Wrench className="h-6 w-6 text-white" />,
+                step: "3",
+                title: "Resolve",
+                description: "Immediate solution implementation",
+              },
+              {
+                icon: <Check className="h-6 w-6 text-white" />,
+                step: "4",
+                title: "Verify",
+                description: "We confirm everything works perfectly",
+              },
+            ].map((step, index) => (
+              <div
+                key={index}
+                className="group transform transition-all duration-300 ease-in-out hover:-translate-y-2"
               >
-                Contact Support Team
-              </PrimaryButton>
-              <SecondaryButton
-                as="a"
-                href="https://www.aaapos.com/support/"
-                target="_blank"
+                <div className="bg-primary w-16 h-16 rounded-xl flex items-center justify-center text-3xl font-bold text-white mb-4 mx-auto transition-transform duration-300 group-hover:scale-110">
+                  {step.icon}
+                </div>
+                <h3 className="text-xl font-bold text-center text-gray-800 mb-2 transition-colors duration-300 group-hover:text-primary">
+                  {step.title}
+                </h3>
+                <p className="text-gray-600 text-center transition-colors duration-300 group-hover:text-gray-800">
+                  {step.description}
+                </p>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Coverage Areas */}
+        <div className="mb-20">
+          <h2 className="text-3xl font-bold text-center mb-12 text-gray-800">
+            Comprehensive Coverage
+          </h2>
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {[
+              {
+                icon: <Database className="h-8 w-8 text-white" />,
+                title: "Software Support",
+                items: [
+                  "System errors & crashes",
+                  "Performance optimization",
+                  "Updates & installations",
+                  "Database maintenance",
+                ],
+              },
+              {
+                icon: <Printer className="h-8 w-8 text-white" />,
+                title: "Hardware Support",
+                items: [
+                  "Printer/scanner setup",
+                  "Peripheral configuration",
+                  "Network troubleshooting",
+                  "POS hardware issues",
+                ],
+              },
+              {
+                icon: <GraduationCap className="h-8 w-8 text-white" />,
+                title: "Training",
+                items: [
+                  "New staff onboarding",
+                  "Feature walkthroughs",
+                  "Best practices",
+                  "Custom reporting",
+                ],
+              },
+            ].map((category, index) => (
+              <div
+                key={index}
+                className="bg-white rounded-xl shadow-lg overflow-hidden border border-gray-200 transform transition-all duration-300 ease-in-out hover:shadow-xl hover:-translate-y-2 hover:border-primary hover:border-opacity-50"
               >
-                View Support Plans
-              </SecondaryButton>
-            </ButtonGroup>
-          </CTASection>
-        </MainCard>
-      </MainContent>
-    </Container>
+                <div className="bg-primary text-white p-6 flex items-center transition-colors duration-300 hover:bg-primary-dark">
+                  <div className="mr-4">{category.icon}</div>
+                  <h3 className="text-xl font-bold">{category.title}</h3>
+                </div>
+                <div className="p-6">
+                  <ul className="space-y-3">
+                    {category.items.map((item, itemIndex) => (
+                      <li 
+                        key={itemIndex} 
+                        className="flex items-start transition-colors duration-200 hover:text-primary"
+                      >
+                        <svg
+                          className="flex-shrink-0 h-5 w-5 text-primary mt-1 mr-3 transition-colors duration-200 group-hover:text-primary-dark"
+                          fill="none"
+                          stroke="currentColor"
+                          viewBox="0 0 24 24"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth={2}
+                            d="M5 13l4 4L19 7"
+                          />
+                        </svg>
+                        <span className="text-gray-700">{item}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Testimonials */}
+        <div className="mb-20">
+          <h2 className="text-3xl font-bold text-center mb-12 text-gray-800">
+            Trusted by Retailers Worldwide
+          </h2>
+          <div className="grid md:grid-cols-2 gap-8">
+            {[
+              {
+                quote:
+                  "Their team resolved our critical system outage in just 8 minutes! We've never experienced such fast support.",
+                name: "Sarah Johnson",
+                company: "Fashion Boutique Chain",
+              },
+              {
+                quote:
+                  "The bilingual support has been invaluable for our international stores. Truly a global service.",
+                name: "Michael Chen",
+                company: "Grocery Supermarkets",
+              },
+            ].map((testimonial, index) => (
+              <div
+                key={index}
+                className="bg-white p-8 rounded-xl border border-gray-200 transform transition-all duration-300 ease-in-out hover:shadow-xl hover:-translate-y-1 hover:border-primary hover:border-opacity-50"
+              >
+                <div className="text-primary mb-6 transition-transform duration-300 hover:scale-110">
+                  <Quote className="h-10 w-10" />
+                </div>
+                <p className="text-lg text-gray-600 italic mb-6 transition-colors duration-300 hover:text-gray-800">
+                  "{testimonial.quote}"
+                </p>
+                <div className="transition-colors duration-300 hover:text-primary">
+                  <p className="font-bold text-gray-800">{testimonial.name}</p>
+                  <p className="text-gray-500">{testimonial.company}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Final CTA */}
+        <div className="bg-primary rounded-xl p-12 text-center text-white shadow-2xl transform transition-all duration-500 ease-in-out hover:shadow-3xl hover:-translate-y-1">
+          <h2 className="text-3xl sm:text-4xl font-bold mb-6">
+            Ready for Stress-Free POS Support?
+          </h2>
+          <p className="text-xl mb-8 max-w-3xl mx-auto">
+            Join thousands of retailers who trust our expert team
+          </p>
+          <div className="flex flex-col sm:flex-row justify-center gap-4">
+            <button className="bg-white hover:bg-gray-100 text-primary font-bold py-4 px-10 rounded-xl transition-all duration-300 ease-in-out transform hover:-translate-y-1 hover:shadow-lg flex items-center justify-center hover:scale-105">
+              <Headphones className="mr-2 h-5 w-5 transition-transform duration-300 hover:scale-125" /> 
+              Get Instant Support
+            </button>
+            <button className="border-2 border-white hover:bg-white hover:bg-opacity-20 text-white font-bold py-4 px-10 rounded-xl transition-all duration-300 ease-in-out transform hover:-translate-y-1 hover:scale-105 flex items-center justify-center">
+              <Users className="mr-2 h-5 w-5 transition-transform duration-300 hover:scale-125" /> 
+              View Pricing Plans
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
   );
 };
 

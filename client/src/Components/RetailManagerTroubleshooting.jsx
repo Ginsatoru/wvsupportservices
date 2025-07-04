@@ -122,7 +122,7 @@ const Title = styled.h1`
   font-size: clamp(12px, 1vw, 14px);
   letter-spacing: 0.5px;
   text-transform: uppercase;
-  font-weight:600;
+  font-weight: 600;
 `;
 
 const Subtitle = styled.h3`
@@ -167,7 +167,7 @@ const ExploreMore = styled.h2`
   padding-bottom: 2px;
   margin-top: 1rem;
   transition: color 0.3s ease;
-  font-weight:600;
+  font-weight: 600;
 
   &:hover {
     color: #0c6e94;
@@ -232,14 +232,11 @@ const RetailManagerTroubleshooting = () => {
             <Subtitle>We'd love to tell you about us</Subtitle>
             <Paragraph>
               Experienced in diagnosing and resolving RetailManager software
-              issues, ensuring smooth customer operations. Backed by 25+ years
-              of collective experience in supporting RetailManager
-              environments. Skilled in troubleshooting software errors,
-              database inconsistencies, and system configuration issues.
-              Proficient in guiding users through transaction errors,
-              connectivity problems, and integration concerns. Strong in log
-              analysis, applying patches, and escalating complex cases while
-              delivering excellent customer support.
+              issues with over 25 years of collective expertise. Skilled in
+              troubleshooting errors, database issues, and system
+              configurations. Proficient in guiding users through transaction,
+              connectivity, and integration problems, with strong log analysis
+              and support escalation skills.
             </Paragraph>
             <ExploreMore onClick={() => navigate("/retailmanager")}>
               Explore more <span className="arrow">➔</span>

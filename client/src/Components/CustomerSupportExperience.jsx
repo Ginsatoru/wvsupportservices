@@ -8,7 +8,8 @@ const CustomerSupportExperience = () => {
   const navigate = useNavigate();
 
   return (
-    <Container as={motion.section}
+    <Container
+      as={motion.section}
       initial={{ opacity: 0, y: 50 }}
       whileInView={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.8, ease: "easeOut" }}
@@ -19,15 +20,12 @@ const CustomerSupportExperience = () => {
           <Title>Customer Remote Support Experience</Title>
           <Subtitle>Remote troubleshooting support</Subtitle>
           <Paragraph>
-            Our Remote Troubleshooting Support provides fast, reliable
-            solutions to resolve any issues with your RetailManager POS
-            system, multi-store configurations, and webstore integrations.
-            With our expert team based in Siem Reap, Cambodia, we offer
-            comprehensive support to Australian clients, ensuring that
-            technical problems are addressed quickly to minimize downtime.
-            Whether it’s a software error, connectivity issue, or database
-            inconsistency, we are committed to delivering prompt assistance
-            that keeps your business running smoothly and efficiently.
+            Our Remote Troubleshooting Support offers fast, reliable solutions
+            for RetailManager POS issues, multi-store setups, and webstore
+            integrations. Based in Siem Reap, Cambodia, we provide expert
+            support to Australian clients—resolving software errors,
+            connectivity problems, and database issues quickly to minimize
+            downtime and keep your business running smoothly.
           </Paragraph>
           <ExploreMore onClick={() => navigate("/Support")}>
             Explore more <span className="arrow">➔</span>
@@ -176,7 +174,7 @@ const Title = styled.h1`
   font-size: clamp(12px, 1vw, 14px);
   letter-spacing: 0.5px;
   text-transform: uppercase;
-  font-weight:600;
+  font-weight: 600;
 `;
 
 const Subtitle = styled.h3`
@@ -221,7 +219,7 @@ const ExploreMore = styled.h2`
   padding-bottom: 2px;
   margin-top: 1rem;
   transition: color 0.3s ease;
- font-weight:600;
+  font-weight: 600;
   &:hover {
     color: #0c6e94;
   }

@@ -1,134 +1,56 @@
 import React from "react";
-import styled from "styled-components";
-import { motion } from "framer-motion"; // Import framer-motion
-import { useInView } from "react-intersection-observer"; // Import useInView
+import { motion } from "framer-motion";
+import { useInView } from "react-intersection-observer";
 
-// Colors
-const colors = {
-  primary: "#0f8abe",
-  white: "#ffffff",
-  gray100: "#f8f9fa",
-  gray200: "#e9ecef",
-  gray600: "#6c757d",
-  gray800: "#343a40",
-};
-
-// Font family
-const fontFamily = "Montserrat, sans-serif";
-
-// Partner Section Container
-const PartnerSection = styled.section`
-  padding: 4rem 1rem; /* Increased padding from 4rem to 6rem */
-  background-color: ${colors.gray100};
-  text-align: center;
-  background: linear-gradient(135deg, #f5f7fa 0%, #e4e8eb 100%);
-
-  @media (min-width: 768px) {
-    padding: 5rem 2rem; /* Increased padding for larger screens */
-  }
-`;
-
-const SectionHeader = styled(motion.div)`
-  /* Motion applied here */
-  max-width: 800px;
-  margin: 0 auto 3rem;
-
-  @media (max-width: 768px) {
-    margin-bottom: 2rem;
-  }
-`;
-
-const SectionTitle = styled(motion.h2)`
-  /* Motion applied here */
-  font-size: 1.8rem;
-  font-weight: 700;
-  color: #0f8abe;
-  margin-bottom: 1.5rem;
-  font-family: ${fontFamily};
-
-  @media (min-width: 768px) {
-    font-size: 2.2rem;
-  }
-`;
-
-const SectionSubtitle = styled(motion.p)`
-  /* Motion applied here */
-  font-size: 1rem;
-  color: ${colors.gray600};
-  line-height: 1.6;
-  font-family: ${fontFamily};
-
-  @media (min-width: 768px) {
-    font-size: 1.15rem;
-  }
-`;
-
-const PartnersGrid = styled(motion.div)`
-  /* Motion applied here */
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 2rem;
-  max-width: 1200px;
-  margin: 0 auto;
-
-  @media (min-width: 640px) {
-    grid-template-columns: repeat(3, 1fr);
-  }
-
-  @media (min-width: 1024px) {
-    grid-template-columns: repeat(4, 1fr);
-  }
-`;
-
-const PartnerCard = styled(motion.div)`
-  /* Motion applied here */
-
-  background-color: ${colors.white};
-  border-radius: 12px;
-  padding: 2rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 120px;
-  transition: all 0.3s ease;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
-  border: 1px solid ${colors.gray200};
-
-  &:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-  }
-  img {
-    max-width: 100%;
-    max-height: 60px;
-    width: auto;
-    height: auto;
-    filter: grayscale(100%);
-    opacity: 0.8;
-    transition: all 0.3s ease;
-  }
-
-  &:hover img {
-    filter: grayscale(0%);
-    opacity: 1;
-  }
-
-  @media (max-width: 640px) {
-    height: 100px;
-    padding: 1.5rem;
-  }
-`;
-
-// Partner logos (replace with actual image imports or SVGs)
-const TyroLogo = () => <img src="https://upload.wikimedia.org/wikipedia/en/1/15/Tyro_Payments_Logo.png" alt="TYRO" />
+// Partner logos components
+const TyroLogo = () => (
+  <img
+    src="https://upload.wikimedia.org/wikipedia/en/1/15/Tyro_Payments_Logo.png"
+    alt="TYRO"
+    className="h-12 w-auto"
+  />
+);
 const LinklyLogo = () => (
-  <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSk32QK8LPYg79sPiXj6pUVwrUHeTJ_DvXi4w&s" alt="Linkly" />
+  <img
+    src="https://www.medianara.com.au/wp-content/uploads/2018/09/linkly_cloud.png"
+    alt="Linkly"
+    className="h-12 w-auto"
+  />
 );
 const MicrosoftLogo = () => (
-  <img src="https://nforceit.com.au/wp-content/uploads/2023/09/nforceit-partner-microsoft-logo.png" alt="microsoft" />
+  <img
+    src="https://www.alfalak.com/wp-content/uploads/Products-Distribution/Logos/MSFT_logo_rgb_C-Gray1.png"
+    alt="microsoft"
+    className="h-12 w-auto"
+  />
 );
 const FirebaseLogo = () => (
-  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/0b/New_Firebase_logo.svg/1200px-New_Firebase_logo.svg.png" alt="firebase" />
+  <img
+    src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/0b/New_Firebase_logo.svg/1200px-New_Firebase_logo.svg.png"
+    alt="firebase"
+    className="h-12 w-auto"
+  />
+);
+const StripeLogo = () => (
+  <img
+    src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/ba/Stripe_Logo%2C_revised_2016.svg/1200px-Stripe_Logo%2C_revised_2016.svg.png"
+    alt="stripe"
+    className="h-12 w-auto"
+  />
+);
+const MYOBLogo = () => (
+  <img
+    src="https://phoenixconsultancy.com.au/wp-content/uploads/myob-logo.png"
+    alt="myob"
+    className="h-12 w-auto"
+  />
+);
+const EpsonLogo = () => (
+  <img
+    src="https://logolook.net/wp-content/uploads/2023/12/Epson-Logo.png"
+    alt="cloudflare"
+    className="h-12 w-auto"
+  />
 );
 
 // Animation Variants
@@ -137,7 +59,7 @@ const containerVariants = {
   visible: {
     opacity: 1,
     transition: {
-      staggerChildren: 0.2, // Stagger animation for children
+      staggerChildren: 0.2,
     },
   },
 };
@@ -148,42 +70,95 @@ const fadeUp = {
 };
 
 const Partners = () => {
-  const { ref, inView } = useInView({ triggerOnce: true, threshold: 0.2 }); // Hook to detect when in view
+  const { ref, inView } = useInView({ triggerOnce: true, threshold: 0.2 });
+
+  // Array of partner logos for easier duplication
+  const partnerLogos = [
+    <TyroLogo key="tyro" />,
+    <LinklyLogo key="linkly" />,
+    <MicrosoftLogo key="microsoft" />,
+    <StripeLogo key="stripe" />,
+    <MYOBLogo key="myob" />,
+    <EpsonLogo key="cloudflare" />,
+  ];
 
   return (
-    <PartnerSection>
-      <SectionHeader
+    <section className="py-16 px-4 bg-gradient-to-br from-gray-50 to-gray-200 text-center md:py-20 md:px-8 overflow-hidden">
+      <motion.div
         ref={ref}
         variants={containerVariants}
         initial="hidden"
         animate={inView ? "visible" : "hidden"}
+        className="max-w-4xl mx-auto mb-12 md:mb-16"
       >
-        <SectionTitle variants={fadeUp}>Our Trusted Partners</SectionTitle>
-        <SectionSubtitle variants={fadeUp}>
+        <motion.h2
+          variants={fadeUp}
+          className="text-3xl font-bold mb-6 font-[Montserrat] md:text-4xl"
+          style={{ color: "#0f8abe" }}
+        >
+          Our Trusted Partners
+        </motion.h2>
+        <motion.p
+          variants={fadeUp}
+          className="text-base text-gray-600 leading-relaxed font-[Montserrat] md:text-lg"
+        >
           We collaborate with industry leaders to deliver the best solutions for
           your business
-        </SectionSubtitle>
-      </SectionHeader>
+        </motion.p>
+      </motion.div>
 
-      <PartnersGrid
-        variants={containerVariants}
-        initial="hidden"
-        animate={inView ? "visible" : "hidden"}
-      >
-        <PartnerCard variants={fadeUp}>
-          <TyroLogo />
-        </PartnerCard>
-        <PartnerCard variants={fadeUp}>
-          <LinklyLogo />
-        </PartnerCard>
-        <PartnerCard variants={fadeUp}>
-          <MicrosoftLogo />
-        </PartnerCard>
-        <PartnerCard variants={fadeUp}>
-          <FirebaseLogo />
-        </PartnerCard>
-      </PartnersGrid>
-    </PartnerSection>
+      <div className="relative w-full max-w-6xl mx-auto">
+        {/* Fade effect on left side */}
+        <div className="absolute left-0 top-0 bottom-0 w-20 bg-gradient-to-r from-gray-200 to-transparent z-10 pointer-events-none"></div>
+
+        {/* Fade effect on right side */}
+        <div className="absolute right-0 top-0 bottom-0 w-20 bg-gradient-to-l from-gray-200 to-transparent z-10 pointer-events-none"></div>
+
+        <motion.div
+          variants={containerVariants}
+          initial="hidden"
+          animate={inView ? "visible" : "hidden"}
+          className="relative overflow-hidden"
+        >
+          <motion.div
+            variants={fadeUp}
+            className="flex animate-scroll-continuous hover:animation-paused"
+          >
+            {/* Double the logos for seamless looping */}
+            {[...partnerLogos, ...partnerLogos].map((logo, index) => (
+              <div
+                key={`logo-${index}`}
+                className="flex-shrink-0 px-6 py-8 flex items-center justify-center h-28 transition-all duration-300 group"
+              >
+                <div className="grayscale opacity-80 transition-all duration-300 group-hover:grayscale-0 group-hover:opacity-100">
+                  {logo}
+                </div>
+              </div>
+            ))}
+          </motion.div>
+        </motion.div>
+      </div>
+
+      <style jsx>{`
+        @keyframes scroll-continuous {
+          0% {
+            transform: translateX(0);
+          }
+          100% {
+            transform: translateX(-50%);
+          }
+        }
+
+        .animate-scroll-continuous {
+          animation: scroll-continuous 20s linear infinite;
+          width: max-content;
+        }
+
+        .hover\:animation-paused:hover {
+          animation-play-state: paused;
+        }
+      `}</style>
+    </section>
   );
 };
 

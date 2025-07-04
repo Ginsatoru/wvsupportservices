@@ -58,7 +58,7 @@ const WelcomeMessage = () => {
         }`}
         style={{ zIndex: 2147483647 }}
       >
-        <div className={`w-full max-w-md transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] ${
+        <div className={`w-full max-w-2xl transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] ${
           isVisible 
             ? 'translate-y-0 scale-100' 
             : 'translate-y-5 scale-95'
@@ -69,35 +69,35 @@ const WelcomeMessage = () => {
               isVisible ? 'opacity-30 scale-100' : 'opacity-0 scale-105'
             }`} />
             
-            {/* Image Section */}
-            <div className="relative w-full h-48">
+            {/* Image Section - Made taller */}
+            <div className="relative w-full h-64 sm:h-80">
               <img
                 src={welcomeImage}
                 alt="Professional IT Support Team"
                 className="w-full h-full object-cover opacity-90"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-[#0f8abe]/30 to-transparent" />
-              <div className="absolute bottom-4 left-4 text-white text-sm font-medium font-poppins bg-[#0f8abe] px-3 py-1 rounded-full">
+              <div className="absolute bottom-6 left-6 text-white text-base sm:text-lg font-medium font-poppins bg-[#0f8abe] px-4 py-1.5 rounded-full">
                 🇰🇭 Siem Reap Team
               </div>
             </div>
             
-            {/* Content Section */}
-            <div className="p-6 sm:p-8">
-              {/* Animated check icon */}
-              <div className={`flex justify-center mb-4 transition-all duration-400 ease-out ${
+            {/* Content Section - Increased padding */}
+            <div className="p-8 sm:p-10">
+              {/* Animated check icon - Made larger */}
+              <div className={`flex justify-center mb-6 transition-all duration-400 ease-out ${
                 isVisible 
                   ? 'opacity-100 scale-100 rotate-0' 
                   : 'opacity-0 scale-50 rotate-45'
               }`}>
-                <div className="flex items-center justify-center w-14 h-14 bg-[#0f8abe]/10 rounded-full">
-                  <CheckCircle className="w-7 h-7 text-[#0f8abe]" />
+                <div className="flex items-center justify-center w-16 h-16 bg-[#0f8abe]/10 rounded-full">
+                  <CheckCircle className="w-9 h-9 text-[#0f8abe]" />
                 </div>
               </div>
 
-              {/* Text content */}
+              {/* Text content - Increased font sizes */}
               <div className="overflow-hidden text-center">
-                <h2 className={`text-xl sm:text-2xl font-bold text-gray-900 mb-2 font-poppins transition-all duration-300 ease-out ${
+                <h2 className={`text-2xl sm:text-3xl font-bold text-gray-900 mb-3 font-poppins transition-all duration-300 ease-out ${
                   isVisible 
                     ? 'translate-y-0 opacity-100' 
                     : 'translate-y-3 opacity-0'
@@ -105,7 +105,7 @@ const WelcomeMessage = () => {
                   Welcome to WV Support
                 </h2>
                 
-                <p className={`text-[#0f8abe] text-sm mb-3 font-poppins transition-all duration-300 ease-out delay-75 ${
+                <p className={`text-[#0f8abe] text-base sm:text-lg mb-4 font-poppins transition-all duration-300 ease-out delay-75 ${
                   isVisible 
                     ? 'translate-y-0 opacity-100' 
                     : 'translate-y-3 opacity-0'
@@ -113,18 +113,18 @@ const WelcomeMessage = () => {
                   RetailManager Specialists in Cambodia
                 </p>
 
-                <div className={`mb-5 transition-all duration-300 ease-out delay-150 ${
+                <div className={`mb-7 transition-all duration-300 ease-out delay-150 ${
                   isVisible 
                     ? 'translate-y-0 opacity-100' 
                     : 'translate-y-3 opacity-0'
                 }`}>
-                  <p className="text-gray-700 text-sm leading-relaxed font-poppins">
+                  <p className="text-gray-700 text-base sm:text-lg leading-relaxed font-poppins">
                     Our Siem Reap-based team provides premium RetailManager support with local expertise and 24/7 availability.
                   </p>
                 </div>
               </div>
 
-              {/* Continue button with new style - white bg with border that fills on hover */}
+              {/* Continue button - Made larger */}
               <div className={`flex justify-center transition-all duration-300 ease-out delay-200 ${
                 isVisible 
                   ? 'translate-y-0 opacity-100' 
@@ -132,13 +132,13 @@ const WelcomeMessage = () => {
               }`}>
                 <button 
                   onClick={handleContinue}
-                  className="group relative bg-white text-[#0f8abe] font-medium py-2.5 pl-6 pr-5 rounded-xl 
+                  className="group relative bg-white text-[#0f8abe] font-medium py-3.5 pl-8 pr-7 rounded-xl 
                     border-2 border-[#0f8abe] hover:text-white
                     shadow-md hover:shadow-lg transition-all duration-200
-                    font-poppins flex items-center gap-2 overflow-hidden"
+                    font-poppins flex items-center gap-2 overflow-hidden text-lg"
                 >
                   <span className="relative z-10">Continue to Site</span>
-                  <ArrowRight className="w-4 h-4 relative z-10 transition-transform duration-200 group-hover:translate-x-1 group-hover:text-white" />
+                  <ArrowRight className="w-5 h-5 relative z-10 transition-transform duration-200 group-hover:translate-x-1 group-hover:text-white" />
                   
                   {/* Hover fill effect */}
                   <span className="absolute inset-0 bg-[#0f8abe] w-0 group-hover:w-full transition-all duration-300 ease-out"></span>

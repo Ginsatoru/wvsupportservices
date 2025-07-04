@@ -18,6 +18,14 @@ export default {
         sm: "calc(var(--radius) - 4px)",
       },
       colors: {
+        // Static color versions
+        primary: {
+          DEFAULT: "#0f8abe",       // Light primary
+          dark: "#0c6e9b",          // Darker shade
+          foreground: "#ffffff",   // Optional text color over primary
+        },
+
+        // Keep CSS variable-based colors if used in your design system
         background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",
         card: {
@@ -27,10 +35,6 @@ export default {
         popover: {
           DEFAULT: "hsl(var(--popover))",
           foreground: "hsl(var(--popover-foreground))",
-        },
-        primary: {
-          DEFAULT: "hsl(var(--primary))",
-          foreground: "hsl(var(--primary-foreground))",
         },
         secondary: {
           DEFAULT: "hsl(var(--secondary))",
@@ -51,6 +55,8 @@ export default {
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",
+
+        // Additional custom colors
         chart: {
           1: "hsl(var(--chart-1))",
           2: "hsl(var(--chart-2))",
