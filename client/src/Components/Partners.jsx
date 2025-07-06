@@ -83,7 +83,7 @@ const Partners = () => {
   ];
 
   return (
-    <section className="py-16 px-4 bg-gradient-to-br from-gray-50 to-gray-200 text-center md:py-20 md:px-8 overflow-hidden">
+    <section className="py-16 px-4 bg-white text-center md:py-20 md:px-8 overflow-hidden">
       <motion.div
         ref={ref}
         variants={containerVariants}
@@ -109,10 +109,10 @@ const Partners = () => {
 
       <div className="relative w-full max-w-6xl mx-auto">
         {/* Fade effect on left side */}
-        <div className="absolute left-0 top-0 bottom-0 w-20 bg-gradient-to-r from-gray-200 to-transparent z-10 pointer-events-none"></div>
+        <div className="absolute left-0 top-0 bottom-0 w-28 bg-gradient-to-r from-white to-transparent z-10 pointer-events-none"></div>
 
         {/* Fade effect on right side */}
-        <div className="absolute right-0 top-0 bottom-0 w-20 bg-gradient-to-l from-gray-200 to-transparent z-10 pointer-events-none"></div>
+        <div className="absolute right-0 top-0 bottom-0 w-28 bg-gradient-to-l from-white to-transparent z-10 pointer-events-none"></div>
 
         <motion.div
           variants={containerVariants}
@@ -139,7 +139,7 @@ const Partners = () => {
         </motion.div>
       </div>
 
-      <style jsx>{`
+      {/* <style jsx>{`
         @keyframes scroll-continuous {
           0% {
             transform: translateX(0);
@@ -157,7 +157,7 @@ const Partners = () => {
         .hover\:animation-paused:hover {
           animation-play-state: paused;
         }
-      `}</style>
+      `}</style> */}
     </section>
   );
 };

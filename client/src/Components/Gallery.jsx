@@ -1,261 +1,29 @@
-import React, { useState, useEffect, useRef, useCallback } from "react";
+import React, { useState, useCallback, useEffect } from "react";
 import { FiMapPin } from "react-icons/fi";
 import { FaIndustry } from "react-icons/fa";
-import styled, { css } from "styled-components";
-import { motion, AnimatePresence } from "framer-motion";
-import Image5 from "./Images/image5.png"
-import Image2 from "./Images/image2.png"
-import Image3 from "./Images/image3.png"
-import Image1 from "./Images/image1.png"
-import Image4 from "./Images/image4.png"
-import Image6 from "./Images/image6.png"
-
-
-// Styled Components
-const GalleryPage = styled.div`
-  padding: 5rem 0;
-  background-color: white;
-`;
-
-const Container = styled.div`
-  max-width: 1250px;
-  margin: 0 auto;
-  padding: 0 1rem;
-`;
-
-const SectionTitle = styled.div`
-  text-align: center;
-  margin-bottom: 2.2rem;
-
-  h2 {
-    font-size: 2.2rem;
-    color: #0f8abe;
-    margin-bottom: 2rem;
-    font-weight:700;
-  }
-
-  p {
-    font-size: 1.1rem;
-    color: #666;
-    max-width: 700px;
-    margin: 0 auto;
-  }
-`;
-
-const FilterButtons = styled.div`
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-  gap: 0.8rem;
-  margin-bottom: 2.5rem;
-`;
-
-const FilterButton = styled.button`
-  padding: 0.3rem 1.5rem;
-  border: none;
-  border-radius: 30px;
-  background-color: #e0e0e0;
-  color: #555;
-  font-weight: 500;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  font-size:0.85rem;
-  
-  ${props => props.$active && css`
-    background-color: #0f8abe;
-    color: white;
-  `}
-
-  &:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-  }
-`;
-
-const GalleryGrid = styled.div`
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  gap: 1.5rem;
-  padding: 0.5rem;
-
-  @media (max-width: 768px) {
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-  }
-`;
-
-const GalleryItem = styled(motion.div)`
-  position: relative;
-  border-radius: 8px;
-  overflow: hidden;
-  cursor: pointer;
-  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-  aspect-ratio: 4/3;
-`;
-
-const ImageContainer = styled.div`
-  width: 100%;
-  height: 100%;
-`;
-
-const GalleryImage = styled.img`
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  transition: transform 0.5s ease;
-`;
-
-const ImageOverlay = styled.div`
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
-  padding: 1.5rem;
-  color: white;
-  transform: translateY(100%);
-  transition: transform 0.3s ease;
-  
-  ${GalleryItem}:hover & {
-    transform: translateY(0);
-  }
-`;
-
-const ImageCategory = styled.span`
-  display: inline-block;
-  background-color: #0f8abe;
-  color: white;
-  padding: 0.3rem 0.8rem;
-  border-radius: 20px;
-  font-size: 0.8rem;
-  margin-bottom: 0.5rem;
-`;
-
-const ImageTitle = styled.h3`
-  font-size: 1.2rem;
-  margin: 0;
-`;
-
-const ModalBackdrop = styled(motion.div)`
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: rgba(0,0,0,0.8);
-  z-index: 1000;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 1rem;
-`;
-
-const ModalContent = styled(motion.div)`
-  background: white;
-  border-radius: 8px;
-  max-width: 900px;
-  width: 100%;
-  max-height: 90vh;
-  overflow: auto;
-  position: relative;
-`;
-
-const CloseButton = styled.button`
-  position: absolute;
-  top: 1rem;
-  right: 1rem;
-  background: #0f8abe;
-  color: white;
-  border: none;
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  font-size: 1.5rem;
-  cursor: pointer;
-  z-index: 10;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-`;
-
-const ModalImage = styled.img`
-  width: 100%;
-  max-height: 500px;
-  object-fit: contain;
-`;
-
-const ImageDetails = styled.div`
-  padding: 1.5rem;
-
-  h3 {
-    color: #0f8abe;
-    margin-bottom: 1rem;
-  }
-
-  p {
-    color: #555;
-    line-height: 1.6;
-    margin-bottom: 1.5rem;
-  }
-`;
-
-const ImageMeta = styled.div`
-  display: flex;
-  gap: 1.5rem;
-  flex-wrap: wrap;
-
-  span {
-    display: flex;
-    align-items: center;
-    color: #666;
-  }
-`;
-
-// Animation variants
-const itemVariants = {
-  hidden: { opacity: 0, y: 30 },
-  visible: { 
-    opacity: 1, 
-    y: 0,
-    transition: {
-      duration: 0.6,
-      ease: "easeOut"
-    }
-  }
-};
-
-const modalVariants = {
-  hidden: { opacity: 0, scale: 0.9 },
-  visible: { 
-    opacity: 1, 
-    scale: 1,
-    transition: {
-      duration: 0.3,
-      ease: "easeOut"
-    }
-  },
-  exit: { opacity: 0, scale: 0.9 }
-};
+import Image1 from "./Images/image1.png";
+import Image2 from "./Images/image2.png";
+import Image3 from "./Images/image3.png";
+import Image4 from "./Images/image4.png";
+import Image5 from "./Images/image5.png";
+import Image6 from "./Images/image6.png";
+import Image7 from "./Images/image7.png";
+import Image8 from "./Images/image8.png";
+import Image9 from "./Images/image9.png";
+import Image10 from "./Images/image10.png";
 
 const Gallery = () => {
   const [activeFilter, setActiveFilter] = useState("All");
   const [selectedImage, setSelectedImage] = useState(null);
-  const galleryRef = useRef(null);
 
-  const filters = [
-    "All",
-    "POS Support",
-    "Webstore Integration",
-    "Multi-Store Management",
-  ];
-
-  
-const galleryData = [
+  const galleryData = [
+    // First row images
     {
       id: 1,
       title: "RetailChain Global POS Deployment",
-      description: "Implemented and supported POS systems for 30K+ stores across Asia-Pacific",
+      description: "Implemented POS systems for 30K+ stores across Asia-Pacific",
       category: "POS Support",
-      location: "Australia, New Zealand, Papua New Guinea, and more",
+      location: "Australia, New Zealand, Papua New Guinea",
       industry: "Retail Fashion",
       image: Image1,
       fullImage: Image1,
@@ -263,7 +31,7 @@ const galleryData = [
     {
       id: 2,
       title: "E-Commerce Platform Integration",
-      description: "Integrated webstore with existing POS for seamless inventory management",
+      description: "Integrated webstore with existing POS systems",
       category: "Webstore Integration",
       location: "Australia, New Zealand",
       industry: "Home Goods",
@@ -273,7 +41,7 @@ const galleryData = [
     {
       id: 3,
       title: "Multi-Store Management System",
-      description: "Centralized management solution for franchise operations in 3 countries",
+      description: "Centralized management for franchise operations",
       category: "Multi-Store Management",
       location: "Australia, Cambodia",
       industry: "Home Decoration",
@@ -281,9 +49,30 @@ const galleryData = [
       fullImage: Image3
     },
     {
+      id: 7,
+      title: "Inventory Synchronization Solution",
+      description: "Real-time inventory updates across all channels",
+      category: "Webstore Integration",
+      location: "Canada, USA",
+      industry: "Sporting Goods",
+      image: Image7,
+      fullImage: Image7
+    },
+    {
+      id: 8,
+      title: "POS Hardware Upgrade Project",
+      description: "Modernized POS terminals for 500+ locations",
+      category: "POS Support",
+      location: "Japan, South Korea",
+      industry: "Convenience Stores",
+      image: Image8,
+      fullImage: Image8
+    },
+    // Second row images
+    {
       id: 4,
       title: "POS System Upgrade & Migration",
-      description: "Seamless migration to new POS platform with zero downtime",
+      description: "Migration to new POS with zero downtime",
       category: "POS Support",
       location: "United Kingdom",
       industry: "Specialty Retail",
@@ -293,7 +82,7 @@ const galleryData = [
     {
       id: 5,
       title: "Omnichannel Retail Solution",
-      description: "Integrated online and offline sales channels for unified customer experience",
+      description: "Integrated online and offline sales channels",
       category: "Webstore Integration",
       location: "United States",
       industry: "Electronics",
@@ -303,18 +92,46 @@ const galleryData = [
     {
       id: 6,
       title: "Franchise Operations Support",
-      description: "24/7 technical support for franchise network across Europe",
+      description: "24/7 support for franchise network",
       category: "Multi-Store Management",
       location: "Germany, France, Spain",
       industry: "Health & Beauty",
       image: Image6,
       fullImage: Image6,
+    },
+    {
+      id: 9,
+      title: "Mobile POS Implementation",
+      description: "Deployed mobile POS for pop-up stores and events",
+      category: "POS Support",
+      location: "Brazil, Argentina",
+      industry: "Fashion Retail",
+      image: Image9,
+      fullImage: Image9
+    },
+    {
+      id: 10,
+      title: "Global E-commerce Unification",
+      description: "Standardized webstore platform across 15 countries",
+      category: "Webstore Integration",
+      location: "Europe, North America",
+      industry: "Luxury Goods",
+      image: Image10,
+      fullImage: Image10
     }
   ];
 
-  const filteredImages = activeFilter === "All" 
-    ? galleryData 
-    : galleryData.filter((item) => item.category === activeFilter);
+  // Split images into two rows (5 images each)
+  const firstRowImages = galleryData.slice(0, 5);
+  const secondRowImages = galleryData.slice(5);
+
+  const filteredFirstRow = activeFilter === "All" 
+    ? firstRowImages 
+    : firstRowImages.filter((item) => item.category === activeFilter);
+
+  const filteredSecondRow = activeFilter === "All" 
+    ? secondRowImages 
+    : secondRowImages.filter((item) => item.category === activeFilter);
 
   const openImage = useCallback((image) => {
     setSelectedImage(image);
@@ -326,7 +143,6 @@ const galleryData = [
     document.body.style.overflow = "auto";
   }, []);
 
-  // Handle escape key to close modal
   useEffect(() => {
     const handleKeyDown = (e) => {
       if (e.key === "Escape") {
@@ -344,92 +160,144 @@ const galleryData = [
   }, [selectedImage, closeImage]);
 
   return (
-    <GalleryPage ref={galleryRef}>
-      <Container>
-        <SectionTitle>
-          <h2>Project Gallery</h2>
-          <p>
-            Browse through our international support initiatives and success
-            stories
+    <div className="py-12 md:py-20 bg-white">
+      <div className="max-w-full mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="text-center mb-8 md:mb-12">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-[#0f8abe] mb-4 md:mb-6 font-montserrat">
+            Project Gallery
+          </h2>
+          <p className="text-sm sm:text-base md:text-lg text-gray-600 max-w-3xl mx-auto font-montserrat px-2">
+            Browse through our international support initiatives and success stories
           </p>
-        </SectionTitle>
+        </div>
 
-        <FilterButtons>
-          {filters.map((filter) => (
-            <FilterButton
-              key={filter}
-              $active={activeFilter === filter}
-              onClick={() => setActiveFilter(filter)}
-            >
-              {filter}
-            </FilterButton>
-          ))}
-        </FilterButtons>
+        {/* First Row - Responsive */}
+        <div className="relative w-full overflow-hidden mb-4 md:mb-6">
+          <div className="absolute left-0 top-0 bottom-0 w-10 md:w-20 bg-gradient-to-r from-white to-transparent z-10 pointer-events-none"></div>
+          <div className="absolute right-0 top-0 bottom-0 w-10 md:w-20 bg-gradient-to-l from-white to-transparent z-10 pointer-events-none"></div>
 
-        <GalleryGrid>
-          {filteredImages.map((item) => (
-            <GalleryItem
-              key={item.id}
-              variants={itemVariants}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true, margin: "0px 0px -100px 0px" }}
-              onClick={() => openImage(item)}
-            >
-              <ImageContainer>
-                <GalleryImage 
-                  src={item.image} 
-                  alt={item.title} 
-                  loading="lazy"
+          <div className="flex space-x-4 md:space-x-6 animate-scroll-continuous hover:pause-animation">
+            {[...filteredFirstRow, ...filteredFirstRow].map((item, index) => (
+              <div 
+                key={`first-${item.id}-${index}`}
+                className="flex-shrink-0 w-64 h-48 sm:w-72 sm:h-56 md:w-80 md:h-64 rounded-xl overflow-hidden shadow-md cursor-pointer relative group"
+                onClick={() => openImage(item)}
+              >
+                <img
+                  src={item.image}
+                  alt={item.title}
+                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                 />
-              </ImageContainer>
-              <ImageOverlay>
-                <ImageCategory>{item.category}</ImageCategory>
-                <ImageTitle>{item.title}</ImageTitle>
-              </ImageOverlay>
-            </GalleryItem>
-          ))}
-        </GalleryGrid>
-      </Container>
+                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-4 md:p-6">
+                  <span className="bg-[#0f8abe] text-white text-[10px] md:text-xs px-2 py-0.5 md:px-3 md:py-1 rounded-full mb-1 md:mb-2 self-start">
+                    {item.category}
+                  </span>
+                  <h3 className="text-white text-sm sm:text-base md:text-xl font-semibold">{item.title}</h3>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
 
-      <AnimatePresence>
-        {selectedImage && (
-          <ModalBackdrop
-            onClick={closeImage}
-            initial="hidden"
-            animate="visible"
-            exit="exit"
-          >
-            <ModalContent
-              variants={modalVariants}
-              onClick={(e) => e.stopPropagation()}
+        {/* Second Row - Responsive */}
+        <div className="relative w-full overflow-hidden">
+          <div className="absolute left-0 top-0 bottom-0 w-10 md:w-10 bg-gradient-to-r from-white to-transparent z-10 pointer-events-none"></div>
+          <div className="absolute right-0 top-0 bottom-0 w-10 md:w-10 bg-gradient-to-l from-white to-transparent z-10 pointer-events-none"></div>
+
+          <div className="flex space-x-4 md:space-x-6 animate-scroll-continuous hover:pause-animation">
+            {[...filteredSecondRow, ...filteredSecondRow].map((item, index) => (
+              <div 
+                key={`second-${item.id}-${index}`}
+                className="flex-shrink-0 w-64 h-48 sm:w-72 sm:h-56 md:w-80 md:h-64 rounded-xl overflow-hidden shadow-md cursor-pointer relative group"
+                onClick={() => openImage(item)}
+              >
+                <img
+                  src={item.image}
+                  alt={item.title}
+                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-4 md:p-6">
+                  <span className="bg-[#0f8abe] text-white text-[10px] md:text-xs px-2 py-0.5 md:px-3 md:py-1 rounded-full mb-1 md:mb-2 self-start">
+                    {item.category}
+                  </span>
+                  <h3 className="text-white text-sm sm:text-base md:text-xl font-semibold">{item.title}</h3>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      {/* Modal - Responsive */}
+      {selectedImage && (
+        <div className="fixed inset-0 bg-black/80 z-[1000] flex items-center justify-center p-2 sm:p-4">
+          <div className="bg-white rounded-lg md:rounded-xl max-w-full sm:max-w-3xl md:max-w-4xl w-full max-h-[90vh] overflow-auto relative">
+            <button
+              onClick={closeImage}
+              className="absolute top-2 right-2 sm:top-4 sm:right-4 bg-[#0f8abe] text-white w-8 h-8 sm:w-10 sm:h-10 rounded-full flex items-center justify-center text-lg sm:text-xl z-10 hover:bg-[#0d79a8] transition-colors"
             >
-              <CloseButton onClick={closeImage} aria-label="Close modal">
-                &times;
-              </CloseButton>
-              <ModalImage
-                src={selectedImage.fullImage || selectedImage.image}
-                alt={selectedImage.title}
-              />
-              <ImageDetails>
-                <h3>{selectedImage.title}</h3>
-                <p>{selectedImage.description}</p>
-                <ImageMeta>
-                  <span>
-                    <FiMapPin style={{ color: "#0f8abe", marginRight: "4px" }} />
-                    {selectedImage.location}
-                  </span>
-                  <span>
-                    <FaIndustry style={{ color: "#0f8abe", marginRight: "4px" }} />
-                    {selectedImage.industry}
-                  </span>
-                </ImageMeta>
-              </ImageDetails>
-            </ModalContent>
-          </ModalBackdrop>
-        )}
-      </AnimatePresence>
-    </GalleryPage>
+              &times;
+            </button>
+            <img
+              src={selectedImage.fullImage || selectedImage.image}
+              alt={selectedImage.title}
+              className="w-full max-h-[40vh] sm:max-h-[50vh] md:max-h-[500px] object-contain"
+            />
+            <div className="p-4 sm:p-6">
+              <h3 className="text-xl sm:text-2xl font-bold text-[#0f8abe] mb-2 sm:mb-4">
+                {selectedImage.title}
+              </h3>
+              <p className="text-sm sm:text-base text-gray-600 mb-4 sm:mb-6">{selectedImage.description}</p>
+              <div className="flex flex-col sm:flex-row sm:flex-wrap gap-2 sm:gap-4">
+                <span className="flex items-center text-xs sm:text-sm text-gray-700">
+                  <FiMapPin className="text-[#0f8abe] mr-1 sm:mr-2" />
+                  {selectedImage.location}
+                </span>
+                <span className="flex items-center text-xs sm:text-sm text-gray-700">
+                  <FaIndustry className="text-[#0f8abe] mr-1 sm:mr-2" />
+                  {selectedImage.industry}
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
+      <style jsx global>{`
+        @keyframes scroll-continuous {
+          0% {
+            transform: translateX(0);
+          }
+          100% {
+            transform: translateX(-50%);
+          }
+        }
+        .animate-scroll-continuous {
+          animation: scroll-continuous 30s linear infinite;
+          width: max-content;
+        }
+        .hover\:pause-animation:hover {
+          animation-play-state: paused;
+        }
+        .font-montserrat {
+          font-family: 'Montserrat', sans-serif;
+        }
+        
+        /* Touch devices - reduce animation speed */
+        @media (hover: none) {
+          .animate-scroll-continuous {
+            animation-duration: 60s;
+          }
+        }
+        
+        /* Very small devices */
+        @media (max-width: 400px) {
+          .animate-scroll-continuous {
+            animation-duration: 40s;
+          }
+        }
+      `}</style>
+    </div>
   );
 };
 

@@ -143,7 +143,7 @@ const HeroSection = styled.section`
   background: linear-gradient(rgba(15, 138, 190, 0.8), rgba(15, 138, 190, 0.9)),
     url(${headerImage}) center/cover no-repeat;
   color: white;
-  padding: 0.4rem 1rem;
+  padding: 3.3rem 1rem;
   text-align: center;
   min-height: 25.5vh;
   display: flex;
