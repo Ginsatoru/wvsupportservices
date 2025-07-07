@@ -110,7 +110,8 @@ function Nav() {
 
   const textColor = isHomePage && !isScrolled ? "text-white" : "text-white";
   const hoverTextColor = "hover:text-blue-100";
-  const mobileMenuBg = isHomePage && !isScrolled ? "bg-[#0f8abe]/90" : "bg-[#0f8abe]";
+  const mobileMenuBg =
+    isHomePage && !isScrolled ? "bg-[#0f8abe]/90" : "bg-[#0f8abe]";
 
   return (
     <>
@@ -161,37 +162,33 @@ function Nav() {
             <div className="hidden md:flex items-center space-x-2 text-lg ">
               <Link
                 to="/"
-                className={`font-medium transition-all duration-300 ${textColor} hover:text-white/90 relative group px-3 py-2 rounded-lg hover:bg-white/10`}
+                className={`font-medium transition-all duration-300 ${textColor} hover:text-white/90 px-3 py-2 rounded-xl hover:bg-white/10`}
               >
                 {t("home")}
-                <div className="absolute bottom-0 left-0 w-0 h-0.5 bg-white/70 transition-all duration-300 group-hover:w-full"></div>
               </Link>
               <Link
                 to="/Contact"
-                className={`font-medium transition-all duration-300 ${textColor} hover:text-white/90 relative group px-3 py-2 rounded-lg hover:bg-white/10`}
+                className={`font-medium transition-all duration-300 ${textColor} hover:text-white/90 px-3 py-2 rounded-xl hover:bg-white/10`}
               >
                 {t("contact")}
-                <div className="absolute bottom-0 left-0 w-0 h-0.5 bg-white/70 transition-all duration-300 group-hover:w-full"></div>
               </Link>
               <Link
                 to="/Services"
-                className={`font-medium transition-all duration-300 ${textColor} hover:text-white/90 relative group px-3 py-2 rounded-lg hover:bg-white/10`}
+                className={`font-medium transition-all duration-300 ${textColor} hover:text-white/90 px-3 py-2 rounded-xl hover:bg-white/10`}
               >
                 {t("services")}
-                <div className="absolute bottom-0 left-0 w-0 h-0.5 bg-white/70 transition-all duration-300 group-hover:w-full"></div>
               </Link>
               <Link
                 to="/Aboutus"
-                className={`font-medium transition-all duration-300 ${textColor} hover:text-white/90 relative group px-3 py-2 rounded-lg hover:bg-white/10`}
+                className={`font-medium transition-all duration-300 ${textColor} hover:text-white/90 px-3 py-2 rounded-xl hover:bg-white/10`}
               >
                 {t("about")}
-                <div className="absolute bottom-0 left-0 w-0 h-0.5 bg-white/70 transition-all duration-300 group-hover:w-full"></div>
               </Link>
 
               {/* Pages Dropdown - Modern Design */}
               <div className="relative group">
                 <button
-                  className={`flex items-center font-medium transition-all duration-300 ${textColor} hover:text-white/90 relative px-3 py-2 rounded-lg hover:bg-white/10`}
+                  className={`relative flex items-center font-medium transition-all duration-300 ${textColor} hover:text-white/90 px-3 py-2 rounded-xl hover:bg-white/10 no-underline hover:no-underline focus:no-underline`}
                 >
                   {t("pages")}
                   <svg
@@ -207,8 +204,8 @@ function Nav() {
                       d="M19 9l-7 7-7-7"
                     />
                   </svg>
-                  <div className="absolute bottom-0 left-0 w-0 h-0.5 bg-white/70 transition-all duration-300 group-hover:w-full"></div>
                 </button>
+
                 <div className="absolute right-0 mt-3 w-56 origin-top-right rounded-2xl bg-white/95 backdrop-blur-xl shadow-2xl border border-white/20 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 transform group-hover:translate-y-0 translate-y-2 group-hover:scale-100 scale-95">
                   <div className="py-3">
                     <Link
@@ -242,11 +239,21 @@ function Nav() {
                   className={`flex items-center font-medium transition-all duration-300 ${textColor} hover:text-white/90 px-4 py-2 rounded-xl bg-white/15 hover:bg-white/25 backdrop-blur-sm border border-white/20`}
                 >
                   {currentLang === "en" ? (
-                    <img src={enFlag} alt="English" className="w-5 h-3.5 mr-2 rounded-sm" />
+                    <img
+                      src={enFlag}
+                      alt="English"
+                      className="w-5 h-3.5 mr-2 rounded-sm"
+                    />
                   ) : (
-                    <img src={khFlag} alt="Khmer" className="w-5 h-3.5 mr-2 rounded-sm" />
+                    <img
+                      src={khFlag}
+                      alt="Khmer"
+                      className="w-5 h-3.5 mr-2 rounded-sm"
+                    />
                   )}
-                  <span className="mr-2 font-semibold">{currentLang === "en" ? "EN" : "KH"}</span>
+                  <span className="mr-2 font-semibold">
+                    {currentLang === "en" ? "EN" : "KH"}
+                  </span>
                   <svg
                     className="h-4 w-4 transition-all duration-300 group-hover:rotate-180"
                     fill="none"
@@ -267,14 +274,22 @@ function Nav() {
                       onClick={() => changeLanguage("en")}
                       className="flex items-center px-5 py-3 text-sm text-gray-700 hover:bg-gradient-to-r hover:from-[#0f8abe]/10 hover:to-[#0f8abe]/5 hover:text-[#0f8abe] w-full text-left transition-all duration-300 group/item"
                     >
-                      <img src={enFlag} alt="English" className="w-6 h-4 mr-3 rounded-sm shadow-sm" />
+                      <img
+                        src={enFlag}
+                        alt="English"
+                        className="w-6 h-4 mr-3 rounded-sm shadow-sm"
+                      />
                       <span className="font-medium">English</span>
                     </button>
                     <button
                       onClick={() => changeLanguage("km")}
                       className="flex items-center px-5 py-3 text-sm text-gray-700 hover:bg-gradient-to-r hover:from-[#0f8abe]/10 hover:to-[#0f8abe]/5 hover:text-[#0f8abe] w-full text-left transition-all duration-300 group/item"
                     >
-                      <img src={khFlag} alt="Khmer" className="w-6 h-4 mr-3 rounded-sm shadow-sm" />
+                      <img
+                        src={khFlag}
+                        alt="Khmer"
+                        className="w-6 h-4 mr-3 rounded-sm shadow-sm"
+                      />
                       <span className="font-medium">Khmer</span>
                     </button>
                   </div>
@@ -450,9 +465,17 @@ function Nav() {
                 >
                   <div className="flex items-center">
                     {currentLang === "en" ? (
-                      <img src={enFlag} alt="English" className="w-5 h-3.5 mr-2" />
+                      <img
+                        src={enFlag}
+                        alt="English"
+                        className="w-5 h-3.5 mr-2"
+                      />
                     ) : (
-                      <img src={khFlag} alt="Khmer" className="w-5 h-3.5 mr-2" />
+                      <img
+                        src={khFlag}
+                        alt="Khmer"
+                        className="w-5 h-3.5 mr-2"
+                      />
                     )}
                     <span>{t("Languages")}</span>
                   </div>
@@ -486,7 +509,11 @@ function Nav() {
                           : "text-white hover:bg-white/20"
                       }`}
                     >
-                      <img src={enFlag} alt="English" className="w-5 h-3.5 mr-2" />
+                      <img
+                        src={enFlag}
+                        alt="English"
+                        className="w-5 h-3.5 mr-2"
+                      />
                       English
                     </button>
                     <button
@@ -497,7 +524,11 @@ function Nav() {
                           : "text-white hover:bg-white/20"
                       }`}
                     >
-                      <img src={khFlag} alt="Khmer" className="w-5 h-3.5 mr-2" />
+                      <img
+                        src={khFlag}
+                        alt="Khmer"
+                        className="w-5 h-3.5 mr-2"
+                      />
                       Khmer
                     </button>
                   </div>
