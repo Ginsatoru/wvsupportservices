@@ -6,687 +6,343 @@ import {
   FaHandsHelping,
   FaAward,
 } from "react-icons/fa";
-import styled, { createGlobalStyle, keyframes } from "styled-components";
 import headerImage from "./Images/header.png";
 import missionImage from "./Images/mission.png";
-
-// Animation keyframes
-const slideUp = keyframes`
-  from {
-    opacity: 0;
-    transform: translateY(30px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-`;
-
-// Global styles
-const GlobalStyle = createGlobalStyle`
-  @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap');
-  
-  body {
-    font-family: 'Montserrat', sans-serif;
-    color: #52514a;
-    background-color: white;
-    line-height: 1.7;
-    margin: 0;
-    padding: 0;
-    overflow-x: hidden;
-  }
-
-  .container {
-    width: 100%;
-    padding-right: 15px;
-    padding-left: 15px;
-    margin-right: auto;
-    margin-left: auto;
-
-    @media (min-width: 576px) {
-      max-width: 540px;
-    }
-
-    @media (min-width: 768px) {
-      max-width: 720px;
-    }
-
-    @media (min-width: 992px) {
-      max-width: 960px;
-    }
-
-    @media (min-width: 1200px) {
-      max-width: 1140px;
-    }
-  }
-
-  .animate-on-scroll {
-    opacity: 0;
-    transform: translateY(30px);
-    transition: opacity 0.5s ease, transform 0.5s ease;
-    transition-delay: 0.2s;
-  }
-  
-  .animated {
-    opacity: 1;
-    transform: translateY(0);
-  }
-`;
-
-// Main container
-const AboutUsContainer = styled.div`
-  max-width: 100vw;
-  overflow-x: hidden;
-`;
-
-// Shared styles
-const SectionTitle = styled.h2`
-  font-family: "Montserrat", sans-serif;
-  color: white;
-  font-weight: 700; /* Changed from 600 to 700 for bolder text */
-  font-size: 2.2rem;
-  margin-bottom: 1.5rem;
-  text-align: center;
-  position: relative;
-  padding-bottom: 15px;
-
-  &::after {
-    content: "";
-    position: absolute;
-    bottom: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 80px;
-    height: 3px;
-    background: linear-gradient(90deg, #0f8abe, #1ac8db);
-  }
-
-  @media (max-width: 768px) {
-    font-size: 1.8rem;
-  }
-`;
-
-const Subtitle = styled.p`
-  font-size: 19.2px;
-  color: white;
-  max-width: 700px;
-  margin: 0 auto;
-  text-align: center;
-
-  @media (max-width: 768px) {
-    font-size: 16px;
-    padding: 0 15px;
-  }
-`;
-
-const CTAButton = styled.button`
-  background: white;
-  color: #0f8abe;
-  border: none;
-  padding: 12px 30px;
-  border-radius: 50px;
-  font-size: 1rem;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  margin-top: 20px;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-
-  &:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
-  }
-`;
-
-// Hero Section
-const HeroSection = styled.section`
-  background: linear-gradient(rgba(15, 138, 190, 0.8), rgba(15, 138, 190, 0.9)),
-    url(${headerImage}) center/cover no-repeat;
-  color: white;
-  padding: 3.3rem 1rem;
-  text-align: center;
-  min-height: 25.5vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  @media (max-width: 768px) {
-    padding: 2rem 1rem;
-    min-height: 25vh;
-  }
-    @media (max-width: 576px) {
-    padding: 0.25rem 0.20rem;
-    min-height: 20vh;
-  }
-`;
-
-const HeroTitle = styled.h1`
-  font-size: 35px;
-  color: white;
-  font-weight: 700; /* Added bold font weight */
-
-  @media (max-width: 768px) {
-    font-size: 28px;
-  }
-`;
-
-// Mission Section
-const MissionSection = styled.section`
-  padding: 80px 0;
-  background-color: white;
-
-  @media (max-width: 768px) {
-    padding: 50px 0;
-  }
-`;
-
-const MissionContent = styled.div`
-  display: flex;
-  align-items: center;
-  gap: 50px;
-
-  @media (max-width: 768px) {
-    flex-direction: column;
-    gap: 30px;
-  }
-`;
-
-const MissionText = styled.div`
-  flex: 1;
-  margin-bottom: 0;
-
-  @media (max-width: 768px) {
-    margin-bottom: 30px;
-  }
-`;
-
-const MissionImage = styled.div`
-  flex: 1;
-  height: 400px;
-  background: url(${missionImage}) no-repeat center center;
-  background-size: cover;
-  border-radius: 10px;
-  box-shadow: 0 15px 30px rgba(15, 138, 190, 0.1);
-
-  @media (max-width: 768px) {
-    width: 100%;
-    height: 300px;
-  }
-`;
-
-const MissionList = styled.ul`
-  margin: 20px 0;
-  padding-left: 20px;
-  list-style: none;
-`;
-
-const MissionListItem = styled.li`
-  margin-bottom: 10px;
-  position: relative;
-  padding-left: 25px;
-
-  &::before {
-    content: "•";
-    color: #0f8abe;
-    font-size: 1.5rem;
-    position: absolute;
-    left: 0;
-    top: -3px;
-  }
-`;
-
-// Story Section
-const StorySection = styled.section`
-  padding: 80px 0;
-  background: linear-gradient(135deg, #f5f7fa 0%, #e4e8eb 100%);
-
-  @media (max-width: 768px) {
-    padding: 50px 0;
-  }
-`;
-
-const Timeline = styled.div`
-  max-width: 800px;
-  margin: 0 auto;
-  position: relative;
-  padding: 40px 0;
-
-  &::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 3px;
-    height: 100%;
-    background: linear-gradient(to bottom, #0f8abe, #1ac8db);
-
-    @media (max-width: 768px) {
-      left: 30px;
-    }
-  }
-`;
-
-const TimelineItem = styled.div`
-  display: flex;
-  margin-bottom: 50px;
-  position: relative;
-
-  &:nth-child(odd) {
-    flex-direction: row-reverse;
-    text-align: right;
-  }
-
-  @media (max-width: 768px) {
-    flex-direction: row !important;
-    text-align: left !important;
-    margin-bottom: 30px;
-  }
-`;
-
-const TimelineYear = styled.div`
-  flex: 1;
-  padding: 0 20px;
-  font-size: 1.5rem;
-  font-weight: 700; /* Added bold font weight */
-  color: #0f8abe;
-  display: flex;
-  align-items: center;
-
-  ${TimelineItem}:nth-child(odd) & {
-    justify-content: flex-end;
-  }
-
-  ${TimelineItem}:nth-child(even) & {
-    justify-content: flex-start;
-  }
-
-  @media (max-width: 768px) {
-    justify-content: flex-start !important;
-    flex: 0 0 80px;
-    font-size: 1.2rem;
-    padding: 0 10px 0 0;
-  }
-`;
-
-const TimelineContent = styled.div`
-  flex: 1;
-  padding: 20px;
-  background: white;
-  border-radius: 8px;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-  position: relative;
-
-  &::before {
-    content: "";
-    position: absolute;
-    width: 20px;
-    height: 20px;
-    background: #0f8abe;
-    border-radius: 50%;
-    top: 50%;
-    transform: translateY(-50%);
-    border: 3px solid white;
-
-    ${TimelineItem}:nth-child(odd) & {
-      right: -10px;
-    }
-
-    ${TimelineItem}:nth-child(even) & {
-      left: -10px;
-    }
-
-    @media (max-width: 768px) {
-      left: -10px !important;
-      right: auto !important;
-    }
-  }
-
-  @media (max-width: 768px) {
-    margin-left: 40px;
-  }
-
-  h3 {
-    margin-top: 0;
-    color: #0f8abe;
-    font-weight: 700; /* Added bold font weight */
-
-    @media (max-width: 768px) {
-      font-size: 1.2rem;
-    }
-  }
-`;
-
-// Vision Section
-const VisionSection = styled.section`
-  padding: 80px 0;
-  background-color: white;
-
-  @media (max-width: 768px) {
-    padding: 50px 0;
-  }
-`;
-
-const VisionStatement = styled.p`
-  font-size: 1.2rem;
-  text-align: center;
-  max-width: 800px;
-  margin: 0 auto 50px;
-  font-weight: 500;
-
-  @media (max-width: 768px) {
-    font-size: 1rem;
-    padding: 0 15px;
-  }
-`;
-
-const VisionPillars = styled.div`
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 30px;
-  margin-bottom: 50px;
-  padding: 0 15px;
-
-  @media (max-width: 768px) {
-    grid-template-columns: 1fr;
-    gap: 20px;
-  }
-`;
-
-const Pillar = styled.div`
-  background: linear-gradient(135deg, #f5f7fa 0%, #e4e8eb 100%);
-  padding: 30px;
-  border-radius: 10px;
-  text-align: center;
-  transition: all 0.3s ease;
-  border: 1px solid rgba(15, 138, 190, 0.1);
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-
-  &:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 10px 30px rgba(15, 138, 190, 0.1);
-    border-color: rgba(15, 138, 190, 0.2);
-  }
-
-  @media (max-width: 768px) {
-    padding: 20px;
-  }
-
-  h3 {
-    color: #0f8abe;
-    font-weight: 700; /* Added bold font weight */
-  }
-`;
-
-const PillarIcon = styled.div`
-  width: 70px;
-  height: 70px;
-  background: linear-gradient(135deg, #0f8abe, #1ac8db);
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin: 0 auto 20px;
-  color: white;
-  font-size: 24px;
-
-  @media (max-width: 768px) {
-    width: 60px;
-    height: 60px;
-    font-size: 20px;
-  }
-`;
-
-const VisionClosing = styled.div`
-  text-align: center;
-  font-size: 1.1rem;
-  max-width: 700px;
-  margin: 0 auto;
-  font-weight: 500;
-  padding: 0 15px;
-
-  @media (max-width: 768px) {
-    font-size: 1rem;
-  }
-`;
-
-// Team CTA
-const TeamCTASection = styled.section`
-  padding: 80px 0;
-  background: linear-gradient(135deg, #f5f7fa 0%, #e4e8eb 100%);
-  text-align: center;
-  color: white;
-
-  @media (max-width: 768px) {
-    padding: 50px 0;
-  }
-
-  .animate-on-scroll {
-    opacity: 0;
-    transform: translateY(30px);
-    transition: opacity 0.6s ease, transform 0.6s ease;
-    transition-delay: 0.3s;
-  }
-
-  .animated {
-    opacity: 1;
-    transform: translateY(0);
-  }
-`;
-
-const TeamCTATitle = styled(SectionTitle)`
-  color: #0f8abe;
-  font-weight: 700; /* Added bold font weight */
-`;
+// Import your timeline images
+import timelineImage1 from "./Images/visual1.png";
+import timelineImage2 from "./Images/visual2.png";
+import timelineImage3 from "./Images/visual3.png";
 
 const AboutUs = () => {
+  // Timeline images array
+  const timelineImages = [timelineImage1, timelineImage2, timelineImage3];
+
   useEffect(() => {
-    const handleScroll = () => {
-      const elements = document.querySelectorAll('.animate-on-scroll');
-      const windowHeight = window.innerHeight;
-      const triggerPoint = windowHeight * 0.85;
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: "0px 0px -50px 0px",
+    };
 
-      elements.forEach((element) => {
-        const elementTop = element.getBoundingClientRect().top;
-
-        if (elementTop < triggerPoint) {
-          element.classList.add('animated');
+    const observerCallback = (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("animate-enter");
+          observer.unobserve(entry.target);
         }
       });
     };
 
-    handleScroll();
-    window.addEventListener('scroll', handleScroll);
+    const observer = new IntersectionObserver(
+      observerCallback,
+      observerOptions
+    );
+    const elements = document.querySelectorAll(".animate-on-scroll");
+
+    elements.forEach((el) => observer.observe(el));
 
     return () => {
-      window.removeEventListener('scroll', handleScroll);
+      elements.forEach((el) => observer.unobserve(el));
     };
   }, []);
 
   return (
-    <>
-      <GlobalStyle />
-      <AboutUsContainer>
-        {/* Hero Section */}
-        <HeroSection>
-          <div className="container">
-            <div className="animate-on-scroll animated">
-              <HeroTitle>About WV Support Services Cambodia</HeroTitle>
-              <Subtitle>
-                Bridging Cambodian talent with global opportunities through
-                exceptional IT support
-              </Subtitle>
+    <div className="font-montserrat text-gray-700 bg-white">
+      {/* Hero Section */}
+      <section className="contact-header">
+        <div className="max-w-7xl mx-auto">
+          <div className="animate-on-scroll transition-all duration-700 ease-out opacity-0 translate-y-8">
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 leading-tight">
+              About <span className="text-[#f8f9fa]">WV Support</span>
+            </h1>
+            <p className="text-xl md:text-2xl text-white/90 max-w-3xl mx-auto leading-relaxed">
+              Bridging Cambodian talent with global opportunities through
+              exceptional IT support
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* Mission Section */}
+      <section className="py-20 bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+            <div className="animate-on-scroll transition-all duration-700 ease-out opacity-0 translate-y-8 delay-100">
+              <span className="text-[#0f8abe] font-semibold">OUR MISSION</span>
+              <h2 className="text-3xl md:text-4xl font-bold text-gray-800 mt-2 mb-6">
+                Empowering Cambodian{" "}
+                <span className="text-[#0f8abe]">Tech Talent</span>
+              </h2>
+              <p className="text-lg text-gray-600 mb-6 leading-relaxed">
+                WV Support Services Cambodia specializes in providing
+                world-class IT support services to Australian businesses while
+                creating meaningful opportunities for Cambodian professionals.
+              </p>
+              <ul className="space-y-4 mb-8">
+                {[
+                  "Competitive benefits and growth opportunities",
+                  "Cutting-edge technology environment",
+                  "Global platform for Cambodian innovation",
+                  "Unmatched customer satisfaction",
+                ].map((item, index) => (
+                  <li key={index} className="flex items-start">
+                    <div className="flex-shrink-0 mt-1">
+                      <div className="w-5 h-5 rounded-full bg-[#0f8abe] flex items-center justify-center">
+                        <svg
+                          className="w-3 h-3 text-white"
+                          fill="none"
+                          stroke="currentColor"
+                          viewBox="0 0 24 24"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth="2"
+                            d="M5 13l4 4L19 7"
+                          />
+                        </svg>
+                      </div>
+                    </div>
+                    <span className="ml-3 text-gray-700">{item}</span>
+                  </li>
+                ))}
+              </ul>
+              <p className="text-lg text-gray-600 leading-relaxed">
+                We're building a future where Cambodian tech professionals
+                compete on the global stage.
+              </p>
+            </div>
+            <div className="animate-on-scroll transition-all duration-700 ease-out opacity-0 translate-y-8 delay-200">
+              <div className="relative rounded-xl overflow-hidden shadow-2xl transition-all duration-300 hover:shadow-3xl hover:-translate-y-1">
+                <div className="aspect-w-16 aspect-h-9">
+                  <img
+                    src={missionImage}
+                    alt="Our team"
+                    className="object-cover w-full h-full transition-transform duration-500 hover:scale-105"
+                  />
+                </div>
+                <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent flex items-end p-8">
+                  <div className="text-white">
+                    <p className="text-sm uppercase tracking-wider">
+                      Siem Reap, Cambodia
+                    </p>
+                    <h3 className="text-xl font-bold mt-1">
+                      Our Professional Environment
+                    </h3>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
-        </HeroSection>
+        </div>
+      </section>
 
-        {/* Mission Section */}
-        <MissionSection>
-          <div className="container">
-            <MissionContent>
-              <MissionText className="animate-on-scroll">
-                <SectionTitle style={{ color: "#0f8abe" }}>Our Mission</SectionTitle>
-                <p>
-                  WV Support Services Cambodia is a growing IT company that
-                  specializes in providing troubleshooting and technical support
-                  services for a wide range of Australian customers.
-                </p>
-                <p>
-                  Our mission is to empower Cambodian talent by creating
-                  meaningful job opportunities in a peaceful and professional
-                  working environment. We are dedicated to:
-                </p>
-                <MissionList>
-                  <MissionListItem>
-                    Offering competitive benefits
-                  </MissionListItem>
-                  <MissionListItem>
-                    Working with the latest technologies
-                  </MissionListItem>
-                  <MissionListItem>
-                    Showcasing Cambodian innovation on a global stage
-                  </MissionListItem>
-                  <MissionListItem>
-                    Delivering excellent customer service and satisfaction
-                  </MissionListItem>
-                </MissionList>
-                <p>
-                  At WV Support, we believe in bridging local potential with
-                  international standards—building a future where Cambodian tech
-                  talent thrives.
-                </p>
-              </MissionText>
-              <MissionImage className="animate-on-scroll" />
-            </MissionContent>
+      {/* Story Section */}
+      <section className="py-20 bg-gray-50">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-16 animate-on-scroll transition-all duration-700 ease-out opacity-0 translate-y-8">
+            <span className="text-[#0f8abe] font-semibold">OUR JOURNEY</span>
+            <h2 className="text-3xl md:text-4xl font-bold text-gray-800 mt-2">
+              Building <span className="text-[#0f8abe]">Trust</span> Since 2021
+            </h2>
           </div>
-        </MissionSection>
 
-        {/* Story Section */}
-        <StorySection>
-          <div className="container">
-            <SectionTitle style={{ color: "#0f8abe" }} className="animate-on-scroll">Our Story</SectionTitle>
-            <Timeline>
-              <TimelineItem>
-                <TimelineYear className="animate-on-scroll">2021</TimelineYear>
-                <TimelineContent className="animate-on-scroll">
-                  <h3>Founded in Siem Reap</h3>
-                  <p>
-                    WV Support Services Cambodia was founded in 2021 and is
-                    located in Siem Reap, Cambodia.
-                  </p>
-                </TimelineContent>
-              </TimelineItem>
-              <TimelineItem>
-                <TimelineYear className="animate-on-scroll">2024</TimelineYear>
-                <TimelineContent className="animate-on-scroll">
-                  <h3>Growing Strong</h3>
-                  <p>
-                    Since then, we've grown rapidly, proudly serving over 10,000
-                    customers with a dedicated team of professionals committed
-                    to delivering reliable IT support and solutions.
-                  </p>
-                </TimelineContent>
-              </TimelineItem>
-              <TimelineItem>
-                <TimelineYear className="animate-on-scroll">Today</TimelineYear>
-                <TimelineContent className="animate-on-scroll">
-                  <h3>Trusted Partner</h3>
-                  <p>
-                    Since 2021, WV Support Services Cambodia has been delivering
-                    smart, reliable IT support from the heart of Siem
-                    Reap—trusted by over 10,000 customers and growing every day.
-                  </p>
-                </TimelineContent>
-              </TimelineItem>
-            </Timeline>
+          <div className="relative">
+            {/* Timeline line */}
+            <div className="hidden lg:block absolute left-1/2 top-0 bottom-0 w-0.5 bg-gradient-to-b from-[#0f8abe] to-[#1ac8db] transform -translate-x-1/2"></div>
+
+            {[
+              {
+                year: "2021",
+                title: "Founded in Siem Reap",
+                content:
+                  "WV Support Services Cambodia was established with a vision to connect Cambodian talent with global opportunities.",
+              },
+              {
+                year: "2024",
+                title: "Expanding Our Reach",
+                content:
+                  "Now serving over 10,000 customers with a dedicated team of IT professionals.",
+              },
+              {
+                year: "Future",
+                title: "Continuing Innovation",
+                content:
+                  "We're committed to growing our impact and expanding our services across the region.",
+              },
+            ].map((item, index) => (
+              <div
+                key={index}
+                className={`relative mb-12 lg:mb-16 ${
+                  index % 2 === 0 ? "lg:text-right" : "lg:text-left"
+                }`}
+              >
+                <div
+                  className={`animate-on-scroll transition-all duration-700 ease-out opacity-0 translate-y-8 delay-${
+                    (index + 1) * 100
+                  } flex flex-col lg:flex-row items-center ${
+                    index % 2 === 0 ? "lg:flex-row-reverse" : ""
+                  }`}
+                >
+                  <div
+                    className={`lg:w-1/2 ${
+                      index % 2 === 0 ? "lg:pl-12" : "lg:pr-12"
+                    } mb-6 lg:mb-0`}
+                  >
+                    <div
+                      className={`inline-block ${
+                        index % 2 === 0 ? "lg:text-right" : "lg:text-left"
+                      }`}
+                    >
+                      <div className="text-2xl font-bold text-[#0f8abe] mb-2">
+                        {item.year}
+                      </div>
+                      <h3 className="text-xl font-bold text-gray-800 mb-3">
+                        {item.title}
+                      </h3>
+                      <p className="text-gray-600">{item.content}</p>
+                    </div>
+                  </div>
+                  <div className="lg:w-1/2 flex justify-center lg:justify-start">
+                    <div className="relative">
+                      {/* Mobile timeline dot */}
+                      <div className="lg:hidden absolute -left-8 top-1/2 transform -translate-y-1/2 w-4 h-4 bg-[#0f8abe] rounded-full border-4 border-white"></div>
+                      <div
+                        className={`w-64 h-48 bg-white rounded-xl shadow-md overflow-hidden transition-all duration-300 hover:shadow-lg hover:-translate-y-1 ${
+                          index % 2 === 0 ? "lg:ml-auto" : "lg:mr-auto"
+                        }`}
+                      >
+                        <img
+                          src={timelineImages[index]}
+                          alt={item.title}
+                          className="w-full h-full object-cover transition-transform duration-500 hover:scale-105"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            ))}
           </div>
-        </StorySection>
+        </div>
+      </section>
 
-        {/* Vision Section */}
-        <VisionSection>
-          <div className="container">
-            <SectionTitle style={{ color: "#0f8abe" }} className="animate-on-scroll">Our Vision</SectionTitle>
-            <VisionStatement className="animate-on-scroll">
-              At WV Support Services Cambodia, our vision is to empower
-              Cambodia's tech talent and become a trusted IT support partner for
-              businesses across Australia and the region.
-            </VisionStatement>
-
-            <VisionPillars>
-              <Pillar className="animate-on-scroll">
-                <PillarIcon>
-                  <FaHandsHelping />
-                </PillarIcon>
-                <h3>Empowerment</h3>
-                <p>
-                  Create quality job opportunities for Cambodians in the tech
-                  and support sectors.
-                </p>
-              </Pillar>
-              <Pillar className="animate-on-scroll">
-                <PillarIcon>
-                  <FaAward />
-                </PillarIcon>
-                <h3>Excellence</h3>
-                <p>
-                  Deliver consistent, reliable, and high-quality services to our
-                  clients.
-                </p>
-              </Pillar>
-              <Pillar className="animate-on-scroll">
-                <PillarIcon>
-                  <FaGlobeAsia />
-                </PillarIcon>
-                <h3>Global Reach</h3>
-                <p>
-                  Build strong, long-term partnerships with businesses
-                  abroad—especially in Australia and New Zealand.
-                </p>
-              </Pillar>
-              <Pillar className="animate-on-scroll">
-                <PillarIcon>
-                  <FaChartLine />
-                </PillarIcon>
-                <h3>Growth</h3>
-                <p>
-                  Foster a learning culture that encourages continuous
-                  professional and personal development.
-                </p>
-              </Pillar>
-              <Pillar className="animate-on-scroll">
-                <PillarIcon>
-                  <FaBullseye />
-                </PillarIcon>
-                <h3>Impact</h3>
-                <p>
-                  Drive positive change by connecting local talent with global
-                  opportunities.
-                </p>
-              </Pillar>
-            </VisionPillars>
-
-            <VisionClosing className="animate-on-scroll">
-              <p>
-                We believe in building a future where Cambodian innovation is
-                recognized and valued on a global stage.
-              </p>
-            </VisionClosing>
-          </div>
-        </VisionSection>
-
-        {/* Team CTA */}
-        <TeamCTASection>
-          <div className="container">
-            <TeamCTATitle className="animate-on-scroll">Join Our Growing Team</TeamCTATitle>
-            <p className="animate-on-scroll" style={{ color: "#52514a" }}>
-              We're always looking for talented Cambodian professionals to join
-              our team.
+      {/* Vision Section */}
+      <section className="py-20 bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-16 animate-on-scroll transition-all duration-700 ease-out opacity-0 translate-y-8">
+            <span className="text-[#0f8abe] font-semibold">OUR VISION</span>
+            <h2 className="text-3xl md:text-4xl font-bold text-gray-800 mt-2">
+              Shaping the <span className="text-[#0f8abe]">Future</span> of IT
+              Support
+            </h2>
+            <p className="text-lg text-gray-600 max-w-3xl mx-auto mt-6">
+              We envision a world where Cambodian tech talent is recognized
+              globally for its excellence and innovation.
             </p>
-            <CTAButton className="animate-on-scroll" onClick={() => window.location.href = '/Careers'}>Explore Careers</CTAButton>
           </div>
-        </TeamCTASection>
-      </AboutUsContainer>
-    </>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {[
+              {
+                icon: <FaHandsHelping className="w-8 h-8" />,
+                title: "Empowerment",
+                description:
+                  "Creating career paths for Cambodian professionals in the tech industry",
+              },
+              {
+                icon: <FaAward className="w-8 h-8" />,
+                title: "Excellence",
+                description:
+                  "Delivering premium IT support services with Cambodian expertise",
+              },
+              {
+                icon: <FaGlobeAsia className="w-8 h-8" />,
+                title: "Global Reach",
+                description:
+                  "Connecting local talent with international opportunities",
+              },
+              {
+                icon: <FaChartLine className="w-8 h-8" />,
+                title: "Growth",
+                description:
+                  "Fostering continuous learning and professional development",
+              },
+              {
+                icon: <FaBullseye className="w-8 h-8" />,
+                title: "Impact",
+                description:
+                  "Making a measurable difference in Cambodia's tech ecosystem",
+              },
+              {
+                icon: <FaHandsHelping className="w-8 h-8" />,
+                title: "Innovation",
+                description: "Pioneering new approaches to IT support services",
+              },
+            ].map((item, index) => (
+              <div
+                key={index}
+                className="animate-on-scroll transition-all duration-700 ease-out opacity-0 translate-y-8 bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300"
+                style={{ transitionDelay: `${index * 100}ms` }}
+              >
+                <div className="p-8">
+                  <div className="w-16 h-16 rounded-full bg-gradient-to-br from-[#0f8abe] to-[#0f8abe] flex items-center justify-center text-white mb-6">
+                    {item.icon}
+                  </div>
+                  <h3 className="text-xl font-bold text-gray-800 mb-3">
+                    {item.title}
+                  </h3>
+                  <p className="text-gray-600 text-lg">{item.description}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* CTA Section */}
+      <section className="py-20 bg-gray-100">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <div className="animate-on-scroll transition-all duration-700 ease-out opacity-0 translate-y-8">
+            <h2 className="text-3xl md:text-4xl font-bold text-[#0f8abe] mb-6">
+              Join Our Growing Team
+            </h2>
+            <p className="text-xl text-gray-900 mb-8 max-w-2xl mx-auto leading-relaxed">
+              We're always looking for talented professionals to join our
+              mission of showcasing Cambodian tech excellence.
+            </p>
+            <button
+              onClick={() => (window.location.href = "/Careers")}
+              className="bg-white text-lg text-[#0f8abe] px-8 py-3 rounded-full font-semibold shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1"
+            >
+              Explore Career Opportunities
+            </button>
+          </div>
+        </div>
+      </section>
+
+      {/* Add these styles to your global CSS */}
+      <style jsx global>{`
+        .contact-header {
+          background: linear-gradient(
+              rgba(15, 138, 190, 0.8),
+              rgba(15, 138, 190, 0.9)
+            ),
+            url(${headerImage}) center/cover no-repeat;
+          color: white;
+          padding: 3.4rem 1rem;
+          text-align: center;
+        }
+
+        .animate-on-scroll {
+          transition: all 0.7s ease-out;
+        }
+
+        .animate-on-scroll.animate-enter {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      `}</style>
+    </div>
   );
 };
 
