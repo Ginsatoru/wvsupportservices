@@ -30,7 +30,9 @@ const HeroComponent = () => {
       <div className="relative z-10 h-full flex items-center max-w-7xl mx-auto px-4 sm:px-6 lg:px-2">
         <div className="max-w-2xl text-white px-4 sm:px-2">
           <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-3 sm:mb-4 animate-slide-up">
-            <span className="text-[#0f8abe]">WV Support</span> Services Cambodia
+            <span className="text-[#0f8abe]">WV Support</span>
+            <br />
+            Services Cambodia
           </h1>
 
           <p className="text-base sm:text-lg md:text-xl text-gray-200 mb-6 sm:mb-8 animate-slide-up delay-100">

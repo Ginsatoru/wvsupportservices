@@ -1,503 +1,300 @@
 import React from 'react';
-import styled from 'styled-components';
-import troubleshootingImage from './Images/image5.png';
-import retailSoftwareImage from './Images/RM.png';
-import supportTeamImage from './Images/team.png';
-import processImage from './Images/method.png';
-import testimonial1 from './Images/sarah.png';
-import testimonial2 from './Images/michael.png';
-
-const Container = styled.section`
-  font-family: 'Montserrat', sans-serif;
-  background-color: white;
-  padding: 2rem 1.5rem;
-  max-width: 1200px;
-  margin: 0 auto;
-  border-radius: 8px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-
-  @media (min-width: 768px) {
-    padding: 3rem;
-  }
-`;
-
-const Heading = styled.h2`
-  color: #0f8abe;
-  font-size: 1.8rem;
-  font-weight: 700;
-  position: relative;
-  line-height: 1.3;
-
-
-  @media (min-width: 576px) {
-    font-size: 2rem;
-    margin-bottom: 1.5rem;
-  }
-
-  @media (min-width: 768px) {
-    font-size: 2.3rem;
-  }
-
-  @media (min-width: 992px) {
-    font-size: 2.5rem;
-  }
-`;
-
-const SubHeading = styled.h3`
-  color: #0f8abe;
-  font-size: 1.4rem;
-  font-weight: 600;
-  margin: 1.8rem 0 1rem;
-  line-height: 1.3;
-
-  @media (min-width: 576px) {
-    font-size: 1.5rem;
-  }
-
-  @media (min-width: 768px) {
-    font-size: 1.7rem;
-    margin: 2rem 0 1rem;
-  }
-
-  @media (min-width: 992px) {
-    font-size: 1.8rem;
-  }
-`;
-
-const Paragraph = styled.p`
-  color: #52514a;
-  font-size: 1rem;
-  line-height: 1.6;
-  margin-bottom: 1.2rem;
-
-  @media (min-width: 768px) {
-    font-size: 1.1rem;
-    margin-bottom: 1.5rem;
-  }
-`;
-
-const ImageContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 1.5rem;
-  margin: 1.5rem 0;
-
-  @media (min-width: 768px) {
-    flex-direction: row;
-    gap: 2rem;
-    margin: 2rem 0;
-  }
-`;
-
-const ImageCard = styled.div`
-  flex: 1;
-  min-width: 100%;
-  border-radius: 8px;
-  overflow: hidden;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-
-  @media (min-width: 576px) {
-    min-width: 300px;
-  }
-`;
-
-const Image = styled.img`
-  width: 100%;
-  height: 200px;
-  object-fit: cover;
-  transition: transform 0.3s ease;
-
-  &:hover {
-    transform: scale(1.03);
-  }
-
-  @media (min-width: 768px) {
-    height: 220px;
-  }
-`;
-
-const ImageCaption = styled.div`
-  padding: 1rem;
-  background: white;
-  color: #52514a;
-  font-size: 0.9rem;
-  text-align: center;
-`;
-
-const HighlightBox = styled.div`
-  background-color: #f5f9fc;
-  border-left: 4px solid #0f8abe;
-  padding: 1.2rem;
-  margin: 1.5rem 0;
-  border-radius: 0 4px 4px 0;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 1.5rem;
-
-  @media (min-width: 768px) {
-    flex-direction: row;
-    padding: 1.5rem;
-    margin: 2rem 0;
-    gap: 2rem;
-  }
-`;
-
-const HighlightImage = styled.img`
-  width: 100%;
-  max-width: 200px;
-  height: auto;
-  border-radius: 4px;
-`;
-
-const List = styled.ul`
-  color: #52514a;
-  margin: 1.2rem 0 1.2rem 1rem;
-  padding-left: 1rem;
-`;
-
-const ListItem = styled.li`
-  margin-bottom: 0.6rem;
-  line-height: 1.5;
-  font-size: 1rem;
-
-  @media (min-width: 768px) {
-    margin-bottom: 0.8rem;
-    font-size: 1.1rem;
-  }
-`;
-
-const TestimonialsContainer = styled.div`
-  margin: 2.5rem 0;
-  padding: 1.5rem 0;
-  border-top: 1px solid #eaeaea;
-  border-bottom: 1px solid #eaeaea;
-
-  @media (min-width: 768px) {
-    margin: 3rem 0;
-    padding: 2rem 0;
-  }
-`;
-
-const TestimonialGrid = styled.div`
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 1.5rem;
-  margin-top: 1.5rem;
-
-  @media (min-width: 576px) {
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 2rem;
-    margin-top: 2rem;
-  }
-`;
-
-const TestimonialCard = styled.div`
-  background: #f9f9f9;
-  padding: 1.2rem;
-  border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
-
-  @media (min-width: 768px) {
-    padding: 1.5rem;
-  }
-`;
-
-const TestimonialContent = styled.p`
-  font-style: italic;
-  color: #52514a;
-  margin-bottom: 1rem;
-  position: relative;
-  font-size: 0.95rem;
-  
-  &:before {
-    content: '"';
-    font-size: 2.5rem;
-    color: #0f8abe;
-    opacity: 0.2;
-    position: absolute;
-    left: -10px;
-    top: -15px;
-  }
-
-  @media (min-width: 768px) {
-    font-size: 1rem;
-    
-    &:before {
-      font-size: 3rem;
-      left: -15px;
-    }
-  }
-`;
-
-const TestimonialAuthor = styled.div`
-  display: flex;
-  align-items: center;
-  gap: 0.8rem;
-`;
-
-const AuthorImage = styled.img`
-  width: 45px;
-  height: 45px;
-  border-radius: 50%;
-  object-fit: cover;
-
-  @media (min-width: 768px) {
-    width: 50px;
-    height: 50px;
-  }
-`;
-
-const AuthorInfo = styled.div`
-  display: flex;
-  flex-direction: column;
-`;
-
-const AuthorName = styled.span`
-  font-weight: 600;
-  color: #0f8abe;
-  font-size: 0.95rem;
-
-  @media (min-width: 768px) {
-    font-size: 1rem;
-  }
-`;
-
-const AuthorTitle = styled.span`
-  font-size: 0.75rem;
-  color: #777;
-
-  @media (min-width: 768px) {
-    font-size: 0.8rem;
-  }
-`;
-
-const ProcessContainer = styled.div`
-  margin: 2.5rem 0;
-
-  @media (min-width: 768px) {
-    margin: 3rem 0;
-  }
-`;
-
-const ProcessSteps = styled.div`
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 1.2rem;
-  margin-top: 1.5rem;
-
-  @media (min-width: 576px) {
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 1.5rem;
-  }
-
-  @media (min-width: 768px) {
-    margin-top: 2rem;
-  }
-`;
-
-const ProcessStep = styled.div`
-  background: white;
-  padding: 1.2rem;
-  border-radius: 8px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-  border-top: 4px solid #0f8abe;
-  position: relative;
-  padding-top: 2rem;
-
-  @media (min-width: 768px) {
-    padding: 1.5rem;
-    padding-top: 2.5rem;
-  }
-`;
-
-const StepNumber = styled.div`
-  position: absolute;
-  top: -20px;
-  left: 15px;
-  width: 40px;
-  height: 40px;
-  background: #0f8abe;
-  color: white;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-weight: bold;
-  font-size: 1.1rem;
-`;
-
-const StepTitle = styled.h4`
-  color: #0f8abe;
-  margin-bottom: 0.5rem;
-  font-size: 1.1rem;
-
-  @media (min-width: 576px) {
-    font-size: 1.2rem;
-  }
-
-  @media (min-width: 768px) {
-    font-size: 1.3rem;
-  }
-`;
-
-const StepDescription = styled.p`
-  color: #52514a;
-  font-size: 0.9rem;
-
-  @media (min-width: 768px) {
-    font-size: 0.95rem;
-  }
-`;
+import { Star, CheckCircle, Users, Clock, Shield, Zap } from 'lucide-react';
 
 const TroubleshootingExperience = () => {
   return (
-    <Container>
-      <Heading>RetailManager Troubleshooting Experience</Heading>
-      <SubHeading>We'd love to tell you about us</SubHeading>
-      
-      <ImageContainer>
-        <ImageCard>
-          <Image src={retailSoftwareImage} alt="RetailManager software interface" />
-          <ImageCaption>RetailManager POS System Interface</ImageCaption>
-        </ImageCard>
-        <ImageCard>
-          <Image src={supportTeamImage} alt="Support team working" />
-          <ImageCaption>Our Expert Support Team</ImageCaption>
-        </ImageCard>
-      </ImageContainer>
-      
-      <Paragraph>
-        Our team brings unparalleled expertise in diagnosing and resolving RetailManager software issues, ensuring smooth customer operations and minimal downtime for your business. With every technical challenge we address, we're committed to delivering solutions that enhance your operational efficiency.
-      </Paragraph>
-      
-      <HighlightBox>
-        <HighlightImage src={troubleshootingImage} alt="Troubleshooting process" />
-        <div>
-          <Paragraph>
-            Backed by 25+ years of collective experience in supporting RetailManager environments across various industries, we've developed a deep understanding of the unique challenges retailers face in today's competitive landscape.
-          </Paragraph>
-          <Paragraph>
-            Our specialists are skilled in troubleshooting software errors, database inconsistencies, and system configuration issues with precision and speed.
-          </Paragraph>
+    <div className="font-['Montserrat'] bg-gradient-to-br from-slate-50 to-blue-50 min-h-screen">
+      {/* Hero Section */}
+      <section className="relative bg-white shadow-xl rounded-b-3xl overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-r from-[#0f8abe]/5 to-[#0f8abe]/10"></div>
+        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-24">
+          <div className="text-center">
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 leading-tight mb-6 animate-fade-in">
+              RetailManager 
+              <span className="text-[#0f8abe] block mt-2">Troubleshooting Experience</span>
+            </h1>
+            <p className="text-xl md:text-2xl text-gray-600 max-w-3xl mx-auto leading-relaxed mb-8">
+              Expert solutions for your retail software challenges with 25+ years of experience
+            </p>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+              <button className="bg-[#0f8abe] text-white px-8 py-4 rounded-xl font-semibold text-lg hover:bg-[#0d7bb5] hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-xl">
+                Get Support Now
+              </button>
+              <button className="border-2 border-[#0f8abe] text-[#0f8abe] px-8 py-4 rounded-xl font-semibold text-lg hover:bg-[#0f8abe] hover:text-white transition-all duration-300">
+                Learn More
+              </button>
+            </div>
+          </div>
         </div>
-      </HighlightBox>
-      
-      <SubHeading>Comprehensive Technical Support</SubHeading>
-      
-      <Paragraph>
-        We provide end-to-end support for all RetailManager systems, including:
-      </Paragraph>
-      
-      <List>
-        <ListItem>Guiding users through transaction errors and payment processing issues</ListItem>
-        <ListItem>Resolving connectivity problems between POS systems and backend servers</ListItem>
-        <ListItem>Troubleshooting integration concerns with third-party applications</ListItem>
-        <ListItem>Addressing inventory management and reporting discrepancies</ListItem>
-        <ListItem>Optimizing system performance for high-volume retail environments</ListItem>
-      </List>
-      
-      <SubHeading>Advanced Diagnostic Capabilities</SubHeading>
-      
-      <Paragraph>
-        Our team excels in log analysis, applying patches, and implementing workarounds for known issues. We maintain up-to-date knowledge of all RetailManager versions and updates, ensuring we can support both legacy systems and the latest releases.
-      </Paragraph>
-      
-      <Paragraph>
-        For complex cases that require deeper investigation, we follow a structured escalation process while maintaining transparent communication with your team. Our approach combines technical expertise with excellent customer support, ensuring you understand each step of the resolution process.
-      </Paragraph>
+      </section>
 
-      <TestimonialsContainer>
-        <SubHeading>What Our Clients Say</SubHeading>
-        <Paragraph>
-          Don't just take our word for it. Here's what RetailManager users say about our troubleshooting services:
-        </Paragraph>
-        
-        <TestimonialGrid>
-          <TestimonialCard>
-            <TestimonialContent>
-              The support team resolved our critical checkout system issue in under an hour during peak holiday season. Their expertise saved us thousands in potential lost sales.
-            </TestimonialContent>
-            <TestimonialAuthor>
-              <AuthorImage src={testimonial1} alt="Sarah Johnson" />
-              <AuthorInfo>
-                <AuthorName>Sarah Johnson</AuthorName>
-                <AuthorTitle>Retail Operations Manager, Fashion Outlet</AuthorTitle>
-              </AuthorInfo>
-            </TestimonialAuthor>
-          </TestimonialCard>
-          
-          <TestimonialCard>
-            <TestimonialContent>
-              After struggling with inventory sync issues for months, their team identified and fixed the root cause in two days. We've had zero problems since.
-            </TestimonialContent>
-            <TestimonialAuthor>
-              <AuthorImage src={testimonial2} alt="Michael Chen" />
-              <AuthorInfo>
-                <AuthorName>Michael Chen</AuthorName>
-                <AuthorTitle>IT Director, Home & Living Stores</AuthorTitle>
-              </AuthorInfo>
-            </TestimonialAuthor>
-          </TestimonialCard>
-        </TestimonialGrid>
-      </TestimonialsContainer>
+      {/* About Section */}
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+        <div className="grid lg:grid-cols-2 gap-12 items-center">
+          <div className="space-y-6">
+            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 leading-tight">
+              We'd love to tell you about us
+            </h2>
+            <p className="text-lg text-gray-600 leading-relaxed">
+              Our team brings unparalleled expertise in diagnosing and resolving RetailManager software issues, ensuring smooth customer operations and minimal downtime for your business.
+            </p>
+            <div className="grid grid-cols-2 gap-6">
+              <div className="text-center p-6 bg-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-300">
+                <div className="text-3xl font-bold text-[#0f8abe] mb-2">25+</div>
+                <div className="text-gray-600 font-medium">Years Experience</div>
+              </div>
+              <div className="text-center p-6 bg-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-300">
+                <div className="text-3xl font-bold text-[#0f8abe] mb-2">500+</div>
+                <div className="text-gray-600 font-medium">Clients Served</div>
+              </div>
+            </div>
+          </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+            <div className="group cursor-pointer">
+              <div className="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300 group-hover:scale-105">
+                <div className="h-48 bg-gradient-to-br from-[#0f8abe]/20 to-[#0f8abe]/40 flex items-center justify-center">
+                  <div className="text-[#0f8abe] text-6xl">💻</div>
+                </div>
+                <div className="p-4">
+                  <h3 className="font-semibold text-gray-900 text-center">RetailManager POS System Interface</h3>
+                </div>
+              </div>
+            </div>
+            <div className="group cursor-pointer">
+              <div className="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300 group-hover:scale-105">
+                <div className="h-48 bg-gradient-to-br from-[#0f8abe]/20 to-[#0f8abe]/40 flex items-center justify-center">
+                  <div className="text-[#0f8abe] text-6xl">👥</div>
+                </div>
+                <div className="p-4">
+                  <h3 className="font-semibold text-gray-900 text-center">Our Expert Support Team</h3>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
 
-      <ProcessContainer>
-        <SubHeading>Our Proven Troubleshooting Process</SubHeading>
-        <Paragraph>
-          We follow a systematic approach to ensure efficient and effective resolution of your RetailManager issues:
-        </Paragraph>
+      {/* Expertise Highlight */}
+      <section className="bg-white py-20">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="bg-gradient-to-r from-[#0f8abe]/5 to-[#0f8abe]/10 rounded-3xl p-8 md:p-12 border-l-8 border-[#0f8abe]">
+            <div className="grid lg:grid-cols-3 gap-8 items-center">
+              <div className="lg:col-span-1">
+                <div className="w-32 h-32 bg-[#0f8abe]/20 rounded-full flex items-center justify-center text-[#0f8abe] text-6xl mx-auto">
+                  🔧
+                </div>
+              </div>
+              <div className="lg:col-span-2 space-y-6">
+                <h3 className="text-2xl md:text-3xl font-bold text-gray-900">
+                  Backed by 25+ Years of Experience
+                </h3>
+                <p className="text-lg text-gray-600 leading-relaxed">
+                  We've developed a deep understanding of the unique challenges retailers face in today's competitive landscape. Our specialists are skilled in troubleshooting software errors, database inconsistencies, and system configuration issues with precision and speed.
+                </p>
+                <div className="flex flex-wrap gap-4">
+                  <div className="flex items-center gap-2 text-[#0f8abe] font-medium">
+                    <Shield className="w-5 h-5" />
+                    <span>Secure Solutions</span>
+                  </div>
+                  <div className="flex items-center gap-2 text-[#0f8abe] font-medium">
+                    <Zap className="w-5 h-5" />
+                    <span>Fast Resolution</span>
+                  </div>
+                  <div className="flex items-center gap-2 text-[#0f8abe] font-medium">
+                    <Users className="w-5 h-5" />
+                    <span>Expert Team</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Services Section */}
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+        <div className="text-center mb-16">
+          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-6">
+            Comprehensive Technical Support
+          </h2>
+          <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
+            We provide end-to-end support for all RetailManager systems, ensuring your business runs smoothly
+          </p>
+        </div>
         
-        <ImageContainer>
-          <ImageCard>
-            <Image src={processImage} alt="Our troubleshooting process" />
-            <ImageCaption>Our Structured Troubleshooting Methodology</ImageCaption>
-          </ImageCard>
-        </ImageContainer>
-        
-        <ProcessSteps>
-          <ProcessStep>
-            <StepNumber>1</StepNumber>
-            <StepTitle>Initial Assessment</StepTitle>
-            <StepDescription>
-              We gather all relevant information about your issue, including error messages, recent changes, and system environment details.
-            </StepDescription>
-          </ProcessStep>
-          
-          <ProcessStep>
-            <StepNumber>2</StepNumber>
-            <StepTitle>Diagnosis</StepTitle>
-            <StepDescription>
-              Our experts analyze logs, replicate issues in test environments, and identify root causes using specialized diagnostic tools.
-            </StepDescription>
-          </ProcessStep>
-          
-          <ProcessStep>
-            <StepNumber>3</StepNumber>
-            <StepTitle>Solution Development</StepTitle>
-            <StepDescription>
-              We develop and test solutions, considering both immediate fixes and long-term prevention strategies.
-            </StepDescription>
-          </ProcessStep>
-          
-          <ProcessStep>
-            <StepNumber>4</StepNumber>
-            <StepTitle>Implementation</StepTitle>
-            <StepDescription>
-              Solutions are carefully implemented with minimal disruption, including user training if needed.
-            </StepDescription>
-          </ProcessStep>
-          
-          <ProcessStep>
-            <StepNumber>5</StepNumber>
-            <StepTitle>Follow-up</StepTitle>
-            <StepDescription>
-              We monitor the solution's effectiveness and provide additional support to ensure complete resolution.
-            </StepDescription>
-          </ProcessStep>
-        </ProcessSteps>
-      </ProcessContainer>
-    </Container>
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {[
+            {
+              icon: "💳",
+              title: "Transaction & Payment Issues",
+              description: "Guiding users through transaction errors and payment processing issues"
+            },
+            {
+              icon: "🔗",
+              title: "Connectivity Solutions",
+              description: "Resolving connectivity problems between POS systems and backend servers"
+            },
+            {
+              icon: "🔧",
+              title: "Integration Support",
+              description: "Troubleshooting integration concerns with third-party applications"
+            },
+            {
+              icon: "📊",
+              title: "Inventory Management",
+              description: "Addressing inventory management and reporting discrepancies"
+            },
+            {
+              icon: "⚡",
+              title: "Performance Optimization",
+              description: "Optimizing system performance for high-volume retail environments"
+            },
+            {
+              icon: "🔍",
+              title: "Advanced Diagnostics",
+              description: "Log analysis, patches, and workarounds for complex issues"
+            }
+          ].map((service, index) => (
+            <div key={index} className="bg-white rounded-xl shadow-lg p-6 hover:shadow-xl hover:scale-105 transition-all duration-300 border-t-4 border-[#0f8abe]">
+              <div className="text-4xl mb-4">{service.icon}</div>
+              <h3 className="text-xl font-semibold text-gray-900 mb-3">{service.title}</h3>
+              <p className="text-gray-600 leading-relaxed">{service.description}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* Process Section */}
+      <section className="bg-white py-20">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-6">
+              Our Proven Troubleshooting Process
+            </h2>
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
+              We follow a systematic approach to ensure efficient and effective resolution of your RetailManager issues
+            </p>
+          </div>
+
+          <div className="mb-12">
+            <div className="bg-gradient-to-r from-[#0f8abe]/10 to-[#0f8abe]/20 rounded-xl p-8 text-center">
+              <div className="text-6xl mb-4">⚙️</div>
+              <h3 className="text-xl font-semibold text-gray-900">Our Structured Troubleshooting Methodology</h3>
+            </div>
+          </div>
+
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {[
+              {
+                number: "1",
+                title: "Initial Assessment",
+                description: "We gather all relevant information about your issue, including error messages, recent changes, and system environment details."
+              },
+              {
+                number: "2",
+                title: "Diagnosis",
+                description: "Our experts analyze logs, replicate issues in test environments, and identify root causes using specialized diagnostic tools."
+              },
+              {
+                number: "3",
+                title: "Solution Development",
+                description: "We develop and test solutions, considering both immediate fixes and long-term prevention strategies."
+              },
+              {
+                number: "4",
+                title: "Implementation",
+                description: "Solutions are carefully implemented with minimal disruption, including user training if needed."
+              },
+              {
+                number: "5",
+                title: "Follow-up",
+                description: "We monitor the solution's effectiveness and provide additional support to ensure complete resolution."
+              }
+            ].map((step, index) => (
+              <div key={index} className="bg-white rounded-xl shadow-lg p-6 hover:shadow-xl transition-all duration-300 relative pt-12 border-t-4 border-[#0f8abe]">
+                <div className="absolute -top-5 left-6 w-10 h-10 bg-[#0f8abe] text-white rounded-full flex items-center justify-center font-bold text-lg shadow-lg">
+                  {step.number}
+                </div>
+                <h3 className="text-xl font-semibold text-[#0f8abe] mb-3">{step.title}</h3>
+                <p className="text-gray-600 leading-relaxed">{step.description}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Testimonials Section */}
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+        <div className="text-center mb-16">
+          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-6">
+            What Our Clients Say
+          </h2>
+          <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
+            Don't just take our word for it. Here's what RetailManager users say about our troubleshooting services
+          </p>
+        </div>
+
+        <div className="grid md:grid-cols-2 gap-8">
+          {[
+            {
+              content: "The support team resolved our critical checkout system issue in under an hour during peak holiday season. Their expertise saved us thousands in potential lost sales.",
+              author: "Sarah Johnson",
+              title: "Retail Operations Manager, Fashion Outlet",
+              avatar: "👩‍💼"
+            },
+            {
+              content: "After struggling with inventory sync issues for months, their team identified and fixed the root cause in two days. We've had zero problems since.",
+              author: "Michael Chen",
+              title: "IT Director, Home & Living Stores",
+              avatar: "👨‍💻"
+            }
+          ].map((testimonial, index) => (
+            <div key={index} className="bg-white rounded-xl shadow-lg p-8 hover:shadow-xl transition-all duration-300 border-l-4 border-[#0f8abe]">
+              <div className="flex items-start gap-4 mb-6">
+                <div className="flex text-[#0f8abe] text-xl">
+                  {[...Array(5)].map((_, i) => (
+                    <Star key={i} className="w-5 h-5 fill-current" />
+                  ))}
+                </div>
+              </div>
+              <blockquote className="text-gray-600 text-lg italic leading-relaxed mb-6 relative">
+                <span className="text-[#0f8abe] text-6xl opacity-20 absolute -top-4 -left-2">"</span>
+                {testimonial.content}
+              </blockquote>
+              <div className="flex items-center gap-4">
+                <div className="w-12 h-12 bg-gradient-to-br from-[#0f8abe]/20 to-[#0f8abe]/40 rounded-full flex items-center justify-center text-2xl">
+                  {testimonial.avatar}
+                </div>
+                <div>
+                  <div className="font-semibold text-[#0f8abe] text-lg">{testimonial.author}</div>
+                  <div className="text-gray-500 text-sm">{testimonial.title}</div>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* CTA Section */}
+      <section className="bg-gradient-to-r from-[#0f8abe] to-[#0d7bb5] py-20">
+        <div className="max-w-4xl mx-auto text-center px-4 sm:px-6 lg:px-8">
+          <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">
+            Ready to Resolve Your RetailManager Issues?
+          </h2>
+          <p className="text-xl text-blue-100 mb-8 leading-relaxed">
+            Our expert team is standing by to help you get back to business quickly and efficiently.
+          </p>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <button className="bg-white text-[#0f8abe] px-8 py-4 rounded-xl font-semibold text-lg hover:bg-gray-100 hover:scale-105 transition-all duration-300 shadow-lg">
+              Contact Support Now
+            </button>
+            <button className="border-2 border-white text-white px-8 py-4 rounded-xl font-semibold text-lg hover:bg-white hover:text-[#0f8abe] transition-all duration-300">
+              Schedule Consultation
+            </button>
+          </div>
+        </div>
+      </section>
+    </div>
   );
 };
 
