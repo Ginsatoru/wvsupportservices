@@ -2,11 +2,13 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import "../Components/i18n";
-import heroBg from "./Images/hero.png";
+import heroBg from "./Images/hero.webp";
+import { useState } from "react";
 
 const HeroComponent = () => {
   const navigate = useNavigate();
   const { t } = useTranslation();
+  const [imageLoaded, setImageLoaded] = useState(false);
 
   return (
     <section className="relative w-full h-screen min-h-[600px] overflow-hidden">
@@ -15,7 +17,10 @@ const HeroComponent = () => {
         <img
           src={heroBg}
           alt="IT Support Services"
-          className="w-full h-full object-cover opacity-90 fade-in-image"
+          className={`w-full h-full object-cover transition-opacity duration-1000 ${
+            imageLoaded ? "opacity-90" : "opacity-0"
+          }`}
+          onLoad={() => setImageLoaded(true)}
           loading="eager"
         />
         <div className="absolute inset-0 bg-black/50" />
