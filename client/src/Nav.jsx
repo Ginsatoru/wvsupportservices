@@ -158,7 +158,7 @@ function Nav() {
             </div>
 
             {/* Desktop Menu */}
-            <div className="hidden md:flex items-center space-x-3 text-lg ">
+            <div className="hidden md:flex items-center space-x-2 text-lg ">
               <Link
                 to="/"
                 className={`font-medium transition-all duration-300 ${textColor} hover:text-white/90 relative group px-3 py-2 rounded-lg hover:bg-white/10`}
