@@ -18,7 +18,7 @@ const HeroComponent = () => {
           className="w-full h-full object-cover opacity-90"
           loading="eager"
         />
-        <div className="absolute inset-0 bg-black/50" />
+        <div className="absolute inset-0 bg-black/65" />
       </div>
 
       {/* Content */}

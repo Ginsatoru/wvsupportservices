@@ -115,13 +115,13 @@ function Nav() {
   return (
     <>
       <nav className={getNavbarClasses()}>
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center h-16 md:h-20 md:max-w-9xl mx-auto">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 ">
+          <div className="flex justify-between items-center h-16 md:h-20 md:max-w-9xl mx-auto ">
             {/* Logo */}
             <div className="flex items-center space-x-2">
               <Link
                 to="/"
-                className="flex items-center"
+                className="flex items-center group"
                 onClick={() => setMenuActive(false)}
               >
                 {settings?.logo ? (
@@ -130,13 +130,13 @@ function Nav() {
                     alt={settings.companyName || "Company Logo"}
                     className={`h-8 md:h-7 transition-all duration-300 ${
                       isHomePage && !isScrolled ? "opacity-90" : "opacity-100"
-                    }`}
+                    } group-hover:scale-105`}
                   />
                 ) : (
                   <div
                     className={`flex items-center justify-center h-10 w-10 rounded-full ${
                       isHomePage && !isScrolled ? "bg-white" : "bg-white"
-                    }`}
+                    } group-hover:scale-105 transition-transform duration-300`}
                   >
                     <span
                       className={`${
@@ -150,7 +150,7 @@ function Nav() {
                   </div>
                 )}
                 <h3
-                  className={`ml-2 text-lg md:text-2xl font-semibold ${textColor}`}
+                  className={`ml-2 text-lg md:text-2xl font-semibold ${textColor} transition-colors duration-300`}
                 >
                   {settings?.companyName || "WV Support Services Cambodia"}
                 </h3>
@@ -158,40 +158,44 @@ function Nav() {
             </div>
 
             {/* Desktop Menu */}
-            <div className="hidden md:flex items-center space-x-6 text-lg">
+            <div className="hidden md:flex items-center space-x-3 text-lg ">
               <Link
                 to="/"
-                className={`font-medium transition-colors ${textColor} ${hoverTextColor}`}
+                className={`font-medium transition-all duration-300 ${textColor} hover:text-white/90 relative group px-3 py-2 rounded-lg hover:bg-white/10`}
               >
                 {t("home")}
+                <div className="absolute bottom-0 left-0 w-0 h-0.5 bg-white/70 transition-all duration-300 group-hover:w-full"></div>
               </Link>
               <Link
                 to="/Contact"
-                className={`font-medium transition-colors ${textColor} ${hoverTextColor}`}
+                className={`font-medium transition-all duration-300 ${textColor} hover:text-white/90 relative group px-3 py-2 rounded-lg hover:bg-white/10`}
               >
                 {t("contact")}
+                <div className="absolute bottom-0 left-0 w-0 h-0.5 bg-white/70 transition-all duration-300 group-hover:w-full"></div>
               </Link>
               <Link
                 to="/Services"
-                className={`font-medium transition-colors ${textColor} ${hoverTextColor}`}
+                className={`font-medium transition-all duration-300 ${textColor} hover:text-white/90 relative group px-3 py-2 rounded-lg hover:bg-white/10`}
               >
                 {t("services")}
+                <div className="absolute bottom-0 left-0 w-0 h-0.5 bg-white/70 transition-all duration-300 group-hover:w-full"></div>
               </Link>
               <Link
                 to="/Aboutus"
-                className={`font-medium transition-colors ${textColor} ${hoverTextColor}`}
+                className={`font-medium transition-all duration-300 ${textColor} hover:text-white/90 relative group px-3 py-2 rounded-lg hover:bg-white/10`}
               >
                 {t("about")}
+                <div className="absolute bottom-0 left-0 w-0 h-0.5 bg-white/70 transition-all duration-300 group-hover:w-full"></div>
               </Link>
 
-              {/* Pages Dropdown */}
+              {/* Pages Dropdown - Modern Design */}
               <div className="relative group">
                 <button
-                  className={`flex items-center font-medium transition-colors ${textColor} ${hoverTextColor}`}
+                  className={`flex items-center font-medium transition-all duration-300 ${textColor} hover:text-white/90 relative px-3 py-2 rounded-lg hover:bg-white/10`}
                 >
                   {t("pages")}
                   <svg
-                    className="ml-1 h-4 w-4"
+                    className="ml-1 h-4 w-4 transition-all duration-300 group-hover:rotate-180"
                     fill="none"
                     viewBox="0 0 24 24"
                     stroke="currentColor"
@@ -203,44 +207,48 @@ function Nav() {
                       d="M19 9l-7 7-7-7"
                     />
                   </svg>
+                  <div className="absolute bottom-0 left-0 w-0 h-0.5 bg-white/70 transition-all duration-300 group-hover:w-full"></div>
                 </button>
-                <div className="absolute right-0 mt-2 w-48 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 transform group-hover:translate-y-0 translate-y-1">
-                  <div className="py-1">
+                <div className="absolute right-0 mt-3 w-56 origin-top-right rounded-2xl bg-white/95 backdrop-blur-xl shadow-2xl border border-white/20 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 transform group-hover:translate-y-0 translate-y-2 group-hover:scale-100 scale-95">
+                  <div className="py-3">
                     <Link
                       to="/Project"
-                      className="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-[#0f8abe]"
+                      className="flex items-center px-5 py-3 text-sm text-gray-700 hover:bg-gradient-to-r hover:from-[#0f8abe]/10 hover:to-[#0f8abe]/5 hover:text-[#0f8abe] transition-all duration-300 group/item"
                     >
-                      {t("project")}
+                      <div className="w-2 h-2 bg-[#0f8abe]/30 rounded-full mr-3 transition-all duration-300 group-hover/item:bg-[#0f8abe] group-hover/item:scale-125"></div>
+                      <span className="font-medium">{t("project")}</span>
                     </Link>
                     <Link
                       to="/Support"
-                      className="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-[#0f8abe]"
+                      className="flex items-center px-5 py-3 text-sm text-gray-700 hover:bg-gradient-to-r hover:from-[#0f8abe]/10 hover:to-[#0f8abe]/5 hover:text-[#0f8abe] transition-all duration-300 group/item"
                     >
-                      {t("support")}
+                      <div className="w-2 h-2 bg-[#0f8abe]/30 rounded-full mr-3 transition-all duration-300 group-hover/item:bg-[#0f8abe] group-hover/item:scale-125"></div>
+                      <span className="font-medium">{t("support")}</span>
                     </Link>
                     <Link
                       to="/Whoweare"
-                      className="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-[#0f8abe]"
+                      className="flex items-center px-5 py-3 text-sm text-gray-700 hover:bg-gradient-to-r hover:from-[#0f8abe]/10 hover:to-[#0f8abe]/5 hover:text-[#0f8abe] transition-all duration-300 group/item"
                     >
-                      {t("whoWeAre")}
+                      <div className="w-2 h-2 bg-[#0f8abe]/30 rounded-full mr-3 transition-all duration-300 group-hover/item:bg-[#0f8abe] group-hover/item:scale-125"></div>
+                      <span className="font-medium">{t("whoWeAre")}</span>
                     </Link>
                   </div>
                 </div>
               </div>
 
-              {/* Language Dropdown - Updated Style */}
+              {/* Language Dropdown - Modern Design */}
               <div className="relative group ml-2">
                 <button
-                  className={`flex items-center font-medium transition-colors ${textColor} ${hoverTextColor} px-3 py-1 rounded-lg bg-white/20 hover:bg-white/30`}
+                  className={`flex items-center font-medium transition-all duration-300 ${textColor} hover:text-white/90 px-4 py-2 rounded-xl bg-white/15 hover:bg-white/25 backdrop-blur-sm border border-white/20`}
                 >
                   {currentLang === "en" ? (
-                    <img src={enFlag} alt="English" className="w-5 h-3.5 mr-2" />
+                    <img src={enFlag} alt="English" className="w-5 h-3.5 mr-2 rounded-sm" />
                   ) : (
-                    <img src={khFlag} alt="Khmer" className="w-5 h-3.5 mr-2" />
+                    <img src={khFlag} alt="Khmer" className="w-5 h-3.5 mr-2 rounded-sm" />
                   )}
-                  <span className="mr-1">{currentLang === "en" ? "EN" : "KH"}</span>
+                  <span className="mr-2 font-semibold">{currentLang === "en" ? "EN" : "KH"}</span>
                   <svg
-                    className="h-4 w-4 transition-transform duration-200 group-hover:rotate-180"
+                    className="h-4 w-4 transition-all duration-300 group-hover:rotate-180"
                     fill="none"
                     viewBox="0 0 24 24"
                     stroke="currentColor"
@@ -253,21 +261,21 @@ function Nav() {
                     />
                   </svg>
                 </button>
-                <div className="absolute right-0 mt-2 w-40 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 transform group-hover:translate-y-0 translate-y-1">
-                  <div className="py-1">
+                <div className="absolute right-0 mt-3 w-48 origin-top-right rounded-2xl bg-white/95 backdrop-blur-xl shadow-2xl border border-white/20 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 transform group-hover:translate-y-0 translate-y-2 group-hover:scale-100 scale-95">
+                  <div className="py-3">
                     <button
                       onClick={() => changeLanguage("en")}
-                      className="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-[#0f8abe] w-full text-left"
+                      className="flex items-center px-5 py-3 text-sm text-gray-700 hover:bg-gradient-to-r hover:from-[#0f8abe]/10 hover:to-[#0f8abe]/5 hover:text-[#0f8abe] w-full text-left transition-all duration-300 group/item"
                     >
-                      <img src={enFlag} alt="English" className="w-5 h-3.5 mr-2" />
-                      English
+                      <img src={enFlag} alt="English" className="w-6 h-4 mr-3 rounded-sm shadow-sm" />
+                      <span className="font-medium">English</span>
                     </button>
                     <button
                       onClick={() => changeLanguage("km")}
-                      className="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-[#0f8abe] w-full text-left"
+                      className="flex items-center px-5 py-3 text-sm text-gray-700 hover:bg-gradient-to-r hover:from-[#0f8abe]/10 hover:to-[#0f8abe]/5 hover:text-[#0f8abe] w-full text-left transition-all duration-300 group/item"
                     >
-                      <img src={khFlag} alt="Khmer" className="w-5 h-3.5 mr-2" />
-                      Khmer
+                      <img src={khFlag} alt="Khmer" className="w-6 h-4 mr-3 rounded-sm shadow-sm" />
+                      <span className="font-medium">Khmer</span>
                     </button>
                   </div>
                 </div>
@@ -314,7 +322,7 @@ function Nav() {
           } ${mobileMenuBg}`}
         >
           <div className="px-4 pb-4">
-            <div className="flex flex-col space-y-2">
+            <div className="flex flex-col space-y-2 text-lg">
               <Link
                 to="/"
                 onClick={() => setMenuActive(false)}
