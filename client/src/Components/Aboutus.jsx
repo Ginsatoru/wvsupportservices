@@ -285,7 +285,7 @@ const AboutUs = () => {
                 style={{ transitionDelay: `${index * 100}ms` }}
               >
                 <div className="p-8">
-                  <div className="w-16 h-16 rounded-full bg-gradient-to-br from-[#0f8abe] to-[#0f8abe] flex items-center justify-center text-white mb-6">
+                  <div className="w-14 h-14 rounded-full bg-gradient-to-br from-[#0f8abe] to-[#0f8abe] flex items-center justify-center text-white mb-6">
                     {item.icon}
                   </div>
                   <h3 className="text-xl font-bold text-gray-800 mb-3">

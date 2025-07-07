@@ -24,9 +24,9 @@ const MicrosoftLogo = () => (
     className="h-12 w-auto"
   />
 );
-const FirebaseLogo = () => (
+const XeroLogo = () => (
   <img
-    src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/0b/New_Firebase_logo.svg/1200px-New_Firebase_logo.svg.png"
+    src="https://images.icon-icons.com/2699/PNG/512/xero_logo_icon_167949.png"
     alt="firebase"
     className="h-12 w-auto"
   />
@@ -80,6 +80,7 @@ const Partners = () => {
     <StripeLogo key="stripe" />,
     <MYOBLogo key="myob" />,
     <EpsonLogo key="cloudflare" />,
+    <XeroLogo key="xero" />,
   ];
 
   return (
