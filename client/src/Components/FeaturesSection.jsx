@@ -97,11 +97,9 @@ export default function FeaturesSection() {
           <img className="card-img big" src={Success} alt="Success Story" />
           <h2>Read Our Success Story for Inspiration</h2>
           <p>
-            Apart from the noise of digital chaos and fleeting promises, WV
-            Support stands as a beacon of trust—delivering real solutions with
-            care, precision, and seamless service. From complex systems to
-            everyday tech fixes, we bridge the gap between technology and trust
-            in a rapidly changing digital world.
+            WV Support cuts through digital noise—delivering trusted, seamless
+            solutions with care and precision. From complex systems to everyday
+            fixes, we bridge technology and trust.
           </p>
           <p>
             On her way, she found a ticket. It warned that in support, messages

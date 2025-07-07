@@ -140,7 +140,7 @@ const Team = () => {
     <div className="bg-white">
       <div
         ref={sectionRef}
-        className={`w-full max-w-[1325px] mx-auto py-12 md:py-16 transition-all duration-300 ease-in-out ${
+        className={`w-full max-w-[1580px] mx-auto py-12 md:py-16 transition-all duration-300 ease-in-out ${
           isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-12"
         }`}
       >

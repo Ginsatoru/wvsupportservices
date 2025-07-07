@@ -1,308 +1,136 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import styled, { keyframes } from "styled-components";
 import { useTranslation } from "react-i18next";
 import "../Components/i18n";
-import imageSrc from "./Images/mainBack.jpg"
+import heroBg from "./Images/hero.png";
 
-// Animations
-const slideIn = keyframes`
-  from {
-    transform: translateX(-50px);
-    opacity: 0;
-  }
-  to {
-    transform: translateX(0);
-    opacity: 1;
-  }
-`;
-
-const shine = keyframes`
-  0% {
-    transform: translateX(-100%) translateY(-100%) rotate(30deg);
-  }
-  80% {
-    transform: translateX(100%) translateY(100%) rotate(30deg);
-  }
-  100% {
-    transform: translateX(100%) translateY(100%) rotate(30deg);
-  }
-`;
-
-// Main container
-const HeroContainer = styled.div`
-  background-color: white;
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 2rem 0;
-`;
-
-// Content wrapper
-const HeroSection = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  width: 80%;
-  margin: 0 auto;
-  min-height: 80vh;
-
-  @media (max-width: 1024px) {
-    flex-direction: column;
-    width: 90%;
-    min-height: auto;
-  }
-`;
-
-const LeftContent = styled.div`
-  width: 50%;
-  display: flex;
-  flex-direction: column;
-
-  @media (max-width: 1431px) {
-    transform: scale(0.92);
-    transform-origin: top left;
-  }
-
-  @media (max-width: 1024px) {
-    width: 100%;
-    align-items: center;
-    text-align: center;
-    transform: none;
-  }
-`;
-
-// Right image section
-const RightContent = styled.div`
-  width: 55%;
-  display: flex;
-  justify-content: center;
-  position: relative;
-  overflow: hidden;
-  border-radius: 1rem;
-
-  @media (max-width: 1431px) {c
-    transform: scale(1.1);
-    transform-origin: botto left;
-  }
-
-  @media (max-width: 1024px) {
-    width: 100%;
-    order: -1;
-    margin-bottom: 3rem;
-  }
-`;
-
-const ImageContainer = styled.div`
-  position: relative;
-  width: 100%;
-  max-width: 50rem;
-  animation: ${slideIn} 0.6s ease-in-out forwards;
-  overflow: hidden;
-  border-radius: 1rem;
-  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1),
-    0 10px 10px -5px rgba(0, 0, 0, 0.04);
-
-  img {
-    width: 100%;
-    height: auto;
-    display: block;
-    position: relative;
-    z-index: 1;
-    border-radius: 1rem;
-  }
-`;
-
-const ImageShine = styled.div`
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 120%;
-  height: 180%;
-  background: linear-gradient(
-    120deg,
-    rgba(255, 255, 255, 0) 30%,
-    rgba(255, 255, 255, 0.8) 50%,
-    rgba(255, 255, 255, 0) 70%
-  );
-  animation: ${shine} 5s infinite;
-  z-index: 2;
-  transform: translateX(-100%) translateY(-100%) rotate(30deg);
-`;
-
-// Title with special styling for "Welcome"
-const Title = styled.h1`
-  text-align: left;
-  font-size: 3.5rem;
-  font-weight: 700;
-  animation: ${slideIn} 0.9s ease-out forwards;
-  line-height: 1.2;
-  margin-bottom: 1rem;
-  width: 80%;
-
-  span.company {
-    color: #52514a;
-    display: block;
-    font-size: 2.5rem;
-    background: #0f8abe;
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
-  }
-
-  @media (max-width: 1200px) {
-    font-size: 3rem;
-
-    span.welcome {
-      font-size: 3.5rem;
-    }
-
-    span.company {
-      font-size: 2.2rem;
-    }
-  }
-
-  @media (max-width: 768px) {
-    font-size: 2.2rem;
-    text-align: center;
-
-    span.welcome {
-      font-size: 2.8rem;
-    }
-
-    span.company {
-      font-size: 1.8rem;
-    }
-  }
-
-  @media (max-width: 480px) {
-    font-size: 1.8rem;
-
-    span.welcome {
-      font-size: 2.2rem;
-    }
-
-    span.company {
-      font-size: 1.5rem;
-    }
-  }
-`;
-
-// Subtitle text
-const Subtitle = styled.p`
-  text-align: left;
-  line-height: 1.6;
-  animation: ${slideIn} 0.8s ease-out forwards;
-  color: #4a5568;
-  font-size: 1.1rem;
-  margin-bottom: 1rem;
-  max-width: 80%;
-
-  @media (max-width: 1024px) {
-    text-align: center;
-    max-width: 100%;
-    font-size: 1rem;
-  }
-
-  @media (max-width: 768px) {
-    font-size: 0.95rem;
-  }
-`;
-
-// Button container
-const ButtonGroup = styled.div`
-  display: flex;
-  gap: 1rem;
-  margin-top: 1rem;
-
-  @media (max-width: 768px) {
-    flex-direction: column;
-    width: 100%;
-  }
-`;
-
-// Base button styles
-const Button = styled.button`
-  padding: 8px 28px;
-  font-size: 1rem;
-  border-radius: 8px;
-  cursor: pointer;
-  position: relative;
-  overflow: hidden;
-  font-weight: 600;
-  border: none;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-
-  // Remove or comment this if transform conflicts
-  // animation: ${slideIn} 0.7s ease-out forwards;
-
-  &:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
-  }
-
-  &:active {
-    transform: translateY(1px);
-  }
-
-  @media (max-width: 768px) {
-    width: 100%;
-    padding: 14px 28px;
-  }
-`;
-
-// Learn More button
-const LearnMoreButton = styled(Button)`
-  background: #0f8abe;
-  color: white;
-
-  &:hover {
-    background-color: #0f8abe;
-  }
-`;
-
-// Contact button
-const ContactButton = styled(Button)`
-  background: white;
-  color: #0f8abe;
-  border: 2px solid #0f8abe;
-
-  &:hover {
-    background: rgba(15, 138, 190, 0.05);
-  }
-`;
-
-const HeroComponent = ({}) => {
+const HeroComponent = () => {
   const navigate = useNavigate();
   const { t } = useTranslation();
 
   return (
-    <HeroContainer>
-      <HeroSection>
-        <LeftContent>
-          <Title>
-            <span className="company">WV Support Services Cambodia</span>
-          </Title>
-          <Subtitle>{t("subtitle")}</Subtitle>
-          <ButtonGroup>
-            <LearnMoreButton onClick={() => navigate("/Services")}>
+    <section className="relative w-full h-screen min-h-[600px] overflow-hidden">
+      {/* Optimized Background Image */}
+      <div className="absolute inset-0 bg-gray-900 z-0">
+        <img
+          src={heroBg}
+          alt="IT Support Services"
+          className="w-full h-full object-cover opacity-90"
+          loading="eager"
+        />
+        <div className="absolute inset-0 bg-black/50" />
+      </div>
+
+      {/* Content */}
+      <div className="relative z-10 h-full flex items-center max-w-7xl mx-auto px-4 sm:px-6 lg:px-2">
+        <div className="max-w-2xl text-white px-4 sm:px-2">
+          <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-3 sm:mb-4 animate-slide-up">
+            <span className="text-[#0f8abe]">WV Support</span> Services Cambodia
+          </h1>
+          
+          <p className="text-base sm:text-lg md:text-xl text-gray-200 mb-6 sm:mb-8 animate-slide-up delay-100">
+            {t("subtitle")}
+          </p>
+
+          <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 animate-slide-up delay-200">
+            <button
+              onClick={() => navigate("/Services")}
+              className="cta-primary px-4 py-2 sm:px-6 sm:py-3 text-sm sm:text-base"
+            >
               {t("LearnMore")}
-            </LearnMoreButton>
-            <ContactButton onClick={() => navigate("/contact")}>
+            </button>
+            <button
+              onClick={() => navigate("/contact")}
+              className="cta-secondary px-4 py-2 sm:px-6 sm:py-3 text-sm sm:text-base"
+            >
               {t("get")}
-            </ContactButton>
-          </ButtonGroup>
-        </LeftContent>
-        <RightContent>
-          <ImageContainer>
-            <img src={imageSrc} alt="IT Support Services in Cambodia" />
-            <ImageShine />
-          </ImageContainer>
-        </RightContent>
-      </HeroSection>
-    </HeroContainer>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      {/* Custom styles */}
+      <style jsx global>{`
+        .shine-effect {
+          position: absolute;
+          top: -50%;
+          left: -50%;
+          width: 200%;
+          height: 200%;
+          background: linear-gradient(
+            to bottom right,
+            rgba(255, 255, 255, 0) 45%,
+            rgba(255, 255, 255, 0.15) 50%,
+            rgba(255, 255, 255, 0) 55%
+          );
+          transform: rotate(30deg);
+          animation: shine 5s infinite;
+        }
+        
+        @keyframes shine {
+          0% { transform: rotate(30deg) translate(-30%, -30%); }
+          100% { transform: rotate(30deg) translate(30%, 30%); }
+        }
+        
+        @keyframes slide-up {
+          0% { opacity: 0; transform: translateY(20px); }
+          100% { opacity: 1; transform: translateY(0); }
+        }
+        
+        .animate-slide-up {
+          animation: slide-up 0.8s ease-out forwards;
+        }
+        
+        .delay-100 { animation-delay: 0.1s; }
+        .delay-200 { animation-delay: 0.2s; }
+        
+        .cta-primary {
+          background: #0f8abe;
+          color: white;
+          border-radius: 0.375rem;
+          font-weight: 600;
+          transition: all 0.3s ease;
+          box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          text-align: center;
+          white-space: nowrap;
+        }
+        
+        .cta-primary:hover {
+          background: #0d79a8;
+          transform: translateY(-2px);
+          box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+        }
+        
+        .cta-secondary {
+          background: rgba(255, 255, 255, 0.1);
+          color: white;
+          border-radius: 0.375rem;
+          font-weight: 600;
+          transition: all 0.3s ease;
+          backdrop-filter: blur(4px);
+          border: 1px solid rgba(255, 255, 255, 0.2);
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          text-align: center;
+          white-space: nowrap;
+        }
+        
+        .cta-secondary:hover {
+          background: rgba(255, 255, 255, 0.2);
+          transform: translateY(-2px);
+        }
+
+        @media (max-width: 640px) {
+          .cta-primary, .cta-secondary {
+            width: 100%;
+          }
+        }
+      `}</style>
+    </section>
   );
 };
 
