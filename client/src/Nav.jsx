@@ -13,6 +13,7 @@ function Nav() {
   const [pagesDropdownActive, setPagesDropdownActive] = useState(false);
   const [languageDropdownActive, setLanguageDropdownActive] = useState(false);
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
+  const [isTablet, setIsTablet] = useState(window.innerWidth > 768 && window.innerWidth <= 1024);
   const [isScrolled, setIsScrolled] = useState(false);
   const { t, i18n } = useTranslation();
   const [currentLang, setCurrentLang] = useState("en");
@@ -30,7 +31,9 @@ function Nav() {
     setCurrentLang(savedLang);
 
     const handleResize = () => {
-      setIsMobile(window.innerWidth <= 768);
+      const width = window.innerWidth;
+      setIsMobile(width <= 768);
+      setIsTablet(width > 768 && width <= 1024);
     };
 
     window.addEventListener("scroll", handleScroll);
@@ -38,6 +41,7 @@ function Nav() {
 
     // Initialize scroll state
     handleScroll();
+    handleResize();
 
     return () => {
       window.removeEventListener("scroll", handleScroll);
@@ -52,14 +56,14 @@ function Nav() {
   };
 
   const togglePagesDropdown = (e) => {
-    if (!isMobile) return;
+    if (!isMobile && !isTablet) return;
     e.preventDefault();
     setPagesDropdownActive(!pagesDropdownActive);
     setLanguageDropdownActive(false);
   };
 
   const toggleLanguageDropdown = (e) => {
-    if (!isMobile) return;
+    if (!isMobile && !isTablet) return;
     e.preventDefault();
     setLanguageDropdownActive(!languageDropdownActive);
     setPagesDropdownActive(false);
@@ -116,8 +120,8 @@ function Nav() {
   return (
     <>
       <nav className={getNavbarClasses()}>
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8 ">
-          <div className="flex justify-between items-center h-16 md:h-20 md:max-w-9xl mx-auto ">
+        <div className="w-full px-4 sm:px-6 lg:px-8">
+          <div className="flex justify-between items-center h-16 md:h-20 lg:h-24 mx-auto w-full lg:w-4/5 xl:w-4/5 2xl:w-4/5">
             {/* Logo */}
             <div className="flex items-center space-x-2">
               <Link
@@ -129,13 +133,13 @@ function Nav() {
                   <img
                     src={settings.logo}
                     alt={settings.companyName || "Company Logo"}
-                    className={`h-5 sm:h-7 md:h-8 transition-all duration-300 ${
+                    className={`h-5 sm:h-6 md:h-7 lg:h-8 xl:h-9 transition-all duration-300 ${
                       isHomePage && !isScrolled ? "opacity-90" : "opacity-100"
                     } group-hover:scale-105`}
                   />
                 ) : (
                   <div
-                    className={`flex items-center justify-center h-10 w-10 rounded-full ${
+                    className={`flex items-center justify-center h-8 w-8 sm:h-9 sm:w-9 md:h-10 md:w-10 lg:h-11 lg:w-11 rounded-full ${
                       isHomePage && !isScrolled ? "bg-white" : "bg-white"
                     } group-hover:scale-105 transition-transform duration-300`}
                   >
@@ -144,22 +148,22 @@ function Nav() {
                         isHomePage && !isScrolled
                           ? "text-[#0f8abe]"
                           : "text-[#0f8abe]"
-                      } font-bold text-lg`}
+                      } font-bold text-sm sm:text-base md:text-lg lg:text-xl`}
                     >
                       {settings?.companyName?.charAt(0) || ""}
                     </span>
                   </div>
                 )}
                 <h3
-                  className={`ml-2 text-base sm:text-lg md:text-2xl font-semibold ${textColor} transition-colors duration-300`}
+                  className={`ml-2 text-sm sm:text-base md:text-lg lg:text-xl xl:text-2xl font-semibold ${textColor} transition-colors duration-300`}
                 >
                   {settings?.companyName || "WV Support Services Cambodia"}
                 </h3>
               </Link>
             </div>
 
-            {/* Desktop Menu */}
-            <div className="hidden md:flex items-center space-x-2 text-lg ">
+            {/* Desktop Menu - Hidden on tablet and mobile */}
+            <div className="hidden lg:flex items-center space-x-2 xl:space-x-1 text-base lg:text-lg xl:text-xl">
               <Link
                 to="/"
                 className={`font-medium transition-all duration-300 ${textColor} hover:text-white/90 px-3 py-2 rounded-xl hover:bg-white/10`}
@@ -297,8 +301,8 @@ function Nav() {
               </div>
             </div>
 
-            {/* Mobile Menu Button */}
-            <div className="md:hidden">
+            {/* Mobile & Tablet Menu Button */}
+            <div className="lg:hidden">
               <button
                 onClick={toggleMenu}
                 className={`p-2 rounded-md focus:outline-none ${textColor} ${hoverTextColor}`}
@@ -330,18 +334,18 @@ function Nav() {
           </div>
         </div>
 
-        {/* Mobile Menu */}
+        {/* Mobile & Tablet Menu */}
         <div
-          className={`md:hidden transition-all duration-300 ease-in-out overflow-hidden ${
+          className={`lg:hidden transition-all duration-300 ease-in-out overflow-hidden ${
             menuActive ? "max-h-screen opacity-100" : "max-h-0 opacity-0"
           } ${mobileMenuBg}`}
         >
-          <div className="px-4 pb-4">
-            <div className="flex flex-col space-y-2 text-lg">
+          <div className="px-4 pb-4 w-full lg:w-4/5 mx-auto">
+            <div className={`flex flex-col space-y-2 ${isTablet ? 'text-xl' : 'text-lg'}`}>
               <Link
                 to="/"
                 onClick={() => setMenuActive(false)}
-                className={`py-2 px-3 rounded-md transition-colors ${
+                className={`py-3 px-4 rounded-md transition-colors ${
                   isHomePage && !isScrolled
                     ? "text-white hover:bg-white/20"
                     : "text-white hover:bg-white/20"
@@ -352,7 +356,7 @@ function Nav() {
               <Link
                 to="/Contact"
                 onClick={() => setMenuActive(false)}
-                className={`py-2 px-3 rounded-md transition-colors ${
+                className={`py-3 px-4 rounded-md transition-colors ${
                   isHomePage && !isScrolled
                     ? "text-white hover:bg-white/20"
                     : "text-white hover:bg-white/20"
@@ -363,7 +367,7 @@ function Nav() {
               <Link
                 to="/Services"
                 onClick={() => setMenuActive(false)}
-                className={`py-2 px-3 rounded-md transition-colors ${
+                className={`py-3 px-4 rounded-md transition-colors ${
                   isHomePage && !isScrolled
                     ? "text-white hover:bg-white/20"
                     : "text-white hover:bg-white/20"
@@ -374,7 +378,7 @@ function Nav() {
               <Link
                 to="/Aboutus"
                 onClick={() => setMenuActive(false)}
-                className={`py-2 px-3 rounded-md transition-colors ${
+                className={`py-3 px-4 rounded-md transition-colors ${
                   isHomePage && !isScrolled
                     ? "text-white hover:bg-white/20"
                     : "text-white hover:bg-white/20"
@@ -383,11 +387,11 @@ function Nav() {
                 {t("about")}
               </Link>
 
-              {/* Mobile Pages Dropdown */}
+              {/* Mobile & Tablet Pages Dropdown */}
               <div className="relative">
                 <button
                   onClick={togglePagesDropdown}
-                  className={`flex items-center justify-between w-full py-2 px-3 rounded-md transition-colors ${
+                  className={`flex items-center justify-between w-full py-3 px-4 rounded-md transition-colors ${
                     isHomePage && !isScrolled
                       ? "text-white hover:bg-white/20"
                       : "text-white hover:bg-white/20"
@@ -395,7 +399,7 @@ function Nav() {
                 >
                   {t("pages")}
                   <svg
-                    className={`h-4 w-4 transform transition-transform ${
+                    className={`h-5 w-5 transform transition-transform ${
                       pagesDropdownActive ? "rotate-180" : ""
                     }`}
                     fill="none"
@@ -412,14 +416,14 @@ function Nav() {
                 </button>
                 <div
                   className={`overflow-hidden transition-all duration-200 ${
-                    pagesDropdownActive ? "max-h-40" : "max-h-0"
+                    pagesDropdownActive ? "max-h-60" : "max-h-0"
                   }`}
                 >
-                  <div className="pl-4 py-1 space-y-1">
+                  <div className={`pl-4 py-1 space-y-1 ${isTablet ? 'text-lg' : 'text-base'}`}>
                     <Link
                       to="/Project"
                       onClick={() => setMenuActive(false)}
-                      className={`block py-2 px-3 rounded-md transition-colors ${
+                      className={`block py-3 px-4 rounded-md transition-colors ${
                         isHomePage && !isScrolled
                           ? "text-white hover:bg-white/20"
                           : "text-white hover:bg-white/20"
@@ -430,7 +434,7 @@ function Nav() {
                     <Link
                       to="/Support"
                       onClick={() => setMenuActive(false)}
-                      className={`block py-2 px-3 rounded-md transition-colors ${
+                      className={`block py-3 px-4 rounded-md transition-colors ${
                         isHomePage && !isScrolled
                           ? "text-white hover:bg-white/20"
                           : "text-white hover:bg-white/20"
@@ -441,7 +445,7 @@ function Nav() {
                     <Link
                       to="/Whoweare"
                       onClick={() => setMenuActive(false)}
-                      className={`block py-2 px-3 rounded-md transition-colors ${
+                      className={`block py-3 px-4 rounded-md transition-colors ${
                         isHomePage && !isScrolled
                           ? "text-white hover:bg-white/20"
                           : "text-white hover:bg-white/20"
@@ -453,11 +457,11 @@ function Nav() {
                 </div>
               </div>
 
-              {/* Mobile Language Dropdown - Updated Style */}
+              {/* Mobile & Tablet Language Dropdown */}
               <div className="relative">
                 <button
                   onClick={toggleLanguageDropdown}
-                  className={`flex items-center justify-between w-full py-2 px-3 rounded-md transition-colors ${
+                  className={`flex items-center justify-between w-full py-3 px-4 rounded-md transition-colors ${
                     isHomePage && !isScrolled
                       ? "text-white hover:bg-white/20"
                       : "text-white hover:bg-white/20"
@@ -468,19 +472,19 @@ function Nav() {
                       <img
                         src={enFlag}
                         alt="English"
-                        className="w-5 h-3.5 mr-2"
+                        className={`${isTablet ? 'w-6 h-4' : 'w-5 h-3.5'} mr-2`}
                       />
                     ) : (
                       <img
                         src={khFlag}
                         alt="Khmer"
-                        className="w-5 h-3.5 mr-2"
+                        className={`${isTablet ? 'w-6 h-4' : 'w-5 h-3.5'} mr-2`}
                       />
                     )}
                     <span>{t("Languages")}</span>
                   </div>
                   <svg
-                    className={`h-4 w-4 transform transition-transform ${
+                    className={`h-5 w-5 transform transition-transform ${
                       languageDropdownActive ? "rotate-180" : ""
                     }`}
                     fill="none"
@@ -500,10 +504,10 @@ function Nav() {
                     languageDropdownActive ? "max-h-40" : "max-h-0"
                   }`}
                 >
-                  <div className="pl-4 py-1 space-y-1">
+                  <div className={`pl-4 py-1 space-y-1 ${isTablet ? 'text-lg' : 'text-base'}`}>
                     <button
                       onClick={() => changeLanguage("en")}
-                      className={`flex items-center w-full py-2 px-3 rounded-md transition-colors ${
+                      className={`flex items-center w-full py-3 px-4 rounded-md transition-colors ${
                         isHomePage && !isScrolled
                           ? "text-white hover:bg-white/20"
                           : "text-white hover:bg-white/20"
@@ -512,13 +516,13 @@ function Nav() {
                       <img
                         src={enFlag}
                         alt="English"
-                        className="w-5 h-3.5 mr-2"
+                        className={`${isTablet ? 'w-6 h-4' : 'w-5 h-3.5'} mr-2`}
                       />
                       English
                     </button>
                     <button
                       onClick={() => changeLanguage("km")}
-                      className={`flex items-center w-full py-2 px-3 rounded-md transition-colors ${
+                      className={`flex items-center w-full py-3 px-4 rounded-md transition-colors ${
                         isHomePage && !isScrolled
                           ? "text-white hover:bg-white/20"
                           : "text-white hover:bg-white/20"
@@ -527,7 +531,7 @@ function Nav() {
                       <img
                         src={khFlag}
                         alt="Khmer"
-                        className="w-5 h-3.5 mr-2"
+                        className={`${isTablet ? 'w-6 h-4' : 'w-5 h-3.5'} mr-2`}
                       />
                       Khmer
                     </button>

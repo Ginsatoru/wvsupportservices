@@ -13,18 +13,27 @@ const Careers = () => {
       <section className="careers-intro">
         <h2>Why Work With Us?</h2>
         <p>
-          At WV Support Services Cambodia, we believe in creativity, collaboration, and growth. 
-          We are passionate about building a team that feels like family and achieving remarkable things together.
+          At WV Support Services Cambodia, we believe in creativity,
+          collaboration, and growth. We are passionate about building a team
+          that feels like family and achieving remarkable things together.
         </p>
       </section>
 
       <section className="careers-values">
         <h2>Our Values</h2>
         <ul>
-          <li><strong>Innovation:</strong> Always improving and embracing change.</li>
-          <li><strong>Integrity:</strong> Doing the right thing, always.</li>
-          <li><strong>Teamwork:</strong> Working together to achieve greatness.</li>
-          <li><strong>Excellence:</strong> Delivering quality without compromise.</li>
+          <li>
+            <strong>Innovation:</strong> Always improving and embracing change.
+          </li>
+          <li>
+            <strong>Integrity:</strong> Doing the right thing, always.
+          </li>
+          <li>
+            <strong>Teamwork:</strong> Working together to achieve greatness.
+          </li>
+          <li>
+            <strong>Excellence:</strong> Delivering quality without compromise.
+          </li>
         </ul>
       </section>
 
@@ -32,9 +41,11 @@ const Careers = () => {
         <h2>Open Positions</h2>
 
         <div className="position-card">
-          <h3>Frontend Developer</h3>
+          <h3>Customer Support Specialist</h3>
           <p>
-            Seeking a creative React.js developer with a strong eye for design and attention to detail.
+            Seeking a proactive customer support specialist with excellent
+            communication skills, problem-solving abilities, and a passion for
+            helping clients succeed.
           </p>
           <button>Apply Now</button>
         </div>
@@ -42,7 +53,8 @@ const Careers = () => {
         <div className="position-card">
           <h3>Backend Developer</h3>
           <p>
-            Looking for a Node.js expert who loves building scalable and secure APIs.
+            Looking for a Node.js expert who loves building scalable and secure
+            APIs.
           </p>
           <button>Apply Now</button>
         </div>
@@ -50,7 +62,8 @@ const Careers = () => {
         <div className="position-card">
           <h3>UI/UX Designer</h3>
           <p>
-            Searching for a talented designer to craft beautiful, user-centered experiences.
+            Searching for a talented designer to craft beautiful, user-centered
+            experiences.
           </p>
           <button>Apply Now</button>
         </div>
@@ -58,14 +71,18 @@ const Careers = () => {
         <div className="position-card">
           <h3>Marketing Specialist</h3>
           <p>
-            Seeking a marketing wizard to help us grow and engage with the world.
+            Seeking a marketing wizard to help us grow and engage with the
+            world.
           </p>
           <button>Apply Now</button>
         </div>
       </section>
 
       <footer className="careers-footer">
-        <p>Don't see the right fit? <a href="mailto:support@aaapos.com">Send us your Resume!</a></p>
+        <p>
+          Don't see the right fit?{" "}
+          <a href="mailto:support@aaapos.com">Send us your Resume!</a>
+        </p>
       </footer>
     </div>
   );

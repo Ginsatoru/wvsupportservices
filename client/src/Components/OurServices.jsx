@@ -1,337 +1,168 @@
 import React from "react";
-import { useNavigate } from "react-router-dom";
-import styled, { keyframes } from "styled-components";
-import { useInView } from "react-intersection-observer"; // Import useInView
-import support from "./Images/support.png";
-import remote from "./Images/remote.png";
-import software from "./Images/software.png";
-import integration from "./Images/integration.png";
-import networking from "./Images/networking.png";
-import training from "./Images/training.png";
-import { useTranslation } from "react-i18next";
-import "../Components/i18n";
+import { useInView } from "react-intersection-observer";
 
-// Slide-in animation
-const slideIn = keyframes`
-  from {
-    opacity: 0;
-    transform: translateY(30px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-`;
-
-const Section = styled.section`
-  width: 100%;
-  min-height: 95vh;
-  background-color: white;
-  padding: 20px 0;
-
-  @media (max-width: 1629px) {
-    min-height: 110vh;
-    padding: 10px 0;
-  }
-`;
-
-const MainText = styled.div`
-  margin: 0 auto;
-  text-align: center;
-  width: 90%;
-
-  h2 {
-    padding-top: 3%;
-    animation: ${slideIn} 0.6s ease-in-out forwards;
-    margin-bottom: 10px;
-    color: #52514a;
-    font-size: 15px;
-
-    @media (max-width: 1440px) {
-      font-size: 20px;
-    }
-    @media (max-width: 1024px) {
-      font-size: 18px;
-    }
-    @media (max-width: 820px) {
-      font-size: 18px;
-    }
-  }
-
-  h1 {
-    animation: ${slideIn} 0.5s ease-in-out forwards;
-    margin-bottom: 12px;
-    font-weight: bold;
-    color: #0f8abe;
-    font-size: 32px;
-
-    @media (max-width: 1440px) {
-      font-size: 30px;
-    }
-    @media (max-width: 1024px) {
-      font-size: 28px;
-    }
-    @media (max-width: 820px) {
-      font-size: 26px;
-    }
-    @media (max-width: 480px) {
-      font-size: 22px;
-    }
-    @media (max-width: 360px) {
-      font-size: 20px;
-    }
-  }
-
-  p {
-    animation: ${slideIn} 0.4s ease-in-out forwards;
-    margin: 0 auto;
-    width: 60%;
-    color: #52514a;
-    font-size: 17px;
-
-    @media (max-width: 1440px) {
-      font-size: 16px;
-      width: 70%;
-    }
-    @media (max-width: 1024px) {
-      font-size: 15px;
-      width: 80%;
-    }
-    @media (max-width: 820px) {
-      font-size: 16px;
-      width: 80%;
-    }
-    @media (max-width: 768px) {
-      width: 100%;
-    }
-    @media (max-width: 480px) {
-      font-size: 14px;
-    }
-  }
-`;
-
-const Cards = styled.div`
-  padding-top: 2%;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 24px;
-  justify-content: center;
-  width: 90%;
-  margin: 0 auto;
-
-  @media (max-width: 1440px) {
-    gap: 20px;
-  }
-  @media (max-width: 1024px) {
-    gap: 16px;
-  }
-  @media (max-width: 820px) {
-    gap: 15px;
-  }
-  @media (max-width: 768px) {
-    gap: 20px;
-  }
-  @media (max-width: 480px) {
-    flex-direction: column;
-    gap: 15px;
-    align-items: center;
-  }
-`;
-
-const Card = styled.div`
-  opacity: 0;
-  transform: translateY(30px);
-  transition: all 0.5s ease;
-  border: solid 1px #52514a1e;
-  border-radius: 8px;
-  width: 28.5%;
-  min-width: 260px;
-  min-height: 200px;
-  color: #52514a;
-  padding: 20px;
-  box-sizing: border-box;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  text-align: left; /* Added to ensure text alignment is left by default */
-
-  &.visible {
-    opacity: 1;
-    transform: translateY(0);
-  }
-
-  &:hover {
-    color: white;
-    background-color: #0f8abe;
-
-    img {
-      filter: brightness(0) invert(1);
-    }
-  }
-
-  @media (max-width: 1440px) {
-    width: 30%;
-  }
-  @media (max-width: 1200px) {
-    width: 32%;
-  }
-  @media (max-width: 1024px) {
-    width: 45%;
-    min-width: 220px;
-    padding: 18px;
-  }
-  @media (max-width: 820px) {
-    width: 45%;
-    padding: 15px;
-  }
-  @media (max-width: 768px) {
-    width: 48%;
-    padding: 20px;
-  }
-  @media (max-width: 600px) {
-    width: 100%;
-    min-width: unset;
-    min-height: 220px;
-    padding: 15px;
-  }
-  @media (max-width: 360px) {
-    min-height: 200px;
-    padding: 15px;
-  }
-`;
-
-const ContentSpace = styled.div`
-  padding-top: 7%;
-  margin: 0 auto;
-  width: 90%;
-  padding: 20px 0;
-  text-align: left; /* Ensure content is left-aligned */
-
-  img {
-    transition: 0.4s ease;
-    filter: brightness(0) saturate(100%) invert(35%) sepia(72%) saturate(569%)
-      hue-rotate(164deg) brightness(94%) contrast(101%);
-    margin-bottom: 15px;
-    width: 3.5rem;
-
-    @media (max-width: 1024px) {
-      max-width: 100px;
-    }
-
-    @media (max-width: 820px) {
-      width: 3rem;
-    }
-
-    @media (max-width: 480px) {
-      width: 3rem;
-    }
-  }
-
-  h1 {
-    font-weight: bold;
-    margin-bottom: 15px;
-    font-size: 20px;
-    text-align: left; /* Ensure heading is left-aligned */
-
-    @media (max-width: 820px) {
-      font-size: 18px;
-    }
-
-    @media (max-width: 768px) {
-      font-size: 18px;
-    }
-
-    @media (max-width: 360px) {
-      font-size: 16px;
-    }
-  }
-
-  p {
-    font-size: 14px;
-    text-align: left; /* Ensure paragraph is left-aligned */
-
-    @media (max-width: 820px) {
-      font-size: 13px;
-    }
-
-    @media (max-width: 360px) {
-      font-size: 11px;
-    }
-  }
-`;
+// Mock images for demonstration - replace with your actual imports
+const mockImages = {
+  pos: "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=400&h=300&fit=crop",
+  webstore:
+    "https://images.unsplash.com/photo-1563013544-824ae1b704d3?w=400&h=300&fit=crop",
+  multistore:
+    "https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=400&h=300&fit=crop",
+  email:
+    "https://images.unsplash.com/photo-1596526131083-e8c633c948d2?w=400&h=300&fit=crop",
+  support:
+    "https://images.unsplash.com/photo-1553877522-43269d4ea984?w=400&h=300&fit=crop",
+  integration:
+    "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=400&h=300&fit=crop",
+};
 
 const OurServices = () => {
-  const navigate = useNavigate();
-  const { t } = useTranslation();
-
   const services = [
     {
-      title: "RetailManager POS Support",
+      title: "Point of Sale (POS) System",
       description:
-        "Fast and efficient remote troubleshooting to resolve software issues and minimize downtime.",
-      image: support,
+        "Comprehensive retail management solution with inventory tracking, sales reporting, and customer management features.",
+      image: mockImages.pos,
     },
     {
-      title: "Remote Troubleshooting",
+      title: "Webstore Manager",
       description:
-        "Quick remote troubleshooting via TeamViewer to resolve issues without on-site visits.",
-      image: remote,
+        "Complete e-commerce platform to manage your online store, products, orders, and customer relationships seamlessly.",
+      image: mockImages.webstore,
     },
     {
-      title: "Software Updates & Maintenance",
+      title: "Multi-Store Management",
       description:
-        "Ensure smooth updates and system maintenance for your RetailManager POS.",
-      image: software,
+        "Centralized management system for multiple retail locations with unified reporting and inventory control.",
+      image: mockImages.multistore,
     },
     {
-      title: "Third-Party Integrations",
+      title: "Email Hosting Services",
       description:
-        "We assist with app integrations to enhance your RetailManager POS experience.",
-      image: integration,
+        "Professional email hosting solutions with custom domains, security features, and reliable uptime for your business.",
+      image: mockImages.email,
     },
     {
-      title: "Networking & Connectivity Support",
+      title: "Technical Support",
       description:
-        "Diagnose and fix network issues to ensure reliable POS operations.",
-      image: networking,
+        "24/7 technical assistance and troubleshooting for all our products with fast response times and expert guidance.",
+      image: mockImages.support,
     },
     {
-      title: "Customer Assistance & Training",
+      title: "System Integration",
       description:
-        "Our team provides guidance and training on RetailManager POS best practices.",
-      image: training,
+        "Seamless integration of all systems and third-party applications to create a unified business management ecosystem.",
+      image: mockImages.integration,
     },
   ];
 
   return (
-    <Section>
-      <MainText>
-        <h2>{t("Best")}</h2>
-        <h1>{t("Our")}</h1>
-        <p>{t("Servicesub")}</p>
-      </MainText>
+    <section className="w-full min-h-screen bg-white py-12 px-4 sm:px-6 lg:px-8">
+      {/* Header Section */}
+      <div className="max-w-7xl mx-auto text-center mb-16">
+        <h2 className="text-slate-600 text-xs sm:text-sm md:text-base font-medium tracking-wide uppercase mb-3 animate-fade-in">
+          Best Solutions
+        </h2>
+        <h1
+          className="text-2xl sm:text-3xl md:text-4xl lg:text-[2rem] xl:text-[2.25rem] font-bold mb-6 animate-fade-in-up"
+          style={{ color: "#0f8abe" }}
+        >
+          Our Services
+        </h1>
+        <p className="text-slate-600 text-sm sm:text-base md:text-lg lg:text-base xl:text-base max-w-3xl mx-auto leading-relaxed animate-fade-in-delay">
+          Complete business management solutions including POS systems, webstore
+          management, multi-store operations, and professional email hosting.
+        </p>
+      </div>
 
-      <Cards>
-        {services.map((service, index) => {
-          const [ref, inView] = useInView({
-            triggerOnce: true,
-            threshold: 0.2,
-          });
+      {/* Cards Grid */}
+      <div className="max-w-7xl mx-auto">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
+          {services.map((service, index) => {
+            const [ref, inView] = useInView({
+              triggerOnce: true,
+              threshold: 0.2,
+            });
 
-          return (
-            <Card
-              key={index}
-              ref={ref}
-              className={inView ? "visible" : ""}
-            >
-              <ContentSpace>
-                <img src={service.image} alt={service.title} />
-                <h1>{service.title}</h1>
-                <p>{service.description}</p>
-              </ContentSpace>
-            </Card>
-          );
-        })}
-      </Cards>
-    </Section>
+            return (
+              <div
+                key={index}
+                ref={ref}
+                className={`
+                  group relative bg-white rounded-xl shadow-md border border-slate-200
+                  transition-all duration-500 ease-out
+                  hover:shadow-lg
+                  ${
+                    inView
+                      ? "opacity-100 translate-y-0"
+                      : "opacity-0 translate-y-8"
+                  }
+                `}
+                style={{
+                  transitionDelay: `${index * 150}ms`,
+                }}
+              >
+                {/* Image Container */}
+                <div className="relative overflow-hidden rounded-t-xl">
+                  <img
+                    src={service.image}
+                    alt={service.title}
+                    className="w-full h-48 sm:h-52 md:h-48 lg:h-52 object-cover transition-all duration-500 ease-out group-hover:scale-105"
+                  />
+                </div>
+
+                {/* Content Container */}
+                <div className="p-6 sm:p-8">
+                  <h3 className="text-lg sm:text-xl md:text-2xl font-bold text-slate-800 mb-4 transition-all duration-500 ease-out group-hover:text-[#0f8abe]">
+                    {service.title}
+                  </h3>
+                  <p className="text-slate-600 text-sm sm:text-base leading-relaxed">
+                    {service.description}
+                  </p>
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      </div>
+
+      <style jsx>{`
+        @keyframes fade-in {
+          from {
+            opacity: 0;
+            transform: translateY(20px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+
+        @keyframes fade-in-up {
+          from {
+            opacity: 0;
+            transform: translateY(30px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+
+        .animate-fade-in {
+          animation: fade-in 1s ease-out forwards;
+        }
+
+        .animate-fade-in-up {
+          animation: fade-in-up 1s ease-out forwards;
+        }
+
+        .animate-fade-in-delay {
+          animation: fade-in 1s ease-out 0.3s forwards;
+          opacity: 0;
+        }
+      `}</style>
+    </section>
   );
 };
 

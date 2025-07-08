@@ -1,7 +1,10 @@
 import React from 'react';
 import './WhoWeAre.css';
+import { useNavigate } from "react-router-dom";
 
 const WhoWeAre = () => {
+  const navigate = useNavigate(); // ✅ Make sure to call this here
+
   return (
     <section className="who-wrapper">
       <div className="hero-banner">
@@ -50,10 +53,12 @@ const WhoWeAre = () => {
         <div className="cta-block">
           <h2>Let’s Build Something Meaningful</h2>
           <p>
-            Whether you're a dreamer, a doer, or a partner — we’d love to connect. Join us as we create a future fueled by creativity,
+            Whether you're a dreamer, a doer, or a partner, we’d love to connect. Join us as we create a future fueled by creativity,
             technology, and heart.
           </p>
-          <a href="/contact" className="cta-button">Get In Touch</a>
+          <a onClick={() => navigate("/contact")} className="cta-button" role="button" tabIndex={0}>
+            Get In Touch
+          </a>
         </div>
       </div>
     </section>
