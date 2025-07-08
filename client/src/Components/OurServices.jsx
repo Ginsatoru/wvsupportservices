@@ -118,7 +118,6 @@ const Cards = styled.div`
   justify-content: center;
   width: 90%;
   margin: 0 auto;
-  cursor: pointer;
 
   @media (max-width: 1440px) {
     gap: 20px;
@@ -269,42 +268,36 @@ const OurServices = () => {
       description:
         "Fast and efficient remote troubleshooting to resolve software issues and minimize downtime.",
       image: support,
-      path: "/pos",
     },
     {
       title: "Remote Troubleshooting",
       description:
         "Quick remote troubleshooting via TeamViewer to resolve issues without on-site visits.",
       image: remote,
-      path: "/Remote",
     },
     {
       title: "Software Updates & Maintenance",
       description:
         "Ensure smooth updates and system maintenance for your RetailManager POS.",
       image: software,
-      path: "/software",
     },
     {
       title: "Third-Party Integrations",
       description:
         "We assist with app integrations to enhance your RetailManager POS experience.",
       image: integration,
-      path: "/integrations",
     },
     {
       title: "Networking & Connectivity Support",
       description:
         "Diagnose and fix network issues to ensure reliable POS operations.",
       image: networking,
-      path: "/networking",
     },
     {
       title: "Customer Assistance & Training",
       description:
         "Our team provides guidance and training on RetailManager POS best practices.",
       image: training,
-      path: "/training",
     },
   ];
 
@@ -328,7 +321,6 @@ const OurServices = () => {
               key={index}
               ref={ref}
               className={inView ? "visible" : ""}
-              onClick={() => navigate(service.path)}
             >
               <ContentSpace>
                 <img src={service.image} alt={service.title} />

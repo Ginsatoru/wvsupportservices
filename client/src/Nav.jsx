@@ -129,7 +129,7 @@ function Nav() {
                   <img
                     src={settings.logo}
                     alt={settings.companyName || "Company Logo"}
-                    className={`h-8 md:h-7 transition-all duration-300 ${
+                    className={`h-5 sm:h-7 md:h-8 transition-all duration-300 ${
                       isHomePage && !isScrolled ? "opacity-90" : "opacity-100"
                     } group-hover:scale-105`}
                   />
@@ -151,7 +151,7 @@ function Nav() {
                   </div>
                 )}
                 <h3
-                  className={`ml-2 text-lg md:text-2xl font-semibold ${textColor} transition-colors duration-300`}
+                  className={`ml-2 text-base sm:text-lg md:text-2xl font-semibold ${textColor} transition-colors duration-300`}
                 >
                   {settings?.companyName || "WV Support Services Cambodia"}
                 </h3>
