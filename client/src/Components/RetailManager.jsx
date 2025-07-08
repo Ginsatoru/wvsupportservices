@@ -19,7 +19,7 @@ const TroubleshootingExperience = () => {
   return (
     <div className="font-['Montserrat'] bg-gradient-to-br from-slate-50 to-blue-50 min-h-screen">
       {/* Compact Hero Section */}
-      <section className="relative bg-white shadow-md rounded-b-3xl overflow-hidden">
+      <section className="relative bg-white shadow-md rounded-b-xl overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-r from-[#0f8abe]/5 to-[#0f8abe]/10"></div>
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-12">
           <div className="text-center">
@@ -37,7 +37,7 @@ const TroubleshootingExperience = () => {
                 href="https://www.aaapos.com/support/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-block bg-[#0f8abe] text-white px-4 sm:px-5 py-2 sm:py-2.5 rounded-lg sm:rounded-xl font-semibold text-sm sm:text-base hover:bg-[#0d7bb5] hover:scale-105 transition-all duration-300 shadow-md hover:shadow-lg"
+                className="inline-block bg-[#0f8abe] text-white px-4 sm:px-5 py-2 sm:py-2.5 rounded-xl font-semibold text-sm sm:text-base hover:bg-[#0d7bb5] hover:scale-105 transition-all duration-300 shadow-md hover:shadow-lg"
               >
                 Get Support Now
               </a>
@@ -45,7 +45,7 @@ const TroubleshootingExperience = () => {
                 href="https://www.aaapos.com/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-block border-2 border-[#0f8abe] text-[#0f8abe] px-4 sm:px-5 py-2 sm:py-2.5 rounded-lg sm:rounded-xl font-semibold text-sm sm:text-base hover:bg-[#0f8abe] hover:text-white transition-all duration-300"
+                className="inline-block border-2 border-[#0f8abe] text-[#0f8abe] px-4 sm:px-5 py-2 sm:py-2.5 rounded-xl font-semibold text-sm sm:text-base hover:bg-[#0f8abe] hover:text-white transition-all duration-300"
               >
                 Learn More
               </a>
@@ -67,7 +67,7 @@ const TroubleshootingExperience = () => {
               and minimal downtime for your business.
             </p>
             <div className="grid grid-cols-2 gap-3 sm:gap-4">
-              <div className="text-center p-3 sm:p-4 bg-white rounded-lg shadow-md hover:shadow-lg transition-all duration-300">
+              <div className="text-center p-3 sm:p-4 bg-white rounded-xl shadow-md hover:shadow-lg transition-all duration-300">
                 <div className="text-xl sm:text-2xl font-bold text-[#0f8abe] mb-1">
                   25+
                 </div>
@@ -75,7 +75,7 @@ const TroubleshootingExperience = () => {
                   Years Experience
                 </div>
               </div>
-              <div className="text-center p-3 sm:p-4 bg-white rounded-lg shadow-md hover:shadow-lg transition-all duration-300">
+              <div className="text-center p-3 sm:p-4 bg-white rounded-xl shadow-md hover:shadow-lg transition-all duration-300">
                 <div className="text-xl sm:text-2xl font-bold text-[#0f8abe] mb-1">
                   500+
                 </div>
@@ -87,8 +87,8 @@ const TroubleshootingExperience = () => {
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
             <div className="group cursor-pointer">
-              <div className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-all duration-300 group-hover:scale-[1.02]">
-                <div className="h-32 sm:h-40 bg-gray-100 flex items-center justify-center overflow-hidden">
+              <div className="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition-all duration-300 group-hover:scale-[1.02]">
+                <div className="h-32 sm:h-44 bg-gray-100 flex items-center justify-center overflow-hidden">
                   <img
                     src={posSystemImage}
                     alt="RetailManager POS System Interface"
@@ -103,8 +103,8 @@ const TroubleshootingExperience = () => {
               </div>
             </div>
             <div className="group cursor-pointer">
-              <div className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-all duration-300 group-hover:scale-[1.02]">
-                <div className="h-32 sm:h-40 bg-gray-100 flex items-center justify-center overflow-hidden">
+              <div className="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition-all duration-300 group-hover:scale-[1.02]">
+                <div className="h-32 sm:h-44 bg-gray-100 flex items-center justify-center overflow-hidden">
                   <img
                     src={supportTeamImage}
                     alt="Our Expert Support Team"
@@ -125,14 +125,14 @@ const TroubleshootingExperience = () => {
       {/* Expertise Highlight */}
       <section className="bg-white py-12">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="bg-gradient-to-r from-[#0f8abe]/5 to-[#0f8abe]/10 rounded-2xl sm:rounded-3xl p-6 sm:p-8 border-l-4 sm:border-l-8 border-[#0f8abe]">
+          <div className="bg-gradient-to-r from-[#0f8abe]/5 to-[#0f8abe]/10 rounded-xl p-6 sm:p-8 border-l-4 border-[#0f8abe]">
             <div className="grid lg:grid-cols-3 gap-6 items-center">
               <div className="lg:col-span-1">
-                <div className="w-24 h-24 sm:w-28 sm:h-28 bg-[#0f8abe]/20 rounded-full flex items-center justify-center text-[#0f8abe] mx-auto overflow-hidden">
+                <div className="w-24 h-24 sm:w-28 sm:h-28 bg-[#0f8abe]/20 rounded-xl flex items-center justify-center text-[#0f8abe] mx-auto overflow-hidden">
                   <img
                     src={troubleshootingImage}
                     alt="Troubleshooting Expertise"
-                    className="w-full h-full object-cover rounded-full"
+                    className="w-full h-full object-cover rounded-xl"
                   />
                 </div>
               </div>
@@ -220,7 +220,7 @@ const TroubleshootingExperience = () => {
           ].map((service, index) => (
             <div
               key={index}
-              className="bg-white rounded-lg shadow-md p-4 sm:p-5 hover:shadow-lg hover:scale-[1.02] transition-all duration-300 border-t-2 sm:border-t-4 border-[#0f8abe]"
+              className="bg-white rounded-xl shadow-md p-4 sm:p-8 hover:shadow-lg hover:scale-[1.02] transition-all duration-300 border-t-2 border-[#0f8abe]"
             >
               <div className="flex justify-center">{service.icon}</div>
               <h3 className="text-base sm:text-lg font-semibold text-gray-900 mb-2 text-center">
@@ -248,7 +248,7 @@ const TroubleshootingExperience = () => {
           </div>
 
           <div className="mb-8 sm:mb-10">
-            <div className="bg-gradient-to-r from-[#0f8abe]/10 to-[#0f8abe]/20 rounded-lg sm:rounded-xl p-6 text-center">
+            <div className="bg-gradient-to-r from-[#0f8abe]/10 to-[#0f8abe]/20 rounded-xl p-6 text-center">
               <div className="flex justify-center mb-3">
                 <FaTools className="text-4xl sm:text-5xl text-[#0f8abe]" />
               </div>
@@ -293,9 +293,9 @@ const TroubleshootingExperience = () => {
             ].map((step, index) => (
               <div
                 key={index}
-                className="bg-white rounded-lg shadow-md p-4 sm:p-5 hover:shadow-lg transition-all duration-300 relative pt-10 sm:pt-12 border-t-2 sm:border-t-4 border-[#0f8abe]"
+                className="bg-white rounded-xl shadow-md p-4 sm:p-10 hover:shadow-lg transition-all duration-300 relative pt-10 sm:pt-12 border-t-2 border-[#0f8abe]"
               >
-                <div className="absolute -top-4 left-4 w-8 h-8 sm:w-9 sm:h-9 bg-[#0f8abe] text-white rounded-full flex items-center justify-center font-bold text-sm sm:text-base shadow-md">
+                <div className="absolute -top-4 left-4 w-8 h-8 sm:w-9 sm:h-9 bg-[#0f8abe] text-white rounded-xl flex items-center justify-center font-bold text-sm sm:text-base shadow-md">
                   {step.number}
                 </div>
                 <h3 className="text-sm sm:text-base font-semibold text-[#0f8abe] mb-2">
@@ -341,7 +341,7 @@ const TroubleshootingExperience = () => {
           ].map((testimonial, index) => (
             <div
               key={index}
-              className="bg-white rounded-lg shadow-md p-5 sm:p-6 hover:shadow-lg transition-all duration-300 border-l-2 sm:border-l-4 border-[#0f8abe]"
+              className="bg-white rounded-xl shadow-md p-5 sm:p-6 hover:shadow-lg transition-all duration-300 border-l-4 border-[#0f8abe]"
             >
               <div className="flex items-start gap-3 mb-4">
                 <div className="flex text-[#0f8abe] text-base">
@@ -369,7 +369,7 @@ const TroubleshootingExperience = () => {
                 <img
                   src={testimonial.avatar}
                   alt={testimonial.author}
-                  className="w-10 h-10 sm:w-12 sm:h-12 rounded-full object-cover shadow-sm"
+                  className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl object-cover shadow-sm"
                 />
                 <div>
                   <div className="font-semibold text-[#0f8abe] text-sm sm:text-base">
@@ -398,14 +398,14 @@ const TroubleshootingExperience = () => {
           <div className="flex flex-col sm:flex-row gap-3 justify-center">
             <Link
               to="/contact"
-              className="bg-white text-[#0f8abe] px-5 sm:px-6 py-2.5 sm:py-3 rounded-lg font-semibold text-sm sm:text-base hover:bg-gray-100 hover:scale-105 transition-all duration-300 shadow-md hover:shadow-lg inline-block text-center"
+              className="bg-white text-[#0f8abe] px-5 sm:px-6 py-2.5 sm:py-3 rounded-xl font-semibold text-sm sm:text-base hover:bg-gray-100 hover:scale-105 transition-all duration-300 shadow-md hover:shadow-lg inline-block text-center"
             >
               Contact Support Now
             </Link>
           </div>
         </div>
       </section>
-    </div>
+    </div>  
   );
 };
 

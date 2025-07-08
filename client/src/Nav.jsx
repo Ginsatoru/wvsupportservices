@@ -13,7 +13,9 @@ function Nav() {
   const [pagesDropdownActive, setPagesDropdownActive] = useState(false);
   const [languageDropdownActive, setLanguageDropdownActive] = useState(false);
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
-  const [isTablet, setIsTablet] = useState(window.innerWidth > 768 && window.innerWidth <= 1024);
+  const [isTablet, setIsTablet] = useState(
+    window.innerWidth > 768 && window.innerWidth <= 1024
+  );
   const [isScrolled, setIsScrolled] = useState(false);
   const { t, i18n } = useTranslation();
   const [currentLang, setCurrentLang] = useState("en");
@@ -120,8 +122,8 @@ function Nav() {
   return (
     <>
       <nav className={getNavbarClasses()}>
-        <div className="w-full px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center h-16 md:h-20 lg:h-24 mx-auto w-full lg:w-4/5 xl:w-4/5 2xl:w-4/5">
+        <div className="w-full px-4 sm:px-6 lg:px-0">
+          <div className="flex justify-between items-center h-[48px] md:h-[56px] lg:h-[80px] mx-auto w-full lg:w-4/5 xl:w-4/5 2xl:w-4/5">
             {/* Logo */}
             <div className="flex items-center space-x-2">
               <Link
@@ -163,7 +165,7 @@ function Nav() {
             </div>
 
             {/* Desktop Menu - Hidden on tablet and mobile */}
-            <div className="hidden lg:flex items-center space-x-2 xl:space-x-1 text-base lg:text-lg xl:text-xl">
+            <div className="hidden lg:flex items-center space-x-1 xl:space-x-0 text-base lg:text-lg xl:text-xl">
               <Link
                 to="/"
                 className={`font-medium transition-all duration-300 ${textColor} hover:text-white/90 px-3 py-2 rounded-xl hover:bg-white/10`}
@@ -341,7 +343,11 @@ function Nav() {
           } ${mobileMenuBg}`}
         >
           <div className="px-4 pb-4 w-full lg:w-4/5 mx-auto">
-            <div className={`flex flex-col space-y-2 ${isTablet ? 'text-xl' : 'text-lg'}`}>
+            <div
+              className={`flex flex-col space-y-2 ${
+                isTablet ? "text-xl" : "text-lg"
+              }`}
+            >
               <Link
                 to="/"
                 onClick={() => setMenuActive(false)}
@@ -419,7 +425,11 @@ function Nav() {
                     pagesDropdownActive ? "max-h-60" : "max-h-0"
                   }`}
                 >
-                  <div className={`pl-4 py-1 space-y-1 ${isTablet ? 'text-lg' : 'text-base'}`}>
+                  <div
+                    className={`pl-4 py-1 space-y-1 ${
+                      isTablet ? "text-lg" : "text-base"
+                    }`}
+                  >
                     <Link
                       to="/Project"
                       onClick={() => setMenuActive(false)}
@@ -472,13 +482,13 @@ function Nav() {
                       <img
                         src={enFlag}
                         alt="English"
-                        className={`${isTablet ? 'w-6 h-4' : 'w-5 h-3.5'} mr-2`}
+                        className={`${isTablet ? "w-6 h-4" : "w-5 h-3.5"} mr-2`}
                       />
                     ) : (
                       <img
                         src={khFlag}
                         alt="Khmer"
-                        className={`${isTablet ? 'w-6 h-4' : 'w-5 h-3.5'} mr-2`}
+                        className={`${isTablet ? "w-6 h-4" : "w-5 h-3.5"} mr-2`}
                       />
                     )}
                     <span>{t("Languages")}</span>
@@ -504,7 +514,11 @@ function Nav() {
                     languageDropdownActive ? "max-h-40" : "max-h-0"
                   }`}
                 >
-                  <div className={`pl-4 py-1 space-y-1 ${isTablet ? 'text-lg' : 'text-base'}`}>
+                  <div
+                    className={`pl-4 py-1 space-y-1 ${
+                      isTablet ? "text-lg" : "text-base"
+                    }`}
+                  >
                     <button
                       onClick={() => changeLanguage("en")}
                       className={`flex items-center w-full py-3 px-4 rounded-md transition-colors ${
@@ -516,7 +530,7 @@ function Nav() {
                       <img
                         src={enFlag}
                         alt="English"
-                        className={`${isTablet ? 'w-6 h-4' : 'w-5 h-3.5'} mr-2`}
+                        className={`${isTablet ? "w-6 h-4" : "w-5 h-3.5"} mr-2`}
                       />
                       English
                     </button>
@@ -531,7 +545,7 @@ function Nav() {
                       <img
                         src={khFlag}
                         alt="Khmer"
-                        className={`${isTablet ? 'w-6 h-4' : 'w-5 h-3.5'} mr-2`}
+                        className={`${isTablet ? "w-6 h-4" : "w-5 h-3.5"} mr-2`}
                       />
                       Khmer
                     </button>
