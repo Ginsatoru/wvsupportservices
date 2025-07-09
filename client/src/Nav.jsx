@@ -123,7 +123,7 @@ function Nav() {
     <>
       <nav className={getNavbarClasses()}>
         <div className="w-full px-4 sm:px-6 lg:px-0">
-          <div className="flex justify-between items-center h-[48px] md:h-[56px] lg:h-[80px] mx-auto w-full lg:w-4/5 xl:w-4/5 2xl:w-4/5">
+          <div className="flex justify-between items-center h-[52px] md:h-[56px] lg:h-[82px] mx-auto w-full lg:w-[88%] xl:w-[82%] 2xl:w-[1500px]">
             {/* Logo */}
             <div className="flex items-center space-x-2">
               <Link
@@ -135,7 +135,7 @@ function Nav() {
                   <img
                     src={settings.logo}
                     alt={settings.companyName || "Company Logo"}
-                    className={`h-5 sm:h-6 md:h-7 lg:h-8 xl:h-9 transition-all duration-300 ${
+                    className={`h-5 sm:h-6 md:h-7 lg:h-8 xl:h-7 transition-all duration-300 ${
                       isHomePage && !isScrolled ? "opacity-90" : "opacity-100"
                     } group-hover:scale-105`}
                   />
@@ -165,7 +165,7 @@ function Nav() {
             </div>
 
             {/* Desktop Menu - Hidden on tablet and mobile */}
-            <div className="hidden lg:flex items-center space-x-1 xl:space-x-0 text-base lg:text-lg xl:text-xl">
+            <div className="hidden lg:flex items-center space-x-1 xl:space-x-1 text-base lg:text-lg xl:text-lg">
               <Link
                 to="/"
                 className={`font-medium transition-all duration-300 ${textColor} hover:text-white/90 px-3 py-2 rounded-xl hover:bg-white/10`}
@@ -342,9 +342,9 @@ function Nav() {
             menuActive ? "max-h-screen opacity-100" : "max-h-0 opacity-0"
           } ${mobileMenuBg}`}
         >
-          <div className="px-4 pb-4 w-full lg:w-4/5 mx-auto">
+          <div className="px-1 pb-4 w-full lg:w-4/5 mx-auto">
             <div
-              className={`flex flex-col space-y-2 ${
+              className={`flex flex-col space-y-0 ${
                 isTablet ? "text-xl" : "text-lg"
               }`}
             >

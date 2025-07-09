@@ -139,11 +139,13 @@ const Team = () => {
   return (
     <div className="bg-white">
       <div
-        ref={sectionRef}
-        className={`w-full max-w-[1580px] mx-auto py-12 md:py-16 transition-all duration-300 ease-in-out ${
-          isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-12"
-        }`}
-      >
+  ref={sectionRef}
+  className={`w-full mx-auto py-12 md:py-16 transition-all duration-300 ease-in-out
+    max-w-full lg:max-w-[1250px] 2xl:max-w-[1580px]
+    ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-12"}
+  `}
+>
+
         <div className="w-full text-center mb-8 md:mb-10">
           <h1 className="text-2xl sm:text-3xl font-bold text-[#0f8abe] mb-4 font-montserrat">
             Meet Our Team

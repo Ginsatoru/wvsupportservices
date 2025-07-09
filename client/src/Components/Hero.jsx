@@ -27,7 +27,8 @@ const HeroComponent = () => {
       </div>
 
       {/* Content */}
-      <div className="relative z-10 h-full flex items-center max-w-7xl mx-auto px-4 sm:px-6 lg:px-2">
+      <div className="relative z-10 h-full flex items-center max-w-full lg:max-w-[85%] xl:max-w-[84%] 2xl:max-w-7xl mx-auto px-4 sm:px-6 lg:px-2">
+
         <div className="max-w-2xl text-white px-4 sm:px-2">
           <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-3 sm:mb-4 animate-slide-up">
             <span className="text-[#0f8abe]">WV Support</span>
