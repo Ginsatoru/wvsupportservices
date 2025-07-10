@@ -1,19 +1,22 @@
 import React from "react";
 import { useInView } from "react-intersection-observer";
 
-// Mock images
+// Import images
+import posImage from "./Images/pos1.png";
+import webstoreImage from "./Images/webstore1.png";
+import multistoreImage from "./Images/ms.png";
+import emailImage from "./Images/email.png";
+import supportImage from "./Images/tech.png";
+import integrationImage from "./Images/integration1.png";
+
+// Image object
 const mockImages = {
-  pos: "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=400&h=300&fit=crop",
-  webstore:
-    "https://images.unsplash.com/photo-1563013544-824ae1b704d3?w=400&h=300&fit=crop",
-  multistore:
-    "https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=400&h=300&fit=crop",
-  email:
-    "https://www.sectorlink.com/img/blog/Mail-Communication-Connection.jpg",
-  support:
-    "https://images.unsplash.com/photo-1553877522-43269d4ea984?w=400&h=300&fit=crop",
-  integration:
-    "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=400&h=300&fit=crop",
+  pos: posImage,
+  webstore: webstoreImage,
+  multistore: multistoreImage,
+  email: emailImage,
+  support: supportImage,
+  integration: integrationImage,
 };
 
 const OurServices = () => {
