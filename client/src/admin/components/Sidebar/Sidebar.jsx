@@ -16,6 +16,7 @@ import {
 } from "react-icons/fi";
 import MessagesContainer from "../Inbox/MessagesContainer";
 import { motion, AnimatePresence } from "framer-motion";
+import { useEffect } from "react";
 
 const Sidebar = ({
   activeTab = "dashboard",
@@ -35,12 +36,33 @@ const Sidebar = ({
     content: false,
   });
 
+  const [todayStats, setTodayStats] = useState({
+    uniqueVisitors: 0,
+    pageViews: 0,
+  });
+
   const toggleSection = (section) => {
     setExpandedSections((prev) => ({
       ...prev,
       [section]: !prev[section],
     }));
   };
+
+  useEffect(() => {
+    const fetchTodayStats = async () => {
+      try {
+        const response = await axios.get("/api/stats/today-stats");
+        setTodayStats(response.data);
+      } catch (error) {
+        console.error("Failed to load today stats:", error);
+      }
+    };
+
+    fetchTodayStats();
+    const interval = setInterval(fetchTodayStats, 300000); // Update every 5 minutes
+
+    return () => clearInterval(interval);
+  }, []);
 
   const menuItems = [
     {
@@ -311,7 +333,7 @@ const Sidebar = ({
     <motion.div
       className={`${
         darkMode ? "bg-gray-800" : "bg-white"
-      } shadow-sm flex flex-col justify-between`}  // Added justify-between here
+      } shadow-sm flex flex-col justify-between`} // Added justify-between here
       initial={{ width: isOpen ? 288 : 80 }}
       animate={{ width: isOpen ? 288 : 80 }}
       transition={{ type: "spring", damping: 25, stiffness: 300 }}
@@ -331,9 +353,7 @@ const Sidebar = ({
             >
               <div
                 className={`rounded-xl p-4 ${
-                  darkMode
-                    ? "bg-gray-700"
-                    : "bg-sky-100"
+                  darkMode ? "bg-gray-700" : "bg-sky-100"
                 }`}
               >
                 <div className="flex items-center justify-around mb-5">
@@ -352,10 +372,8 @@ const Sidebar = ({
                 </div>
                 <div className="grid grid-cols-2 gap-3">
                   <div className="text-center">
-                    <p
-                      className="text-2xl font-bold text-sky-400"
-                    >
-                      68
+                    <p className="text-2xl font-bold text-sky-400">
+                      {todayStats?.pageViews || 0}
                     </p>
                     <p
                       className={`text-sm ${
@@ -366,10 +384,8 @@ const Sidebar = ({
                     </p>
                   </div>
                   <div className="text-center">
-                    <p
-                      className="text-2xl font-bold text-sky-400"
-                    >
-                      32
+                    <p className="text-2xl font-bold text-sky-400">
+                      {todayStats?.uniqueVisitors || 0}
                     </p>
                     <p
                       className={`text-sm ${

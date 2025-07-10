@@ -11,6 +11,7 @@ import Settings from "../components/Settings/Settings";
 import ConfirmationModal from "../components/Modals/ConfirmationModal";
 import { motion, AnimatePresence } from "framer-motion";
 import WelcomeModal from "./WelcomeModal";
+import { use } from "react";
 
 const AdminPanel = () => {
   const [activeTab, setActiveTab] = useState("dashboard");

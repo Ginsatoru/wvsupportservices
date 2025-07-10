@@ -1,215 +1,252 @@
-import React from "react";
-import { LineChart, Line, XAxis, YAxis, Tooltip, Legend, ResponsiveContainer, Area, AreaChart } from "recharts";
+import React, { useState } from "react";
+import { PieChart, Pie, Tooltip, Legend, ResponsiveContainer, Cell } from "recharts";
+import PropTypes from 'prop-types';
 
-export const visitorData = [
-  { name: "Mon", visitors: 1200 },
-  { name: "Tue", visitors: 2100 },
-  { name: "Wed", visitors: 800 },
-  { name: "Thu", visitors: 1600 },
-  { name: "Fri", visitors: 2500 },
-  { name: "Sat", visitors: 1800 },
-  { name: "Sun", visitors: 2200 },
-];
+// Empty state component
+const EmptyState = ({ darkMode }) => (
+  <div className={`h-80 flex flex-col items-center justify-center p-4 rounded-lg ${
+    darkMode ? 'bg-gray-800/50' : 'bg-gray-100/50'
+  }`}>
+    <div className={`w-16 h-16 rounded-full flex items-center justify-center mb-4 ${
+      darkMode ? 'bg-gray-700 text-gray-400' : 'bg-gray-200 text-gray-500'
+    }`}>
+      <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+      </svg>
+    </div>
+    <h3 className={`text-lg font-medium mb-1 ${
+      darkMode ? 'text-gray-300' : 'text-gray-700'
+    }`}>
+      No Data Available
+    </h3>
+    <p className={`text-sm ${
+      darkMode ? 'text-gray-400' : 'text-gray-500'
+    }`}>
+      There's no country data to display
+    </p>
+  </div>
+);
 
-// Custom tooltip component
-const CustomTooltip = ({ active, payload, label, darkMode }) => {
-  if (active && payload && payload.length) {
+const TopCountries = ({ 
+  data = null, 
+  colors = [], 
+  darkMode = false,
+  title = "Top Countries",
+  description = "Distribution by user engagement",
+  isLoading = false
+}) => {
+  const [activeIndex, setActiveIndex] = useState(-1);
+  
+  // Safely handle data states
+  const hasData = data && Array.isArray(data) && data.length > 0;
+  const displayData = hasData ? data : [];
+  const displayColors = colors.length > 0 ? colors : [
+    "#6366F1", "#10B981", "#F59E0B", "#EF4444", 
+    "#8B5CF6", "#EC4899", "#14B8A6", "#F97316"
+  ];
+
+  // Calculate totals only if we have data
+  const total = hasData ? displayData.reduce((sum, item) => sum + (item?.value || 0), 0) : 0;
+  const topCountry = hasData 
+    ? displayData.reduce((prev, current) => 
+        (prev?.value || 0) > (current?.value || 0) ? prev : current, 
+        displayData[0]
+      )
+    : null;
+
+  const onPieEnter = (_, index) => {
+    setActiveIndex(index);
+  };
+
+  const onPieLeave = () => {
+    setActiveIndex(-1);
+  };
+
+  if (isLoading) {
     return (
-      <div 
-        className={`px-4 py-3 rounded-xl shadow-lg border backdrop-blur-sm ${
-          darkMode 
-            ? 'bg-gray-800/95 border-gray-600 text-white' 
-            : 'bg-white/95 border-gray-200 text-gray-900'
-        }`}
-        style={{
-          backdropFilter: 'blur(8px)',
-          WebkitBackdropFilter: 'blur(8px)'
-        }}
-      >
-        <p className="font-semibold text-sm mb-1">{label}</p>
-        <p className="text-lg font-bold" style={{ color: payload[0].color }}>
-          {payload[0].value.toLocaleString()} visitors
-        </p>
+      <div className={`p-6 rounded-2xl ${
+        darkMode
+          ? "bg-gray-800/50 border border-gray-700"
+          : "bg-white border border-gray-200"
+      }`}>
+        <div className="animate-pulse">
+          <div className={`h-6 w-1/3 rounded mb-4 ${
+            darkMode ? "bg-gray-700" : "bg-gray-200"
+          }`}></div>
+          <div className={`h-4 w-2/3 rounded mb-6 ${
+            darkMode ? "bg-gray-700" : "bg-gray-200"
+          }`}></div>
+          <div className="h-64 rounded-lg flex items-center justify-center">
+            <div className={`h-32 w-32 rounded-full ${
+              darkMode ? "bg-gray-700" : "bg-gray-200"
+            }`}></div>
+          </div>
+        </div>
       </div>
     );
   }
-  return null;
-};
 
-// Custom dot component for line points
-const CustomDot = ({ cx, cy, payload, darkMode }) => {
   return (
-    <circle
-      cx={cx}
-      cy={cy}
-      r={4}
-      fill="url(#dotGradient)"
-      stroke="#fff"
-      strokeWidth={2}
-      className="drop-shadow-sm hover:r-6 transition-all duration-200"
-    />
-  );
-};
-
-const VisitorChart = ({ data = visitorData, darkMode = false }) => {
-  // Calculate some stats
-  const totalVisitors = data.reduce((sum, day) => sum + day.visitors, 0);
-  const avgVisitors = Math.round(totalVisitors / data.length);
-  const maxDay = data.reduce((max, day) => day.visitors > max.visitors ? day : max, data[0]);
-  
-  return (
-    <div className={`
-      relative p-6 rounded-2xl transition-all duration-300 border
-      ${darkMode 
-        ? 'bg-gradient-to-br from-gray-900 to-gray-900 border-gray-700' 
-        : 'bg-gradient-to-br from-white to-gray-50 border-gray-200'
-      }
-    `}
-    style={{
-      boxShadow: darkMode 
-        ? '0 10px 30px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.05)'
-        : '0 10px 30px rgba(0, 0, 0, 0.08), inset 0 1px 0 rgba(255, 255, 255, 0.8)'
-    }}>
-      
-      {/* Header Section */}
-      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-6 space-y-4 sm:space-y-0">
+    <div
+      className={`relative p-6 rounded-2xl transition-all duration-300 ${
+        darkMode
+          ? "bg-gray-900 border border-gray-700"
+          : "bg-white border border-gray-200"
+      }`}
+    >
+      {/* Header section */}
+      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-6">
         <div>
           <h2 className={`text-xl sm:text-2xl font-bold mb-2 ${
             darkMode ? "text-white" : "text-gray-900"
           }`}>
-            Weekly Visitors
+            {title}
           </h2>
           <p className={`text-sm ${
             darkMode ? "text-gray-400" : "text-gray-600"
           }`}>
-            Tracking your site's weekly performance
+            {description}
           </p>
         </div>
         
-        {/* Stats Cards */}
-        <div className="flex flex-wrap gap-3 sm:gap-4">
-          <div className={`px-3 py-2 rounded-lg backdrop-blur-sm border ${
-            darkMode 
-              ? 'bg-blue-900/30 border-blue-700/50 text-blue-300' 
-              : 'bg-blue-50 border-blue-200 text-blue-700'
-          }`}>
-            <p className="text-xs font-medium opacity-80">Total</p>
-            <p className="text-sm font-bold">{totalVisitors.toLocaleString()}</p>
+        {/* Summary stats - only show if we have data */}
+        {hasData && topCountry && (
+          <div className="mt-4 sm:mt-0 flex flex-col sm:items-end">
+            <span className={`text-xs uppercase tracking-wide font-medium ${
+              darkMode ? "text-gray-400" : "text-gray-500"
+            }`}>
+              Leading Market
+            </span>
+            <div className="flex items-center gap-2">
+              <span className="text-lg">{topCountry.flag || ''}</span>
+              <span className="text-xl font-bold text-indigo-500">
+                {topCountry.name || 'No data'}
+              </span>
+            </div>
           </div>
-          
-          <div className={`px-3 py-2 rounded-lg backdrop-blur-sm border ${
-            darkMode 
-              ? 'bg-green-900/30 border-green-700/50 text-green-300' 
-              : 'bg-green-50 border-green-200 text-green-700'
-          }`}>
-            <p className="text-xs font-medium opacity-80">Average</p>
-            <p className="text-sm font-bold">{avgVisitors.toLocaleString()}</p>
-          </div>
-          
-          <div className={`px-3 py-2 rounded-lg backdrop-blur-sm border ${
-            darkMode 
-              ? 'bg-purple-900/30 border-purple-700/50 text-purple-300' 
-              : 'bg-purple-50 border-purple-200 text-purple-700'
-          }`}>
-            <p className="text-xs font-medium opacity-80">Peak</p>
-            <p className="text-sm font-bold">{maxDay.name}</p>
-          </div>
-        </div>
+        )}
       </div>
-      
-      {/* Chart Container */}
+
+      {/* Chart container */}
       <div className="relative">
-        <ResponsiveContainer width="100%" height={300} className="sm:h-80">
-          <AreaChart data={data} margin={{ top: 20, right: 30, left: 0, bottom: 5 }}>
-            {/* Gradient definitions */}
-            <defs>
-              <linearGradient id="areaGradient" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="0%" stopColor="#6366f1" stopOpacity={0.3} />
-                <stop offset="100%" stopColor="#6366f1" stopOpacity={0.05} />
-              </linearGradient>
-              <linearGradient id="lineGradient" x1="0" y1="0" x2="1" y2="0">
-                <stop offset="0%" stopColor="#8b5cf6" />
-                <stop offset="50%" stopColor="#6366f1" />
-                <stop offset="100%" stopColor="#06b6d4" />
-              </linearGradient>
-              <radialGradient id="dotGradient">
-                <stop offset="0%" stopColor="#6366f1" />
-                <stop offset="100%" stopColor="#8b5cf6" />
-              </radialGradient>
-            </defs>
-            
-            <XAxis 
-              dataKey="name" 
-              stroke={darkMode ? "#9ca3af" : "#6b7280"}
-              fontSize={12}
-              tickLine={false}
-              axisLine={false}
-              className="text-xs sm:text-sm"
-            />
-            <YAxis 
-              stroke={darkMode ? "#9ca3af" : "#6b7280"}
-              fontSize={12}
-              tickLine={false}
-              axisLine={false}
-              tickFormatter={(value) => `${(value / 1000).toFixed(1)}k`}
-              className="text-xs sm:text-sm"
-            />
-            <Tooltip 
-              content={<CustomTooltip darkMode={darkMode} />}
-              cursor={{
-                stroke: darkMode ? '#4b5563' : '#d1d5db',
-                strokeWidth: 1,
-                strokeDasharray: '4 4'
-              }}
-            />
-            
-            {/* Area fill */}
-            <Area
-              type="monotone"
-              dataKey="visitors"
-              stroke="none"
-              fill="url(#areaGradient)"
-            />
-            
-            {/* Main line */}
-            <Line 
-              type="monotone" 
-              dataKey="visitors" 
-              stroke="url(#lineGradient)"
-              strokeWidth={3}
-              dot={<CustomDot darkMode={darkMode} />}
-              activeDot={{ 
-                r: 6, 
-                fill: '#6366f1',
-                stroke: '#fff',
-                strokeWidth: 2,
-                filter: 'drop-shadow(0 2px 4px rgba(99, 102, 241, 0.3))'
-              }}
-            />
-          </AreaChart>
-        </ResponsiveContainer>
-        
-        {/* Grid overlay for better visual separation */}
-        <div className={`absolute inset-0 pointer-events-none ${
-          darkMode ? 'opacity-5' : 'opacity-10'
-        }`}
-        style={{
-          backgroundImage: `linear-gradient(${darkMode ? '#fff' : '#000'} 1px, transparent 1px),
-                           linear-gradient(90deg, ${darkMode ? '#fff' : '#000'} 1px, transparent 1px)`,
-          backgroundSize: '50px 30px'
-        }} />
+        {hasData ? (
+          <>
+            <ResponsiveContainer width="100%" height={320} className="min-h-[280px]">
+              <PieChart>
+                <defs>
+                  {displayColors.map((color, index) => (
+                    <linearGradient key={index} id={`gradient${index}`} x1="0" y1="0" x2="1" y2="1">
+                      <stop offset="0%" stopColor={color} stopOpacity={0.8} />
+                      <stop offset="100%" stopColor={color} stopOpacity={0.6} />
+                    </linearGradient>
+                  ))}
+                </defs>
+                
+                <Pie
+                  data={displayData}
+                  cx="50%"
+                  cy="45%"
+                  innerRadius={60}
+                  outerRadius={100}
+                  paddingAngle={3}
+                  dataKey="value"
+                  nameKey="name"
+                  onMouseEnter={onPieEnter}
+                  onMouseLeave={onPieLeave}
+                >
+                  {displayData.map((entry, index) => (
+                    <Cell
+                      key={`cell-${index}`}
+                      fill={`url(#gradient${index % displayColors.length})`}
+                      stroke={darkMode ? "#374151" : "#F3F4F6"}
+                      strokeWidth={2}
+                    />
+                  ))}
+                </Pie>
+                
+                <Tooltip />
+                <Legend />
+              </PieChart>
+            </ResponsiveContainer>
+
+            {/* Center total display */}
+            <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+              <div className="text-center">
+                <div className={`text-2xl font-bold ${
+                  darkMode ? "text-white" : "text-gray-900"
+                }`}>
+                  {total.toLocaleString()}
+                </div>
+                <div className={`text-xs uppercase tracking-wide font-medium ${
+                  darkMode ? "text-gray-400" : "text-gray-500"
+                }`}>
+                  Total Users
+                </div>
+              </div>
+            </div>
+          </>
+        ) : (
+          <EmptyState darkMode={darkMode} />
+        )}
       </div>
-      
-      {/* Bottom info */}
-      <div className={`mt-4 pt-4 border-t text-center ${
-        darkMode ? 'border-gray-700 text-gray-400' : 'border-gray-200 text-gray-500'
-      }`}>
-        <p className="text-xs sm:text-sm">
-          Data refreshed every hour • Last update: {new Date().toLocaleTimeString()}
-        </p>
-      </div>
+
+      {/* Stats grid - only show if we have data */}
+      {hasData && (
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mt-6 pt-4 border-t border-gray-200 dark:border-gray-700">
+          {displayData.map((country, index) => {
+            const percentage = total > 0 ? ((country.value / total) * 100).toFixed(1) : 0;
+            return (
+              <div
+                key={country.name || index}
+                className={`text-center p-3 rounded-lg ${
+                  darkMode
+                    ? "bg-gray-800/30 hover:bg-gray-700/50"
+                    : "bg-gray-50 hover:bg-gray-100"
+                }`}
+              >
+                <div className="text-lg mb-1">{country.flag || ''}</div>
+                <div className={`text-xs font-medium mb-1 ${
+                  darkMode ? "text-gray-300" : "text-gray-600"
+                }`}>
+                  {country.name || 'Unknown'}
+                </div>
+                <div 
+                  className="text-sm font-bold" 
+                  style={{ color: displayColors[index % displayColors.length] }}
+                >
+                  {percentage}%
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      )}
     </div>
   );
 };
 
-export default VisitorChart;
+TopCountries.propTypes = {
+  data: PropTypes.arrayOf(
+    PropTypes.shape({
+      name: PropTypes.string,
+      value: PropTypes.number,
+      flag: PropTypes.string
+    })
+  ),
+  colors: PropTypes.arrayOf(PropTypes.string),
+  darkMode: PropTypes.bool,
+  title: PropTypes.string,
+  description: PropTypes.string,
+  isLoading: PropTypes.bool
+};
+
+TopCountries.defaultProps = {
+  data: null, // Explicitly null to distinguish from empty array
+  colors: [],
+  darkMode: false,
+  title: "Top Countries",
+  description: "Distribution by user engagement",
+  isLoading: false
+};
+
+export default TopCountries;
