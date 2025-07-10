@@ -123,7 +123,8 @@ function Nav() {
     <>
       <nav className={getNavbarClasses()}>
         <div className="w-full px-4 sm:px-6 lg:px-0">
-          <div className="flex justify-between items-center h-[52px] md:h-[56px] lg:h-[82px] mx-auto w-full lg:w-[88%] xl:w-[82%] 2xl:w-[1500px]">
+          <div className="flex justify-between items-center h-[52px] md:h-[56px] lg:h-[82px] mx-auto w-full lg:w-[88%] xl:w-[83%] 2xl:max-w-[1400px] [@media(min-width:1700px)]:max-w-[1500px]">
+
             {/* Logo */}
             <div className="flex items-center space-x-2">
               <Link

@@ -233,7 +233,7 @@ const Careers = () => {
         </p>
         <motion.a
           href="mailto:careers@wvsupport.com.kh"
-          className="inline-block bg-[#0f8abe] text-white px-6 py-2 rounded-xl hover:bg-[#0c6f94] transition-colors text-sm sm:text-base"
+          className="inline-block bg-[#0f8abe] text-white px-6 py-3 rounded-xl hover:bg-[#0c6f94] transition-colors text-sm sm:text-base"
           whileHover={{ scale: 1.03 }}
           whileTap={{ scale: 0.97 }}
         >
