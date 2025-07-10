@@ -79,7 +79,7 @@ const OurServices = () => {
       <div className="max-w-7xl mx-auto">
         <div
           className="grid
-         grid-cols-1 md:grid-cols-2 lg:gri
+         grid-cols-1 md:grid-cols-3 lg:gri
         d-cols-3 gap-4 lg:gap-6 justify-items-center max-w-full lg:max-w-[85%] xl:max-w-[85%] 2xl:max-w-[1100px] [@media(min-width:1700px)]:max-w-[1500px] mx-auto"
         >
           {services.map((service, index) => {
