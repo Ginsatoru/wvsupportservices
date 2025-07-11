@@ -40,7 +40,7 @@ const OurServices = () => {
       image: mockImages.multistore,
     },
     {
-      title: "Email Hosting Services",
+      title: "Hosting Services",
       description:
         "Professional email hosting solutions with custom domains, security features, and reliable uptime for your business.",
       image: mockImages.email,

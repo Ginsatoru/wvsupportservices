@@ -6,14 +6,14 @@ import {
   FaCashRegister,
   FaSyncAlt,
   FaStore,
-  FaBoxes,
+  FaServer,
   FaChartBar,
   FaUsers,
   FaHandshake,
   FaDatabase,
   FaTools,
   FaShieldAlt,
-  FaChartLine
+  FaChartLine,
 } from "react-icons/fa";
 import { IoMdTrendingUp } from "react-icons/io";
 import { GiProgression } from "react-icons/gi";
@@ -38,37 +38,45 @@ const services = [
     title: "RetailManager POS",
     description: "Comprehensive point-of-sale solutions for retail businesses.",
     icon: <FaCashRegister />,
-    details: "Custom setup, barcode scanning, receipt printing, and payment processing.",
+    details:
+      "Custom setup, barcode scanning, receipt printing, and payment processing.",
   },
   {
     title: "WebStore Integration",
-    description: "Seamless integration between your physical and online stores.",
+    description:
+      "Seamless integration between your physical and online stores.",
     icon: <FaSyncAlt />,
-    details: "Real-time inventory sync, order management, and customer data integration.",
+    details:
+      "Real-time inventory sync, order management, and customer data integration.",
   },
   {
     title: "Multi-Store Management",
     description: "Centralized control for businesses with multiple locations.",
     icon: <FaStore />,
-    details: "Unified reporting, inventory transfers, and consolidated purchasing.",
+    details:
+      "Unified reporting, inventory transfers, and consolidated purchasing.",
   },
   {
-    title: "Inventory Management",
-    description: "Advanced tools to track and optimize your stock levels.",
-    icon: <FaBoxes />,
-    details: "Automated reordering, barcode generation, and stock movement tracking.",
+    title: "Web Hosting Service",
+    description: "Reliable and scalable hosting solutions for your websites.",
+    icon: <FaServer />,
+    details:
+      "High uptime, fast loading speeds, domain support, and easy management tools.",
   },
+
   {
     title: "Reporting & Analytics",
     description: "Powerful insights into your business performance.",
     icon: <FaChartBar />,
-    details: "Custom reports, sales trends, profit analysis, and KPI dashboards.",
+    details:
+      "Custom reports, sales trends, profit analysis, and KPI dashboards.",
   },
   {
     title: "Customer Management",
     description: "Build loyalty and understand your customer base.",
     icon: <FaUsers />,
-    details: "Customer profiles, purchase history, loyalty programs, and marketing tools.",
+    details:
+      "Customer profiles, purchase history, loyalty programs, and marketing tools.",
   },
 ];
 
@@ -80,10 +88,10 @@ const Services = () => {
   return (
     <>
       {/* Hero Section */}
-      <div 
+      <div
         className="relative text-white py-15 text-center bg-cover bg-center bg-no-repeat"
         style={{
-          backgroundImage: `linear-gradient(rgba(15, 138, 190, 0.8), rgba(15, 138, 190, 0.9)), url(${headerImage})`
+          backgroundImage: `linear-gradient(rgba(15, 138, 190, 0.8), rgba(15, 138, 190, 0.9)), url(${headerImage})`,
         }}
       >
         <div className="max-w-4xl mx-auto px-5">
@@ -91,7 +99,8 @@ const Services = () => {
             Our Services
           </h1>
           <p className="text-xl opacity-90 text-white animate-[slideIn_0.5s_ease-in-out]">
-            Comprehensive tools to streamline your retail operations and boost your business performance.
+            Comprehensive tools to streamline your retail operations and boost
+            your business performance.
           </p>
         </div>
       </div>
@@ -127,75 +136,142 @@ const Services = () => {
           Our Retail Technology Stack
         </h2>
         <p className="text-gray-700 text-lg max-w-2xl mx-auto mb-12 leading-relaxed">
-          We specialize in these powerful retail management technologies and platforms
+          We specialize in these powerful retail management technologies and
+          platforms
         </p>
 
         <div className="max-w-6xl mx-auto mt-12">
           {/* First Tech Group */}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
-            <div className="bg-white rounded-xl p-8 shadow-[0_5px_15px_rgba(0,0,0,0.05)] transition-all duration-300 hover:shadow-[0_10px_25px_rgba(0,0,0,0.1)] hover:transform hover:-translate-y-1" data-aos="fade-up" data-aos-delay="0">
+            <div
+              className="bg-white rounded-xl p-8 shadow-[0_5px_15px_rgba(0,0,0,0.05)] transition-all duration-300 hover:shadow-[0_10px_25px_rgba(0,0,0,0.1)] hover:transform hover:-translate-y-1"
+              data-aos="fade-up"
+              data-aos-delay="0"
+            >
               <div className="flex justify-center items-center h-20 mb-4">
-                <img src={retailManagerIcon} alt="RetailManager" className="w-20 h-20 object-contain mb-4" />
+                <img
+                  src={retailManagerIcon}
+                  alt="RetailManager"
+                  className="w-20 h-20 object-contain mb-4"
+                />
               </div>
               <h4 className="text-xl text-gray-900 mb-0 max-[600px]:text-base">
                 RetailManager
               </h4>
             </div>
-            <div className="bg-white rounded-xl p-8 shadow-[0_5px_15px_rgba(0,0,0,0.05)] transition-all duration-300 hover:shadow-[0_10px_25px_rgba(0,0,0,0.1)] hover:transform hover:-translate-y-1" data-aos="fade-up" data-aos-delay="100">
+            <div
+              className="bg-white rounded-xl p-8 shadow-[0_5px_15px_rgba(0,0,0,0.05)] transition-all duration-300 hover:shadow-[0_10px_25px_rgba(0,0,0,0.1)] hover:transform hover:-translate-y-1"
+              data-aos="fade-up"
+              data-aos-delay="100"
+            >
               <div className="flex justify-center items-center h-20 mb-4">
-                <img src={webstoreIcon} alt="WebStore Manager" className="w-20 h-20 object-contain mb-4" />
+                <img
+                  src={webstoreIcon}
+                  alt="WebStore Manager"
+                  className="w-20 h-20 object-contain mb-4"
+                />
               </div>
               <h4 className="text-xl text-gray-900 mb-0 max-[600px]:text-base">
                 WebStore Manager
               </h4>
             </div>
-            <div className="bg-white rounded-xl p-8 shadow-[0_5px_15px_rgba(0,0,0,0.05)] transition-all duration-300 hover:shadow-[0_10px_25px_rgba(0,0,0,0.1)] hover:transform hover:-translate-y-1" data-aos="fade-up" data-aos-delay="200">
+            <div
+              className="bg-white rounded-xl p-8 shadow-[0_5px_15px_rgba(0,0,0,0.05)] transition-all duration-300 hover:shadow-[0_10px_25px_rgba(0,0,0,0.1)] hover:transform hover:-translate-y-1"
+              data-aos="fade-up"
+              data-aos-delay="200"
+            >
               <div className="flex justify-center items-center h-20 mb-4">
-                <img src={multiStoreIcon} alt="RM Multi-Store" className="w-20 h-20 object-contain mb-4" />
+                <img
+                  src={multiStoreIcon}
+                  alt="RM Multi-Store"
+                  className="w-20 h-20 object-contain mb-4"
+                />
               </div>
               <h4 className="text-xl text-gray-900 mb-0 max-[600px]:text-base">
                 RM Multi-Store
               </h4>
             </div>
-            <div className="bg-white rounded-xl p-8 shadow-[0_5px_15px_rgba(0,0,0,0.05)] transition-all duration-300 hover:shadow-[0_10px_25px_rgba(0,0,0,0.1)] hover:transform hover:-translate-y-1" data-aos="fade-up" data-aos-delay="300">
+
+            <div
+              className="bg-white rounded-xl p-8 shadow-[0_5px_15px_rgba(0,0,0,0.05)] transition-all duration-300 hover:shadow-[0_10px_25px_rgba(0,0,0,0.1)] hover:transform hover:-translate-y-1"
+              data-aos="fade-up"
+              data-aos-delay="200"
+            >
               <div className="flex justify-center items-center h-20 mb-4">
-                <img src={windowsIcon} alt="Windows" className="w-20 h-20 object-contain mb-4" />
+                <img
+                  src={inventoryIcon}
+                  alt="Web Hosting"
+                  className="w-20 h-20 object-contain mb-4"
+                />
               </div>
               <h4 className="text-xl text-gray-900 mb-0 max-[600px]:text-base">
-                Windows Platform
+                Web Hosting
               </h4>
             </div>
           </div>
 
           {/* Second Tech Group */}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
-            <div className="bg-white rounded-xl p-8 shadow-[0_5px_15px_rgba(0,0,0,0.05)] transition-all duration-300 hover:shadow-[0_10px_25px_rgba(0,0,0,0.1)] hover:transform hover:-translate-y-1" data-aos="fade-up" data-aos-delay="0">
+            <div
+              className="bg-white rounded-xl p-8 shadow-[0_5px_15px_rgba(0,0,0,0.05)] transition-all duration-300 hover:shadow-[0_10px_25px_rgba(0,0,0,0.1)] hover:transform hover:-translate-y-1"
+              data-aos="fade-up"
+              data-aos-delay="300"
+            >
               <div className="flex justify-center items-center h-20 mb-4">
-                <img src={sqlIcon} alt="SQL Database" className="w-20 h-20 object-contain mb-4" />
+                <img
+                  src={windowsIcon}
+                  alt="Windows"
+                  className="w-20 h-20 object-contain mb-4"
+                />
+              </div>
+              <h4 className="text-xl text-gray-900 mb-0 max-[600px]:text-base">
+                Windows Platform
+              </h4>
+            </div>
+            <div
+              className="bg-white rounded-xl p-8 shadow-[0_5px_15px_rgba(0,0,0,0.05)] transition-all duration-300 hover:shadow-[0_10px_25px_rgba(0,0,0,0.1)] hover:transform hover:-translate-y-1"
+              data-aos="fade-up"
+              data-aos-delay="0"
+            >
+              <div className="flex justify-center items-center h-20 mb-4">
+                <img
+                  src={sqlIcon}
+                  alt="SQL Database"
+                  className="w-20 h-20 object-contain mb-4"
+                />
               </div>
               <h4 className="text-xl text-gray-900 mb-0 max-[600px]:text-base">
                 SQL Database
               </h4>
             </div>
-            <div className="bg-white rounded-xl p-8 shadow-[0_5px_15px_rgba(0,0,0,0.05)] transition-all duration-300 hover:shadow-[0_10px_25px_rgba(0,0,0,0.1)] hover:transform hover:-translate-y-1" data-aos="fade-up" data-aos-delay="100">
+            <div
+              className="bg-white rounded-xl p-8 shadow-[0_5px_15px_rgba(0,0,0,0.05)] transition-all duration-300 hover:shadow-[0_10px_25px_rgba(0,0,0,0.1)] hover:transform hover:-translate-y-1"
+              data-aos="fade-up"
+              data-aos-delay="100"
+            >
               <div className="flex justify-center items-center h-20 mb-4">
-                <img src={posIcon} alt="POS Hardware" className="w-20 h-20 object-contain mb-4" />
+                <img
+                  src={posIcon}
+                  alt="POS Hardware"
+                  className="w-20 h-20 object-contain mb-4"
+                />
               </div>
               <h4 className="text-xl text-gray-900 mb-0 max-[600px]:text-base">
                 POS Hardware
               </h4>
             </div>
-            <div className="bg-white rounded-xl p-8 shadow-[0_5px_15px_rgba(0,0,0,0.05)] transition-all duration-300 hover:shadow-[0_10px_25px_rgba(0,0,0,0.1)] hover:transform hover:-translate-y-1" data-aos="fade-up" data-aos-delay="200">
+
+            <div
+              className="bg-white rounded-xl p-8 shadow-[0_5px_15px_rgba(0,0,0,0.05)] transition-all duration-300 hover:shadow-[0_10px_25px_rgba(0,0,0,0.1)] hover:transform hover:-translate-y-1"
+              data-aos="fade-up"
+              data-aos-delay="300"
+            >
               <div className="flex justify-center items-center h-20 mb-4">
-                <img src={inventoryIcon} alt="Inventory Systems" className="w-20 h-20 object-contain mb-4" />
-              </div>
-              <h4 className="text-xl text-gray-900 mb-0 max-[600px]:text-base">
-                Inventory Systems
-              </h4>
-            </div>
-            <div className="bg-white rounded-xl p-8 shadow-[0_5px_15px_rgba(0,0,0,0.05)] transition-all duration-300 hover:shadow-[0_10px_25px_rgba(0,0,0,0.1)] hover:transform hover:-translate-y-1" data-aos="fade-up" data-aos-delay="300">
-              <div className="flex justify-center items-center h-20 mb-4">
-                <img src={reportingIcon} alt="Reporting Tools" className="w-20 h-20 object-contain mb-4" />
+                <img
+                  src={reportingIcon}
+                  alt="Reporting Tools"
+                  className="w-20 h-20 object-contain mb-4"
+                />
               </div>
               <h4 className="text-xl text-gray-900 mb-0 max-[600px]:text-base">
                 Reporting Tools
@@ -205,33 +281,65 @@ const Services = () => {
 
           {/* Third Tech Group */}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-            <div className="bg-white rounded-xl p-8 shadow-[0_5px_15px_rgba(0,0,0,0.05)] transition-all duration-300 hover:shadow-[0_10px_25px_rgba(0,0,0,0.1)] hover:transform hover:-translate-y-1" data-aos="fade-up" data-aos-delay="0">
+            <div
+              className="bg-white rounded-xl p-8 shadow-[0_5px_15px_rgba(0,0,0,0.05)] transition-all duration-300 hover:shadow-[0_10px_25px_rgba(0,0,0,0.1)] hover:transform hover:-translate-y-1"
+              data-aos="fade-up"
+              data-aos-delay="0"
+            >
               <div className="flex justify-center items-center h-20 mb-4">
-                <img src={teamviewerIcon} alt="TeamViewer" className="w-20 h-20 object-contain mb-4" />
+                <img
+                  src={teamviewerIcon}
+                  alt="TeamViewer"
+                  className="w-20 h-20 object-contain mb-4"
+                />
               </div>
               <h4 className="text-xl text-gray-900 mb-0 max-[600px]:text-base">
                 TeamViewer
               </h4>
             </div>
-            <div className="bg-white rounded-xl p-8 shadow-[0_5px_15px_rgba(0,0,0,0.05)] transition-all duration-300 hover:shadow-[0_10px_25px_rgba(0,0,0,0.1)] hover:transform hover:-translate-y-1" data-aos="fade-up" data-aos-delay="100">
+            <div
+              className="bg-white rounded-xl p-8 shadow-[0_5px_15px_rgba(0,0,0,0.05)] transition-all duration-300 hover:shadow-[0_10px_25px_rgba(0,0,0,0.1)] hover:transform hover:-translate-y-1"
+              data-aos="fade-up"
+              data-aos-delay="100"
+            >
               <div className="flex justify-center items-center h-20 mb-4">
-                <img src={onedriveIcon} alt="OneDrive" className="w-20 h-20 object-contain mb-4" />
+                <img
+                  src={onedriveIcon}
+                  alt="OneDrive"
+                  className="w-20 h-20 object-contain mb-4"
+                />
               </div>
               <h4 className="text-xl text-gray-900 mb-0 max-[600px]:text-base">
                 OneDrive
               </h4>
             </div>
-            <div className="bg-white rounded-xl p-8 shadow-[0_5px_15px_rgba(0,0,0,0.05)] transition-all duration-300 hover:shadow-[0_10px_25px_rgba(0,0,0,0.1)] hover:transform hover:-translate-y-1" data-aos="fade-up" data-aos-delay="200">
+            <div
+              className="bg-white rounded-xl p-8 shadow-[0_5px_15px_rgba(0,0,0,0.05)] transition-all duration-300 hover:shadow-[0_10px_25px_rgba(0,0,0,0.1)] hover:transform hover:-translate-y-1"
+              data-aos="fade-up"
+              data-aos-delay="200"
+            >
               <div className="flex justify-center items-center h-20 mb-4">
-                <img src={accessIcon} alt="Microsoft Access" className="w-20 h-20 object-contain mb-4" />
+                <img
+                  src={accessIcon}
+                  alt="Microsoft Access"
+                  className="w-20 h-20 object-contain mb-4"
+                />
               </div>
               <h4 className="text-xl text-gray-900 mb-0 max-[600px]:text-base">
                 Microsoft Access
               </h4>
             </div>
-            <div className="bg-white rounded-xl p-8 shadow-[0_5px_15px_rgba(0,0,0,0.05)] transition-all duration-300 hover:shadow-[0_10px_25px_rgba(0,0,0,0.1)] hover:transform hover:-translate-y-1" data-aos="fade-up" data-aos-delay="300">
+            <div
+              className="bg-white rounded-xl p-8 shadow-[0_5px_15px_rgba(0,0,0,0.05)] transition-all duration-300 hover:shadow-[0_10px_25px_rgba(0,0,0,0.1)] hover:transform hover:-translate-y-1"
+              data-aos="fade-up"
+              data-aos-delay="300"
+            >
               <div className="flex justify-center items-center h-20 mb-4">
-                <img src={outlookIcon} alt="Outlook Classic" className="w-20 h-20 object-contain mb-4" />
+                <img
+                  src={outlookIcon}
+                  alt="Outlook Classic"
+                  className="w-20 h-20 object-contain mb-4"
+                />
               </div>
               <h4 className="text-xl text-gray-900 mb-0 max-[600px]:text-base">
                 Outlook Classic
@@ -247,10 +355,15 @@ const Services = () => {
           Our Implementation Process
         </h2>
         <p className="text-gray-700 text-lg max-w-2xl mx-auto mb-12 leading-relaxed">
-          We follow a structured approach to ensure successful RetailManager deployment
+          We follow a structured approach to ensure successful RetailManager
+          deployment
         </p>
         <div className="flex justify-center flex-wrap gap-8 max-w-6xl mx-auto px-5">
-          <div className="flex-1 min-w-[250px] bg-white rounded-xl p-8 shadow-[0_5px_20px_rgba(0,0,0,0.05)] transition-all duration-300 hover:transform hover:-translate-y-3 hover:shadow-[0_8px_25px_rgba(0,0,0,0.1)]" data-aos="fade-up" data-aos-delay="0">
+          <div
+            className="flex-1 min-w-[250px] bg-white rounded-xl p-8 shadow-[0_5px_20px_rgba(0,0,0,0.05)] transition-all duration-300 hover:transform hover:-translate-y-3 hover:shadow-[0_8px_25px_rgba(0,0,0,0.1)]"
+            data-aos="fade-up"
+            data-aos-delay="0"
+          >
             <div className="text-3xl text-[#0f8abe] mb-6 inline-flex justify-center items-center w-[70px] h-[70px] bg-[#0f8abe]/10 rounded-full">
               <FaHandshake />
             </div>
@@ -258,10 +371,15 @@ const Services = () => {
               Needs Assessment
             </h3>
             <p className="text-gray-700 leading-relaxed text-sm">
-              We analyze your business requirements, current processes, and pain points to recommend the right solution.
+              We analyze your business requirements, current processes, and pain
+              points to recommend the right solution.
             </p>
           </div>
-          <div className="flex-1 min-w-[250px] bg-white rounded-xl p-8 shadow-[0_5px_20px_rgba(0,0,0,0.05)] transition-all duration-300 hover:transform hover:-translate-y-3 hover:shadow-[0_8px_25px_rgba(0,0,0,0.1)]" data-aos="fade-up" data-aos-delay="100">
+          <div
+            className="flex-1 min-w-[250px] bg-white rounded-xl p-8 shadow-[0_5px_20px_rgba(0,0,0,0.05)] transition-all duration-300 hover:transform hover:-translate-y-3 hover:shadow-[0_8px_25px_rgba(0,0,0,0.1)]"
+            data-aos="fade-up"
+            data-aos-delay="100"
+          >
             <div className="text-3xl text-[#0f8abe] mb-6 inline-flex justify-center items-center w-[70px] h-[70px] bg-[#0f8abe]/10 rounded-full">
               <FaDatabase />
             </div>
@@ -269,10 +387,15 @@ const Services = () => {
               Business Data Migration
             </h3>
             <p className="text-gray-700 leading-relaxed text-sm">
-              We securely transfer your existing product, customer, and transaction data to the new system.
+              We securely transfer your existing product, customer, and
+              transaction data to the new system.
             </p>
           </div>
-          <div className="flex-1 min-w-[250px] bg-white rounded-xl p-8 shadow-[0_5px_20px_rgba(0,0,0,0.05)] transition-all duration-300 hover:transform hover:-translate-y-3 hover:shadow-[0_8px_25px_rgba(0,0,0,0.1)]" data-aos="fade-up" data-aos-delay="200">
+          <div
+            className="flex-1 min-w-[250px] bg-white rounded-xl p-8 shadow-[0_5px_20px_rgba(0,0,0,0.05)] transition-all duration-300 hover:transform hover:-translate-y-3 hover:shadow-[0_8px_25px_rgba(0,0,0,0.1)]"
+            data-aos="fade-up"
+            data-aos-delay="200"
+          >
             <div className="text-3xl text-[#0f8abe] mb-6 inline-flex justify-center items-center w-[70px] h-[70px] bg-[#0f8abe]/10 rounded-full">
               <FaTools />
             </div>
@@ -280,10 +403,15 @@ const Services = () => {
               System Configuration
             </h3>
             <p className="text-gray-700 leading-relaxed text-sm">
-              We customize RetailManager to match your business workflows, tax rules, and reporting needs.
+              We customize RetailManager to match your business workflows, tax
+              rules, and reporting needs.
             </p>
           </div>
-          <div className="flex-1 min-w-[250px] bg-white rounded-xl p-8 shadow-[0_5px_20px_rgba(0,0,0,0.05)] transition-all duration-300 hover:transform hover:-translate-y-3 hover:shadow-[0_8px_25px_rgba(0,0,0,0.1)]" data-aos="fade-up" data-aos-delay="300">
+          <div
+            className="flex-1 min-w-[250px] bg-white rounded-xl p-8 shadow-[0_5px_20px_rgba(0,0,0,0.05)] transition-all duration-300 hover:transform hover:-translate-y-3 hover:shadow-[0_8px_25px_rgba(0,0,0,0.1)]"
+            data-aos="fade-up"
+            data-aos-delay="300"
+          >
             <div className="text-3xl text-[#0f8abe] mb-6 inline-flex justify-center items-center w-[70px] h-[70px] bg-[#0f8abe]/10 rounded-full">
               <FaShieldAlt />
             </div>
@@ -291,7 +419,8 @@ const Services = () => {
               Training & Support
             </h3>
             <p className="text-gray-700 leading-relaxed text-sm">
-              Comprehensive staff training and ongoing support to ensure you get the most from your system.
+              Comprehensive staff training and ongoing support to ensure you get
+              the most from your system.
             </p>
           </div>
         </div>
@@ -300,15 +429,27 @@ const Services = () => {
       {/* Why Choose Us Section */}
       <section className="py-20 bg-slate-50 text-center">
         <div className="max-w-6xl mx-auto px-5">
-          <h2 className="text-3xl text-[#0f8abe] mb-6 font-bold relative inline-block" data-aos="fade-up">
+          <h2
+            className="text-3xl text-[#0f8abe] mb-6 font-bold relative inline-block"
+            data-aos="fade-up"
+          >
             Why Retailers Choose Us
           </h2>
-          <p className="text-gray-700 text-xl max-w-2xl mx-auto mb-12 leading-relaxed" data-aos="fade-up" data-aos-delay="100">
-            We combine deep retail expertise with technical knowledge to deliver solutions that drive real business results.
+          <p
+            className="text-gray-700 text-xl max-w-2xl mx-auto mb-12 leading-relaxed"
+            data-aos="fade-up"
+            data-aos-delay="100"
+          >
+            We combine deep retail expertise with technical knowledge to deliver
+            solutions that drive real business results.
           </p>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 mt-12">
-            <div className="bg-white rounded-2xl p-10 shadow-[0_10px_30px_rgba(0,0,0,0.05)] transition-all duration-300 relative overflow-hidden z-10 before:content-[''] before:absolute before:top-0 before:left-0 before:w-full before:h-[5px] before:bg-gradient-to-r before:from-[#0f8abe]/60 before:to-[#0f8abe] hover:transform hover:-translate-y-3 hover:shadow-[0_15px_40px_rgba(0,0,0,0.1)]" data-aos="fade-up" data-aos-delay="0">
+            <div
+              className="bg-white rounded-2xl p-10 shadow-[0_10px_30px_rgba(0,0,0,0.05)] transition-all duration-300 relative overflow-hidden z-10 before:content-[''] before:absolute before:top-0 before:left-0 before:w-full before:h-[5px] before:bg-gradient-to-r before:from-[#0f8abe]/60 before:to-[#0f8abe] hover:transform hover:-translate-y-3 hover:shadow-[0_15px_40px_rgba(0,0,0,0.1)]"
+              data-aos="fade-up"
+              data-aos-delay="0"
+            >
               <div className="text-4xl text-[#0f8abe] mb-6 inline-flex justify-center items-center w-20 h-20 bg-[#0f8abe]/10 rounded-full">
                 <IoMdTrendingUp />
               </div>
@@ -316,11 +457,17 @@ const Services = () => {
                 Retail Specialists
               </h3>
               <p className="text-gray-700 leading-7 text-base">
-                Our team understands retail operations from the ground up, ensuring solutions that actually work in real retail environments.
+                Our team understands retail operations from the ground up,
+                ensuring solutions that actually work in real retail
+                environments.
               </p>
             </div>
 
-            <div className="bg-white rounded-2xl p-10 shadow-[0_10px_30px_rgba(0,0,0,0.05)] transition-all duration-300 relative overflow-hidden z-10 before:content-[''] before:absolute before:top-0 before:left-0 before:w-full before:h-[5px] before:bg-gradient-to-r before:from-[#0f8abe]/60 before:to-[#0f8abe] hover:transform hover:-translate-y-3 hover:shadow-[0_15px_40px_rgba(0,0,0,0.1)]" data-aos="fade-up" data-aos-delay="100">
+            <div
+              className="bg-white rounded-2xl p-10 shadow-[0_10px_30px_rgba(0,0,0,0.05)] transition-all duration-300 relative overflow-hidden z-10 before:content-[''] before:absolute before:top-0 before:left-0 before:w-full before:h-[5px] before:bg-gradient-to-r before:from-[#0f8abe]/60 before:to-[#0f8abe] hover:transform hover:-translate-y-3 hover:shadow-[0_15px_40px_rgba(0,0,0,0.1)]"
+              data-aos="fade-up"
+              data-aos-delay="100"
+            >
               <div className="text-4xl text-[#0f8abe] mb-6 inline-flex justify-center items-center w-20 h-20 bg-[#0f8abe]/10 rounded-full">
                 <GiProgression />
               </div>
@@ -328,11 +475,16 @@ const Services = () => {
                 Proven Track Record
               </h3>
               <p className="text-gray-700 leading-7 text-base">
-                We've helped hundreds of retailers streamline operations, reduce costs, and increase sales through our solutions.
+                We've helped hundreds of retailers streamline operations, reduce
+                costs, and increase sales through our solutions.
               </p>
             </div>
 
-            <div className="bg-white rounded-2xl p-10 shadow-[0_10px_30px_rgba(0,0,0,0.05)] transition-all duration-300 relative overflow-hidden z-10 before:content-[''] before:absolute before:top-0 before:left-0 before:w-full before:h-[5px] before:bg-gradient-to-r before:from-[#0f8abe]/60 before:to-[#0f8abe] hover:transform hover:-translate-y-3 hover:shadow-[0_15px_40px_rgba(0,0,0,0.1)]" data-aos="fade-up" data-aos-delay="200">
+            <div
+              className="bg-white rounded-2xl p-10 shadow-[0_10px_30px_rgba(0,0,0,0.05)] transition-all duration-300 relative overflow-hidden z-10 before:content-[''] before:absolute before:top-0 before:left-0 before:w-full before:h-[5px] before:bg-gradient-to-r before:from-[#0f8abe]/60 before:to-[#0f8abe] hover:transform hover:-translate-y-3 hover:shadow-[0_15px_40px_rgba(0,0,0,0.1)]"
+              data-aos="fade-up"
+              data-aos-delay="200"
+            >
               <div className="text-4xl text-[#0f8abe] mb-6 inline-flex justify-center items-center w-20 h-20 bg-[#0f8abe]/10 rounded-full">
                 <FaChartLine />
               </div>
@@ -340,7 +492,8 @@ const Services = () => {
                 Ongoing Support
               </h3>
               <p className="text-gray-700 leading-7 text-base">
-                We don't just implement systems - we provide continuous support, updates, and optimizations as your business grows.
+                We don't just implement systems - we provide continuous support,
+                updates, and optimizations as your business grows.
               </p>
             </div>
           </div>
@@ -354,7 +507,8 @@ const Services = () => {
             Ready to Transform Your Retail Business?
           </h2>
           <p className="text-xl mb-10 leading-7 opacity-90 max-w-2xl mx-auto text-gray-700">
-            Let's discuss how RetailManager can streamline your operations and boost your profits. Our team is ready to help.
+            Let's discuss how RetailManager can streamline your operations and
+            boost your profits. Our team is ready to help.
           </p>
           <Link
             to="/contact"

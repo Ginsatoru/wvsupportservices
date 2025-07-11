@@ -52,6 +52,13 @@ const EpsonLogo = () => (
     className="h-12 w-auto"
   />
 );
+const CpanelLogo = () => (
+  <img
+    src="https://www.webhostingworld.net/img/pages/cpanel-logo.png"
+    alt="cloudflare"
+    className="h-12 w-auto"
+  />
+);
 
 // Animation Variants
 const containerVariants = {
@@ -81,6 +88,7 @@ const Partners = () => {
     <MYOBLogo key="myob" />,
     <EpsonLogo key="cloudflare" />,
     <XeroLogo key="xero" />,
+    <CpanelLogo key="cpanel" />,
   ];
 
   return (
