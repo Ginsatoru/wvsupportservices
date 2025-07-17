@@ -1,16 +1,6 @@
 import React from "react";
 import { LineChart, Line, XAxis, YAxis, Tooltip, Legend, ResponsiveContainer, Area, AreaChart } from "recharts";
 
-export const visitorData = [
-  { name: "Mon", visitors: 1200 },
-  { name: "Tue", visitors: 2100 },
-  { name: "Wed", visitors: 800 },
-  { name: "Thu", visitors: 1600 },
-  { name: "Fri", visitors: 2500 },
-  { name: "Sat", visitors: 1800 },
-  { name: "Sun", visitors: 2200 },
-];
-
 // Custom tooltip component
 const CustomTooltip = ({ active, payload, label, darkMode }) => {
   if (active && payload && payload.length) {
@@ -28,7 +18,7 @@ const CustomTooltip = ({ active, payload, label, darkMode }) => {
       >
         <p className="font-semibold text-sm mb-1">{label}</p>
         <p className="text-lg font-bold" style={{ color: payload[0].color }}>
-          {payload[0].value.toLocaleString()} visitors
+          {payload[0].value.toLocaleString()} visits
         </p>
       </div>
     );
@@ -51,15 +41,47 @@ const CustomDot = ({ cx, cy, payload, darkMode }) => {
   );
 };
 
-const VisitorChart = ({ data = visitorData, darkMode = false }) => {
-  // Calculate some stats
-  const totalVisitors = data.reduce((sum, day) => sum + day.visitors, 0);
-  const avgVisitors = Math.round(totalVisitors / data.length);
-  const maxDay = data.reduce((max, day) => day.visitors > max.visitors ? day : max, data[0]);
-  
+const VisitorChart = ({ data = [], darkMode = false }) => {
+  // Format data for the chart
+  const chartData = data.map(item => ({
+    name: item.date,
+    visits: item.count
+  }));
+
+  // Calculate stats
+  const totalVisitors = chartData.reduce((sum, day) => sum + day.visits, 0);
+  const avgVisitors = Math.round(totalVisitors / chartData.length) || 0;
+  const maxDay = chartData.length > 0 
+    ? chartData.reduce((max, day) => day.visits > max.visits ? day : max, chartData[0])
+    : { name: 'N/A', visits: 0 };
+
+  // If no data, show a placeholder
+  if (chartData.length === 0) {
+    return (
+      <div className={`
+        relative p-6 rounded-2xl transition-all duration-300 border
+        ${darkMode 
+          ? 'bg-gradient-to-br from-gray-900 to-gray-900 border-gray-700' 
+          : 'bg-gradient-to-br from-white to-gray-50 border-gray-200'
+        }
+      `}
+      style={{
+        boxShadow: darkMode 
+          ? '0 10px 30px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.05)'
+          : '0 10px 30px rgba(0, 0, 0, 0.08), inset 0 1px 0 rgba(255, 255, 255, 0.8)'
+      }}>
+        <div className="flex flex-col items-center justify-center h-80">
+          <p className={`text-lg ${darkMode ? "text-gray-400" : "text-gray-500"}`}>
+            No visitor data available
+          </p>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className={`
-      relative p-6 rounded-2xl transition-all duration-300 border
+      relative p-11 rounded-2xl transition-all duration-300 border
       ${darkMode 
         ? 'bg-gradient-to-br from-gray-900 to-gray-900 border-gray-700' 
         : 'bg-gradient-to-br from-white to-gray-50 border-gray-200'
@@ -77,12 +99,12 @@ const VisitorChart = ({ data = visitorData, darkMode = false }) => {
           <h2 className={`text-xl sm:text-2xl font-bold mb-2 ${
             darkMode ? "text-white" : "text-gray-900"
           }`}>
-            Weekly Visitors
+            Visit Trends
           </h2>
           <p className={`text-sm ${
             darkMode ? "text-gray-400" : "text-gray-600"
           }`}>
-            Tracking your site's weekly performance
+            Tracking your site's visit patterns
           </p>
         </div>
         
@@ -120,7 +142,7 @@ const VisitorChart = ({ data = visitorData, darkMode = false }) => {
       {/* Chart Container */}
       <div className="relative">
         <ResponsiveContainer width="100%" height={300} className="sm:h-80">
-          <AreaChart data={data} margin={{ top: 20, right: 30, left: 0, bottom: 5 }}>
+          <AreaChart data={chartData} margin={{ top: 20, right: 30, left: 0, bottom: 5 }}>
             {/* Gradient definitions */}
             <defs>
               <linearGradient id="areaGradient" x1="0" y1="0" x2="0" y2="1">
@@ -151,7 +173,10 @@ const VisitorChart = ({ data = visitorData, darkMode = false }) => {
               fontSize={12}
               tickLine={false}
               axisLine={false}
-              tickFormatter={(value) => `${(value / 1000).toFixed(1)}k`}
+              tickFormatter={(value) => {
+                if (value >= 1000) return `${(value / 1000).toFixed(1)}k`;
+                return value;
+              }}
               className="text-xs sm:text-sm"
             />
             <Tooltip 
@@ -166,7 +191,7 @@ const VisitorChart = ({ data = visitorData, darkMode = false }) => {
             {/* Area fill */}
             <Area
               type="monotone"
-              dataKey="visitors"
+              dataKey="visits"
               stroke="none"
               fill="url(#areaGradient)"
             />
@@ -174,7 +199,7 @@ const VisitorChart = ({ data = visitorData, darkMode = false }) => {
             {/* Main line */}
             <Line 
               type="monotone" 
-              dataKey="visitors" 
+              dataKey="visits" 
               stroke="url(#lineGradient)"
               strokeWidth={3}
               dot={<CustomDot darkMode={darkMode} />}

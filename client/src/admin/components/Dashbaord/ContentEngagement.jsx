@@ -9,16 +9,6 @@ import {
   Cell,
 } from "recharts";
 
-// Updated data structure for content engagement
-export const contentData = [
-  { name: "Jan", views: 12000, reads: 8000, interactions: 3500 },
-  { name: "Feb", views: 9000, reads: 6000, interactions: 2800 },
-  { name: "Mar", views: 15000, reads: 9500, interactions: 4200 },
-  { name: "Apr", views: 13500, reads: 8500, interactions: 3800 },
-  { name: "May", views: 18000, reads: 11000, interactions: 5200 },
-  { name: "Jun", views: 21000, reads: 13000, interactions: 6800 },
-];
-
 // Modern gradient colors for bars
 const barColors = [
   "#8B5CF6", // Purple
@@ -34,21 +24,21 @@ const CustomTooltip = ({ active, payload, label, darkMode }) => {
   if (active && payload && payload.length) {
     return (
       <div
-        className={`px-4 py-3 rounded-lg shadow-lg border backdrop-blur-sm ${
+        className={`px-3 py-2 sm:px-4 sm:py-3 rounded-lg shadow-lg border backdrop-blur-sm max-w-xs ${
           darkMode
             ? "bg-gray-800/90 border-gray-700 text-white"
             : "bg-white/90 border-gray-200 text-gray-900"
         }`}
       >
-        <p className="font-medium text-sm mb-1">{label}</p>
+        <p className="font-medium text-xs sm:text-sm mb-1 break-words">{label}</p>
         {payload.map((entry, index) => (
           <div key={`tooltip-${index}`} className="flex items-center mt-1">
             <div
-              className="w-3 h-3 rounded-full mr-2"
+              className="w-2 h-2 sm:w-3 sm:h-3 rounded-full mr-2 flex-shrink-0"
               style={{ backgroundColor: entry.color }}
             />
-            <span className="text-sm font-medium mr-2">{entry.name}:</span>
-            <span className="text-sm font-bold">
+            <span className="text-xs sm:text-sm font-medium mr-2 truncate">{entry.name}:</span>
+            <span className="text-xs sm:text-sm font-bold flex-shrink-0">
               {entry.value.toLocaleString()}
             </span>
           </div>
@@ -60,99 +50,126 @@ const CustomTooltip = ({ active, payload, label, darkMode }) => {
 };
 
 // Updated component for Content Engagement
-const ContentEngagement = ({ data = contentData, darkMode = false }) => {
-  const maxViews = Math.max(...data.map(item => item.views));
-  
+const ContentEngagement = ({ data = {}, darkMode = false }) => {
+  // Format data for the chart from the analytics API response
+  const chartData = [
+    {
+      name: "Clicks",
+      value: data.clicks || 0,
+      color: "#8B5CF6" // Purple
+    },
+    {
+      name: "Scroll Depth",
+      value: data.scrollDepth || 0,
+      color: "#06B6D4" // Cyan
+    },
+    {
+      name: "Time Spent",
+      value: data.timeSpent || 0,
+      color: "#10B981" // Emerald
+    }
+  ];
+
+  // Calculate peak value
+  const peakValue = Math.max(...chartData.map(item => item.value));
+
   return (
     <div
-      className={`relative p-6 rounded-2xl transition-all duration-300 hover:shadow-xl ${
+      className={`relative p-4 sm:p-6 lg:p-8 xl:p-11 rounded-xl sm:rounded-2xl transition-all duration-300 hover:shadow-xl w-full max-w-full overflow-hidden ${
         darkMode
           ? "bg-gradient-to-br from-gray-850 to-gray-900 shadow-2xl border border-gray-700"
           : "bg-gradient-to-br from-white to-gray-50 shadow-lg border border-gray-100"
       }`}
     >
       {/* Header section */}
-      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-6">
-        <div>
+      <div className="flex flex-col space-y-3 sm:space-y-4 lg:flex-row lg:items-center lg:justify-between lg:space-y-0 mb-4 sm:mb-6">
+        <div className="min-w-0 flex-1">
           <h2
-            className={`text-xl sm:text-2xl font-bold mb-2 ${
+            className={`text-lg sm:text-xl lg:text-2xl font-bold mb-1 sm:mb-2 leading-tight ${
               darkMode ? "text-white" : "text-gray-900"
             }`}
           >
-            Content Engagement
+            Engagement Metrics
           </h2>
           <p
-            className={`text-sm ${
+            className={`text-xs sm:text-sm leading-relaxed ${
               darkMode ? "text-gray-400" : "text-gray-600"
             }`}
           >
-            Audience interaction over the past 6 months
+            Average user engagement per session
           </p>
         </div>
         
         {/* Summary */}
-        <div className="mt-4 sm:mt-0 flex flex-col sm:items-end">
+        <div className="flex flex-col sm:items-start lg:items-end flex-shrink-0">
           <span
-            className={`text-xs uppercase tracking-wide font-medium ${
+            className={`text-xs uppercase tracking-wide font-medium mb-1 ${
               darkMode ? "text-gray-400" : "text-gray-500"
             }`}
           >
-            Peak Views
+            Peak Metric
           </span>
-          <span className="text-2xl font-bold text-emerald-500">
-            {maxViews.toLocaleString()}
+          <span className="text-xl sm:text-2xl font-bold text-emerald-500">
+            {peakValue.toLocaleString()}
           </span>
         </div>
       </div>
 
       {/* Chart container */}
-      <div className="relative">
-        <ResponsiveContainer width="100%" height={300} className="min-h-[250px]">
+      <div className="relative w-full">
+        <ResponsiveContainer 
+          width="100%" 
+          height={250} 
+          className="min-h-[200px] sm:min-h-[250px] lg:min-h-[300px]"
+        >
           <BarChart
-            data={data}
+            data={chartData}
+            layout="vertical"
             margin={{
-              top: 20,
-              right: 20,
+              top: 10,
+              right: 10,
               left: 0,
-              bottom: 20,
+              bottom: 10,
             }}
-            barCategoryGap="15%"
-            barGap={4}
+            barCategoryGap="10%"
+            barGap={2}
           >
             <defs>
               {/* Gradient definitions */}
-              <linearGradient id="viewsGradient" x1="0" y1="0" x2="0" y2="1">
+              <linearGradient id="clicksGradient" x1="0" y1="0" x2="1" y2="0">
                 <stop offset="0%" stopColor="#8B5CF6" stopOpacity={0.8} />
                 <stop offset="100%" stopColor="#8B5CF6" stopOpacity={0.4} />
               </linearGradient>
-              <linearGradient id="readsGradient" x1="0" y1="0" x2="0" y2="1">
+              <linearGradient id="scrollGradient" x1="0" y1="0" x2="1" y2="0">
                 <stop offset="0%" stopColor="#06B6D4" stopOpacity={0.8} />
                 <stop offset="100%" stopColor="#06B6D4" stopOpacity={0.4} />
               </linearGradient>
-              <linearGradient id="interactionsGradient" x1="0" y1="0" x2="0" y2="1">
+              <linearGradient id="timeGradient" x1="0" y1="0" x2="1" y2="0">
                 <stop offset="0%" stopColor="#10B981" stopOpacity={0.8} />
                 <stop offset="100%" stopColor="#10B981" stopOpacity={0.4} />
               </linearGradient>
             </defs>
             
-            <XAxis
+            <YAxis
+              type="category"
               dataKey="name"
               stroke={darkMode ? "#9CA3AF" : "#6B7280"}
-              fontSize={12}
+              fontSize={10}
               fontWeight={500}
               axisLine={false}
               tickLine={false}
-              tick={{ dy: 8 }}
+              width={60}
+              tick={{ fontSize: 10 }}
             />
             
-            <YAxis
+            <XAxis
+              type="number"
               stroke={darkMode ? "#9CA3AF" : "#6B7280"}
-              fontSize={12}
+              fontSize={10}
               fontWeight={500}
               axisLine={false}
               tickLine={false}
-              tick={{ dx: -8 }}
-              width={60}
+              tick={{ fontSize: 10 }}
             />
             
             <Tooltip
@@ -163,51 +180,26 @@ const ContentEngagement = ({ data = contentData, darkMode = false }) => {
               }}
             />
             
-            <Legend 
-              wrapperStyle={{
-                paddingTop: '20px',
-                fontSize: '12px',
-                fontWeight: 500,
-              }}
-              iconType="circle"
-              iconSize={10}
-            />
-            
             <Bar
-              dataKey="views"
-              name="Views"
-              radius={[8, 8, 0, 0]}
-              fill="url(#viewsGradient)"
-              stroke="#8B5CF6"
-              strokeWidth={1}
+              dataKey="value"
+              radius={[0, 6, 6, 0]}
               className="drop-shadow-sm hover:drop-shadow-md transition-all duration-200"
-            />
-            
-            <Bar
-              dataKey="reads"
-              name="Reads"
-              radius={[8, 8, 0, 0]}
-              fill="url(#readsGradient)"
-              stroke="#06B6D4"
-              strokeWidth={1}
-              className="drop-shadow-sm hover:drop-shadow-md transition-all duration-200"
-            />
-            
-            <Bar
-              dataKey="interactions"
-              name="Interactions"
-              radius={[8, 8, 0, 0]}
-              fill="url(#interactionsGradient)"
-              stroke="#10B981"
-              strokeWidth={1}
-              className="drop-shadow-sm hover:drop-shadow-md transition-all duration-200"
-            />
+            >
+              {chartData.map((entry, index) => (
+                <Cell 
+                  key={`cell-${index}`} 
+                  fill={`url(#${entry.name.toLowerCase().replace(' ', '')}Gradient)`}
+                  stroke={entry.color}
+                  strokeWidth={1}
+                />
+              ))}
+            </Bar>
           </BarChart>
         </ResponsiveContainer>
         
         {/* Subtle grid overlay effect */}
         <div
-          className={`absolute inset-0 pointer-events-none rounded-xl ${
+          className={`absolute inset-0 pointer-events-none rounded-lg sm:rounded-xl ${
             darkMode
               ? "bg-gradient-to-t from-gray-900/20 to-transparent"
               : "bg-gradient-to-t from-gray-50/30 to-transparent"
@@ -217,23 +209,23 @@ const ContentEngagement = ({ data = contentData, darkMode = false }) => {
       
       {/* Bottom info bar */}
       <div
-        className={`mt-4 pt-4 border-t flex flex-wrap gap-4 text-xs ${
+        className={`mt-3 sm:mt-4 pt-3 sm:pt-4 border-t flex flex-col space-y-2 sm:space-y-0 sm:flex-row sm:flex-wrap gap-2 sm:gap-4 text-xs ${
           darkMode
             ? "border-gray-700 text-gray-400"
             : "border-gray-200 text-gray-500"
         }`}
       >
-        <div className="flex items-center gap-2">
-          <div className="w-3 h-3 rounded-full bg-purple-500"></div>
-          <span>Views - Total content impressions</span>
+        <div className="flex items-center gap-2 min-w-0">
+          <div className="w-2 h-2 sm:w-3 sm:h-3 rounded-full bg-purple-500 flex-shrink-0"></div>
+          <span className="truncate">Clicks - Average per session</span>
         </div>
-        <div className="flex items-center gap-2">
-          <div className="w-3 h-3 rounded-full bg-cyan-500"></div>
-          <span>Reads - Engaged reading sessions</span>
+        <div className="flex items-center gap-2 min-w-0">
+          <div className="w-2 h-2 sm:w-3 sm:h-3 rounded-full bg-cyan-500 flex-shrink-0"></div>
+          <span className="truncate">Scroll Depth - Percentage of page scrolled</span>
         </div>
-        <div className="flex items-center gap-2">
-          <div className="w-3 h-3 rounded-full bg-emerald-500"></div>
-          <span>Interactions - Comments & shares</span>
+        <div className="flex items-center gap-2 min-w-0">
+          <div className="w-2 h-2 sm:w-3 sm:h-3 rounded-full bg-emerald-500 flex-shrink-0"></div>
+          <span className="truncate">Time Spent - Seconds on page</span>
         </div>
       </div>
     </div>

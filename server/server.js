@@ -12,11 +12,11 @@ const mongoose = require("mongoose");
 const cors = require("cors");
 const http = require("http");
 const path = require("path");
+const { initGeoIP } = require("./utils/geoIP");
 
 // Security and authentication
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
-
 
 // Models
 const User = require("./models/User");
@@ -25,11 +25,12 @@ const Message = require("./models/Message");
 // Routes
 const settingsRouter = require("./routes/settings");
 const authRouter = require("./routes/auth");
+const analyticsRouter = require('./routes/analytics');
+const analyticsController = require('./controllers/analyticsController');
 
 // Initialize Express and HTTP server
 const app = express();
 const server = http.createServer(app);
-
 
 // Database Configuration
 const FALLBACK_URI = "mongodb://127.0.0.1:27017/wv-support";
@@ -79,6 +80,14 @@ mongoose.connection.on("disconnected", () => {
 });
 
 // ======================
+// track analytics
+// ======================
+
+initGeoIP().then(() => {
+  console.log("GeoIP initialized");
+});
+
+// ======================
 // ROUTES
 // ======================
 
@@ -111,6 +120,7 @@ app.set("socket", socketServer); // Make accessible in routes
 app.use("/api/messages", require("./routes/messageRoutes"));
 app.use("/api/settings", settingsRouter);
 app.use("/api/auth", authRouter);
+app.use('/api/analytics', analyticsRouter);
 
 // ======================
 // MESSAGE ENDPOINTS
@@ -313,25 +323,63 @@ app.use((req, res) => {
 // SERVER STARTUP
 // ======================
 const startServer = async () => {
-  await connectDB();
-  const PORT = process.env.PORT || 5000;
+  try {
+    // Connect to database first
+    await connectDB();
+    
+    // Initialize GeoIP (continue even if it fails)
+    const geoIPReady = await initGeoIP().then(success => {
+      if (!success) {
+        console.warn('⚠️  GeoIP functionality limited - country detection may not work');
+      }
+      return success;
+    }).catch(err => {
+      console.warn('⚠️  GeoIP initialization failed:', err.message);
+      return false;
+    });
 
-  server.listen(PORT, () => {
-    console.log(`🚀 Server running on port ${PORT}`);
-    console.log(`Admin login: http://localhost:${PORT}/api/admin/login`);
-    console.log(`Health check: http://localhost:${PORT}/api/health`);
-  });
+    const PORT = process.env.PORT || 5000;
+
+    server.listen(PORT, () => {
+      console.log(`\n🚀 Server running on port ${PORT}`);
+      console.log(`---------------------------------`);
+      console.log(`Admin login: http://localhost:${PORT}/api/admin/login`);
+      console.log(`Health check: http://localhost:${PORT}/api/health`);
+      console.log(`---------------------------------`);
+      console.log(`GeoIP Status: ${geoIPReady ? '✅ Ready' : '⚠️ Limited functionality'}`);
+      console.log(`Database: ${mongoose.connection.readyState === 1 ? '✅ Connected' : '❌ Disconnected'}`);
+    });
+  } catch (error) {
+    console.error('\n❌ Server startup failed:', error.message);
+    console.error('Exiting process...');
+    process.exit(1);
+  }
 };
 
 // Graceful shutdown
 process.on("SIGTERM", () => {
-  console.log("SIGTERM received. Shutting down gracefully...");
+  console.log("\n🔻 SIGTERM received. Shutting down gracefully...");
   wss.shutdown();
   server.close(() => {
-    console.log("Server closed");
+    console.log("✅ Server closed");
     process.exit(0);
   });
 });
 
+// Handle uncaught exceptions
+process.on('uncaughtException', (err) => {
+  console.error('\n❌ Uncaught Exception:', err);
+  process.exit(1);
+});
+
+// Handle unhandled promise rejections
+process.on('unhandledRejection', (err) => {
+  console.error('\n❌ Unhandled Rejection:', err);
+  process.exit(1);
+});
+
 // Start the server
-startServer();
+startServer().catch(err => {
+  console.error('\n❌ Failed to start server:', err);
+  process.exit(1);
+});

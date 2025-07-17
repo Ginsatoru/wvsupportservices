@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { Activity, Briefcase, Map } from "lucide-react";
+import { Activity, Clock, Globe, Users } from "lucide-react";
 import { useState } from "react";
 
 const cardVariants = {
@@ -12,11 +12,29 @@ const cardVariants = {
 };
 
 const iconComponents = {
-  users: Activity,
-  dollar: Briefcase,
-  world: Map,
+  users: Users,
+  clock: Clock,
+  world: Globe,
+  activity: Activity,
 };
 
+/**
+ * StatsCard Component
+ * 
+ * @param {Object} props
+ * @param {string} props.title - Card title (e.g., "Visitors")
+ * @param {string|number} props.value - The main metric value
+ * @param {'users'|'clock'|'world'|'activity'} props.iconType - Icon to display
+ * @param {Object} props.color - Color configuration
+ * @param {string} props.color.from - Tailwind gradient from color
+ * @param {string} props.color.to - Tailwind gradient to color
+ * @param {string} props.color.bg - Tailwind background color
+ * @param {string} props.color.text - Tailwind text color
+ * @param {'up'|'down'} [props.trend] - Trend direction
+ * @param {string} [props.change] - Percentage change (e.g., "+3.2%")
+ * @param {boolean} [props.darkMode] - Dark mode toggle
+ * @param {boolean} [props.showFilter] - Show time range filter
+ */
 const StatsCard = ({
   title,
   value,
@@ -28,7 +46,7 @@ const StatsCard = ({
   showFilter = false,
 }) => {
   const [timeRange, setTimeRange] = useState("today");
-  const IconComponent = iconComponents[iconType];
+  const IconComponent = iconComponents[iconType] || Activity;
 
   return (
     <motion.div
@@ -49,13 +67,13 @@ const StatsCard = ({
           <div
             className={`
               w-14 h-14 rounded-full flex items-center justify-center
-              ${darkMode ? "bg-gray-700" : "bg-gray-100"}
+              ${darkMode ? "bg-gray-700" : color.bg || "bg-gray-100"}
               transition-colors duration-200
             `}
           >
             <IconComponent
               size={24}
-              className={darkMode ? "text-gray-300" : "text-gray-700"}
+              className={darkMode ? "text-gray-300" : color.text || "text-gray-700"}
               strokeWidth={1.5}
             />
           </div>

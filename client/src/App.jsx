@@ -5,6 +5,7 @@ import {
   Navigate,
   useLocation,
 } from "react-router-dom";
+import initTracker from "../utils/tracker";
 import { SettingsProvider } from "./context/SettingsContext";
 import { useEffect, useState } from "react";
 import Nav from "./Nav";
@@ -53,13 +54,13 @@ function App() {
   );
 
   useEffect(() => {
+    initTracker(); // Initialize the analytics tracker
     window.scrollTo(0, 0);
   }, [location]);
 
   return (
-
-      <>
-          <SettingsProvider>
+    <>
+      <SettingsProvider>
         {/* Render Nav only for non-admin pages */}
         {!hideLayout && <Nav />}
 
@@ -94,8 +95,6 @@ function App() {
             <Route path="/wordpress" element={<WordPress />} />
             <Route path="/web-hosting" element={<WebHosting />} /> */}
 
-            
-
             {/* Admin routes */}
             <Route
               path="/admin/login"
@@ -124,8 +123,8 @@ function App() {
 
         {/* Footer appears on all pages except admin routes */}
         {!hideLayout && <Footer />}
-        </SettingsProvider>
-      </>
+      </SettingsProvider>
+    </>
   );
 }
 
