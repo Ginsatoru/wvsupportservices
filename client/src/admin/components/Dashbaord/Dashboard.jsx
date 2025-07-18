@@ -30,7 +30,7 @@ const Dashboard = ({ darkMode }) => {
 
   if (loading) {
     return (
-      <div className="flex items-center justify-center min-h-screen bg-gray-50 dark:bg-gray-900">
+      <div className="flex items-center justify-center min-h-[90vh] bg-gray-50 dark:bg-gray-900 rounded-xl p-6">
         <div className="flex flex-col items-center space-y-6">
           {/* Animated spinner */}
           <div className="relative">
@@ -72,62 +72,117 @@ const Dashboard = ({ darkMode }) => {
   }
 
   if (error) {
-  return (
-    <div className="flex items-center justify-center min-h-screen bg-gray-50 dark:bg-gray-900">
-      <div className="flex flex-col items-center space-y-6 max-w-md p-8">
-        {/* Error icon with animation */}
-        <div className="relative">
-          <div className="w-16 h-16 bg-red-100 dark:bg-red-900/30 rounded-full flex items-center justify-center">
-            <svg 
-              xmlns="http://www.w3.org/2000/svg" 
-              className="h-10 w-10 text-red-500 dark:text-red-400 animate-pulse" 
-              fill="none" 
-              viewBox="0 0 24 24" 
-              stroke="currentColor"
-              strokeWidth={2}
-            >
-              <path strokeLinecap="round" strokeLinejoin="round" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-            </svg>
+    return (
+      <div className="flex items-center justify-center min-h-[90vh] bg-gray-50 dark:bg-gray-900 rounded-xl p-6">
+        <div className="flex flex-col items-center space-y-6 max-w-md p-8">
+          {/* Error icon with animation */}
+          <div className="relative">
+            <div className="w-16 h-16 bg-red-100 dark:bg-red-900/30 rounded-full flex items-center justify-center">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="h-10 w-10 text-red-500 dark:text-red-400 animate-pulse"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                strokeWidth={2}
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                />
+              </svg>
+            </div>
+            <div className="absolute -inset-2 border-2 border-red-200 dark:border-red-800 rounded-full animate-ping opacity-75"></div>
           </div>
-          <div className="absolute -inset-2 border-2 border-red-200 dark:border-red-800 rounded-full animate-ping opacity-75"></div>
+
+          {/* Error text */}
+          <div className="text-center space-y-2">
+            <h2 className="text-2xl font-semibold text-gray-800 dark:text-gray-200">
+              Something went wrong
+            </h2>
+            <p className="text-red-500 dark:text-red-400 font-medium">
+              {error}
+            </p>
+            <p className="text-gray-600 dark:text-gray-400">
+              We couldn't load your dashboard data.
+            </p>
+          </div>
+
+          {/* Retry button */}
+          <button
+            onClick={() => window.location.reload()}
+            className="mt-4 px-6 py-2 bg-red-500 hover:bg-red-600 text-lg dark:bg-red-600 dark:hover:bg-red-700 text-white font-medium rounded-xl transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 dark:focus:ring-offset-gray-900"
+          >
+            Try Again
+          </button>
+
+          {/* Support link */}
+          <a
+            href="https://t.me/Gin_Satoru"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-sm text-blue-500 dark:text-blue-400 hover:underline mt-2"
+          >
+            Need help? Contact developer on Telegram
+          </a>
         </div>
-        
-        {/* Error text */}
-        <div className="text-center space-y-2">
-          <h2 className="text-2xl font-semibold text-gray-800 dark:text-gray-200">Something went wrong</h2>
-          <p className="text-red-500 dark:text-red-400 font-medium">{error}</p>
-          <p className="text-gray-600 dark:text-gray-400">We couldn't load your dashboard data.</p>
-        </div>
-        
-        {/* Retry button */}
-        <button
-          onClick={() => window.location.reload()}
-          className="mt-4 px-6 py-2 bg-red-500 hover:bg-red-600 dark:bg-red-600 dark:hover:bg-red-700 text-white font-medium rounded-lg transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 dark:focus:ring-offset-gray-900"
-        >
-          Try Again
-        </button>
-        
-        {/* Support link */}
-        <a 
-          href="/support" 
-          className="text-sm text-blue-500 dark:text-blue-400 hover:underline mt-2"
-        >
-          Need help? Contact support
-        </a>
       </div>
-    </div>
-  );
-}
+    );
+  }
 
   if (!analyticsData) {
     return (
-      <div
-        className={`p-5 bg-gray-200 dark:bg-gray-900 min-h-[80vh] rounded-xl ${
-          darkMode ? "dark" : ""
-        }`}
-      >
-        <div className="text-gray-500 dark:text-gray-400 text-center p-4">
-          No analytics data available
+      <div className="flex items-center justify-center min-h-screen bg-gray-50 dark:bg-gray-900">
+        <div className="flex flex-col items-center space-y-6 max-w-md p-8">
+          {/* Empty state icon with subtle animation */}
+          <div className="relative">
+            <div className="w-16 h-16 bg-gray-100 dark:bg-gray-800 rounded-full flex items-center justify-center">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="h-10 w-10 text-gray-400 dark:text-gray-500 animate-float"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                strokeWidth={1.5}
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
+                />
+              </svg>
+            </div>
+            <div className="absolute inset-0 rounded-full border-2 border-gray-200 dark:border-gray-700 animate-pulse opacity-75"></div>
+          </div>
+
+          {/* Empty state text */}
+          <div className="text-center space-y-2">
+            <h2 className="text-2xl font-semibold text-gray-700 dark:text-gray-300">
+              No Analytics Data
+            </h2>
+            <p className="text-gray-500 dark:text-gray-400">
+              We couldn't find any data to display.
+              <br />
+              Try adjusting your filters or check back later.
+            </p>
+          </div>
+
+          {/* Action buttons */}
+          <div className="flex gap-4 pt-2">
+            <button
+              onClick={() => window.location.reload()}
+              className="px-5 py-2 bg-blue-500 hover:bg-blue-600 dark:bg-blue-600 dark:hover:bg-blue-700 text-white font-medium rounded-lg transition-colors duration-200"
+            >
+              Refresh Data
+            </button>
+            <button
+              onClick={() => setFiltersOpen(true)}
+              className="px-5 py-2 bg-gray-100 hover:bg-gray-200 dark:bg-gray-700 dark:hover:bg-gray-600 text-gray-700 dark:text-gray-200 font-medium rounded-lg transition-colors duration-200"
+            >
+              Adjust Filters
+            </button>
+          </div>
         </div>
       </div>
     );
