@@ -11,6 +11,7 @@ import Settings from "../components/Settings/Settings";
 import ConfirmationModal from "../components/Modals/ConfirmationModal";
 import { motion, AnimatePresence } from "framer-motion";
 import WelcomeModal from "./WelcomeModal";
+import Soon from "../components/Temp/AvailableSoon.jsx";
 
 const AdminPanel = () => {
   const [activeTab, setActiveTab] = useState("dashboard");
@@ -146,6 +147,10 @@ const AdminPanel = () => {
             {activeTab === "inbox-open" && <OpenMessage darkMode={darkMode} />}
             {activeTab === "inbox-closed" && <ClosedMessage darkMode={darkMode} />}
             {activeTab === "frontend" && <FrontendPages darkMode={darkMode} />}
+            {activeTab === "reports" && <Soon darkMode={darkMode} />}
+            {activeTab === "statistics" && <Soon darkMode={darkMode} />}
+            {activeTab === "users" && <Soon darkMode={darkMode} />}
+            {activeTab === "orders" && <Soon darkMode={darkMode} />}
             {activeTab === "settings" && <Settings darkMode={darkMode} />}
           </div>
         </main>

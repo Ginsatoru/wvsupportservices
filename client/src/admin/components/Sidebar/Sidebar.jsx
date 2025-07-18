@@ -57,7 +57,7 @@ const Sidebar = ({
       isExpandable: true,
       isExpanded: expandedSections.analytics,
       children: [
-        { id: "reports", label: "Reports", icon: FiTrendingUp },
+        { id: "reports", label: "Reports", icon: FiTrendingUp,},
         { id: "statistics", label: "Statistics", icon: FiBarChart },
       ],
     },
