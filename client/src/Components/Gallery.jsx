@@ -263,7 +263,7 @@ const Gallery = () => {
         </div>
       )}
 
-      <style jsx global>{`
+      <style global="true">{`
         @keyframes scroll-continuous {
           0% {
             transform: translateX(0);

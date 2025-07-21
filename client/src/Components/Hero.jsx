@@ -1,9 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import "../Components/i18n";
 import heroBg from "./Images/hero.webp";
-import { useState } from "react";
 
 const HeroComponent = () => {
   const navigate = useNavigate();
@@ -28,7 +27,6 @@ const HeroComponent = () => {
 
       {/* Content */}
       <div className="relative z-10 h-full flex items-center max-w-full lg:max-w-[85%] xl:max-w-[84%] 2xl:max-w-7xl mx-auto px-4 sm:px-6 lg:px-2">
-
         <div className="max-w-2xl text-white px-4 sm:px-2">
           <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-3 sm:mb-4 animate-slide-up">
             <span className="text-[#0f8abe]">WV Support</span>
@@ -57,21 +55,15 @@ const HeroComponent = () => {
         </div>
       </div>
 
-      {/* Custom styles */}
-      <style jsx global>{`
+      {/* Fixed style component */}
+      <style global="true">{`
         @keyframes fadeIn {
-          0% {
-            opacity: 0;
-          }
-          100% {
-            opacity: 1;
-          }
+          0% { opacity: 0; }
+          100% { opacity: 1; }
         }
-
         .fade-in-image {
           animation: fadeIn 1s ease-in forwards;
         }
-
         .shine-effect {
           position: absolute;
           top: -50%;
@@ -87,16 +79,10 @@ const HeroComponent = () => {
           transform: rotate(30deg);
           animation: shine 5s infinite;
         }
-
         @keyframes shine {
-          0% {
-            transform: rotate(30deg) translate(-30%, -30%);
-          }
-          100% {
-            transform: rotate(30deg) translate(30%, 30%);
-          }
+          0% { transform: rotate(30deg) translate(-30%, -30%); }
+          100% { transform: rotate(30deg) translate(30%, 30%); }
         }
-
         @keyframes slide-up {
           0% {
             opacity: 0;
@@ -107,18 +93,11 @@ const HeroComponent = () => {
             transform: translateY(0);
           }
         }
-
         .animate-slide-up {
           animation: slide-up 0.8s ease-out forwards;
         }
-
-        .delay-100 {
-          animation-delay: 0.1s;
-        }
-        .delay-200 {
-          animation-delay: 0.2s;
-        }
-
+        .delay-100 { animation-delay: 0.1s; }
+        .delay-200 { animation-delay: 0.2s; }
         .cta-primary {
           background: #0f8abe;
           color: white;
@@ -132,13 +111,11 @@ const HeroComponent = () => {
           text-align: center;
           white-space: nowrap;
         }
-
         .cta-primary:hover {
           background: #0d79a8;
           transform: translateY(-2px);
           box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
         }
-
         .cta-secondary {
           background: rgba(255, 255, 255, 0.1);
           color: white;
@@ -153,12 +130,10 @@ const HeroComponent = () => {
           text-align: center;
           white-space: nowrap;
         }
-
         .cta-secondary:hover {
           background: rgba(255, 255, 255, 0.2);
           transform: translateY(-2px);
         }
-
         @media (max-width: 640px) {
           .cta-primary,
           .cta-secondary {

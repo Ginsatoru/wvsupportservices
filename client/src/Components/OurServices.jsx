@@ -129,8 +129,8 @@ const OurServices = () => {
         </div>
       </div>
 
-      {/* Animations */}
-      <style jsx>{`
+      {/* Animations - Fixed by removing jsx attribute */}
+      <style>{`
         @keyframes fade-in {
           from {
             opacity: 0;

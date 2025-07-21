@@ -1,6 +1,9 @@
 // tracker.js (to be included in your public-facing React app)
 class AnalyticsTracker {
   constructor() {
+    if (window.location.pathname.startsWith('/admin-panel')) {
+      return;
+    }
     this.sessionId = sessionStorage.getItem('analyticsSessionId') || 
                    this.generateSessionId();
     sessionStorage.setItem('analyticsSessionId', this.sessionId);
