@@ -91,40 +91,6 @@ const Team = () => {
     };
   }, []);
 
-  // Debug: Log current state
-  console.log('Current state:', { loading, error, teamMembersLength: teamMembers.length });
-
-  // Loading state
-  // if (loading) {
-  //   return (
-  //     <div className="bg-white">
-  //       <div className="w-full mx-auto py-12 md:py-16 max-w-full lg:max-w-[1250px] 2xl:max-w-[1350px] [@media(min-width:1700px)]:max-w-[1585px]">
-  //         <div className="w-full text-center mb-8 md:mb-10">
-  //           <h1 className="text-2xl sm:text-3xl font-bold text-[#0f8abe] mb-4 font-montserrat">
-  //             Meet Our Team
-  //           </h1>
-  //           <p className="text-base sm:text-lg text-gray-600 max-w-3xl mx-auto font-montserrat px-4">
-  //             Loading team members...
-  //           </p>
-  //         </div>
-  //         <div className="w-full px-4 sm:px-6 lg:px-8 mx-auto">
-  //           <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-3 sm:gap-4 md:gap-6">
-  //             {[...Array(9)].map((_, index) => (
-  //               <div key={index} className="bg-white rounded-xl shadow-md border overflow-hidden animate-pulse">
-  //                 <div className="h-36 sm:h-40 md:h-48 bg-gray-200"></div>
-  //                 <div className="p-3 sm:p-4 text-center">
-  //                   <div className="h-4 bg-gray-200 rounded mb-2"></div>
-  //                   <div className="h-3 bg-gray-200 rounded w-2/3 mx-auto"></div>
-  //                 </div>
-  //               </div>
-  //             ))}
-  //           </div>
-  //         </div>
-  //       </div>
-  //     </div>
-  //   );
-  // }
-
   // Error state
   if (error) {
     return (
