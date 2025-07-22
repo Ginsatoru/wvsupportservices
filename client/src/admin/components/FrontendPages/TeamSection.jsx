@@ -53,14 +53,14 @@ const CMSTeam = () => {
   };
 
   return (
-    <div className="p-6 bg-gray-200 dark:bg-gray-900 rounded-xl">
+    <div className="px-4 py-0 bg-gray-200 dark:bg-gray-900 rounded-xl">
       <div className="flex flex-col h-full">
         {/* Header */}
         <div className="flex justify-between items-center mb-6">
           <div className="flex items-center gap-3">
-            <Layout className="w-6 h-6 text-sky-400" />
             <div>
-              <h1 className="text-2xl font-bold text-gray-900 dark:text-white">
+              <h1 className="text-2xl font-bold text-gray-900 dark:text-white flex items-center gap-2">
+                <Layout className="w-6 h-6 text-sky-400" />
                 Team Management
               </h1>
               <p className="text-sm text-gray-500 dark:text-gray-400">
@@ -70,7 +70,7 @@ const CMSTeam = () => {
           </div>
           <button
             onClick={() => setIsAddModalOpen(true)}
-            className="flex items-center gap-2 px-4 py-2 bg-sky-600 dark:bg-sky-700 text-white text-sm font-medium rounded-xl hover:bg-sky-700 dark:hover:bg-sky-600 transition-colors"
+            className="flex items-center gap-2 px-4 py-3 bg-sky-600 dark:bg-sky-700 text-white text-sm font-medium rounded-xl hover:bg-sky-700 dark:hover:bg-sky-600 transition-colors"
           >
             <Plus className="w-4 h-4" />
             Add New Member

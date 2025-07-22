@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { updateTeamMember } from '../../../services/api';
 import Modal from 'react-modal';
-import { X, Loader2 } from 'lucide-react';
+import { X, Loader2, Image as ImageIcon, User, Briefcase, Mail, Phone, Send } from 'lucide-react';
 
 Modal.setAppElement('#root');
 
@@ -72,104 +72,151 @@ const EditModal = ({ isOpen, onClose, member, onSuccess }) => {
       isOpen={isOpen}
       onRequestClose={onClose}
       className="modal-content bg-transparent border-none shadow-none outline-none"
-      overlayClassName="fixed inset-0 bg-gray-600 bg-opacity-50 dark:bg-gray-900 dark:bg-opacity-50 flex items-center justify-center p-4 z-50"
+      overlayClassName="fixed inset-0 bg-gray-600/50 dark:bg-gray-900/80 backdrop-blur-sm flex items-center justify-center p-4 z-50"
     >
-      <div className="bg-white dark:bg-gray-800 rounded-xl shadow-xl p-6 w-full max-w-md border border-gray-200 dark:border-gray-700">
-        <div className="flex justify-between items-center mb-6">
-          <h2 className="text-xl font-bold text-gray-900 dark:text-white">Edit Team Member</h2>
+      <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-2xl p-8 w-full max-w-2xl border border-gray-200/50 dark:border-gray-700/50">
+        <div className="flex justify-between items-start mb-8">
+          <div>
+            <h2 className="text-2xl font-bold text-gray-900 dark:text-white">Edit Team Member</h2>
+            <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">Update member details and contact information</p>
+          </div>
           <button 
             onClick={onClose}
-            className="text-gray-400 hover:text-gray-500 dark:hover:text-gray-300 transition-colors p-1 rounded-full hover:bg-gray-100 dark:hover:bg-gray-700"
+            className="text-gray-400 hover:text-gray-500 dark:hover:text-gray-300 transition-colors p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-700/50"
           >
             <X className="w-5 h-5" />
           </button>
         </div>
 
         <form onSubmit={handleSubmit}>
-          <div className="space-y-4 mb-6">
-            <div>
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Name</label>
-              <input
-                type="text"
-                name="name"
-                value={formData.name}
-                onChange={handleChange}
-                className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-sky-500 focus:border-transparent"
-                required
-              />
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+            {/* Left Column */}
+            <div className="space-y-5">
+              <div className="relative">
+                <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none text-gray-400 dark:text-gray-500">
+                  <User className="w-5 h-5" />
+                </div>
+                <input
+                  type="text"
+                  name="name"
+                  value={formData.name}
+                  onChange={handleChange}
+                  className="w-full text-base pl-10 pr-4 py-3 border border-gray-300/70 dark:border-gray-600/50 rounded-xl bg-white dark:bg-gray-700/50 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-sky-500/50 focus:border-transparent transition-all"
+                  placeholder="Full name"
+                  required
+                />
+              </div>
+
+              <div className="relative">
+                <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none text-gray-400 dark:text-gray-500">
+                  <Briefcase className="w-5 h-5" />
+                </div>
+                <input
+                  type="text"
+                  name="position"
+                  value={formData.position}
+                  onChange={handleChange}
+                  className="w-full pl-10 text-base pr-4 py-3 border border-gray-300/70 dark:border-gray-600/50 rounded-xl bg-white dark:bg-gray-700/50 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-sky-500/50 focus:border-transparent transition-all"
+                  placeholder="Position/Role"
+                  required
+                />
+              </div>
+
+              <div className="relative">
+                <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none text-gray-400 dark:text-gray-500">
+                  <ImageIcon className="w-5 h-5" />
+                </div>
+                <input
+                  type="text"
+                  name="image"
+                  value={formData.image}
+                  onChange={handleChange}
+                  className="w-full pl-10 pr-4 py-3 text-base border border-gray-300/70 dark:border-gray-600/50 rounded-xl bg-white dark:bg-gray-700/50 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-sky-500/50 focus:border-transparent transition-all"
+                  placeholder="Profile image URL"
+                  required
+                />
+              </div>
             </div>
 
-            <div>
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Position</label>
-              <input
-                type="text"
-                name="position"
-                value={formData.position}
-                onChange={handleChange}
-                className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-sky-500 focus:border-transparent"
-                required
-              />
-            </div>
+            {/* Right Column */}
+            <div className="space-y-5">
+              <div className="relative">
+                <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none text-gray-400 dark:text-gray-500">
+                  <Mail className="w-5 h-5" />
+                </div>
+                <input
+                  type="email"
+                  name="contacts.email"
+                  value={formData.contacts.email}
+                  onChange={handleChange}
+                  className="w-full pl-10 pr-4 py-3 text-base border border-gray-300/70 dark:border-gray-600/50 rounded-xl bg-white dark:bg-gray-700/50 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-sky-500/50 focus:border-transparent transition-all"
+                  placeholder="Email address"
+                  required
+                />
+              </div>
 
-            <div>
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Image URL</label>
-              <input
-                type="text"
-                name="image"
-                value={formData.image}
-                onChange={handleChange}
-                className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-sky-500 focus:border-transparent"
-                required
-              />
-            </div>
+              <div className="relative">
+                <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none text-gray-400 dark:text-gray-500">
+                  <Phone className="w-5 h-5" />
+                </div>
+                <input
+                  type="text"
+                  name="contacts.phone"
+                  value={formData.contacts.phone}
+                  onChange={handleChange}
+                  className="w-full pl-10 pr-4 py-3 border text-base border-gray-300/70 dark:border-gray-600/50 rounded-xl bg-white dark:bg-gray-700/50 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-sky-500/50 focus:border-transparent transition-all"
+                  placeholder="Phone number"
+                />
+              </div>
 
-            <div>
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Email</label>
-              <input
-                type="email"
-                name="contacts.email"
-                value={formData.contacts.email}
-                onChange={handleChange}
-                className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-sky-500 focus:border-transparent"
-                required
-              />
-            </div>
-
-            <div>
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Phone</label>
-              <input
-                type="text"
-                name="contacts.phone"
-                value={formData.contacts.phone}
-                onChange={handleChange}
-                className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-sky-500 focus:border-transparent"
-              />
-            </div>
-
-            <div>
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Telegram</label>
-              <input
-                type="text"
-                name="contacts.telegram"
-                value={formData.contacts.telegram}
-                onChange={handleChange}
-                className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-sky-500 focus:border-transparent"
-              />
+              <div className="relative">
+                <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none text-gray-400 dark:text-gray-500">
+                  <Send className="w-5 h-5" />
+                </div>
+                <input
+                  type="text"
+                  name="contacts.telegram"
+                  value={formData.contacts.telegram}
+                  onChange={handleChange}
+                  className="w-full pl-10 pr-4 py-3 border text-base border-gray-300/70 dark:border-gray-600/50 rounded-xl bg-white dark:bg-gray-700/50 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-sky-500/50 focus:border-transparent transition-all"
+                  placeholder="Telegram username"
+                />
+              </div>
             </div>
           </div>
 
-          <div className="flex justify-end space-x-3">
+          {/* Image Preview */}
+          {formData.image && (
+            <div className="mb-8 flex justify-center">
+              <div className="relative group">
+                <img 
+                  src={formData.image} 
+                  alt="Preview" 
+                  className="w-32 h-32 rounded-xl object-cover border-2 border-gray-200 dark:border-gray-600 group-hover:border-sky-400 transition-all"
+                  onError={(e) => {
+                    e.target.onerror = null; 
+                    e.target.src = 'https://via.placeholder.com/128?text=No+Image';
+                  }}
+                />
+                <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 rounded-xl flex items-center justify-center transition-opacity">
+                  <span className="text-white text-sm font-medium">Image Preview</span>
+                </div>
+              </div>
+            </div>
+          )}
+
+          <div className="flex justify-end space-x-4 pt-4 border-t border-gray-200/50 dark:border-gray-700/50">
             <button
               type="button"
               onClick={onClose}
-              className="px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-xl text-sm font-medium text-gray-700 dark:text-gray-300 bg-white dark:bg-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600 transition-colors"
+              className="px-6 py-3 border border-gray-300/70 dark:border-gray-600/50 rounded-xl text-sm font-medium text-gray-700 dark:text-gray-300 bg-white dark:bg-gray-700/50 hover:bg-gray-50/80 dark:hover:bg-gray-700 transition-all"
             >
               Cancel
             </button>
             <button
               type="submit"
               disabled={isSubmitting}
-              className="px-4 py-2 border border-transparent rounded-xl text-sm font-medium text-white bg-sky-600 dark:bg-sky-700 hover:bg-sky-700 dark:hover:bg-sky-600 transition-colors focus:outline-none focus:ring-2 focus:ring-sky-500 focus:ring-offset-2 disabled:opacity-50 flex items-center justify-center min-w-[120px]"
+              className="px-6 py-3 border border-transparent rounded-xl text-sm font-medium text-white bg-gradient-to-r from-sky-500 to-blue-600 hover:from-sky-600 hover:to-blue-700 shadow-sm transition-all focus:outline-none focus:ring-2 focus:ring-sky-500/50 focus:ring-offset-2 disabled:opacity-50 flex items-center justify-center min-w-[140px]"
             >
               {isSubmitting ? (
                 <>

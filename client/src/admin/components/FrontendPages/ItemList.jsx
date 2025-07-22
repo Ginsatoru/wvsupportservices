@@ -62,14 +62,14 @@ const ItemList = ({ teamMembers, onEdit, onDelete }) => {
               <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium space-x-2">
                 <button
                   onClick={() => onEdit(member)}
-                  className="text-sky-600 dark:text-sky-400 hover:text-sky-700 dark:hover:text-sky-300 transition-colors duration-150 ease-in-out p-2 rounded hover:bg-sky-50 dark:hover:bg-sky-900/20"
+                  className="text-sky-600 dark:text-sky-400 hover:text-sky-700 dark:hover:text-sky-300 transition-colors duration-150 ease-in-out p-2 rounded-full hover:bg-sky-50 dark:hover:bg-sky-900/20"
                   title="Edit"
                 >
                   <Edit2 className="w-4 h-4" />
                 </button>
                 <button
                   onClick={() => onDelete(member._id)}
-                  className="text-red-600 dark:text-red-400 hover:text-red-700 dark:hover:text-red-300 transition-colors duration-150 ease-in-out p-2 rounded hover:bg-red-50 dark:hover:bg-red-900/20"
+                  className="text-red-600 dark:text-red-400 hover:text-red-700 dark:hover:text-red-300 transition-colors duration-150 ease-in-out p-2 rounded-full hover:bg-red-50 dark:hover:bg-red-900/20"
                   title="Delete"
                 >
                   <Trash2 className="w-4 h-4" />
