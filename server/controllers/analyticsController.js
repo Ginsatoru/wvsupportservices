@@ -3,6 +3,51 @@ const Visit = require("../models/Visit");
 const { parseUserAgent } = require("../utils/userAgentParser");
 const { getCountryFromIP } = require("../utils/geoIP");
 
+// Get today's stats
+exports.getTodayStats = async (req, res) => {
+  try {
+    // Get start of today and now
+    const startOfToday = new Date();
+    startOfToday.setHours(0, 0, 0, 0);
+    
+    const endOfToday = new Date();
+    endOfToday.setHours(23, 59, 59, 999);
+
+    // MongoDB aggregation to get today's stats
+    const stats = await Visit.aggregate([
+      {
+        $match: {
+          timestamp: { $gte: startOfToday, $lte: endOfToday }
+        }
+      },
+      {
+        $group: {
+          _id: null,
+          totalViews: { $sum: 1 },
+          uniqueVisitors: { $addToSet: "$visitorId" }
+        }
+      },
+      {
+        $project: {
+          _id: 0,
+          totalViews: 1,
+          uniqueVisitors: { $size: "$uniqueVisitors" }
+        }
+      }
+    ]);
+
+    // If no data found today, return zeros
+    const result = stats[0] || { totalViews: 0, uniqueVisitors: 0 };
+
+    // Cache control - 5 minutes
+    res.set('Cache-Control', 'public, max-age=300');
+    res.json(result);
+  } catch (error) {
+    console.error('Error fetching today stats:', error);
+    res.status(500).json({ error: 'Internal server error' });
+  }
+};
+
 // Track a new visit
 exports.trackVisit = async (req, res) => {
   try {

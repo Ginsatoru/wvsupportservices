@@ -132,7 +132,7 @@ const TopCountries = ({ data = [], colors = COLORS, darkMode = false }) => {
 
   return (
     <div
-      className={`relative py-3 px-4 sm:py-4 sm:px-6 lg:py-6 lg:px-8 rounded-xl sm:rounded-2xl transition-all duration-300 hover:shadow-xl w-full max-w-full overflow-hidden ${
+      className={`relative py-3 px-4 sm:py-4 sm:px-6 lg:py-6 lg:px-10 rounded-xl sm:rounded-2xl transition-all duration-300 hover:shadow-xl w-full max-w-full overflow-hidden ${
         darkMode
           ? "bg-gradient-to-br from-black-800 to-gray-900 shadow-2xl border border-gray-700"
           : "bg-gradient-to-br from-white to-gray-50 shadow-lg border border-gray-100"

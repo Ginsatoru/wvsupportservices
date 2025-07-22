@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   FiHome,
   FiMail,
@@ -34,6 +34,42 @@ const Sidebar = ({
     management: false,
     content: false,
   });
+
+  // State for today's stats
+  const [todayStats, setTodayStats] = useState({
+    viewers: 0,
+    visitors: 0,
+    loading: true,
+  });
+
+  // Fetch today's stats
+  useEffect(() => {
+    const fetchTodayStats = async () => {
+      try {
+        const response = await fetch('/api/analytics/today');
+        if (!response.ok) throw new Error('Failed to fetch stats');
+        
+        const data = await response.json();
+        setTodayStats({
+          viewers: data.totalViews || 0,
+          visitors: data.uniqueVisitors || 0,
+          loading: false,
+        });
+      } catch (error) {
+        console.error('Error fetching today stats:', error);
+        setTodayStats(prev => ({
+          ...prev,
+          loading: false
+        }));
+      }
+    };
+
+    fetchTodayStats();
+    
+    // Optional: Refresh data every 5 minutes (matches cache duration)
+    const interval = setInterval(fetchTodayStats, 300000);
+    return () => clearInterval(interval);
+  }, []);
 
   const toggleSection = (section) => {
     setExpandedSections((prev) => ({
@@ -311,7 +347,7 @@ const Sidebar = ({
     <motion.div
       className={`${
         darkMode ? "bg-gray-800" : "bg-white"
-      } shadow-sm flex flex-col justify-between`}  // Added justify-between here
+      } shadow-sm flex flex-col justify-between`}
       initial={{ width: isOpen ? 288 : 80 }}
       animate={{ width: isOpen ? 288 : 80 }}
       transition={{ type: "spring", damping: 25, stiffness: 300 }}
@@ -352,11 +388,13 @@ const Sidebar = ({
                 </div>
                 <div className="grid grid-cols-2 gap-3">
                   <div className="text-center">
-                    <p
-                      className="text-2xl font-bold text-sky-400"
-                    >
-                      68
-                    </p>
+                    {todayStats.loading ? (
+                      <div className="h-8 w-12 mx-auto bg-gray-300 dark:bg-gray-600 rounded-md animate-pulse"></div>
+                    ) : (
+                      <p className="text-2xl font-bold text-sky-400">
+                        {todayStats.viewers}
+                      </p>
+                    )}
                     <p
                       className={`text-sm ${
                         darkMode ? "text-gray-300" : "text-gray-500"
@@ -366,11 +404,13 @@ const Sidebar = ({
                     </p>
                   </div>
                   <div className="text-center">
-                    <p
-                      className="text-2xl font-bold text-sky-400"
-                    >
-                      32
-                    </p>
+                    {todayStats.loading ? (
+                      <div className="h-8 w-12 mx-auto bg-gray-300 dark:bg-gray-600 rounded-md animate-pulse"></div>
+                    ) : (
+                      <p className="text-2xl font-bold text-sky-400">
+                        {todayStats.visitors}
+                      </p>
+                    )}
                     <p
                       className={`text-sm ${
                         darkMode ? "text-gray-300" : "text-gray-500"

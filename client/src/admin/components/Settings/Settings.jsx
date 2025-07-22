@@ -366,7 +366,7 @@ export default function SettingsPage() {
   }
 
   return (
-    <div className="p-1 bg-gray-200 dark:bg-gray-900 min-h-[50vh] rounded-xl">
+    <div className="p-6 bg-gray-200 dark:bg-gray-900 min-h-[50vh] rounded-xl">
       {/* Modern Alert */}
       {alert.show && (
         <ModernAlert
