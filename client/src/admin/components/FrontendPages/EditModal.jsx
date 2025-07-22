@@ -1,238 +1,178 @@
-import React, { useState, useEffect, useRef } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import {
-  X,
-  Save,
-  Trash2,
-  Image as ImageIcon,
-  Upload,
-  User,
-  Eye,
-  Clock
-} from "lucide-react";
+import React, { useState, useEffect } from 'react';
+import { updateTeamMember } from '../../../services/api';
+import Modal from 'react-modal';
 
-const EditModal = ({ item, onClose, onSave }) => {
-  const [formData, setFormData] = useState(item);
-  const [imagePreview, setImagePreview] = useState(item.imageUrl || "");
-  const fileInputRef = useRef(null);
+Modal.setAppElement('#root');
+
+const EditModal = ({ isOpen, onClose, member, onSuccess }) => {
+  const [formData, setFormData] = useState({
+    name: '',
+    position: '',
+    image: '',
+    contacts: {
+      telegram: '',
+      email: '',
+      phone: ''
+    }
+  });
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   useEffect(() => {
-    setFormData(item);
-    setImagePreview(item.imageUrl || "");
-  }, [item]);
+    if (member) {
+      setFormData({
+        name: member.name,
+        position: member.position,
+        image: member.image,
+        contacts: {
+          telegram: member.contacts.telegram || '',
+          email: member.contacts.email,
+          phone: member.contacts.phone || ''
+        }
+      });
+    }
+  }, [member]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData(prev => ({ ...prev, [name]: value }));
-  };
-
-  const handleImageChange = (e) => {
-    const file = e.target.files[0];
-    if (file) {
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        setImagePreview(reader.result);
-        setFormData(prev => ({ ...prev, imageFile: file }));
-      };
-      reader.readAsDataURL(file);
+    
+    if (name.includes('contacts.')) {
+      const contactField = name.split('.')[1];
+      setFormData(prev => ({
+        ...prev,
+        contacts: {
+          ...prev.contacts,
+          [contactField]: value
+        }
+      }));
+    } else {
+      setFormData(prev => ({
+        ...prev,
+        [name]: value
+      }));
     }
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    onSave({
-      ...formData,
-      imageUrl: imagePreview
-    });
+    setIsSubmitting(true);
+    
+    try {
+      await updateTeamMember(member._id, formData);
+      onSuccess();
+    } catch (error) {
+      console.error('Error updating team member:', error);
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
-    <AnimatePresence>
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        exit={{ opacity: 0 }}
-        className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4"
-      >
-        <motion.div
-          initial={{ scale: 0.95, y: 20 }}
-          animate={{ scale: 1, y: 0 }}
-          exit={{ scale: 0.95, y: 20 }}
-          className="bg-white dark:bg-gray-800 rounded-xl shadow-2xl w-full max-w-2xl max-h-[90vh] overflow-y-auto"
-        >
-          {/* Modal Header */}
-          <div className="flex items-center justify-between p-4 border-b border-gray-200 dark:border-gray-700 sticky top-0 bg-white dark:bg-gray-800 z-10 rounded-t-xl">
-            <h2 className="text-lg font-semibold text-gray-900 dark:text-white">
-              Edit {item.name}
-            </h2>
-            <button
-              onClick={onClose}
-              className="p-1 rounded-xl hover:bg-gray-100 dark:hover:bg-gray-700"
-              aria-label="Close"
-            >
-              <X className="w-5 h-5 text-gray-500 dark:text-gray-400" />
-            </button>
+    <Modal
+      isOpen={isOpen}
+      onRequestClose={onClose}
+      className="modal"
+      overlayClassName="overlay"
+    >
+      <div className="bg-white rounded-lg shadow-xl p-6 w-full max-w-md">
+        <div className="flex justify-between items-center mb-4">
+          <h2 className="text-xl font-bold text-gray-900">Edit Team Member</h2>
+          <button onClick={onClose} className="text-gray-500 hover:text-gray-700">
+            <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          </button>
+        </div>
+
+        <form onSubmit={handleSubmit}>
+          <div className="mb-4">
+            <label className="block text-sm font-medium text-gray-700 mb-1">Name</label>
+            <input
+              type="text"
+              name="name"
+              value={formData.name}
+              onChange={handleChange}
+              className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+              required
+            />
           </div>
 
-          {/* Modal Body */}
-          <form onSubmit={handleSubmit} className="p-4">
-            {/* Image Upload */}
-            <div className="mb-4">
-              <label className="block text-xs font-medium mb-1 text-gray-700 dark:text-gray-300">
-                Section Image
-              </label>
-              <div className="flex items-center gap-3">
-                <div className="w-20 h-20 rounded-xl bg-gray-100 dark:bg-gray-700 overflow-hidden">
-                  {imagePreview ? (
-                    <img 
-                      src={imagePreview} 
-                      alt="Preview" 
-                      className="w-full h-full object-cover"
-                    />
-                  ) : (
-                    <div className="w-full h-full flex items-center justify-center">
-                      <ImageIcon className="w-6 h-6 text-gray-400" />
-                    </div>
-                  )}
-                </div>
-                <div>
-                  <button
-                    type="button"
-                    onClick={() => fileInputRef.current.click()}
-                    className="flex items-center gap-1.5 px-3 py-1.5 bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 rounded-xl text-xs"
-                  >
-                    <Upload className="w-4 h-4" />
-                    <span>Upload Image</span>
-                  </button>
-                  <input
-                    type="file"
-                    ref={fileInputRef}
-                    onChange={handleImageChange}
-                    accept="image/*"
-                    className="hidden"
-                  />
-                  <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
-                    JPG, PNG or GIF (max 2MB)
-                  </p>
-                </div>
-              </div>
-            </div>
+          <div className="mb-4">
+            <label className="block text-sm font-medium text-gray-700 mb-1">Position</label>
+            <input
+              type="text"
+              name="position"
+              value={formData.position}
+              onChange={handleChange}
+              className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+              required
+            />
+          </div>
 
-            {/* Form Fields */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
-              <div>
-                <label className="block text-xs font-medium mb-1 text-gray-700 dark:text-gray-300">
-                  Name
-                </label>
-                <input
-                  type="text"
-                  name="name"
-                  value={formData.name}
-                  onChange={handleChange}
-                  className="w-full px-3 py-1.5 text-sm border border-gray-200 dark:border-gray-700 rounded-xl bg-white dark:bg-gray-700 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                  required
-                />
-              </div>
+          <div className="mb-4">
+            <label className="block text-sm font-medium text-gray-700 mb-1">Image URL</label>
+            <input
+              type="text"
+              name="image"
+              value={formData.image}
+              onChange={handleChange}
+              className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+              required
+            />
+          </div>
 
-              <div>
-                <label className="block text-xs font-medium mb-1 text-gray-700 dark:text-gray-300">
-                  Type
-                </label>
-                <select
-                  name="type"
-                  value={formData.type}
-                  onChange={handleChange}
-                  className="w-full px-3 py-1.5 text-sm border border-gray-200 dark:border-gray-700 rounded-xl bg-white dark:bg-gray-700 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                >
-                  <option value="Banner">Banner</option>
-                  <option value="Content">Content</option>
-                  <option value="Grid">Grid</option>
-                  <option value="Form">Form</option>
-                  <option value="Carousel">Carousel</option>
-                  <option value="Gallery">Gallery</option>
-                </select>
-              </div>
+          <div className="mb-4">
+            <label className="block text-sm font-medium text-gray-700 mb-1">Email</label>
+            <input
+              type="email"
+              name="contacts.email"
+              value={formData.contacts.email}
+              onChange={handleChange}
+              className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+              required
+            />
+          </div>
 
-              <div>
-                <label className="block text-xs font-medium mb-1 text-gray-700 dark:text-gray-300">
-                  Status
-                </label>
-                <select
-                  name="status"
-                  value={formData.status}
-                  onChange={handleChange}
-                  className="w-full px-3 py-1.5 text-sm border border-gray-200 dark:border-gray-700 rounded-xl bg-white dark:bg-gray-700 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                >
-                  <option value="Published">Published</option>
-                  <option value="Draft">Draft</option>
-                  <option value="Review">Review</option>
-                  <option value="Scheduled">Scheduled</option>
-                </select>
-              </div>
+          <div className="mb-4">
+            <label className="block text-sm font-medium text-gray-700 mb-1">Phone</label>
+            <input
+              type="text"
+              name="contacts.phone"
+              value={formData.contacts.phone}
+              onChange={handleChange}
+              className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+            />
+          </div>
 
-              <div>
-                <label className="block text-xs font-medium mb-1 text-gray-700 dark:text-gray-300">
-                  Author
-                </label>
-                <input
-                  type="text"
-                  name="author"
-                  value={formData.author}
-                  onChange={handleChange}
-                  className="w-full px-3 py-1.5 text-sm border border-gray-200 dark:border-gray-700 rounded-xl bg-white dark:bg-gray-700 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                  required
-                />
-              </div>
-            </div>
+          <div className="mb-4">
+            <label className="block text-sm font-medium text-gray-700 mb-1">Telegram</label>
+            <input
+              type="text"
+              name="contacts.telegram"
+              value={formData.contacts.telegram}
+              onChange={handleChange}
+              className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+            />
+          </div>
 
-            <div className="mb-4">
-              <label className="block text-xs font-medium mb-1 text-gray-700 dark:text-gray-300">
-                Description
-              </label>
-              <textarea
-                name="description"
-                value={formData.description}
-                onChange={handleChange}
-                rows={3}
-                className="w-full px-3 py-1.5 text-sm border border-gray-200 dark:border-gray-700 rounded-xl bg-white dark:bg-gray-700 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-              />
-            </div>
-
-            <div className="flex items-center justify-between border-t border-gray-200 dark:border-gray-700 pt-4 rounded-b-xl">
-              <button
-                type="button"
-                onClick={() => {
-                  if (confirm("Are you sure you want to delete this item?")) {
-                    onClose();
-                  }
-                }}
-                className="flex items-center gap-1.5 px-3 py-1.5 text-xs text-red-600 dark:text-red-400 hover:bg-red-50 dark:hover:bg-red-900/30 rounded-xl"
-              >
-                <Trash2 className="w-4 h-4" />
-                <span>Delete</span>
-              </button>
-
-              <div className="flex gap-2">
-                <button
-                  type="button"
-                  onClick={onClose}
-                  className="px-3 py-1.5 text-xs border border-gray-200 dark:border-gray-700 rounded-xl hover:bg-gray-50 dark:hover:bg-gray-700"
-                >
-                  Cancel
-                </button>
-                <button
-                  type="submit"
-                  className="flex items-center gap-1.5 px-3 py-1.5 text-xs bg-blue-600 hover:bg-blue-700 text-white rounded-xl"
-                >
-                  <Save className="w-4 h-4" />
-                  <span>Save Changes</span>
-                </button>
-              </div>
-            </div>
-          </form>
-        </motion.div>
-      </motion.div>
-    </AnimatePresence>
+          <div className="flex justify-end space-x-3">
+            <button
+              type="button"
+              onClick={onClose}
+              className="px-4 py-2 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+            >
+              Cancel
+            </button>
+            <button
+              type="submit"
+              disabled={isSubmitting}
+              className="px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 disabled:opacity-50"
+            >
+              {isSubmitting ? 'Updating...' : 'Update Member'}
+            </button>
+          </div>
+        </form>
+      </div>
+    </Modal>
   );
 };
 

@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect, useCallback, Routes, Route } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import Sidebar from "../components/Sidebar/Sidebar";
 import TopBar from "../components/TopBar/TopBar";
@@ -6,7 +6,7 @@ import Dashboard from "../components/Dashbaord/Dashboard";
 // import Inbox from "../components/Inbox/Inbox";
 import OpenMessage from "../components/Inbox/OpenMessagesPage";
 import ClosedMessage from "../components/Inbox/ClosedMessagesPage";
-import FrontendPages from "../components/FrontendPages/CMSPage.jsx";
+import CMS from "../components/FrontendPages/CMSContainer.jsx";
 import Settings from "../components/Settings/Settings";
 import ConfirmationModal from "../components/Modals/ConfirmationModal";
 import { motion, AnimatePresence } from "framer-motion";
@@ -146,7 +146,7 @@ const AdminPanel = () => {
             {activeTab === "dashboard" && <Dashboard darkMode={darkMode} />}
             {activeTab === "inbox-open" && <OpenMessage darkMode={darkMode} />}
             {activeTab === "inbox-closed" && <ClosedMessage darkMode={darkMode} />}
-            {activeTab === "frontend" && <FrontendPages darkMode={darkMode} />}
+            {activeTab === "frontend" && <CMS darkMode={darkMode} />}
             {activeTab === "reports" && <Soon darkMode={darkMode} />}
             {activeTab === "statistics" && <Soon darkMode={darkMode} />}
             {activeTab === "users" && <Soon darkMode={darkMode} />}

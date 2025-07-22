@@ -13,6 +13,8 @@ const cors = require("cors");
 const http = require("http");
 const path = require("path");
 const { initGeoIP } = require("./utils/geoIP");
+const teamRoutes = require('./routes/teamRoute');
+
 
 // Security and authentication
 const bcrypt = require("bcryptjs");
@@ -121,6 +123,7 @@ app.use("/api/messages", require("./routes/messageRoutes"));
 app.use("/api/settings", settingsRouter);
 app.use("/api/auth", authRouter);
 app.use('/api/analytics', analyticsRouter);
+app.use('/api/team', teamRoutes);
 
 // ======================
 // MESSAGE ENDPOINTS

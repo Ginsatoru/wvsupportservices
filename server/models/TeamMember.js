@@ -9,23 +9,18 @@ const teamMemberSchema = new mongoose.Schema({
     type: String,
     required: true
   },
-  bio: {
-    type: String,
-    required: true
-  },
   image: {
     type: String,
     required: true
   },
-  socialLinks: {
-    twitter: String,
-    linkedin: String,
-    github: String
-  },
-  createdAt: {
-    type: Date,
-    default: Date.now
+  contacts: {
+    telegram: String,
+    email: {
+      type: String,
+      required: true
+    },
+    phone: String
   }
-});
+}, { timestamps: true });
 
 module.exports = mongoose.model('TeamMember', teamMemberSchema);

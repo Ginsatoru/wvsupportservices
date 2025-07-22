@@ -16,11 +16,11 @@ import {
   ChevronUp,
   ChevronDown,
 } from "lucide-react";
-import ItemList from "./ItemList";
-import EditModal from "./EditModal";
-import AddSectionModal from "./AddSectionModal";
+import ItemList from "../ItemList";
+import EditModal from "../EditModal";
+import AddSectionModal from "../AddSectionModal";
 
-const CMSPage = () => {
+const CMSContainer = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedItems, setSelectedItems] = useState([]);
   const [showFilters, setShowFilters] = useState(false);
@@ -395,4 +395,4 @@ const CMSPage = () => {
   );
 };
 
-export default CMSPage;
+export default CMSContainer;
