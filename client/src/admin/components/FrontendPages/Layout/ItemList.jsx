@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Edit2, Trash2 } from "lucide-react";
 import ConfirmationModal from "../../Modals/ConfirmationModal";
 
-const ItemList = ({ teamMembers, onEdit, onDelete }) => {
+const ItemList = ({ teamMembers, onEdit, onDelete, selectedMembers, onSelectMember }) => {
   const [darkMode, setDarkMode] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedId, setSelectedId] = useState(null);
@@ -24,11 +24,19 @@ const ItemList = ({ teamMembers, onEdit, onDelete }) => {
     setIsModalOpen(false);
     setSelectedId(null);
   };
+
   return (
     <div className="bg-white dark:bg-gray-800 rounded-xl shadow overflow-hidden">
       <table className="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
         <thead className="bg-gray-50 dark:bg-gray-700">
           <tr>
+            {/* Add checkbox column header */}
+            <th
+              scope="col"
+              className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider w-12"
+            >
+              Select
+            </th>
             <th
               scope="col"
               className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider"
@@ -56,8 +64,24 @@ const ItemList = ({ teamMembers, onEdit, onDelete }) => {
           {teamMembers.map((member) => (
             <tr
               key={member._id}
-              className="transition-all duration-200 ease-in-out border-b border-transparent hover:bg-sky-50 dark:hover:bg-gray-700/40 hover:shadow-sm hover:border-sky-100 dark:hover:border-gray-600"
+              className={`transition-all duration-200 ease-in-out border-b border-transparent hover:bg-sky-50 dark:hover:bg-gray-700/40 hover:shadow-sm hover:border-sky-100 dark:hover:border-gray-600 ${
+                selectedMembers && selectedMembers.has(member._id) 
+                  ? 'bg-sky-50 dark:bg-sky-900/20 border-sky-200 dark:border-sky-800' 
+                  : ''
+              }`}
             >
+              {/* Checkbox column */}
+              <td className="px-6 py-4 whitespace-nowrap">
+                <div className="flex items-center">
+                  <input
+                    type="checkbox"
+                    checked={selectedMembers ? selectedMembers.has(member._id) : false}
+                    onChange={(e) => onSelectMember && onSelectMember(member._id, e.target.checked)}
+                    className="w-4 h-4 text-sky-600 bg-gray-100 border-gray-300 rounded focus:ring-sky-500 dark:focus:ring-sky-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600 cursor-pointer"
+                  />
+                </div>
+              </td>
+              
               <td className="px-6 py-4 whitespace-nowrap">
                 <div className="flex items-center">
                   <div className="flex-shrink-0 h-10 w-10">

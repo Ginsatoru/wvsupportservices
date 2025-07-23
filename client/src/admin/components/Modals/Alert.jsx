@@ -28,33 +28,33 @@ export const ModernAlert = ({ message, type = 'success', onClose }) => {
     switch (type) {
       case 'success':
         return {
-          bgColor: 'bg-gradient-to-r from-emerald-500 to-emerald-600',
+          bgColor: 'bg-sky-500',
           icon: <CheckCircle className="w-5 h-5" />,
-          borderColor: 'border-emerald-400'
+          borderColor: 'border-sky-400'
         };
       case 'error':
         return {
-          bgColor: 'bg-gradient-to-r from-red-500 to-red-600',
+          bgColor: 'bg-red-500',
           icon: <AlertCircle className="w-5 h-5" />,
           borderColor: 'border-red-400'
         };
       case 'warning':
         return {
-          bgColor: 'bg-gradient-to-r from-amber-500 to-orange-500',
+          bgColor: 'bg-amber-500',
           icon: <AlertCircle className="w-5 h-5" />,
           borderColor: 'border-amber-400'
         };
       case 'info':
         return {
-          bgColor: 'bg-gradient-to-r from-blue-500 to-blue-600',
+          bgColor: 'bg-blue-500',
           icon: <AlertCircle className="w-5 h-5" />,
           borderColor: 'border-blue-400'
         };
       default:
         return {
-          bgColor: 'bg-gradient-to-r from-emerald-500 to-emerald-600',
+          bgColor: 'bg-sky-500',
           icon: <CheckCircle className="w-5 h-5" />,
-          borderColor: 'border-emerald-400'
+          borderColor: 'border-sky-400'
         };
     }
   };
@@ -75,7 +75,6 @@ export const ModernAlert = ({ message, type = 'success', onClose }) => {
         hover:shadow-2xl hover:scale-105
       `}
       style={{
-        background: `${bgColor.replace('bg-gradient-to-r', 'linear-gradient(to right,')} + ')'`,
         animation: isVisible && !isExiting ? 'slideIn 0.4s cubic-bezier(0.4, 0, 0.2, 1)' : undefined
       }}
     >
@@ -109,7 +108,7 @@ export const ModernAlert = ({ message, type = 'success', onClose }) => {
         }}
       />
 
-      <style jsx>{`
+      <style>{`
         @keyframes slideIn {
           0% {
             transform: translateX(100%) scale(0.9);

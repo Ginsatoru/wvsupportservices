@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import { addTeamMember } from "../../../../services/api";
 import Modal from "react-modal";
 import { X, Loader2, User, Image as ImageIcon, Briefcase, Mail, Phone, Send } from 'lucide-react';
-import Alert from "../../Modals/Alert";
 
 Modal.setAppElement('#root');
 
