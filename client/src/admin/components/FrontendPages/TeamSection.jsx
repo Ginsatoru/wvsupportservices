@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { getTeamMembers, deleteTeamMember } from "../../../services/api";
 import { Layout, Plus, Loader2 } from "lucide-react";
-import ItemList from "./ItemList";
-import AddSectionModal from "./AddSectionModal";
-import EditModal from "./EditModal";
+import ItemList from "./Layout/ItemList";
+import AddSectionModal from "./Layout/AddSectionModal";
+import EditModal from "./Layout/EditModal";
 
 const CMSTeam = () => {
   const [teamMembers, setTeamMembers] = useState([]);

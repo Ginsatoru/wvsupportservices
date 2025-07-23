@@ -9,7 +9,7 @@ import {
   Search,
   ChevronLeft,
 } from "lucide-react";
-import Team from "./TeamSection"; // Import the CMSTeam component
+import Team from "../TeamSection"; // Import the CMSTeam component
 
 const CMSContainer = () => {
   const [searchTerm, setSearchTerm] = useState("");
@@ -156,7 +156,7 @@ const CMSContainer = () => {
                         e.stopPropagation();
                         handleSectionClick(section);
                       }}
-                      className="text-sky-600 dark:text-sky-400 hover:text-sky-700 dark:hover:text-sky-300 transition-colors duration-150 ease-in-out px-2 py-1 rounded hover:bg-sky-50 dark:hover:bg-sky-900/20"
+                      className="text-sky-600 dark:text-sky-400 hover:text-sky-700 dark:hover:text-sky-300 transition-colors duration-150 ease-in-out px-3 py-2 rounded-xl hover:bg-sky-50 dark:hover:bg-sky-600/20"
                     >
                       Manage
                     </button>
@@ -207,9 +207,15 @@ const CMSContainer = () => {
     <div className="flex h-screen bg-gray-50 dark:bg-gray-900 rounded-xl">
       <div className="flex-1 flex flex-col overflow-hidden">
         {/* Header */}
-        <header className="bg-gray-200 dark:bg-gray-900 border-b rounded-t-xl border-gray-300 dark:border-gray-700 px-4 py-4">
+        <header className="bg-gray-200 dark:bg-gray-900 border-b rounded-t-xl border-gray-300 dark:border-gray-700 px-7 py-4">
           <div className="flex justify-between items-center">
             <div className="flex items-center gap-4">
+              {!currentSection && (
+                <h1 className="text-2xl font-semibold text-gray-900 dark:text-white">
+                  <Layout className="inline-block w-7 h-7 mr-2 text-sky-400" />
+                  Content Management
+                </h1>
+              )}
               {currentSection && (
                 <button
                   onClick={handleBackClick}

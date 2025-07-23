@@ -6,7 +6,7 @@ import Dashboard from "../components/Dashbaord/Dashboard";
 // import Inbox from "../components/Inbox/Inbox";
 import OpenMessage from "../components/Inbox/OpenMessagesPage";
 import ClosedMessage from "../components/Inbox/ClosedMessagesPage";
-import CMS from "../components/FrontendPages/CMSContainer.jsx";
+import CMS from "../components/FrontendPages/Layout/CMSContainer.jsx";
 import Settings from "../components/Settings/Settings";
 import ConfirmationModal from "../components/Modals/ConfirmationModal";
 import { motion, AnimatePresence } from "framer-motion";
@@ -147,6 +147,7 @@ const AdminPanel = () => {
             {activeTab === "inbox-open" && <OpenMessage darkMode={darkMode} />}
             {activeTab === "inbox-closed" && <ClosedMessage darkMode={darkMode} />}
             {activeTab === "frontend" && <CMS darkMode={darkMode} />}
+            {activeTab === "blog" && <Soon darkMode={darkMode} />}
             {activeTab === "reports" && <Soon darkMode={darkMode} />}
             {activeTab === "statistics" && <Soon darkMode={darkMode} />}
             {activeTab === "users" && <Soon darkMode={darkMode} />}

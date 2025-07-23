@@ -153,3 +153,5 @@ export const ModernAlert = ({ message, type = 'success', onClose }) => {
     </div>
   );
 };
+
+export default ModernAlert;

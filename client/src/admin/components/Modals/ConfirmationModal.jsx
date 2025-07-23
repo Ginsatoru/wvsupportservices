@@ -96,7 +96,7 @@ const ConfirmationModal = ({
             <div
               className={`flex items-center justify-center w-16 h-16 mx-auto mb-4 rounded-full ${
                 danger
-                  ? "bg-red-100 dark:bg-red-900"
+                  ? "bg-red-100 dark:bg-red-100"
                   : darkMode
                   ? "bg-sky-900"
                   : "bg-sky-100"
