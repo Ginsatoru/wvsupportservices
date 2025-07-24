@@ -13,18 +13,25 @@ import React, { useEffect, useState, useRef } from "react";
 
 const Contact = () => {
   const { settings, loading } = useSettings();
-
+  const [timeoutReached, setTimeoutReached] = useState(false);
   const [formData, setFormData] = useState({
     name: "",
     email: "",
     subject: "",
     message: "",
   });
-
   const [submissionStatus, setSubmissionStatus] = useState(null);
   const [recaptchaValue, setRecaptchaValue] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const recaptchaRef = useRef();
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setTimeoutReached(true);
+    }, 5000); // 5 seconds
+
+    return () => clearTimeout(timer);
+  }, []);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -76,16 +83,6 @@ const Contact = () => {
 
   // Show loading state if settings are still loading
   if (loading || !settings) {
-    const [timeoutReached, setTimeoutReached] = useState(false);
-
-    useEffect(() => {
-      const timer = setTimeout(() => {
-        setTimeoutReached(true);
-      }, 5000); // 5 seconds
-
-      return () => clearTimeout(timer);
-    }, []);
-
     return (
       <div className="flex items-center justify-center min-h-[92vh] bg-gray-50 dark:bg-gray-900">
         <motion.div
@@ -98,7 +95,7 @@ const Contact = () => {
             <>
               <AlertTriangle className="w-10 h-10 text-red-500" />
               <p className="text-gray-800 dark:text-gray-300 text-lg font-semibold">
-                Oops! We couldn’t load the contact page.
+                Oops! We couldn't load the contact page.
               </p>
               <p className="text-gray-500 dark:text-gray-400 text-sm text-center max-w-sm">
                 It looks like our server might be temporarily unavailable.
@@ -153,6 +150,12 @@ const Contact = () => {
             {submissionStatus === "success" && (
               <div className="alert success">
                 Thank you for your message! We'll get back to you soon.
+              </div>
+            )}
+
+            {submissionStatus === "error" && (
+              <div className="alert error">
+                Something went wrong. Please try again later.
               </div>
             )}
 
