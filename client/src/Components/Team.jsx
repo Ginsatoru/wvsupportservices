@@ -1,8 +1,10 @@
 import React, { useEffect, useRef, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { FaTelegram, FaEnvelope, FaPhone } from "react-icons/fa";
 import { getTeamMembers } from '../services/api';
 
 const Team = () => {
+  const { t } = useTranslation();
   const [teamMembers, setTeamMembers] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -16,13 +18,10 @@ const Team = () => {
         setLoading(true);
         setError(null);
         
-        console.log('Fetching team members...'); // Debug log
-        
+        console.log('Fetching team members...');
         const response = await getTeamMembers();
+        console.log('API Response:', response);
         
-        console.log('API Response:', response); // Debug log
-        
-        // Handle different response structures
         let members = [];
         if (response?.data) {
           members = Array.isArray(response.data) ? response.data : [];
@@ -33,41 +32,38 @@ const Team = () => {
           members = [];
         }
         
-        console.log('Processed team members:', members); // Debug log
-        
+        console.log('Processed team members:', members);
         setTeamMembers(members);
         
-        // If no members found, set a warning message
         if (members.length === 0) {
-          setError('No team members found');
+          setError(t('team.error.noMembers'));
         }
         
       } catch (error) {
         console.error('Error fetching team members:', error);
         
-        // More detailed error handling
-        let errorMessage = 'Failed to load team members';
+        let errorMessage = t('team.error.default');
         
         if (error.response) {
-          // Server responded with error status
-          errorMessage = `Server error: ${error.response.status} - ${error.response.statusText}`;
+          errorMessage = t('team.error.server', {
+            status: error.response.status,
+            statusText: error.response.statusText
+          });
         } else if (error.request) {
-          // Request was made but no response received
-          errorMessage = 'Network error: No response from server';
+          errorMessage = t('team.error.network');
         } else if (error.message) {
-          // Something else happened
-          errorMessage = `Error: ${error.message}`;
+          errorMessage = t('team.error.generic', { message: error.message });
         }
         
         setError(errorMessage);
-        setTeamMembers([]); // Ensure empty array on error
+        setTeamMembers([]);
       } finally {
         setLoading(false);
       }
     };
 
     fetchTeamMembers();
-  }, []);
+  }, [t]);
 
   // Intersection observer for animations
   useEffect(() => {
@@ -81,7 +77,7 @@ const Team = () => {
       { threshold: 0.2 }
     );
 
-    const currentRef = sectionRef.current; // Store ref in variable
+    const currentRef = sectionRef.current;
     if (currentRef) {
       observer.observe(currentRef);
     }
@@ -98,7 +94,7 @@ const Team = () => {
         <div className="w-full mx-auto py-12 md:py-16 max-w-full lg:max-w-[1250px] 2xl:max-w-[1350px] [@media(min-width:1700px)]:max-w-[1585px]">
           <div className="w-full text-center mb-8 md:mb-10">
             <h1 className="text-2xl sm:text-3xl font-bold text-[#0f8abe] mb-4 font-montserrat">
-              Meet Our Team
+              {t('team.title')}
             </h1>
             <p className="text-base sm:text-lg text-red-600 max-w-3xl mx-auto font-montserrat px-4">
               {error}
@@ -107,7 +103,7 @@ const Team = () => {
               onClick={() => window.location.reload()} 
               className="mt-4 px-6 py-2 bg-[#0f8abe] text-white rounded-xl hover:bg-[#0d7aa3] transition-colors"
             >
-              Retry
+              {t('team.retryButton')}
             </button>
           </div>
         </div>
@@ -115,17 +111,17 @@ const Team = () => {
     );
   }
 
-  // Empty state - when no error but no team members
+  // Empty state
   if (!loading && !error && teamMembers.length === 0) {
     return (
       <div className="bg-white">
         <div className="w-full mx-auto py-12 md:py-16 max-w-full lg:max-w-[1250px] 2xl:max-w-[1350px] [@media(min-width:1700px)]:max-w-[1585px]">
           <div className="w-full text-center mb-8 md:mb-10">
             <h1 className="text-2xl sm:text-3xl font-bold text-[#0f8abe] mb-4 font-montserrat">
-              Meet Our Team
+              {t('team.title')}
             </h1>
             <p className="text-base sm:text-lg text-gray-600 max-w-3xl mx-auto font-montserrat px-4">
-              No team members available at the moment.
+              {t('team.emptyMessage')}
             </p>
           </div>
         </div>
@@ -144,10 +140,10 @@ const Team = () => {
       >
         <div className="w-full text-center mb-8 md:mb-10">
           <h1 className="text-2xl sm:text-3xl font-bold text-[#0f8abe] mb-4 font-montserrat">
-            Meet Our Team
+            {t('team.title')}
           </h1>
           <p className="text-base sm:text-lg text-gray-600 max-w-3xl mx-auto font-montserrat px-4">
-            Our Cambodia-based experts providing global technical support
+            {t('team.subtitle')}
           </p>
         </div>
 
@@ -164,10 +160,9 @@ const Team = () => {
                 <div className="relative h-36 sm:h-40 md:h-48 overflow-hidden group">
                   <img
                     src={member.image || '/api/placeholder/200/200'}
-                    alt={member.name || 'Team Member'}
+                    alt={member.name || t('team.defaultAltText')}
                     className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                     onError={(e) => {
-                      // Fallback for broken images
                       e.target.src = 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgdmlld0JveD0iMCAwIDIwMCAyMDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSIyMDAiIGhlaWdodD0iMjAwIiBmaWxsPSIjRjNGNEY2Ii8+CjxwYXRoIGQ9Ik0xMDAgNTBDODYuMTkgNTAgNzUgNjEuMTkgNzUgNzVDNzUgODguODEgODYuMTkgMTAwIDEwMCAxMDBDMTEzLjgxIDEwMCAxMjUgODguODEgMTI1IDc1QzEyNSA2MS4xOSAxMTMuODEgNTAgMTAwIDUwWiIgZmlsbD0iIzkzOTZBMCIvPgo8cGF0aCBkPSJNMTAwIDExMEM3Mi4zODYgMTEwIDUwIDEzMi4zODYgNTAgMTYwSDE1MEMxNTAgMTMyLjM4NiAxMjcuNjE0IDExMCAxMDAgMTEwWiIgZmlsbD0iIzkzOTZBMCIvPgo8L3N2Zz4K';
                     }}
                   />
@@ -202,10 +197,10 @@ const Team = () => {
                 </div>
                 <div className="p-3 sm:p-4 text-center">
                   <h3 className="font-semibold text-gray-800 text-sm sm:text-base md:text-lg mb-1">
-                    {member.name || 'Unknown'}
+                    {member.name || t('team.defaultName')}
                   </h3>
                   <p className="text-[#0f8abe] font-medium text-xs sm:text-sm mb-1 sm:mb-2">
-                    {member.position || 'Position not specified'}
+                    {member.position || t('team.defaultPosition')}
                   </p>
                 </div>
               </div>

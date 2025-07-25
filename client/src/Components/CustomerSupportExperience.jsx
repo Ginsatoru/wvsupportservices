@@ -1,10 +1,12 @@
 import React from "react";
+import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { motion } from "framer-motion";
 import working from "./Images/working.png";
 
 const CustomerSupportExperience = () => {
+  const { t } = useTranslation();
   const navigate = useNavigate();
 
   return (
@@ -17,27 +19,22 @@ const CustomerSupportExperience = () => {
     >
       <PageSize>
         <Right>
-          <Title>Customer Remote Support Experience</Title>
-          <Subtitle>Remote troubleshooting support</Subtitle>
+          <Title>{t('customerSupport.title')}</Title>
+          <Subtitle>{t('customerSupport.subtitle')}</Subtitle>
           <Paragraph>
-            Our Remote Troubleshooting Support offers fast, reliable solutions
-            for RetailManager POS issues, multi-store setups, and webstore
-            integrations. Based in Siem Reap, Cambodia, we provide expert
-            support to Australian clients—resolving software errors,
-            connectivity problems, and database issues quickly to minimize
-            downtime and keep your business running smoothly.
+            {t('customerSupport.description')}
           </Paragraph>
           <ExploreMore onClick={() => navigate("/Support")}>
-            Explore more <span className="arrow">➔</span>
+            {t('customerSupport.exploreMore')} <span className="arrow">➔</span>
           </ExploreMore>
         </Right>
 
         <Left>
           <ImageContainer>
-            <Image src={working} alt="RetailManager Troubleshooting" />
+            <Image src={working} alt={t('customerSupport.imageAlt')} />
             <HoverText>
-              <h4>Customer Technical Support</h4>
-              <h5>Expert Remote Troubleshooting and Support Services</h5>
+              <h4>{t('customerSupport.hoverTitle')}</h4>
+              <h5>{t('customerSupport.hoverSubtitle')}</h5>
             </HoverText>
           </ImageContainer>
         </Left>

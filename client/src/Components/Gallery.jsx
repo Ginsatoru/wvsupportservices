@@ -1,4 +1,5 @@
 import React, { useState, useCallback, useEffect } from "react";
+import { useTranslation } from "react-i18next";
 import { FiMapPin } from "react-icons/fi";
 import { FaIndustry } from "react-icons/fa";
 import Image1 from "./Images/image1.png";
@@ -13,123 +14,121 @@ import Image9 from "./Images/image9.png";
 import Image10 from "./Images/image10.png";
 
 const Gallery = () => {
-  const [activeFilter, setActiveFilter] = useState("All");
+  const { t } = useTranslation();
+  const [activeFilter, setActiveFilter] = useState(t('gallery.filters.all'));
   const [selectedImage, setSelectedImage] = useState(null);
 
   const galleryData = [
-    // First row images
     {
       id: 1,
-      title: "RetailChain Global POS Deployment",
-      description: "Implemented POS systems for 30K+ stores across Asia-Pacific",
-      category: "POS Support",
-      location: "Australia, New Zealand, Papua New Guinea",
-      industry: "Retail Fashion",
+      title: t('gallery.items.item1.title'),
+      description: t('gallery.items.item1.description'),
+      category: t('gallery.categories.pos'),
+      location: t('gallery.locations.australiaNZPNG'),
+      industry: t('gallery.industries.retailFashion'),
       image: Image1,
       fullImage: Image1,
     },
     {
       id: 2,
-      title: "E-Commerce Platform Integration",
-      description: "Integrated webstore with existing POS systems",
-      category: "Webstore Integration",
-      location: "Australia, New Zealand",
-      industry: "Home Goods",
+      title: t('gallery.items.item2.title'),
+      description: t('gallery.items.item2.description'),
+      category: t('gallery.categories.webstore'),
+      location: t('gallery.locations.australiaNZ'),
+      industry: t('gallery.industries.homeGoods'),
       image: Image2,
       fullImage: Image2,
     },
     {
       id: 3,
-      title: "Multi-Store Management System",
-      description: "Centralized management for franchise operations",
-      category: "Multi-Store Management",
-      location: "Australia, Cambodia",
-      industry: "Home Decoration",
+      title: t('gallery.items.item3.title'),
+      description: t('gallery.items.item3.description'),
+      category: t('gallery.categories.multistore'),
+      location: t('gallery.locations.australiaCambodia'),
+      industry: t('gallery.industries.homeDecor'),
       image: Image3,
       fullImage: Image3
     },
     {
       id: 7,
-      title: "Inventory Synchronization Solution",
-      description: "Real-time inventory updates across all channels",
-      category: "Webstore Integration",
-      location: "Canada, USA",
-      industry: "Sporting Goods",
+      title: t('gallery.items.item7.title'),
+      description: t('gallery.items.item7.description'),
+      category: t('gallery.categories.webstore'),
+      location: t('gallery.locations.canadaUSA'),
+      industry: t('gallery.industries.sportingGoods'),
       image: Image7,
       fullImage: Image7
     },
     {
       id: 8,
-      title: "POS Hardware Upgrade Project",
-      description: "Modernized POS terminals for 500+ locations",
-      category: "POS Support",
-      location: "Japan, South Korea",
-      industry: "Convenience Stores",
+      title: t('gallery.items.item8.title'),
+      description: t('gallery.items.item8.description'),
+      category: t('gallery.categories.pos'),
+      location: t('gallery.locations.japanKorea'),
+      industry: t('gallery.industries.convenience'),
       image: Image8,
       fullImage: Image8
     },
-    // Second row images
     {
       id: 4,
-      title: "POS System Upgrade & Migration",
-      description: "Migration to new POS with zero downtime",
-      category: "POS Support",
-      location: "United Kingdom",
-      industry: "Specialty Retail",
+      title: t('gallery.items.item4.title'),
+      description: t('gallery.items.item4.description'),
+      category: t('gallery.categories.pos'),
+      location: t('gallery.locations.uk'),
+      industry: t('gallery.industries.specialty'),
       image: Image4,
       fullImage: Image4,
     },
     {
       id: 5,
-      title: "Omnichannel Retail Solution",
-      description: "Integrated online and offline sales channels",
-      category: "Webstore Integration",
-      location: "United States",
-      industry: "Electronics",
+      title: t('gallery.items.item5.title'),
+      description: t('gallery.items.item5.description'),
+      category: t('gallery.categories.webstore'),
+      location: t('gallery.locations.us'),
+      industry: t('gallery.industries.electronics'),
       image: Image5,
       fullImage: Image5,
     },
     {
       id: 6,
-      title: "Franchise Operations Support",
-      description: "24/7 support for franchise network",
-      category: "Multi-Store Management",
-      location: "Germany, France, Spain",
-      industry: "Health & Beauty",
+      title: t('gallery.items.item6.title'),
+      description: t('gallery.items.item6.description'),
+      category: t('gallery.categories.multistore'),
+      location: t('gallery.locations.europe'),
+      industry: t('gallery.industries.healthBeauty'),
       image: Image6,
       fullImage: Image6,
     },
     {
       id: 9,
-      title: "Mobile POS Implementation",
-      description: "Deployed mobile POS for pop-up stores and events",
-      category: "POS Support",
-      location: "Brazil, Argentina",
-      industry: "Fashion Retail",
+      title: t('gallery.items.item9.title'),
+      description: t('gallery.items.item9.description'),
+      category: t('gallery.categories.pos'),
+      location: t('gallery.locations.latinAmerica'),
+      industry: t('gallery.industries.fashion'),
       image: Image9,
       fullImage: Image9
     },
     {
       id: 10,
-      title: "Global E-commerce Unification",
-      description: "Standardized webstore platform across 15 countries",
-      category: "Webstore Integration",
-      location: "Europe, North America",
-      industry: "Luxury Goods",
+      title: t('gallery.items.item10.title'),
+      description: t('gallery.items.item10.description'),
+      category: t('gallery.categories.webstore'),
+      location: t('gallery.locations.global'),
+      industry: t('gallery.industries.luxury'),
       image: Image10,
       fullImage: Image10
     }
   ];
 
-  // Split images into two rows (5 images each)
   const firstRowImages = galleryData.slice(0, 5);
   const secondRowImages = galleryData.slice(5);
 
-  const filteredFirstRow = activeFilter === "All" 
+  const filteredFirstRow = activeFilter === t('gallery.filters.all') 
     ? firstRowImages 
     : firstRowImages.filter((item) => item.category === activeFilter);
 
-  const filteredSecondRow = activeFilter === "All" 
+  const filteredSecondRow = activeFilter === t('gallery.filters.all') 
     ? secondRowImages 
     : secondRowImages.filter((item) => item.category === activeFilter);
 
@@ -164,14 +163,14 @@ const Gallery = () => {
       <div className="max-w-full mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-8 md:mb-12">
           <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-[#0f8abe] mb-4 md:mb-6 font-montserrat">
-            Project Gallery
+            {t('gallery.title')}
           </h2>
           <p className="text-sm sm:text-base md:text-lg text-gray-600 max-w-3xl mx-auto font-montserrat px-2">
-            Browse through our international support initiatives and success stories
+            {t('gallery.subtitle')}
           </p>
         </div>
 
-        {/* First Row - Responsive */}
+        {/* First Row */}
         <div className="relative w-full overflow-hidden mb-4 md:mb-6">
           <div className="absolute left-0 top-0 bottom-0 w-10 md:w-20 bg-gradient-to-r from-white to-transparent z-10 pointer-events-none"></div>
           <div className="absolute right-0 top-0 bottom-0 w-10 md:w-20 bg-gradient-to-l from-white to-transparent z-10 pointer-events-none"></div>
@@ -199,7 +198,7 @@ const Gallery = () => {
           </div>
         </div>
 
-        {/* Second Row - Responsive */}
+        {/* Second Row */}
         <div className="relative w-full overflow-hidden">
           <div className="absolute left-0 top-0 bottom-0 w-10 md:w-10 bg-gradient-to-r from-white to-transparent z-10 pointer-events-none"></div>
           <div className="absolute right-0 top-0 bottom-0 w-10 md:w-10 bg-gradient-to-l from-white to-transparent z-10 pointer-events-none"></div>
@@ -228,7 +227,7 @@ const Gallery = () => {
         </div>
       </div>
 
-      {/* Modal - Responsive */}
+      {/* Modal */}
       {selectedImage && (
         <div className="fixed inset-0 bg-black/80 z-[1000] flex items-center justify-center p-2 sm:p-4">
           <div className="bg-white rounded-lg md:rounded-xl max-w-full sm:max-w-3xl md:max-w-4xl w-full max-h-[90vh] overflow-auto relative">
@@ -283,14 +282,12 @@ const Gallery = () => {
           font-family: 'Montserrat', sans-serif;
         }
         
-        /* Touch devices - reduce animation speed */
         @media (hover: none) {
           .animate-scroll-continuous {
             animation-duration: 60s;
           }
         }
         
-        /* Very small devices */
         @media (max-width: 400px) {
           .animate-scroll-continuous {
             animation-duration: 40s;

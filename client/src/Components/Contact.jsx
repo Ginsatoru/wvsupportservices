@@ -10,8 +10,10 @@ import { useSettings } from "../context/SettingsContext";
 import { Loader2, AlertTriangle } from "lucide-react";
 import { motion } from "framer-motion";
 import React, { useEffect, useState, useRef } from "react";
+import { useTranslation } from 'react-i18next';
 
 const Contact = () => {
+  const { t } = useTranslation();
   const { settings, loading } = useSettings();
   const [timeoutReached, setTimeoutReached] = useState(false);
   const [formData, setFormData] = useState({
@@ -28,8 +30,7 @@ const Contact = () => {
   useEffect(() => {
     const timer = setTimeout(() => {
       setTimeoutReached(true);
-    }, 5000); // 5 seconds
-
+    }, 5000);
     return () => clearTimeout(timer);
   }, []);
 
@@ -45,7 +46,7 @@ const Contact = () => {
     e.preventDefault();
 
     if (!recaptchaValue) {
-      alert("Please verify the reCAPTCHA first.");
+      alert(t('contactPage.form.recaptchaAlert'));
       return;
     }
 
@@ -81,7 +82,6 @@ const Contact = () => {
     setTimeout(() => setSubmissionStatus(null), 5000);
   };
 
-  // Show loading state if settings are still loading
   if (loading || !settings) {
     return (
       <div className="flex items-center justify-center min-h-[92vh] bg-gray-50 dark:bg-gray-900">
@@ -95,19 +95,17 @@ const Contact = () => {
             <>
               <AlertTriangle className="w-10 h-10 text-red-500" />
               <p className="text-gray-800 dark:text-gray-300 text-lg font-semibold">
-                Oops! We couldn't load the contact page.
+                {t('contactPage.loading.errorTitle')}
               </p>
               <p className="text-gray-500 dark:text-gray-400 text-sm text-center max-w-sm">
-                It looks like our server might be temporarily unavailable.
-                Please check your internet connection or try again in a few
-                moments.
+                {t('contactPage.loading.errorDescription')}
               </p>
             </>
           ) : (
             <>
               <Loader2 className="w-10 h-10 text-sky-500 animate-spin" />
               <p className="text-gray-700 dark:text-gray-300 text-lg font-medium">
-                Loading contact page...
+                {t('contactPage.loading.text')}
               </p>
             </>
           )}
@@ -116,57 +114,56 @@ const Contact = () => {
     );
   }
 
-  // Dynamic contact methods using settings data
   const contactMethods = [
     {
       icon: <HiOutlineMapPin className="contact-icon" />,
-      title: "Address:",
-      description: settings.address || "Address not available",
+      title: t('contactPage.contactMethods.address.title'),
+      description: settings.address || t('contactPage.contactMethods.address.fallback'),
     },
     {
       icon: <HiOutlinePhone className="contact-icon" />,
-      title: "Phone:",
-      description: settings.phoneNumber || "Phone not available",
+      title: t('contactPage.contactMethods.phone.title'),
+      description: settings.phoneNumber || t('contactPage.contactMethods.phone.fallback'),
     },
     {
       icon: <HiOutlineEnvelope className="contact-icon" />,
-      title: "Email:",
-      description: settings.email || "Email not available",
+      title: t('contactPage.contactMethods.email.title'),
+      description: settings.email || t('contactPage.contactMethods.email.fallback'),
     },
   ];
 
   return (
     <div className="whole-page">
       <header className="contact-header">
-        <h1>Contact Us</h1>
-        <p>We're here to help, anytime you need support or have a question.</p>
+        <h1>{t('contactPage.header.title')}</h1>
+        <p>{t('contactPage.header.subtitle')}</p>
       </header>
 
       <div className="contact-container">
         <div className="contact-content">
           <div className="contact-form-container">
-            <h2>How Can We Assist You?</h2>
+            <h2>{t('contactPage.form.title')}</h2>
 
             {submissionStatus === "success" && (
               <div className="alert success">
-                Thank you for your message! We'll get back to you soon.
+                {t('contactPage.form.successMessage')}
               </div>
             )}
 
             {submissionStatus === "error" && (
               <div className="alert error">
-                Something went wrong. Please try again later.
+                {t('contactPage.form.errorMessage')}
               </div>
             )}
 
             <form onSubmit={handleSubmit} className="contact-form">
               <div className="form-group">
-                <label htmlFor="name">Name</label>
+                <label htmlFor="name">{t('contactPage.form.name.label')}</label>
                 <input
                   type="text"
                   id="name"
                   name="name"
-                  placeholder="Enter your full name"
+                  placeholder={t('contactPage.form.name.placeholder')}
                   value={formData.name}
                   onChange={handleChange}
                   required
@@ -174,12 +171,12 @@ const Contact = () => {
               </div>
 
               <div className="form-group">
-                <label htmlFor="email">Email</label>
+                <label htmlFor="email">{t('contactPage.form.email.label')}</label>
                 <input
                   type="email"
                   id="email"
                   name="email"
-                  placeholder="Enter your full email address"
+                  placeholder={t('contactPage.form.email.placeholder')}
                   value={formData.email}
                   onChange={handleChange}
                   required
@@ -187,12 +184,12 @@ const Contact = () => {
               </div>
 
               <div className="form-group">
-                <label htmlFor="subject">Subject</label>
+                <label htmlFor="subject">{t('contactPage.form.subject.label')}</label>
                 <input
                   type="text"
                   id="subject"
                   name="subject"
-                  placeholder="Provide your main subject"
+                  placeholder={t('contactPage.form.subject.placeholder')}
                   value={formData.subject}
                   onChange={handleChange}
                   required
@@ -200,14 +197,14 @@ const Contact = () => {
               </div>
 
               <div className="form-group">
-                <label htmlFor="message">Tell us your issue</label>
+                <label htmlFor="message">{t('contactPage.form.message.label')}</label>
                 <textarea
                   id="message"
                   name="message"
                   rows="5"
                   value={formData.message}
                   onChange={handleChange}
-                  placeholder="Describe your issue or question"
+                  placeholder={t('contactPage.form.message.placeholder')}
                   required
                 ></textarea>
               </div>
@@ -228,17 +225,17 @@ const Contact = () => {
                 {isLoading ? (
                   <>
                     <span className="loading-spinner"></span>
-                    Sending...
+                    {t('contactPage.form.submit.sending')}
                   </>
                 ) : (
-                  "Send Message"
+                  t('contactPage.form.submit.button')
                 )}
               </button>
             </form>
           </div>
 
           <div className="contact-info">
-            <h2>Other ways to reach us</h2>
+            <h2>{t('contactPage.contactInfo.title')}</h2>
 
             <div className="contact-methods">
               {contactMethods.map((method, index) => (
@@ -251,22 +248,20 @@ const Contact = () => {
             </div>
 
             <div className="business-hours">
-              <h3>Business Hours</h3>
-              <p>Monday - Friday: 7:00 AM - 4:00 PM</p>
-              <p>Saturday: 7:00 AM - 1:30 PM</p>
-              <p>Sunday: Closed</p>
+              <h3>{t('contactPage.businessHours.title')}</h3>
+              <p>{t('contactPage.businessHours.weekdays')}</p>
+              <p>{t('contactPage.businessHours.saturday')}</p>
+              <p>{t('contactPage.businessHours.sunday')}</p>
             </div>
           </div>
         </div>
 
         <div className="contact-map">
           {settings.mapEmbedCode ? (
-            // Use dynamic map embed code from settings
             <div dangerouslySetInnerHTML={{ __html: settings.mapEmbedCode }} />
           ) : (
-            // Fallback to your existing iframe if no mapEmbedCode in settings
             <iframe
-              title="Company Location"
+              title={t('contactPage.map.title')}
               src="https://www.google.com/maps/embed?pb=!1m10!1m8!1m3!1d970.5500260653366!2d103.83897579630282!3d13.337825192552444!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2sau!4v1743737141343!5m2!1sen!2sau"
               width="100%"
               height="450"

@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
+import { useTranslation } from "react-i18next";
 import styled, { keyframes } from "styled-components";
 
 const slideUp = keyframes`
@@ -114,6 +115,7 @@ const AchievementLabel = styled.p`
 `;
 
 const AchievementsSection = () => {
+  const { t } = useTranslation();
   const [counts, setCounts] = useState({
     years: 0,
     tickets: 0,
@@ -203,39 +205,36 @@ const AchievementsSection = () => {
 
   return (
     <AchievementContainer ref={sectionRef}>
-      <Title ref={titleRef}>Our Achievements</Title>
-      <Subtitle ref={subtitleRef}>
-        At WV Support Services Cambodia, we proudly help businesses thrive by
-        delivering reliable IT solutions and support.
-      </Subtitle>
+      <Title ref={titleRef}>{t("achievements.title")}</Title>
+      <Subtitle ref={subtitleRef}>{t("achievements.subtitle")}</Subtitle>
 
       <AchievementsGrid>
         <AchievementCard ref={addToRefs}>
           <AchievementNumber>{counts.years}+</AchievementNumber>
-          <AchievementLabel>Years of Trusted IT Support</AchievementLabel>
+          <AchievementLabel>{t("achievements.yearsLabel")}</AchievementLabel>
         </AchievementCard>
 
         <AchievementCard ref={addToRefs}>
           <AchievementNumber>
             {counts.tickets.toLocaleString()}
           </AchievementNumber>
-          <AchievementLabel>
-            Successful Support Tickets Resolved
-          </AchievementLabel>
+          <AchievementLabel>{t("achievements.ticketsLabel")}</AchievementLabel>
         </AchievementCard>
 
         <AchievementCard ref={addToRefs}>
           <AchievementNumber>
             {counts.clients.toLocaleString()}+
           </AchievementNumber>
-          <AchievementLabel>Satisfied Clients Across Cambodia</AchievementLabel>
+          <AchievementLabel>{t("achievements.clientsLabel")}</AchievementLabel>
         </AchievementCard>
 
         <AchievementCard ref={addToRefs}>
           <AchievementNumber>
             {counts.businesses.toLocaleString()}
           </AchievementNumber>
-          <AchievementLabel>Businesses Supported Annually</AchievementLabel>
+          <AchievementLabel>
+            {t("achievements.businessesLabel")}
+          </AchievementLabel>
         </AchievementCard>
       </AchievementsGrid>
     </AchievementContainer>

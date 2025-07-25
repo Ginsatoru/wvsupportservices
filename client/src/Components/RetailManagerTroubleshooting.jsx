@@ -1,7 +1,5 @@
-// Install if needed:
-// npm install styled-components framer-motion react-intersection-observer
-
 import React from "react";
+import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { motion } from "framer-motion";
@@ -199,6 +197,7 @@ const ExploreMore = styled.h2`
 `;
 
 const RetailManagerTroubleshooting = () => {
+  const { t } = useTranslation();
   const navigate = useNavigate();
   const { ref, inView } = useInView({ triggerOnce: true, threshold: 0.2 });
 
@@ -213,10 +212,10 @@ const RetailManagerTroubleshooting = () => {
             transition={{ duration: 0.8, ease: "easeOut" }}
           >
             <ImageContainer>
-              <Image src={IT} alt="RetailManager Troubleshooting" />
+              <Image src={IT} alt={t('retailManager.imageAlt')} />
               <HoverText>
-                <h4>RetailManager Expertise</h4>
-                <h5>25+ years of collective troubleshooting experience</h5>
+                <h4>{t('retailManager.hoverTitle')}</h4>
+                <h5>{t('retailManager.hoverSubtitle')}</h5>
               </HoverText>
             </ImageContainer>
           </motion.div>
@@ -228,18 +227,13 @@ const RetailManagerTroubleshooting = () => {
             animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.8, ease: "easeOut", delay: 0.2 }}
           >
-            <Title>RetailManager Troubleshooting Experience</Title>
-            <Subtitle>We'd love to tell you about us</Subtitle>
+            <Title>{t('retailManager.title')}</Title>
+            <Subtitle>{t('retailManager.subtitle')}</Subtitle>
             <Paragraph>
-              Experienced in diagnosing and resolving RetailManager software
-              issues with over 25 years of collective expertise. Skilled in
-              troubleshooting errors, database issues, and system
-              configurations. Proficient in guiding users through transaction,
-              connectivity, and integration problems, with strong log analysis
-              and support escalation skills.
+              {t('retailManager.description')}
             </Paragraph>
             <ExploreMore onClick={() => navigate("/retailmanager")}>
-              Explore more <span className="arrow">➔</span>
+              {t('retailManager.exploreMore')} <span className="arrow">➔</span>
             </ExploreMore>
           </motion.div>
         </Right>

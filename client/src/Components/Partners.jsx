@@ -1,7 +1,7 @@
 import React from "react";
+import { useTranslation } from "react-i18next";
 import { motion } from "framer-motion";
 import { useInView } from "react-intersection-observer";
-
 // Partner logos components
 const TyroLogo = () => (
   <img
@@ -77,6 +77,7 @@ const fadeUp = {
 };
 
 const Partners = () => {
+  const { t } = useTranslation();
   const { ref, inView } = useInView({ triggerOnce: true, threshold: 0.2 });
 
   // Array of partner logos for easier duplication
@@ -105,14 +106,13 @@ const Partners = () => {
           className="text-3xl font-bold mb-6 font-[Montserrat] md:text-4xl"
           style={{ color: "#0f8abe" }}
         >
-          Our Trusted Partners
+          {t("partners.title")}
         </motion.h2>
         <motion.p
           variants={fadeUp}
           className="text-base text-gray-600 leading-relaxed font-[Montserrat] md:text-lg"
         >
-          We collaborate with industry leaders to deliver the best solutions for
-          your business
+          {t("partners.subtitle")}
         </motion.p>
       </motion.div>
 
@@ -147,26 +147,6 @@ const Partners = () => {
           </motion.div>
         </motion.div>
       </div>
-
-      {/* <style jsx>{`
-        @keyframes scroll-continuous {
-          0% {
-            transform: translateX(0);
-          }
-          100% {
-            transform: translateX(-50%);
-          }
-        }
-
-        .animate-scroll-continuous {
-          animation: scroll-continuous 20s linear infinite;
-          width: max-content;
-        }
-
-        .hover\:animation-paused:hover {
-          animation-play-state: paused;
-        }
-      `}</style> */}
     </section>
   );
 };

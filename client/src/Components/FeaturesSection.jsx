@@ -1,13 +1,15 @@
 import React, { useEffect, useRef, useState } from "react";
+import { useTranslation } from "react-i18next";
+import { Link } from "react-router-dom";
 import "./FeaturesSection.css";
 import Organization from "./Images/Organization.png";
 import Marketing from "./Images/Marketing.png";
 import Risk from "./Images/Risk.png";
 import Success from "./Images/Success.png";
 import Market from "./Images/Market.png";
-import { Link } from "react-router-dom";
 
 export default function FeaturesSection() {
+  const { t } = useTranslation();
   const sectionRef = useRef(null);
   const [isVisible, setIsVisible] = useState(false);
 
@@ -39,11 +41,9 @@ export default function FeaturesSection() {
       >
         {/* Left Side */}
         <div className="left-div">
-          <h2>Our Main Features</h2>
+          <h2>{t('features.mainTitle')}</h2>
           <p className="intro">
-            WV Support discovered AAAPOS needing reliable assistance. Without
-            proper support, systems risk being misused or altered. We help keep
-            everything running as originally designed.
+            {t('features.intro')}
           </p>
 
           <div className="card-grid">
@@ -51,42 +51,44 @@ export default function FeaturesSection() {
               <img
                 className="card-img small"
                 src={Organization}
-                alt="Organization"
+                alt={t('features.organization.title')}
               />
-              <h3>Organization</h3>
+              <h3>{t('features.organization.title')}</h3>
               <p>
-                A well-structured system ensures smooth, efficient operation.
+                {t('features.organization.description')}
               </p>
             </div>
             <div className="feature-card">
               <img
                 className="card-img small"
                 src={Marketing}
-                alt="Marketing Strategy"
+                alt={t('features.marketing.title')}
               />
-              <h3>Marketing Strategy</h3>
+              <h3>{t('features.marketing.title')}</h3>
               <p>
-                A smart marketing strategy targets the right audience for
-                maximum impact.
+                {t('features.marketing.description')}
               </p>
             </div>
             <div className="feature-card">
-              <img className="card-img small" src={Risk} alt="Risk Analysis" />
-              <h3>Risk Analysis</h3>
+              <img 
+                className="card-img small" 
+                src={Risk} 
+                alt={t('features.risk.title')} 
+              />
+              <h3>{t('features.risk.title')}</h3>
               <p>
-                Identifying potential issues early helps prevent bigger problems
-                later.
+                {t('features.risk.description')}
               </p>
             </div>
             <div className="feature-card">
               <img
                 className="card-img small"
                 src={Market}
-                alt="Capital Market"
+                alt={t('features.capital.title')}
               />
-              <h3>Capital Market</h3>
+              <h3>{t('features.capital.title')}</h3>
               <p>
-                A well-organized system ensures smooth and efficient operations.
+                {t('features.capital.description')}
               </p>
             </div>
           </div>
@@ -94,19 +96,20 @@ export default function FeaturesSection() {
 
         {/* Right Side */}
         <div className="right-div">
-          <img className="card-img big" src={Success} alt="Success Story" />
-          <h2>Read Our Success Story for Inspiration</h2>
+          <img 
+            className="card-img big" 
+            src={Success} 
+            alt={t('features.success.imageAlt')} 
+          />
+          <h2>{t('features.success.title')}</h2>
           <p>
-            WV Support cuts through digital noise—delivering trusted, seamless
-            solutions with care and precision. From complex systems to everyday
-            fixes, we bridge technology and trust.
+            {t('features.success.paragraph1')}
           </p>
           <p>
-            On her way, she found a ticket. It warned that in support, messages
-            are often rewritten until only clarity and the true solution remain.
+            {t('features.success.paragraph2')}
           </p>
           <Link to="/Contact">
-            <button>Contact Us</button>
+            <button>{t('features.contactButton')}</button>
           </Link>
         </div>
       </div>

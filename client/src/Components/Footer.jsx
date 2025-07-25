@@ -15,8 +15,10 @@ import { db } from "./firebaseConfig";
 import { collection, addDoc, serverTimestamp } from "firebase/firestore";
 import ReCAPTCHA from "react-google-recaptcha";
 import { useSettings } from '../context/SettingsContext';
+import { useTranslation } from 'react-i18next';
 
 const Footer = () => {
+  const { t } = useTranslation();
   const [showModal, setShowModal] = useState(false);
   const recaptchaRef = useRef(null);
   const [showRecaptcha, setShowRecaptcha] = useState(false);
@@ -34,25 +36,25 @@ const Footer = () => {
       setRecaptchaVerified(true);
       setStatusMessage(
         <span>
-          <span className="highlight">✅ Verified! Click "Send" again</span>
+          <span className="highlight">✅ {t('footer.recaptchaVerified')}</span>
         </span>
       );
     } else {
       setRecaptchaVerified(false);
       setStatusMessage(
-        <span style={{ color: "red" }}>❌ Verification failed.</span>
+        <span style={{ color: "red" }}>❌ {t('footer.recaptchaFailed')}</span>
       );
     }
   };
 
   const handleEmailSubmit = async () => {
     if (!email || !email.includes("@")) {
-      setStatusMessage("❌ Please enter a valid email address.");
+      setStatusMessage(`❌ ${t('footer.invalidEmail')}`);
       return;
     }
 
     if (!recaptchaVerified) {
-      setStatusMessage("❌ Please verify that you are a human.");
+      setStatusMessage(`❌ ${t('footer.verifyHuman')}`);
       return;
     }
 
@@ -80,7 +82,7 @@ const Footer = () => {
     } catch (error) {
       console.error("Error saving email or sending message:", error);
       setStatusMessage(
-        `❌ ${error.message || "Something went wrong. Please try again."}`
+        `❌ ${error.message || t('footer.somethingWrong')}`
       );
       setEmailSent(false);
     } finally {
@@ -90,7 +92,7 @@ const Footer = () => {
 
   const handleSendClick = () => {
     if (!email || !email.includes("@")) {
-      setStatusMessage("❌ Please enter a valid email address.");
+      setStatusMessage(`❌ ${t('footer.invalidEmail')}`);
       return;
     }
 
@@ -135,7 +137,7 @@ const Footer = () => {
               <img
                 src={settings.logo}
                 className="footer-logo"
-                alt={`${settings.companyName || 'Company'} Logo`}
+                alt={`${settings.companyName || t('footer.company')} ${t('footer.logo')}`}
               />
             ) : (
               <div className="footer-logo-placeholder">
@@ -146,9 +148,7 @@ const Footer = () => {
             )}
           </Link>
           <p className="footer-text">
-            {settings?.companyDescription || 
-             "There are support request and service record custom post types, allowing you to easily create and manage support requests and service records."
-            }
+            {settings?.companyDescription || t('footer.defaultDescription')}
           </p>
           <div className="contact-info">
             {settings?.phoneNumber && (
@@ -168,55 +168,55 @@ const Footer = () => {
 
         <div className="footer-row-sections">
           <div className="footer-section">
-            <h3 className="footer-heading">About Us</h3>
+            <h3 className="footer-heading">{t('footer.aboutUs')}</h3>
             <ul className="footer-links">
               <li>
-                <a onClick={() => window.location.href = '/Aboutus'}>About</a>
+                <a onClick={() => window.location.href = '/Aboutus'}>{t('footer.about')}</a>
               </li>
               <li>
-                <a onClick={() => window.location.href = '/Legal'}>Legal</a>
+                <a onClick={() => window.location.href = '/Legal'}>{t('footer.legal')}</a>
               </li>
               <li>
-                <a onClick={() => window.location.href = '/contact'}>Contact</a>
+                <a onClick={() => window.location.href = '/contact'}>{t('footer.contact')}</a>
               </li>
               <li>
-                <a onClick={() => window.location.href = '/Project'}>Project</a>
+                <a onClick={() => window.location.href = '/Project'}>{t('footer.project')}</a>
               </li>
               <li>
-                <a onClick={() => window.location.href = '/Careers'}>Careers</a>
+                <a onClick={() => window.location.href = '/Careers'}>{t('footer.careers')}</a>
               </li>
             </ul>
           </div>
 
           <div className="footer-section">
-            <h3 className="footer-heading">Useful Links</h3>
+            <h3 className="footer-heading">{t('footer.usefulLinks')}</h3>
             <ul className="footer-links">
               <li>
-                <a href="https://www.aaapos.com/">Browse to AAAPOS</a>
+                <a href="https://www.aaapos.com/">{t('footer.browseToAAAPOS')}</a>
               </li>
               <li>
-                <a onClick={() => window.location.href = '/Partner'}>Partners</a>
+                <a onClick={() => window.location.href = '/Partner'}>{t('footer.partners')}</a>
               </li>
               <li>
-                <a onClick={() => window.location.href = '/FAQ'}>FAQs</a>
+                <a onClick={() => window.location.href = '/FAQ'}>{t('footer.faqs')}</a>
               </li>
               <li>
-                <a onClick={() => window.location.href = '/Support'}>Support</a>
+                <a onClick={() => window.location.href = '/Support'}>{t('footer.support')}</a>
               </li>
             </ul>
           </div>
         </div>
 
         <div className="footer-section">
-          <h3 className="footer-heading">Newsletter</h3>
+          <h3 className="footer-heading">{t('footer.newsletter')}</h3>
           <p className="footer-text">
-            Get the latest {settings?.companyName || 'company'} news delivered to your inbox.
+            {t('footer.newsletterText', { companyName: settings?.companyName || t('footer.company') })}
           </p>
 
           <div className="newsletter-form">
             <input
               type="email"
-              placeholder="Enter your email"
+              placeholder={t('footer.emailPlaceholder')}
               className="email-input"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
@@ -254,13 +254,13 @@ const Footer = () => {
       {showModal && (
         <div className="popup-overlay">
           <div className="popup-box">
-            <h2>✅Thanks for Subscribing!</h2>
-            <p>We'll keep you posted with the latest updates and news.</p>
+            <h2>✅ {t('footer.thanksForSubscribing')}</h2>
+            <p>{t('footer.subscriptionConfirmation')}</p>
             <button
               className="popup-close-btn"
               onClick={() => setShowModal(false)}
             >
-              Close
+              {t('footer.close')}
             </button>
           </div>
         </div>
@@ -270,11 +270,10 @@ const Footer = () => {
 
       <div className="footer-bottom">
         <div className="copyright">
-          Copyright ©2025 All rights reserved | This website is developed by
-          AAAPOS team
+          {t('footer.copyright', { year: new Date().getFullYear() })}
         </div>
         <div className="social-links">
-          <span>Follow us</span>
+          <span>{t('footer.followUs')}</span>
           <a href="https://facebook.com" aria-label="Facebook">
             <FaFacebookF className="social-icon" />
           </a>
