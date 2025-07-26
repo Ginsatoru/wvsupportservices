@@ -1,9 +1,17 @@
-import i18n from "i18next";
-import { initReactI18next } from "react-i18next";
+import i18n from 'i18next';
+import { initReactI18next } from 'react-i18next';
+
+const updateFontFamily = (lng) => {
+  document.documentElement.style.setProperty(
+    '--font-primary',
+    lng === 'km' ? 'Dangrek, sans-serif' : 'Montserrat, sans-serif'
+  );
+};
 
 const resources = {
   en: {
     translation: {
+      font: 'Montserrat',
       // Services Page
       // Contact
       contactPage: {
@@ -340,6 +348,7 @@ const resources = {
   },
   km: {
     translation: {
+      font: 'Dangrek',
       // Contact
       contactPage: {
         header: {
@@ -697,15 +706,12 @@ i18n
     interpolation: {
       escapeValue: false,
     },
-  })
-  .then(() => {
-    // Set lang on init (after i18n is ready)
-    setHtmlLang(i18n.language);
   });
 
+  // Set initial font
+updateFontFamily(i18n.language);
+
 // Listen to language changes and force update lang attr
-i18n.on("languageChanged", (lng) => {
-  setHtmlLang(lng);
-});
+i18n.on('languageChanged', updateFontFamily);
 
 export default i18n;
